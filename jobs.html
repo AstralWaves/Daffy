@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daffy - Jobs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f7fafc 0%, #e0e7ff 100%);
+            min-height: 100vh;
+        }
+        .sidebar {
+            background: linear-gradient(135deg, #1e2761 80%, #facc15 100%);
+            box-shadow: 2px 0 16px 0 rgba(30, 64, 175, 0.08);
+            border-radius: 0 32px 32px 0;
+        }
+        .job-card {
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 6px 32px 0 rgba(30, 64, 175, 0.10);
+            transition: transform 0.3s ease;
+        }
+        .job-card:hover {
+            transform: translateY(-4px);
+        }
+        .company-logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            background: #f7f9fb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #1e2761;
+        }
+        .job-type {
+            background: rgba(250, 204, 21, 0.1);
+            color: #1e2761;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .apply-btn {
+            background: linear-gradient(90deg, #1e2761 60%, #facc15 100%);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .apply-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+        }
+        .search-input {
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 9999px;
+            padding: 12px 20px;
+            transition: all 0.3s ease;
+        }
+        .search-input:focus {
+            border-color: #facc15;
+            box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.1);
+        }
+        .filter-btn {
+            background: rgba(250, 204, 21, 0.1);
+            color: #1e2761;
+            padding: 8px 16px;
+            border-radius: 9999px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: #facc15;
+            color: #1e2761;
+        }
+        .sidebar-link {
+            color: #ffffff;
+            padding: 12px 16px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .sidebar-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .sidebar-link.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .sidebar-icon {
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+    <!-- Left Sidebar -->
+    <aside class="sidebar w-72 flex flex-col py-12 px-8 min-h-screen mr-12">
+        <div class="logo text-3xl font-bold text-[#facc15] mb-8">
+            <span class="material-icons" style="font-size:2.5rem;">bubble_chart</span> Daffy
+        </div>
+        <nav class="flex flex-col gap-1">
+            <a href="home.html" class="sidebar-link"><span class="material-icons sidebar-icon">home</span> Home</a>
+            <a href="trends.html" class="sidebar-link"><span class="material-icons sidebar-icon">trending_up</span> Trends</a>
+            <a href="clubs.html" class="sidebar-link"><span class="material-icons sidebar-icon">groups</span> Clubs</a>
+            <a href="messaging.html" class="sidebar-link"><span class="material-icons sidebar-icon">chat_bubble</span> Messages</a>
+            <a href="jobs.html" class="sidebar-link active"><span class="material-icons sidebar-icon">work</span> Jobs</a>
+            <a href="settings.html" class="sidebar-link"><span class="material-icons sidebar-icon">settings</span> Settings</a>
+        </nav>
+        <div class="mt-auto">
+            <button onclick="logout()" class="sidebar-link w-full text-left">
+                <span class="material-icons sidebar-icon">logout</span> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-[#1e2761] mb-4">Job Opportunities</h1>
+            <div class="flex items-center gap-4">
+                <div class="relative flex-1">
+                    <input type="text" class="search-input w-full pl-12" placeholder="Search jobs...">
+                    <span class="material-icons absolute left-4 top-3 text-gray-400">search</span>
+                </div>
+                <div class="flex gap-2">
+                    <button class="filter-btn active">All</button>
+                    <button class="filter-btn">Full-time</button>
+                    <button class="filter-btn">Part-time</button>
+                    <button class="filter-btn">Remote</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Jobs Grid -->
+        <div class="grid grid-cols-1 gap-6">
+            <!-- Job Card 1 -->
+            <div class="job-card p-6">
+                <div class="flex items-start justify-between">
+                    <div class="flex gap-4">
+                        <div class="company-logo">G</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-[#1e2761] mb-1">Senior Web Developer</h3>
+                            <p class="text-gray-600 mb-2">Google Inc.</p>
+                            <div class="flex items-center gap-4">
+                                <span class="text-gray-600 flex items-center gap-1">
+                                    <span class="material-icons text-[#facc15]">location_on</span>
+                                    San Francisco, CA
+                                </span>
+                                <span class="text-gray-600 flex items-center gap-1">
+                                    <span class="material-icons text-[#facc15]">attach_money</span>
+                                    $120k - $150k
+                                </span>
+                                <span class="job-type">Full-time</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="apply-btn">Apply Now</button>
+                </div>
+            </div>
+
+            <!-- Job Card 2 -->
+            <div class="job-card p-6">
+                <div class="flex items-start justify-between">
+                    <div class="flex gap-4">
+                        <div class="company-logo">M</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-[#1e2761] mb-1">UI/UX Designer</h3>
+                            <p class="text-gray-600 mb-2">Microsoft</p>
+                            <div class="flex items-center gap-4">
+                                <span class="text-gray-600 flex items-center gap-1">
+                                    <span class="material-icons text-[#facc15]">location_on</span>
+                                    Remote
+                                </span>
+                                <span class="text-gray-600 flex items-center gap-1">
+                                    <span class="material-icons text-[#facc15]">attach_money</span>
+                                    $90k - $120k
+                                </span>
+                                <span class="job-type">Full-time</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="apply-btn">Apply Now</button>
+                </div>
+            </div>
+
+            <!-- Job Card 3 -->
+            <div class="job-card p-6">
+                <div class="flex items-start justify-between">
+                    <div class="flex gap-4">
+                        <div class="company-logo">A</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-[#1e2761] mb-1">Data Scientist</h3>
+                            <p class="text-gray-600 mb-2">Amazon</p>
+                            <div class="flex items-center gap-4">
+                                <span class="text-gray-600 flex items-center gap-1">
+                                    <span class="material-icons text-[#facc15]">location_on</span>
+                                    Seattle, WA
+                                </span>
+                                <span class="text-gray-600 flex items-center gap-1">
+                                    <span class="material-icons text-[#facc15]">attach_money</span>
+                                    $130k - $160k
+                                </span>
+                                <span class="job-type">Full-time</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="apply-btn">Apply Now</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Check if user is logged in
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'index.html';
+        }
+
+        // Filter button functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            document.querySelectorAll('.job-card').forEach(card => {
+                const jobTitle = card.querySelector('h3').textContent.toLowerCase();
+                const company = card.querySelector('p').textContent.toLowerCase();
+                const location = card.querySelector('.text-gray-600').textContent.toLowerCase();
+                
+                if (jobTitle.includes(searchTerm) || company.includes(searchTerm) || location.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Apply button functionality
+        document.querySelectorAll('.apply-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const jobTitle = this.closest('.job-card').querySelector('h3').textContent;
+                const company = this.closest('.job-card').querySelector('p').textContent;
+                alert(`Application submitted for ${jobTitle} at ${company}!`);
+            });
+        });
+
+        // Logout functionality
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

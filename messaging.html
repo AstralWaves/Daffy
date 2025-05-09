@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daffy - Messages</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #000000;
+            min-height: 100vh;
+            color: #ffffff;
+        }
+        .sidebar {
+            background: linear-gradient(135deg, #1e2761 80%, #facc15 100%);
+            box-shadow: 2px 0 16px 0 rgba(30, 64, 175, 0.08);
+            border-radius: 0 32px 32px 0;
+        }
+        .chat-card {
+            background: #1a1a1a;
+            border-radius: 24px;
+            box-shadow: 0 6px 32px 0 rgba(30, 64, 175, 0.10);
+            transition: transform 0.3s ease;
+        }
+        .chat-card:hover {
+            transform: translateY(-4px);
+            background: #2a2a2a;
+        }
+        .avatar {
+            background: linear-gradient(135deg, #facc15 0%, #1e2761 100%);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.3rem;
+            border-radius: 50%;
+            width: 3.2rem;
+            height: 3.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .online-indicator {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 12px;
+            height: 12px;
+            background: #22c55e;
+            border: 2px solid #000;
+            border-radius: 50%;
+        }
+        .message-input {
+            background: #2a2a2a;
+            border: 2px solid #333333;
+            border-radius: 24px;
+            padding: 12px 20px;
+            transition: all 0.3s ease;
+            color: #ffffff;
+            resize: none;
+            min-height: 48px;
+            max-height: 120px;
+        }
+        .message-input:focus {
+            border-color: #facc15;
+            box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.1);
+        }
+        .send-btn {
+            background: linear-gradient(90deg, #1e2761 60%, #facc15 100%);
+            color: white;
+            padding: 12px;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+        }
+        .message-bubble {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+            position: relative;
+            word-break: break-word;
+        }
+        .message-bubble.sent {
+            background: linear-gradient(90deg, #1e2761 60%, #facc15 100%);
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 4px;
+        }
+        .message-bubble.received {
+            background: #2a2a2a;
+            color: #ffffff;
+            margin-right: auto;
+            border-bottom-left-radius: 4px;
+        }
+        .message-time {
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 4px;
+            text-align: right;
+        }
+        .message-status {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 4px;
+        }
+        .message-status .material-icons {
+            font-size: 1rem;
+        }
+        .typing-indicator {
+            display: flex;
+            gap: 2px;
+            padding: 8px 12px;
+            background: #2a2a2a;
+            border-radius: 16px;
+            width: fit-content;
+            margin: 8px 0;
+        }
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background: #888;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-4px); }
+        }
+        .reaction-button {
+            position: absolute;
+            right: -24px;
+            bottom: -4px;
+            background: #2a2a2a;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .message-bubble:hover .reaction-button {
+            opacity: 1;
+        }
+        .reactions {
+            position: absolute;
+            bottom: 100%;
+            right: 0;
+            background: #2a2a2a;
+            border-radius: 24px;
+            padding: 8px;
+            display: none;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+        }
+        .reaction-button:hover .reactions {
+            display: grid;
+        }
+        .reaction {
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        .reaction:hover {
+            background: #333;
+        }
+        .search-input {
+            background: #2a2a2a;
+            border: 2px solid #333333;
+            border-radius: 9999px;
+            padding: 12px 20px 12px 48px;
+            transition: all 0.3s ease;
+            color: #ffffff;
+            width: 100%;
+        }
+        .search-input:focus {
+            border-color: #facc15;
+            box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.1);
+        }
+        .unread-indicator {
+            background: #facc15;
+            color: #000;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+    <!-- Left Sidebar -->
+    <aside class="sidebar w-72 flex flex-col py-12 px-8 min-h-screen mr-12">
+        <div class="logo text-3xl font-bold text-[#facc15] mb-8">
+            <span class="material-icons" style="font-size:2.5rem;">bubble_chart</span> Daffy
+        </div>
+        <nav class="flex flex-col gap-1">
+            <a href="home.html" class="sidebar-link"><span class="material-icons sidebar-icon">home</span> Home</a>
+            <a href="trends.html" class="sidebar-link"><span class="material-icons sidebar-icon">trending_up</span> Trends</a>
+            <a href="clubs.html" class="sidebar-link"><span class="material-icons sidebar-icon">groups</span> Clubs</a>
+            <a href="messaging.html" class="sidebar-link active"><span class="material-icons sidebar-icon">chat_bubble</span> Messages</a>
+            <a href="jobs.html" class="sidebar-link"><span class="material-icons sidebar-icon">work</span> Jobs</a>
+            <a href="settings.html" class="sidebar-link"><span class="material-icons sidebar-icon">settings</span> Settings</a>
+        </nav>
+        <div class="mt-auto">
+            <button onclick="logout()" class="sidebar-link w-full text-left">
+                <span class="material-icons sidebar-icon">logout</span> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8">
+        <div class="grid grid-cols-12 gap-8 h-[calc(100vh-4rem)]">
+            <!-- Chat List -->
+            <div class="col-span-4 flex flex-col">
+                <div class="mb-6">
+                    <h1 class="text-3xl font-bold text-white mb-4">Messages</h1>
+                    <div class="relative">
+                        <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+                        <input type="text" class="search-input" placeholder="Search messages...">
+                    </div>
+                </div>
+                <div class="space-y-4 overflow-y-auto flex-1">
+                    <!-- Active Chat -->
+                    <div class="chat-card p-4 cursor-pointer bg-[#2a2a2a]">
+                        <div class="flex items-center gap-4">
+                            <div class="avatar">
+                                R
+                                <div class="online-indicator"></div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div class="font-semibold text-white">Rakib Hassan</div>
+                                    <div class="text-xs text-gray-400">2m ago</div>
+                                </div>
+                                <div class="text-gray-400 text-sm truncate">Hey, how's your project going? 🚀</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Unread Chat -->
+                    <div class="chat-card p-4 cursor-pointer">
+                        <div class="flex items-center gap-4">
+                            <div class="avatar">
+                                S
+                                <div class="online-indicator"></div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div class="font-semibold text-white">Sarah Ahmed</div>
+                                    <div class="unread-indicator">2</div>
+                                </div>
+                                <div class="text-gray-400 text-sm truncate">Check out the latest updates!</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Offline Chat -->
+                    <div class="chat-card p-4 cursor-pointer">
+                        <div class="flex items-center gap-4">
+                            <div class="avatar">
+                                M
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div class="font-semibold text-white">Mehedi Hasan</div>
+                                    <div class="text-xs text-gray-400">1h ago</div>
+                                </div>
+                                <div class="text-gray-400 text-sm truncate">Let's meet tomorrow at the lab</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Area -->
+            <div class="col-span-8 flex flex-col">
+                <div class="chat-card p-6 flex-1 flex flex-col">
+                    <!-- Chat Header -->
+                    <div class="flex items-center justify-between mb-6 pb-4 border-b border-gray-800">
+                        <div class="flex items-center gap-4">
+                            <div class="avatar">
+                                R
+                                <div class="online-indicator"></div>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-white">Rakib Hassan</div>
+                                <div class="text-sm text-gray-400">Active now</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <button class="p-2 hover:bg-gray-700 rounded-full" title="Voice Call">
+                                <span class="material-icons text-gray-400">phone</span>
+                            </button>
+                            <button class="p-2 hover:bg-gray-700 rounded-full" title="Video Call">
+                                <span class="material-icons text-gray-400">videocam</span>
+                            </button>
+                            <button class="p-2 hover:bg-gray-700 rounded-full" title="More Options">
+                                <span class="material-icons text-gray-400">more_vert</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Messages Container -->
+                    <div class="flex-1 overflow-y-auto space-y-4 mb-4 px-4">
+                        <!-- Date Separator -->
+                        <div class="flex items-center justify-center my-4">
+                            <div class="text-xs text-gray-400 bg-[#1a1a1a] px-4 py-1 rounded-full">Today</div>
+                        </div>
+
+                        <!-- Received Message -->
+                        <div class="message-bubble received">
+                            Hey, how's your project going? 🚀
+                            <div class="message-time">10:30 AM</div>
+                            <div class="reaction-button">
+                                <span class="material-icons text-sm">add_reaction</span>
+                                <div class="reactions">
+                                    <span class="reaction">👍</span>
+                                    <span class="reaction">❤️</span>
+                                    <span class="reaction">😊</span>
+                                    <span class="reaction">😮</span>
+                                    <span class="reaction">😢</span>
+                                    <span class="reaction">😡</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sent Message -->
+                        <div class="message-bubble sent">
+                            It's going great! Just finished implementing the new features 🎉
+                            <div class="message-time">10:31 AM</div>
+                            <div class="message-status">
+                                <span class="material-icons">done_all</span>
+                                <span>Seen</span>
+                            </div>
+                        </div>
+
+                        <!-- Typing Indicator -->
+                        <div class="typing-indicator">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                    </div>
+
+                    <!-- Message Input Area -->
+                    <div class="flex items-end gap-4 pt-4 border-t border-gray-800">
+                        <button class="p-3 hover:bg-gray-700 rounded-full" title="Add Attachment">
+                            <span class="material-icons text-gray-400">add_circle</span>
+                        </button>
+                        <div class="relative flex-1">
+                            <textarea 
+                                class="message-input w-full pr-12" 
+                                placeholder="Type a message..."
+                                rows="1"
+                                oninput="this.style.height = 'auto'; this.style.height = this.scrollHeight + 'px';"
+                            ></textarea>
+                            <button class="absolute right-3 bottom-3 p-2 hover:bg-gray-700 rounded-full">
+                                <span class="material-icons text-gray-400">emoji_emotions</span>
+                            </button>
+                        </div>
+                        <button class="send-btn">
+                            <span class="material-icons">send</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Message handling
+        const messageInput = document.querySelector('textarea.message-input');
+        const sendButton = document.querySelector('.send-btn');
+        const messagesContainer = document.querySelector('.flex-1.overflow-y-auto');
+
+        function sendMessage(text) {
+            if (!text.trim()) return;
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message-bubble sent';
+            messageDiv.innerHTML = `
+                ${text}
+                <div class="message-time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
+                <div class="message-status">
+                    <span class="material-icons">done</span>
+                    <span>Sent</span>
+                </div>
+            `;
+
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            messageInput.value = '';
+            messageInput.style.height = 'auto';
+
+            // Simulate message delivery and seen status
+            setTimeout(() => {
+                messageDiv.querySelector('.message-status').innerHTML = `
+                    <span class="material-icons">done_all</span>
+                    <span>Delivered</span>
+                `;
+            }, 1000);
+
+            setTimeout(() => {
+                messageDiv.querySelector('.message-status').innerHTML = `
+                    <span class="material-icons">done_all</span>
+                    <span>Seen</span>
+                `;
+            }, 2000);
+        }
+
+        // Send message on Enter (without Shift)
+        messageInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage(messageInput.value);
+            }
+        });
+
+        sendButton.addEventListener('click', () => {
+            sendMessage(messageInput.value);
+        });
+
+        // Logout functionality
+        function logout() {
+            localStorage.removeItem('user');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

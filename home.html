@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daffy - DIU Social Platform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #000000;
+      min-height: 100vh;
+      color: #ffffff;
+    }
+    .sidebar {
+      background: linear-gradient(135deg, #1e2761 80%, #facc15 100%);
+      box-shadow: 2px 0 16px 0 rgba(30, 64, 175, 0.08);
+      border-radius: 0 32px 32px 0;
+    }
+    .post-card {
+      background: #1a1a1a;
+      border-radius: 24px;
+      box-shadow: 0 6px 32px 0 rgba(30, 64, 175, 0.10);
+      transition: transform 0.3s ease;
+    }
+    .post-card:hover {
+      transform: translateY(-4px);
+    }
+    .post-input {
+      background: #2a2a2a;
+      border: 2px solid #333333;
+      border-radius: 24px;
+      padding: 12px 20px;
+      transition: all 0.3s ease;
+      color: #ffffff;
+    }
+    .post-input:focus {
+      border-color: #facc15;
+      box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.1);
+    }
+    .post-btn {
+      background: linear-gradient(90deg, #1e2761 60%, #facc15 100%);
+      color: white;
+      padding: 8px 24px;
+      border-radius: 9999px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .post-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+    }
+    .right-card {
+      background: #1a1a1a;
+      border-radius: 24px;
+      box-shadow: 0 6px 32px 0 rgba(30, 64, 175, 0.10);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .trending-tag {
+      color: #facc15;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .trending-title {
+      font-weight: 600;
+      color: #ffffff;
+    }
+    .trending-stats {
+      color: #888888;
+      font-size: 0.9rem;
+    }
+    .avatar {
+      background: linear-gradient(135deg, #facc15 0%, #1e2761 100%);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.3rem;
+      border-radius: 50%;
+      width: 3.2rem;
+      height: 3.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sidebar-link {
+      color: #ffffff;
+      padding: 12px 16px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .sidebar-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .sidebar-link.active {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .sidebar-icon {
+      font-size: 1.5rem;
+    }
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin: 1rem 0;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+    }
+    .department-tag {
+      background: linear-gradient(135deg, #1e2761 0%, #facc15 100%);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    .notice-card {
+      background: linear-gradient(135deg, rgba(30, 39, 97, 0.2) 0%, rgba(250, 204, 21, 0.1) 100%);
+      border: 1px solid rgba(250, 204, 21, 0.2);
+      border-radius: 24px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body class="flex min-h-screen overflow-hidden">
+  <!-- Left Sidebar -->
+  <aside class="sidebar w-72 flex flex-col py-12 px-8 min-h-screen mr-12">
+    <div class="logo text-3xl font-bold text-[#facc15] mb-8">
+      <span class="material-icons" style="font-size:2.5rem;">bubble_chart</span> Daffy
+    </div>
+    <nav class="flex flex-col gap-1">
+      <a href="home.html" class="sidebar-link active"><span class="material-icons sidebar-icon">home</span> Home</a>
+      <a href="trends.html" class="sidebar-link"><span class="material-icons sidebar-icon">trending_up</span> Trends</a>
+      <a href="clubs.html" class="sidebar-link"><span class="material-icons sidebar-icon">groups</span> Clubs</a>
+      <a href="messaging.html" class="sidebar-link"><span class="material-icons sidebar-icon">chat_bubble</span> Messages</a>
+      <a href="videos.html" class="sidebar-link"><span class="material-icons sidebar-icon">play_circle</span> Videos</a>
+      <a href="jobs.html" class="sidebar-link"><span class="material-icons sidebar-icon">work</span> Jobs</a>
+      <a href="settings.html" class="sidebar-link"><span class="material-icons sidebar-icon">settings</span> Settings</a>
+    </nav>
+    <div class="mt-auto">
+      <button onclick="logout()" class="sidebar-link w-full text-left">
+        <span class="material-icons sidebar-icon">logout</span> Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 main-content p-8">
+    <!-- Notice Section -->
+    <div class="notice-card mb-8">
+      <h2 class="text-lg font-semibold text-[#facc15] mb-2">📢 Important Notice</h2>
+      <p class="text-white">Mid-term examinations start from next week. Check your exam schedule on the DIU portal.</p>
+    </div>
+
+    <!-- Post Creation Box -->
+    <div class="post-card p-6 mb-8">
+      <div class="flex gap-4">
+        <div class="avatar">S</div>
+        <textarea class="post-input w-full" placeholder="Share your thoughts with DIU community..."></textarea>
+      </div>
+      <div class="flex justify-between items-center mt-4">
+        <div class="flex gap-4">
+          <button class="text-gray-400 hover:text-[#facc15]" title="Add Image">
+            <span class="material-icons">image</span>
+          </button>
+          <!-- Add this in the post creation box buttons -->
+          <button class="text-gray-400 hover:text-[#facc15]" title="Record Video">
+              <span class="material-icons">videocam</span>
+          </button>
+          <button class="text-gray-400 hover:text-[#facc15]" title="Add File">
+            <span class="material-icons">attach_file</span>
+          </button>
+          <button class="text-gray-400 hover:text-[#facc15]" title="Tag Department">
+            <span class="material-icons">local_offer</span>
+          </button>
+        </div>
+        <button class="post-btn">Post</button>
+      </div>
+    </div>
+
+    <!-- Feed Section -->
+    <div class="space-y-6">
+      <!-- Example DIU Student Post -->
+      <div class="post-card p-6">
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">R</div>
+            <div>
+              <div class="font-semibold text-white">Rakib Hassan</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">1 hour ago</span>
+                <span class="department-tag">CSE</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="text-white mb-4">
+          <p class="mb-4">Just finished my presentation on Machine Learning algorithms! Thanks to everyone who attended and provided feedback. 🎯</p>
+          <img src="https://picsum.photos/800/400" alt="Presentation" class="w-full rounded-xl mb-4">
+          <div class="flex gap-2">
+            <span class="department-tag">#DIUTechTalks</span>
+            <span class="department-tag">#MachineLearning</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15]">
+            <span class="material-icons">chat_bubble_outline</span>
+            <span>24</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15]">
+            <span class="material-icons">repeat</span>
+            <span>15</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15]">
+            <span class="material-icons">favorite_border</span>
+            <span>89</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15]">
+            <span class="material-icons">share</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Right Sidebar -->
+  <aside class="w-80 p-8 right-sidebar">
+    <div class="right-card">
+      <h3 class="text-lg font-semibold mb-4">DIU Trending</h3>
+      <div class="space-y-4">
+        <div>
+          <div class="trending-tag">#DIUTechFest2024</div>
+          <div class="trending-title">Annual Tech Festival</div>
+          <div class="trending-stats">1.2k posts</div>
+        </div>
+        <div>
+          <div class="trending-tag">#DIUStartups</div>
+          <div class="trending-title">Student Innovations</div>
+          <div class="trending-stats">856 posts</div>
+        </div>
+        <div>
+          <div class="trending-tag">#DIUCulturalWeek</div>
+          <div class="trending-title">Cultural Events</div>
+          <div class="trending-stats">654 posts</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Department Updates -->
+    <div class="right-card mt-6">
+      <h3 class="text-lg font-semibold mb-4">Department Updates</h3>
+      <div class="space-y-3">
+        <div class="flex items-center gap-2">
+          <span class="material-icons text-[#facc15]">school</span>
+          <div>
+            <div class="text-sm font-medium">CSE Department</div>
+            <div class="text-xs text-gray-400">Project Showcase - Tomorrow</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="material-icons text-[#facc15]">event</span>
+          <div>
+            <div class="text-sm font-medium">EEE Department</div>
+            <div class="text-xs text-gray-400">Seminar on IoT - Next Week</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <script>
+    function logout() {
+      localStorage.removeItem('user');
+      window.location.href = 'login.html';
+    }
+  </script>
+</body>
+</html>

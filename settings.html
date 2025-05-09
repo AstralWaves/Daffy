@@ -1,0 +1,826 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daffy - Settings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #000000;
+            min-height: 100vh;
+            color: #ffffff;
+        }
+        .sidebar {
+            background: linear-gradient(135deg, #1e2761 80%, #facc15 100%);
+            box-shadow: 2px 0 16px 0 rgba(30, 64, 175, 0.08);
+            border-radius: 0 32px 32px 0;
+        }
+        .settings-card {
+            background: #1a1a1a;
+            border-radius: 24px;
+            box-shadow: 0 6px 32px 0 rgba(30, 64, 175, 0.10);
+        }
+        .input-field {
+            background: #2a2a2a;
+            border: 2px solid #333333;
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: #ffffff;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            border-color: #facc15;
+            box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.1);
+            outline: none;
+        }
+        .save-btn {
+            background: linear-gradient(90deg, #1e2761 60%, #facc15 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+        }
+        .sidebar-link {
+            color: #ffffff;
+            padding: 12px 16px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .sidebar-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .sidebar-link.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .sidebar-icon {
+            font-size: 1.5rem;
+        }
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #2a2a2a;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background: linear-gradient(90deg, #1e2761 60%, #facc15 100%);
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+    <!-- Left Sidebar -->
+    <aside class="sidebar w-72 flex flex-col py-12 px-8 min-h-screen mr-12">
+        <div class="logo text-3xl font-bold text-[#facc15] mb-8">
+            <span class="material-icons" style="font-size:2.5rem;">bubble_chart</span> Daffy
+        </div>
+        <nav class="flex flex-col gap-1">
+            <a href="home.html" class="sidebar-link"><span class="material-icons sidebar-icon">home</span> Home</a>
+            <a href="trends.html" class="sidebar-link"><span class="material-icons sidebar-icon">trending_up</span> Trends</a>
+            <a href="clubs.html" class="sidebar-link"><span class="material-icons sidebar-icon">groups</span> Clubs</a>
+            <a href="messaging.html" class="sidebar-link"><span class="material-icons sidebar-icon">chat_bubble</span> Messages</a>
+            <a href="jobs.html" class="sidebar-link"><span class="material-icons sidebar-icon">work</span> Jobs</a>
+            <a href="settings.html" class="sidebar-link active"><span class="material-icons sidebar-icon">settings</span> Settings</a>
+        </nav>
+        <div class="mt-auto">
+            <button onclick="logout()" class="sidebar-link w-full text-left">
+                <span class="material-icons sidebar-icon">logout</span> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8">
+        <h1 class="text-3xl font-bold text-white mb-8">Settings</h1>
+
+        <!-- Account Settings -->
+        <div class="settings-card p-6 mb-8">
+            <h2 class="text-xl font-bold text-white mb-6">Account Settings</h2>
+            <form id="accountForm" class="space-y-6">
+                <div>
+                    <label class="block text-gray-300 mb-2">Email</label>
+                    <input type="email" class="input-field" id="email" placeholder="Enter your email">
+                </div>
+                <div>
+                    <label class="block text-gray-300 mb-2">Current Password</label>
+                    <input type="password" class="input-field" id="currentPassword" placeholder="Enter current password">
+                </div>
+                <div>
+                    <label class="block text-gray-300 mb-2">New Password</label>
+                    <input type="password" class="input-field" id="newPassword" placeholder="Enter new password">
+                </div>
+                <div>
+                    <label class="block text-gray-300 mb-2">Confirm New Password</label>
+                    <input type="password" class="input-field" id="confirmPassword" placeholder="Confirm new password">
+                </div>
+                <button type="submit" class="save-btn">Save Changes</button>
+            </form>
+        </div>
+
+        <!-- Notification Settings -->
+        <div class="settings-card p-6 mb-8">
+            <h2 class="text-xl font-bold text-white mb-6">Notification Settings</h2>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-semibold">Email Notifications</h3>
+                        <p class="text-gray-400 text-sm">Receive email notifications for important updates</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="emailNotifications" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-semibold">Push Notifications</h3>
+                        <p class="text-gray-400 text-sm">Receive push notifications on your device</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="pushNotifications" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-semibold">Message Notifications</h3>
+                        <p class="text-gray-400 text-sm">Get notified when you receive new messages</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="messageNotifications" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy Settings -->
+        <div class="settings-card p-6 mb-8">
+            <h2 class="text-xl font-bold text-white mb-6">Privacy Settings</h2>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-semibold">Profile Visibility</h3>
+                        <p class="text-gray-400 text-sm">Make your profile visible to everyone</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="profileVisibility" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-semibold">Activity Status</h3>
+                        <p class="text-gray-400 text-sm">Show when you're active on the platform</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="activityStatus" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Session Settings -->
+        <div class="settings-card p-6 mb-8">
+            <h2 class="text-xl font-bold text-white mb-6">Session Settings</h2>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-semibold">Remember Me</h3>
+                        <p class="text-gray-400 text-sm">Keep me logged in on this device</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="rememberMe" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-semibold">Auto Logout</h3>
+                        <p class="text-gray-400 text-sm">Automatically logout after 24 hours of inactivity</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="autoLogout" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="mt-6">
+                    <button onclick="logoutAllDevices()" class="bg-[#2a2a2a] text-white px-6 py-2 rounded-lg hover:bg-[#333333] transition mr-4">
+                        Logout All Devices
+                    </button>
+                    <button onclick="logout()" class="bg-[#1e2761] text-white px-6 py-2 rounded-lg hover:bg-[#2a3a8f] transition">
+                        Logout Current Device
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Danger Zone -->
+        <div class="settings-card p-6 border-2 border-red-500">
+            <h2 class="text-xl font-bold text-red-500 mb-6">Danger Zone</h2>
+            <div class="space-y-4">
+                <div>
+                    <h3 class="text-white font-semibold mb-2">Delete Account</h3>
+                    <p class="text-gray-400 text-sm mb-4">Once you delete your account, there is no going back. Please be certain.</p>
+                    <button onclick="deleteAccount()" class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition">
+                        Delete Account
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Check if user is logged in
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'login.html';
+        }
+
+        // Load user settings
+        function loadSettings() {
+            const settings = JSON.parse(localStorage.getItem('userSettings')) || {
+                emailNotifications: true,
+                pushNotifications: true,
+                messageNotifications: true,
+                profileVisibility: true,
+                activityStatus: true,
+                rememberMe: true,
+                autoLogout: true
+            };
+
+            document.getElementById('emailNotifications').checked = settings.emailNotifications;
+            document.getElementById('pushNotifications').checked = settings.pushNotifications;
+            document.getElementById('messageNotifications').checked = settings.messageNotifications;
+            document.getElementById('profileVisibility').checked = settings.profileVisibility;
+            document.getElementById('activityStatus').checked = settings.activityStatus;
+            document.getElementById('rememberMe').checked = settings.rememberMe;
+            document.getElementById('autoLogout').checked = settings.autoLogout;
+
+            const userData = JSON.parse(localStorage.getItem('userData')) || {};
+            document.getElementById('email').value = userData.email || '';
+        }
+
+        // Save settings
+        function saveSettings() {
+            const settings = {
+                emailNotifications: document.getElementById('emailNotifications').checked,
+                pushNotifications: document.getElementById('pushNotifications').checked,
+                messageNotifications: document.getElementById('messageNotifications').checked,
+                profileVisibility: document.getElementById('profileVisibility').checked,
+                activityStatus: document.getElementById('activityStatus').checked,
+                rememberMe: document.getElementById('rememberMe').checked,
+                autoLogout: document.getElementById('autoLogout').checked
+            };
+
+            localStorage.setItem('userSettings', JSON.stringify(settings));
+            alert('Settings saved successfully!');
+        }
+
+        // Handle account form submission
+        document.getElementById('accountForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (newPassword && newPassword !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            // Here you would typically make an API call to update the account
+            alert('Account updated successfully!');
+        });
+
+        // Delete account
+        function deleteAccount() {
+            if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userData');
+                localStorage.removeItem('userSettings');
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Logout from current device
+        function logout() {
+            if (confirm('Are you sure you want to logout from this device?')) {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userData');
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Logout from all devices
+        function logoutAllDevices() {
+            if (confirm('Are you sure you want to logout from all devices? This will end all your active sessions.')) {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userData');
+                localStorage.removeItem('userSettings');
+                localStorage.removeItem('sessionToken');
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Add event listeners for settings changes
+        document.getElementById('rememberMe').addEventListener('change', function() {
+            const settings = JSON.parse(localStorage.getItem('userSettings')) || {};
+            settings.rememberMe = this.checked;
+            localStorage.setItem('userSettings', JSON.stringify(settings));
+        });
+
+        document.getElementById('autoLogout').addEventListener('change', function() {
+            const settings = JSON.parse(localStorage.getItem('userSettings')) || {};
+            settings.autoLogout = this.checked;
+            localStorage.setItem('userSettings', JSON.stringify(settings));
+        });
+
+        // Check for auto logout
+        function checkAutoLogout() {
+            const settings = JSON.parse(localStorage.getItem('userSettings')) || {};
+            if (settings.autoLogout) {
+                const lastActivity = localStorage.getItem('lastActivity');
+                if (lastActivity) {
+                    const hoursSinceLastActivity = (Date.now() - parseInt(lastActivity)) / (1000 * 60 * 60);
+                    if (hoursSinceLastActivity >= 24) {
+                        logout();
+                    }
+                }
+            }
+        }
+
+        // Update last activity timestamp
+        function updateLastActivity() {
+            localStorage.setItem('lastActivity', Date.now().toString());
+        }
+
+        // Add activity listeners
+        document.addEventListener('click', updateLastActivity);
+        document.addEventListener('keypress', updateLastActivity);
+        document.addEventListener('mousemove', updateLastActivity);
+
+        // Check auto logout periodically
+        setInterval(checkAutoLogout, 60000); // Check every minute
+
+        // Initialize
+        loadSettings();
+        updateLastActivity();
+    </script>
+</body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daffy - Settings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #000000;
+            min-height: 100vh;
+            color: #ffffff;
+        }
+        .sidebar {
+            background: linear-gradient(135deg, #1e2761 80%, #facc15 100%);
+            box-shadow: 2px 0 16px 0 rgba(30, 64, 175, 0.08);
+            border-radius: 0 32px 32px 0;
+        }
+        .settings-card {
+            background: #1a1a1a;
+            border-radius: 24px;
+            box-shadow: 0 6px 32px 0 rgba(30, 64, 175, 0.10);
+        }
+        .input-field {
+            background: #2a2a2a;
+            border: 2px solid #333333;
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: #ffffff;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            border-color: #facc15;
+            box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.1);
+            outline: none;
+        }
+        .save-btn {
+            background: linear-gradient(90deg, #1e2761 60%, #facc15 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+        }
+        .sidebar-link {
+            color: #ffffff;
+            padding: 12px 16px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .sidebar-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .sidebar-link.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .sidebar-icon {
+            font-size: 1.5rem;
+        }
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #2a2a2a;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background: linear-gradient(90deg, #1e2761 60%, #facc15 100%);
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+    <!-- Left Sidebar -->
+    <aside class="sidebar w-72 flex flex-col py-12 px-8 min-h-screen mr-12">
+        <div class="logo text-3xl font-bold text-[#facc15] mb-8">
+            <span class="material-icons" style="font-size:2.5rem;">bubble_chart</span> Daffy
+        </div>
+        <nav class="flex flex-col gap-1">
+            <a href="home.html" class="sidebar-link"><span class="material-icons sidebar-icon">home</span> Home</a>
+            <a href="trends.html" class="sidebar-link"><span class="material-icons sidebar-icon">trending_up</span> Trends</a>
+            <a href="clubs.html" class="sidebar-link"><span class="material-icons sidebar-icon">groups</span> Clubs</a>
+            <a href="messaging.html" class="sidebar-link"><span class="material-icons sidebar-icon">chat_bubble</span> Messages</a>
+            <a href="jobs.html" class="sidebar-link"><span class="material-icons sidebar-icon">work</span> Jobs</a>
+            <a href="settings.html" class="sidebar-link active"><span class="material-icons sidebar-icon">settings</span> Settings</a>
+        </nav>
+        <div class="mt-auto">
+            <button onclick="logout()" class="sidebar-link w-full text-left">
+                <span class="material-icons sidebar-icon">logout</span> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8">
+        <h1 class="text-3xl font-bold text-white mb-8">Settings</h1>
+
+        <!-- Account Settings -->
+        <div class="settings-card p-6 mb-8">
+            <h2 class="text-xl font-bold text-white mb-6">Account Settings</h2>
+            <form id="accountForm" class="space-y-6">
+                <div>
+                    <label class="block text-gray-300 mb-2">Email</label>
+                    <input type="email" class="input-field" id="email" placeholder="Enter your email">
+                </div>
+                <div>
+                    <label class="block text-gray-300 mb-2">Current Password</label>
+                    <input type="password" class="input-field" id="currentPassword" placeholder="Enter current password">
+                </div>
+                <div>
+                    <label class="block text-gray-300 mb-2">New Password</label>
+                    <input type="password" class="input-field" id="newPassword" placeholder="Enter new password">
+                </div>
+                <div>
+                    <label class="block text-gray-300 mb-2">Confirm New Password</label>
+                    <input type="password" class="input-field" id="confirmPassword" placeholder="Confirm new password">
+                </div>
+                <button type="submit" class="save-btn">Save Changes</button>
+            </form>
+        </div>
+
+        <!-- Notification Settings -->
+        <div class="settings-card p-6 mb-8">
+            <h2 class="text-xl font-bold text-white mb-6">Notification Settings</h2>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-semibold">Email Notifications</h3>
+                        <p class="text-gray-400 text-sm">Receive email notifications for important updates</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="emailNotifications" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-semibold">Push Notifications</h3>
+                        <p class="text-gray-400 text-sm">Receive push notifications on your device</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="pushNotifications" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-semibold">Message Notifications</h3>
+                        <p class="text-gray-400 text-sm">Get notified when you receive new messages</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="messageNotifications" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy Settings -->
+        <div class="settings-card p-6 mb-8">
+            <h2 class="text-xl font-bold text-white mb-6">Privacy Settings</h2>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-semibold">Profile Visibility</h3>
+                        <p class="text-gray-400 text-sm">Make your profile visible to everyone</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="profileVisibility" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-semibold">Activity Status</h3>
+                        <p class="text-gray-400 text-sm">Show when you're active on the platform</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="activityStatus" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Session Settings -->
+        <div class="settings-card p-6 mb-8">
+            <h2 class="text-xl font-bold text-white mb-6">Session Settings</h2>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-semibold">Remember Me</h3>
+                        <p class="text-gray-400 text-sm">Keep me logged in on this device</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="rememberMe" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-semibold">Auto Logout</h3>
+                        <p class="text-gray-400 text-sm">Automatically logout after 24 hours of inactivity</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="autoLogout" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="mt-6">
+                    <button onclick="logoutAllDevices()" class="bg-[#2a2a2a] text-white px-6 py-2 rounded-lg hover:bg-[#333333] transition mr-4">
+                        Logout All Devices
+                    </button>
+                    <button onclick="logout()" class="bg-[#1e2761] text-white px-6 py-2 rounded-lg hover:bg-[#2a3a8f] transition">
+                        Logout Current Device
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Danger Zone -->
+        <div class="settings-card p-6 border-2 border-red-500">
+            <h2 class="text-xl font-bold text-red-500 mb-6">Danger Zone</h2>
+            <div class="space-y-4">
+                <div>
+                    <h3 class="text-white font-semibold mb-2">Delete Account</h3>
+                    <p class="text-gray-400 text-sm mb-4">Once you delete your account, there is no going back. Please be certain.</p>
+                    <button onclick="deleteAccount()" class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition">
+                        Delete Account
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Check if user is logged in
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'login.html';
+        }
+
+        // Load user settings
+        function loadSettings() {
+            const settings = JSON.parse(localStorage.getItem('userSettings')) || {
+                emailNotifications: true,
+                pushNotifications: true,
+                messageNotifications: true,
+                profileVisibility: true,
+                activityStatus: true,
+                rememberMe: true,
+                autoLogout: true
+            };
+
+            document.getElementById('emailNotifications').checked = settings.emailNotifications;
+            document.getElementById('pushNotifications').checked = settings.pushNotifications;
+            document.getElementById('messageNotifications').checked = settings.messageNotifications;
+            document.getElementById('profileVisibility').checked = settings.profileVisibility;
+            document.getElementById('activityStatus').checked = settings.activityStatus;
+            document.getElementById('rememberMe').checked = settings.rememberMe;
+            document.getElementById('autoLogout').checked = settings.autoLogout;
+
+            const userData = JSON.parse(localStorage.getItem('userData')) || {};
+            document.getElementById('email').value = userData.email || '';
+        }
+
+        // Save settings
+        function saveSettings() {
+            const settings = {
+                emailNotifications: document.getElementById('emailNotifications').checked,
+                pushNotifications: document.getElementById('pushNotifications').checked,
+                messageNotifications: document.getElementById('messageNotifications').checked,
+                profileVisibility: document.getElementById('profileVisibility').checked,
+                activityStatus: document.getElementById('activityStatus').checked,
+                rememberMe: document.getElementById('rememberMe').checked,
+                autoLogout: document.getElementById('autoLogout').checked
+            };
+
+            localStorage.setItem('userSettings', JSON.stringify(settings));
+            alert('Settings saved successfully!');
+        }
+
+        // Handle account form submission
+        document.getElementById('accountForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (newPassword && newPassword !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            // Here you would typically make an API call to update the account
+            alert('Account updated successfully!');
+        });
+
+        // Delete account
+        function deleteAccount() {
+            if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userData');
+                localStorage.removeItem('userSettings');
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Logout from current device
+        function logout() {
+            if (confirm('Are you sure you want to logout from this device?')) {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userData');
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Logout from all devices
+        function logoutAllDevices() {
+            if (confirm('Are you sure you want to logout from all devices? This will end all your active sessions.')) {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userData');
+                localStorage.removeItem('userSettings');
+                localStorage.removeItem('sessionToken');
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Add event listeners for settings changes
+        document.getElementById('rememberMe').addEventListener('change', function() {
+            const settings = JSON.parse(localStorage.getItem('userSettings')) || {};
+            settings.rememberMe = this.checked;
+            localStorage.setItem('userSettings', JSON.stringify(settings));
+        });
+
+        document.getElementById('autoLogout').addEventListener('change', function() {
+            const settings = JSON.parse(localStorage.getItem('userSettings')) || {};
+            settings.autoLogout = this.checked;
+            localStorage.setItem('userSettings', JSON.stringify(settings));
+        });
+
+        // Check for auto logout
+        function checkAutoLogout() {
+            const settings = JSON.parse(localStorage.getItem('userSettings')) || {};
+            if (settings.autoLogout) {
+                const lastActivity = localStorage.getItem('lastActivity');
+                if (lastActivity) {
+                    const hoursSinceLastActivity = (Date.now() - parseInt(lastActivity)) / (1000 * 60 * 60);
+                    if (hoursSinceLastActivity >= 24) {
+                        logout();
+                    }
+                }
+            }
+        }
+
+        // Update last activity timestamp
+        function updateLastActivity() {
+            localStorage.setItem('lastActivity', Date.now().toString());
+        }
+
+        // Add activity listeners
+        document.addEventListener('click', updateLastActivity);
+        document.addEventListener('keypress', updateLastActivity);
+        document.addEventListener('mousemove', updateLastActivity);
+
+        // Check auto logout periodically
+        setInterval(checkAutoLogout, 60000); // Check every minute
+
+        // Initialize
+        loadSettings();
+        updateLastActivity();
+    </script>
+</body>
+>>>>>>> c387e841511f6a3a5c4b54e6051c8e91e8e26d18
+</html> 

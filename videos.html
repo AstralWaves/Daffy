@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daffy - Videos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #000000;
+            min-height: 100vh;
+            color: #ffffff;
+        }
+        .sidebar {
+            background: linear-gradient(135deg, #1e2761 80%, #facc15 100%);
+            box-shadow: 2px 0 16px 0 rgba(30, 64, 175, 0.08);
+            border-radius: 0 32px 32px 0;
+        }
+        .video-card {
+            background: #1a1a1a;
+            border-radius: 24px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .video-card:hover {
+            transform: translateY(-4px);
+        }
+        .video-thumbnail {
+            position: relative;
+            padding-top: 56.25%;
+            background: #2a2a2a;
+            overflow: hidden;
+        }
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .video-duration {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        .upload-area {
+            border: 2px dashed #333;
+            border-radius: 24px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .upload-area:hover {
+            border-color: #facc15;
+            background: rgba(250, 204, 21, 0.1);
+        }
+        .category-pill {
+            background: #2a2a2a;
+            padding: 8px 16px;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .category-pill.active {
+            background: linear-gradient(90deg, #1e2761 60%, #facc15 100%);
+        }
+        .category-pill:hover {
+            background: #333;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+    <!-- Left Sidebar -->
+    <aside class="sidebar w-72 flex flex-col py-12 px-8 min-h-screen mr-12">
+        <div class="logo text-3xl font-bold text-[#facc15] mb-8">
+            <span class="material-icons" style="font-size:2.5rem;">bubble_chart</span> Daffy
+        </div>
+        <nav class="flex flex-col gap-1">
+            <a href="home.html" class="sidebar-link"><span class="material-icons sidebar-icon">home</span> Home</a>
+            <a href="trends.html" class="sidebar-link"><span class="material-icons sidebar-icon">trending_up</span> Trends</a>
+            <a href="clubs.html" class="sidebar-link"><span class="material-icons sidebar-icon">groups</span> Clubs</a>
+            <a href="messaging.html" class="sidebar-link"><span class="material-icons sidebar-icon">chat_bubble</span> Messages</a>
+            <a href="videos.html" class="sidebar-link active"><span class="material-icons sidebar-icon">play_circle</span> Videos</a>
+            <a href="jobs.html" class="sidebar-link"><span class="material-icons sidebar-icon">work</span> Jobs</a>
+            <a href="settings.html" class="sidebar-link"><span class="material-icons sidebar-icon">settings</span> Settings</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8">
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold mb-6">DIU Video Hub</h1>
+            
+            <!-- Upload Section -->
+            <div class="upload-area mb-8" onclick="document.getElementById('videoUpload').click()">
+                <input type="file" id="videoUpload" class="hidden" accept="video/*">
+                <span class="material-icons text-4xl text-gray-400 mb-2">cloud_upload</span>
+                <p class="text-lg font-semibold">Upload Your Video</p>
+                <p class="text-sm text-gray-400">Share your academic content, projects, or campus moments</p>
+            </div>
+
+            <!-- Categories -->
+            <div class="flex gap-4 mb-8 overflow-x-auto pb-4">
+                <button class="category-pill active">All Videos</button>
+                <button class="category-pill">Lectures</button>
+                <button class="category-pill">Lab Tutorials</button>
+                <button class="category-pill">Student Projects</button>
+                <button class="category-pill">Campus Events</button>
+                <button class="category-pill">Tech Talks</button>
+            </div>
+        </div>
+
+        <!-- Video Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Video 1: Programming Tutorial -->
+            <div class="video-card">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/W6NZfCO5SIk/maxresdefault.jpg" alt="JavaScript Tutorial">
+                    <span class="video-duration">15:30</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">JavaScript Fundamentals for Beginners</h3>
+                    <p class="text-sm text-gray-400 mb-2">CSE Department • Dr. Rahman</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>2.1k views</span>
+                        <span>2 days ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 2: Lab Tutorial -->
+            <div class="video-card">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/PkZNo7MFNFg/maxresdefault.jpg" alt="Database Lab">
+                    <span class="video-duration">23:45</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Database Lab: SQL Queries and Joins</h3>
+                    <p class="text-sm text-gray-400 mb-2">CSE Department • Lab Instructor Fatima</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>1.8k views</span>
+                        <span>3 days ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 3: Student Project -->
+            <div class="video-card">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/Mus_vwhTCq0/maxresdefault.jpg" alt="IoT Project">
+                    <span class="video-duration">12:20</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Smart Home Automation using IoT</h3>
+                    <p class="text-sm text-gray-400 mb-2">Final Year Project • Team Innovators</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>3.4k views</span>
+                        <span>1 week ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add more video cards here with similar structure -->
+        </div>
+    </main>
+
+    <script>
+        // Video upload handling
+        const videoUpload = document.getElementById('videoUpload');
+        videoUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                // Here you would typically handle the video upload
+                // For now, we'll just show an alert
+                alert(`Video "${file.name}" selected for upload`);
+            }
+        });
+
+        // Category selection
+        const categories = document.querySelectorAll('.category-pill');
+        categories.forEach(category => {
+            category.addEventListener('click', () => {
+                categories.forEach(c => c.classList.remove('active'));
+                category.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

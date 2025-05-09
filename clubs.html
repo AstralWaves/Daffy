@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daffy - Clubs</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #000000;
+      min-height: 100vh;
+      color: #ffffff;
+    }
+    .sidebar {
+      background: linear-gradient(135deg, #1e2761 80%, #facc15 100%);
+      box-shadow: 2px 0 16px 0 rgba(30, 64, 175, 0.08);
+      border-radius: 0 32px 32px 0;
+    }
+    .club-card {
+      background: #1a1a1a;
+      border-radius: 24px;
+      box-shadow: 0 6px 32px 0 rgba(30, 64, 175, 0.10);
+      transition: transform 0.3s ease;
+    }
+    .club-card:hover {
+      transform: translateY(-4px);
+    }
+    .modal {
+      background: rgba(0, 0, 0, 0.8);
+    }
+    .modal-content {
+      background: #1a1a1a;
+      border-radius: 24px;
+    }
+    .category-btn {
+      background: #2a2a2a;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+    .category-btn.active {
+      background: #facc15;
+      color: #000000;
+    }
+  </style>
+</head>
+<body class="flex min-h-screen overflow-hidden">
+  <!-- Left Sidebar -->
+  <aside class="sidebar w-72 flex flex-col py-12 px-8 min-h-screen mr-12">
+    <div class="logo text-3xl font-bold text-[#facc15] mb-8">
+      <span class="material-icons" style="font-size:2.5rem;">bubble_chart</span> Daffy
+    </div>
+    <nav class="flex flex-col gap-1">
+      <a href="home.html" class="sidebar-link"><span class="material-icons sidebar-icon">home</span> Home</a>
+      <a href="trends.html" class="sidebar-link"><span class="material-icons sidebar-icon">trending_up</span> Trends</a>
+      <a href="clubs.html" class="sidebar-link active"><span class="material-icons sidebar-icon">groups</span> Clubs</a>
+      <a href="messaging.html" class="sidebar-link"><span class="material-icons sidebar-icon">chat_bubble</span> Messages</a>
+      <a href="jobs.html" class="sidebar-link"><span class="material-icons sidebar-icon">work</span> Jobs</a>
+      <a href="settings.html" class="sidebar-link"><span class="material-icons sidebar-icon">settings</span> Settings</a>
+    </nav>
+    <div class="mt-auto">
+      <button onclick="logout()" class="sidebar-link w-full text-left">
+        <span class="material-icons sidebar-icon">logout</span> Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 main-content p-8 overflow-y-auto">
+    <!-- Header with Search and Create Club Button -->
+    <div class="flex justify-between items-center mb-8">
+      <div class="relative w-1/2">
+        <input type="text" id="searchInput" placeholder="Search clubs..." class="w-full bg-[#2a2a2a] text-white rounded-full py-2 px-6 pl-12 focus:outline-none focus:ring-2 focus:ring-[#facc15]">
+        <span class="material-icons absolute left-3 top-2 text-gray-400">search</span>
+      </div>
+      <button onclick="openCreateClubModal()" class="bg-[#facc15] text-black font-semibold py-2 px-6 rounded-full flex items-center gap-2 hover:bg-opacity-90 transition-all">
+        <span class="material-icons">add</span>
+        Create Club
+      </button>
+    </div>
+
+    <!-- Category Filter -->
+    <div class="flex gap-4 mb-8 overflow-x-auto pb-4">
+      <button class="category-btn active px-4 py-2" data-category="all">All Clubs</button>
+      <button class="category-btn px-4 py-2" data-category="cultural">🎭 Cultural & Literary</button>
+      <button class="category-btn px-4 py-2" data-category="academic">🧠 Academic & Professional</button>
+      <button class="category-btn px-4 py-2" data-category="technology">💻 Technology & Engineering</button>
+      <button class="category-btn px-4 py-2" data-category="social">🌱 Social Service</button>
+      <button class="category-btn px-4 py-2" data-category="leadership">🏛️ Leadership & Debate</button>
+      <button class="category-btn px-4 py-2" data-category="sports">⚽ Sports & Fitness</button>
+      <button class="category-btn px-4 py-2" data-category="departmental">🧪 Departmental</button>
+    </div>
+
+    <!-- Clubs Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="clubsGrid">
+      <!-- Club cards will be dynamically added here -->
+    </div>
+  </main>
+
+  <!-- Create Club Modal -->
+  <div id="createClubModal" class="modal fixed inset-0 hidden items-center justify-center z-50">
+    <div class="modal-content w-[600px] p-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+        <span class="material-icons">groups</span>
+        Create New Club
+      </h2>
+      <form id="createClubForm" class="space-y-6">
+        <div>
+          <label class="block text-sm font-medium mb-2">Club Name</label>
+          <input type="text" name="clubName" class="w-full bg-[#2a2a2a] rounded-lg p-3" required>
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-2">Category</label>
+          <select name="category" class="w-full bg-[#2a2a2a] rounded-lg p-3" required>
+            <option value="cultural">Cultural & Literary</option>
+            <option value="academic">Academic & Professional</option>
+            <option value="technology">Technology & Engineering</option>
+            <option value="social">Social Service</option>
+            <option value="leadership">Leadership & Debate</option>
+            <option value="sports">Sports & Fitness</option>
+            <option value="departmental">Departmental</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-2">Description</label>
+          <textarea name="description" rows="4" class="w-full bg-[#2a2a2a] rounded-lg p-3" required></textarea>
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-2">Club Rules</label>
+          <textarea name="rules" rows="3" class="w-full bg-[#2a2a2a] rounded-lg p-3" required></textarea>
+        </div>
+        <div class="flex gap-4">
+          <button type="submit" class="bg-[#facc15] text-black font-semibold py-2 px-6 rounded-full hover:bg-opacity-90 transition-all">Create Club</button>
+          <button type="button" onclick="closeCreateClubModal()" class="bg-[#2a2a2a] text-white font-semibold py-2 px-6 rounded-full hover:bg-opacity-90 transition-all">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Club data structure
+    const clubs = [
+      // Cultural & Literary Clubs
+      {
+        name: 'DIU Cultural Club (DIUCC)',
+        category: 'cultural',
+        members: 250,
+        description: 'Promoting and preserving cultural heritage through various cultural activities.',
+        image: '🎭'
+      },
+      {
+        name: 'English Literary Club (ELC)',
+        category: 'cultural',
+        members: 180,
+        description: 'Enhancing English language skills through literary activities.',
+        image: '📚'
+      },
+      {
+        name: 'DIU Film Society',
+        category: 'cultural',
+        members: 150,
+        description: 'Exploring the art of filmmaking and film appreciation.',
+        image: '🎬'
+      },
+      {
+        name: 'DIU Photographic Society (DIUPS)',
+        category: 'cultural',
+        members: 200,
+        description: 'Capturing moments and developing photography skills.',
+        image: '📸'
+      },
+      {
+        name: 'DIU Readers Club',
+        category: 'cultural',
+        members: 120,
+        description: 'Promoting reading culture and literary discussions.',
+        image: '📖'
+      },
+
+      // Academic & Professional Clubs
+      {
+        name: 'DIU Business & Education Club (DIUBEC)',
+        category: 'academic',
+        members: 300,
+        description: 'Developing business and entrepreneurial skills.',
+        image: '💼'
+      },
+      {
+        name: 'DIU Marketing Club',
+        category: 'academic',
+        members: 220,
+        description: 'Exploring modern marketing strategies and practices.',
+        image: '📊'
+      },
+      // Add more clubs for each category...
+
+      // Technology & Engineering Clubs
+      {
+        name: 'DIU Software Engineering Club (DIUSEC)',
+        category: 'technology',
+        members: 400,
+        description: 'Advancing software engineering skills and knowledge.',
+        image: '💻'
+      },
+      {
+        name: 'DIU Computer and Programming Club (DIUCPC)',
+        category: 'technology',
+        members: 350,
+        description: 'Fostering programming skills and innovation.',
+        image: '👨‍💻'
+      },
+
+      // Social Service Clubs
+      {
+        name: 'DIU Voluntary Service Club (DIUVSC)',
+        category: 'social',
+        members: 280,
+        description: 'Serving the community through voluntary activities.',
+        image: '🤝'
+      },
+      {
+        name: 'DIU Blood Donors Club (DIUBDC)',
+        category: 'social',
+        members: 200,
+        description: 'Organizing blood donation campaigns and awareness programs.',
+        image: '🩸'
+      }
+    ];
+
+    // Function to render clubs
+    function renderClubs(filteredClubs = clubs) {
+      const clubsGrid = document.getElementById('clubsGrid');
+      clubsGrid.innerHTML = filteredClubs.map(club => `
+        <div class="club-card p-6">
+          <div class="text-4xl mb-4">${club.image}</div>
+          <h3 class="text-xl font-semibold mb-2">${club.name}</h3>
+          <p class="text-gray-400 text-sm mb-4">${club.description}</p>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#facc15]">${club.category}</span>
+            <span class="text-sm">${club.members} members</span>
+          </div>
+          <button class="mt-4 w-full bg-[#2a2a2a] text-white font-semibold py-2 rounded-full hover:bg-[#facc15] hover:text-black transition-all">Join Club</button>
+        </div>
+      `).join('');
+    }
+
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+      const searchTerm = e.target.value.toLowerCase();
+      const filteredClubs = clubs.filter(club =>
+        club.name.toLowerCase().includes(searchTerm) ||
+        club.description.toLowerCase().includes(searchTerm)
+      );
+      renderClubs(filteredClubs);
+    });
+
+    // Category filter functionality
+    document.querySelectorAll('.category-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelector('.category-btn.active').classList.remove('active');
+        this.classList.add('active');
+        const category = this.dataset.category;
+        const filteredClubs = category === 'all' ? clubs : clubs.filter(club => club.category === category);
+        renderClubs(filteredClubs);
+      });
+    });
+
+    // Modal functions
+    function openCreateClubModal() {
+      document.getElementById('createClubModal').classList.remove('hidden');
+      document.getElementById('createClubModal').classList.add('flex');
+    }
+
+    function closeCreateClubModal() {
+      document.getElementById('createClubModal').classList.add('hidden');
+      document.getElementById('createClubModal').classList.remove('flex');
+    }
+
+    // Form submission
+    document.getElementById('createClubForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const newClub = {
+        name: formData.get('clubName'),
+        category: formData.get('category'),
+        description: formData.get('description'),
+        members: 1,
+        image: getClubEmoji(formData.get('category'))
+      };
+      clubs.unshift(newClub);
+      renderClubs();
+      closeCreateClubModal();
+      e.target.reset();
+    });
+
+    // Helper function to get emoji based on category
+    function getClubEmoji(category) {
+      const emojis = {
+        cultural: '🎭',
+        academic: '🧠',
+        technology: '💻',
+        social: '🌱',
+        leadership: '🏛️',
+        sports: '⚽',
+        departmental: '🧪'
+      };
+      return emojis[category] || '👥';
+    }
+
+    // Initial render
+    renderClubs();
+  </script>
+</body>
+</html>
