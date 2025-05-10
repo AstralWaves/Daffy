@@ -108,6 +108,21 @@
         input:checked + .slider:before {
             transform: translateX(26px);
         }
+        .select-field {
+            background: #2a2a2a;
+            border: 2px solid #333333;
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: #ffffff;
+            width: 100%;
+            transition: all 0.3s ease;
+            appearance: none;
+        }
+        .select-field:focus {
+            border-color: #facc15;
+            box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.1);
+            outline: none;
+        }
     </style>
 </head>
 <body class="flex min-h-screen">
@@ -140,8 +155,12 @@
             <h2 class="text-xl font-bold text-white mb-6">Account Settings</h2>
             <form id="accountForm" class="space-y-6">
                 <div>
+                    <label class="block text-gray-300 mb-2">Username</label>
+                    <input type="text" class="input-field" id="username" placeholder="Enter your username" required>
+                </div>
+                <div>
                     <label class="block text-gray-300 mb-2">Email</label>
-                    <input type="email" class="input-field" id="email" placeholder="Enter your email">
+                    <input type="email" class="input-field" id="email" placeholder="Enter your email" required>
                 </div>
                 <div>
                     <label class="block text-gray-300 mb-2">Current Password</label>
@@ -157,6 +176,28 @@
                 </div>
                 <button type="submit" class="save-btn">Save Changes</button>
             </form>
+        </div>
+
+        <!-- Two-Factor Authentication -->
+        <div class="settings-card p-6 mb-8">
+            <h2 class="text-xl font-bold text-white mb-6">Two-Factor Authentication</h2>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-semibold">Enable Two-Factor Authentication</h3>
+                        <p class="text-gray-400 text-sm">Add an extra layer of security to your account</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="twoFactorAuth">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div id="twoFactorSetup" class="hidden">
+                    <label class="block text-gray-300 mb-2">Phone Number for SMS Verification</label>
+                    <input type="tel" class="input-field" id="phoneNumber" placeholder="Enter your phone number">
+                    <button onclick="sendVerificationCode()" class="save-btn mt-4">Send Verification Code</button>
+                </div>
+            </div>
         </div>
 
         <!-- Notification Settings -->
@@ -193,6 +234,16 @@
                         <span class="slider"></span>
                     </label>
                 </div>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-semibold">Event Reminders</h3>
+                        <p class="text-gray-400 text-sm">Get notified about upcoming events and deadlines</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="eventNotifications" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
             </div>
         </div>
 
@@ -203,12 +254,13 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <h3 class="text-white font-semibold">Profile Visibility</h3>
-                        <p class="text-gray-400 text-sm">Make your profile visible to everyone</p>
+                        <p class="text-gray-400 text-sm">Control who can see your profile</p>
                     </div>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="profileVisibility" checked>
-                        <span class="slider"></span>
-                    </label>
+                    <select class="select-field" id="profileVisibility">
+                        <option value="everyone">Everyone</option>
+                        <option value="connections">Connections Only</option>
+                        <option value="private">Private</option>
+                    </select>
                 </div>
                 <div class="flex items-center justify-between">
                     <div>
@@ -219,6 +271,116 @@
                         <input type="checkbox" id="activityStatus" checked>
                         <span class="slider"></span>
                     </label>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-semibold">Data Sharing</h3>
+                        <p class="text-gray-400 text-sm">Allow third-party apps to access your data</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="dataSharing">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blocked Contacts -->
+        <div class="settings-card p-6 mb-8">
+            <h2 class="text-xl font-bold text-white mb-6">Blocked Contacts</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-gray-300 mb-2">Block a User</label>
+                    <input type="text" class="input-field" id="blockUser" placeholder="Enter username or email">
+                    <button onclick="blockUser()" class="save-btn mt-4">Block User</button>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-2">Blocked Users</h3>
+                    <ul id="blockedUsersList" class="text-gray-400"></ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Preferences -->
+        <div class="settings-card p-6 mb-8">
+            <h2 class="text-xl font-bold text-white mb-6">Content Preferences</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-gray-300 mb-2">Content Language</label>
+                    <select class="select-field" id="contentLanguage">
+                        <option value="en">English</option>
+                        <option value="es">Spanish</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                    </select>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-semibold">Sensitive Content Filter</h3>
+                        <p class="text-gray-400 text-sm">Filter out sensitive or explicit content</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="sensitiveContentFilter" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accessibility Settings -->
+        <div class="settings-card p-6 mb-8">
+            <h2 class="text-xl font-bold text-white mb-6">Accessibility Settings</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-gray-300 mb-2">Font Size</label>
+                    <select class="select-field" id="fontSize">
+                        <option value="small">Small</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="large">Large</option>
+                    </select>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-semibold">High Contrast Mode</h3>
+                        <p class="text-gray-400 text-sm">Enable high contrast for better visibility</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="highContrastMode">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Linked Accounts -->
+        <div class="settings-card p-6 mb-8">
+            <h2 class="text-xl font-bold text-white mb-6">Linked Accounts</h2>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-semibold">Google</h3>
+                        <p class="text-gray-400 text-sm">Link your Google account for easier login</p>
+                    </div>
+                    <button id="linkGoogle" class="bg-[#2a2a2a] text-white px-6 py-2 rounded-lg hover:bg-[#333333] transition">Link</button>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-white font-semibold">Facebook</h3>
+                        <p class="text-gray-400 text-sm">Link your Facebook account for easier login</p>
+                    </div>
+                    <button id="linkFacebook" class="bg-[#2a2a2a] text-white px-6 py-2 rounded-lg hover:bg-[#333333] transition">Link</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Download -->
+        <div class="settings-card p-6 mb-8">
+            <h2 class="text-xl font-bold text-white mb-6">Data Download</h2>
+            <div class="space-y-4">
+                <div>
+                    <h3 class="text-white font-semibold">Download Your Data</h3>
+                    <p class="text-gray-400 text-sm">Request a copy of your personal data</p>
+                    <button onclick="requestDataDownload()" class="save-btn mt-4">Request Data</button>
                 </div>
             </div>
         </div>
@@ -285,22 +447,43 @@
                 emailNotifications: true,
                 pushNotifications: true,
                 messageNotifications: true,
-                profileVisibility: true,
+                eventNotifications: true,
+                profileVisibility: 'everyone',
                 activityStatus: true,
+                dataSharing: false,
+                twoFactorAuth: false,
+                sensitiveContentFilter: true,
+                fontSize: 'medium',
+                highContrastMode: false,
+                contentLanguage: 'en',
                 rememberMe: true,
                 autoLogout: true
             };
 
+            const userData = JSON.parse(localStorage.getItem('userData')) || {};
+            document.getElementById('username').value = userData.username || '';
+            document.getElementById('email').value = userData.email || '';
             document.getElementById('emailNotifications').checked = settings.emailNotifications;
             document.getElementById('pushNotifications').checked = settings.pushNotifications;
             document.getElementById('messageNotifications').checked = settings.messageNotifications;
-            document.getElementById('profileVisibility').checked = settings.profileVisibility;
+            document.getElementById('eventNotifications').checked = settings.eventNotifications;
+            document.getElementById('profileVisibility').value = settings.profileVisibility;
             document.getElementById('activityStatus').checked = settings.activityStatus;
+            document.getElementById('dataSharing').checked = settings.dataSharing;
+            document.getElementById('twoFactorAuth').checked = settings.twoFactorAuth;
+            document.getElementById('sensitiveContentFilter').checked = settings.sensitiveContentFilter;
+            document.getElementById('fontSize').value = settings.fontSize;
+            document.getElementById('highContrastMode').checked = settings.highContrastMode;
+            document.getElementById('contentLanguage').value = settings.contentLanguage;
             document.getElementById('rememberMe').checked = settings.rememberMe;
             document.getElementById('autoLogout').checked = settings.autoLogout;
 
-            const userData = JSON.parse(localStorage.getItem('userData')) || {};
-            document.getElementById('email').value = userData.email || '';
+            // Show/hide 2FA setup
+            document.getElementById('twoFactorSetup').classList.toggle('hidden', !settings.twoFactorAuth);
+            document.getElementById('phoneNumber').value = userData.phoneNumber || '';
+
+            // Load blocked users
+            loadBlockedUsers();
         }
 
         // Save settings
@@ -309,8 +492,15 @@
                 emailNotifications: document.getElementById('emailNotifications').checked,
                 pushNotifications: document.getElementById('pushNotifications').checked,
                 messageNotifications: document.getElementById('messageNotifications').checked,
-                profileVisibility: document.getElementById('profileVisibility').checked,
+                eventNotifications: document.getElementById('eventNotifications').checked,
+                profileVisibility: document.getElementById('profileVisibility').value,
                 activityStatus: document.getElementById('activityStatus').checked,
+                dataSharing: document.getElementById('dataSharing').checked,
+                twoFactorAuth: document.getElementById('twoFactorAuth').checked,
+                sensitiveContentFilter: document.getElementById('sensitiveContentFilter').checked,
+                fontSize: document.getElementById('fontSize').value,
+                highContrastMode: document.getElementById('highContrastMode').checked,
+                contentLanguage: document.getElementById('contentLanguage').value,
                 rememberMe: document.getElementById('rememberMe').checked,
                 autoLogout: document.getElementById('autoLogout').checked
             };
@@ -322,17 +512,115 @@
         // Handle account form submission
         document.getElementById('accountForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const currentPassword = document.getElementById('currentPassword').value;
             const newPassword = document.getElementById('newPassword').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
 
+            // Validation
+            if (!username || !email) {
+                alert('Username and email are required!');
+                return;
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                alert('Please enter a valid email address!');
+                return;
+            }
             if (newPassword && newPassword !== confirmPassword) {
-                alert('Passwords do not match!');
+                alert('New passwords do not match!');
+                return;
+            }
+            if (newPassword && newPassword.length < 8) {
+                alert('New password must be at least 8 characters long!');
+                return;
+            }
+            if (newPassword && !currentPassword) {
+                alert('Current password is required to change password!');
                 return;
             }
 
+            // Update user data
+            const userData = JSON.parse(localStorage.getItem('userData')) || {};
+            userData.username = username;
+            userData.email = email;
+            localStorage.setItem('userData', JSON.stringify(userData));
+
             // Here you would typically make an API call to update the account
             alert('Account updated successfully!');
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
         });
+
+        // Two-Factor Authentication
+        document.getElementById('twoFactorAuth').addEventListener('change', function() {
+            document.getElementById('twoFactorSetup').classList.toggle('hidden', !this.checked);
+            saveSettings();
+        });
+
+        function sendVerificationCode() {
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            if (!/^\+?\d{10,15}$/.test(phoneNumber)) {
+                alert('Please enter a valid phone number!');
+                return;
+            }
+            // Here you would typically send an API request to send a verification code
+            alert('Verification code sent to ' + phoneNumber);
+        }
+
+        // Blocked Users
+        function blockUser() {
+            const blockUserInput = document.getElementById('blockUser').value;
+            if (!blockUserInput) {
+                alert('Please enter a username or email to block!');
+                return;
+            }
+            const blockedUsers = JSON.parse(localStorage.getItem('blockedUsers')) || [];
+            if (blockedUsers.includes(blockUserInput)) {
+                alert('This user is already blocked!');
+                return;
+            }
+            blockedUsers.push(blockUserInput);
+            localStorage.setItem(' blockedUsers', JSON.stringify(blockedUsers));
+            document.getElementById('blockUser').value = '';
+            loadBlockedUsers();
+            alert('User blocked successfully!');
+        }
+
+        function loadBlockedUsers() {
+            const blockedUsers = JSON.parse(localStorage.getItem('blockedUsers')) || [];
+            const list = document.getElementById('blockedUsersList');
+            list.innerHTML = blockedUsers.length ? blockedUsers.map(user => `
+                <li class="flex justify-between items-center py-2">
+                    <span>${user}</span>
+                    <button onclick="unblockUser('${user}')" class="text-red-500 hover:text-red-600">Unblock</button>
+                </li>
+            `).join('') : '<li>No blocked users</li>';
+        }
+
+        function unblockUser(user) {
+            const blockedUsers = JSON.parse(localStorage.getItem('blockedUsers')) || [];
+            const updatedList = blockedUsers.filter(u => u !== user);
+            localStorage.setItem('blockedUsers', JSON.stringify(updatedList));
+            loadBlockedUsers();
+            alert('User unblocked successfully!');
+        }
+
+        // Linked Accounts (Placeholder)
+        document.getElementById('linkGoogle').addEventListener('click', function() {
+            alert('Google account linking is not implemented yet.');
+        });
+
+        document.getElementById('linkFacebook').addEventListener('click', function() {
+            alert('Facebook account linking is not implemented yet.');
+        });
+
+        // Data Download
+        function requestDataDownload() {
+            // Here you would typically make an API call to initiate data download
+            alert('Data download request submitted. You will receive an email with download instructions.');
+        }
 
         // Delete account
         function deleteAccount() {
@@ -340,6 +628,7 @@
                 localStorage.removeItem('isLoggedIn');
                 localStorage.removeItem('userData');
                 localStorage.removeItem('userSettings');
+                localStorage.removeItem('blockedUsers');
                 window.location.href = 'login.html';
             }
         }
@@ -359,22 +648,21 @@
                 localStorage.removeItem('isLoggedIn');
                 localStorage.removeItem('userData');
                 localStorage.removeItem('userSettings');
+                localStorage.removeItem('blockedUsers');
                 localStorage.removeItem('sessionToken');
                 window.location.href = 'login.html';
             }
         }
 
         // Add event listeners for settings changes
-        document.getElementById('rememberMe').addEventListener('change', function() {
-            const settings = JSON.parse(localStorage.getItem('userSettings')) || {};
-            settings.rememberMe = this.checked;
-            localStorage.setItem('userSettings', JSON.stringify(settings));
+        ['emailNotifications', 'pushNotifications', 'messageNotifications', 'eventNotifications', 
+         'activityStatus', 'dataSharing', 'sensitiveContentFilter', 'highContrastMode', 
+         'rememberMe', 'autoLogout'].forEach(id => {
+            document.getElementById(id).addEventListener('change', saveSettings);
         });
 
-        document.getElementById('autoLogout').addEventListener('change', function() {
-            const settings = JSON.parse(localStorage.getItem('userSettings')) || {};
-            settings.autoLogout = this.checked;
-            localStorage.setItem('userSettings', JSON.stringify(settings));
+        ['profileVisibility', 'fontSize', 'contentLanguage'].forEach(id => {
+            document.getElementById(id).addEventListener('change', saveSettings);
         });
 
         // Check for auto logout

@@ -5,33 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daffy - Trends</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
             background: #000000;
             min-height: 100vh;
             color: #ffffff;
+            margin: 0;
         }
         .sidebar {
             background: linear-gradient(135deg, #1e2761 80%, #facc15 100%);
             box-shadow: 2px 0 16px 0 rgba(30, 64, 175, 0.08);
             border-radius: 0 32px 32px 0;
+            width: 18rem;
+            flex-shrink: 0;
         }
         .trend-card {
-            background: #1a1a1a;
+            background: linear-gradient(145deg, #1a1a1a, #262626);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 24px;
-            box-shadow: 0 6px 32px 0 rgba(30, 64, 175, 0.10);
-            transition: transform 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 0.5s ease-out;
+            backdrop-filter: blur(12px);
         }
         .trend-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 48px rgba(250, 204, 21, 0.2);
+            border-color: rgba(250, 204, 21, 0.2);
         }
         .trend-tag {
-            color: #facc15;
-            font-weight: 600;
-            font-size: 1.1rem;
+            background: linear-gradient(135deg, #facc15, #f59e0b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+            font-size: 1.25rem;
         }
         .trend-category {
             color: #facc15;
@@ -39,50 +50,89 @@
             font-weight: 500;
         }
         .trend-stats {
-            color: #888888;
-            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            margin-top: 16px;
+        }
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #888;
+            transition: color 0.3s ease;
+        }
+        .stat-item:hover {
+            color: #facc15;
         }
         .search-input {
-            background: #2a2a2a;
-            border: 2px solid #333333;
-            border-radius: 9999px;
-            padding: 12px 20px;
+            background: rgba(42, 42, 42, 0.8);
+            border: 2px solid rgba(250, 204, 21, 0.1);
+            padding: 16px 24px;
+            border-radius: 16px;
+            font-size: 1rem;
             transition: all 0.3s ease;
-            color: #ffffff;
+            backdrop-filter: blur(12px);
         }
         .search-input:focus {
             border-color: #facc15;
-            box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.1);
+            box-shadow: 0 0 0 4px rgba(250, 204, 21, 0.1);
+            transform: scale(1.02);
         }
         .filter-btn {
             background: rgba(250, 204, 21, 0.1);
-            color: #ffffff;
-            padding: 8px 16px;
-            border-radius: 9999px;
-            font-weight: 500;
+            border: 1px solid rgba(250, 204, 21, 0.1);
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 600;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .filter-btn:hover, .filter-btn.active {
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(250, 204, 21, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+        .filter-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        .filter-btn.active {
             background: #facc15;
-            color: #000000;
+            color: #000;
+            transform: scale(1.05);
         }
         .top-trends {
-            background: #1a1a1a;
+            background: linear-gradient(165deg, #1a1a1a, #262626);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 24px;
-            box-shadow: 0 6px 32px 0 rgba(30, 64, 175, 0.10);
-            padding: 1.5rem;
+            padding: 24px;
+            animation: slideUp 0.8s ease-out;
             position: sticky;
-            top: 2rem;
+            top: 8rem;
+            width: 20rem;
+            flex-shrink: 0;
         }
         .trend-rank {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #ffffff;
-            opacity: 0.7;
+            color: #facc15;
+            opacity: 0.9;
         }
         .trend-rank.top-3 {
-            color: #facc15;
             opacity: 1;
+            font-weight: 800;
         }
         .section-title {
             color: #ffffff;
@@ -111,186 +161,331 @@
         .sidebar-icon {
             font-size: 1.5rem;
         }
+        .engagement-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .engagement-btn:hover {
+            background: rgba(250, 204, 21, 0.1);
+            transform: scale(1.05);
+        }
+        .engagement-btn.liked .material-icons {
+            color: #facc15;
+            animation: pulse 0.3s ease;
+        }
+        .trend-image, .trend-video {
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 16px 0;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .trend-video iframe {
+            width: 100%;
+            height: 360px;
+            border: none;
+        }
+        .trend-image:hover, .trend-video:hover {
+            transform: scale(1.02);
+        }
+        .loading-indicator {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .loading .loading-indicator {
+            opacity: 1;
+        }
+        #trendingFeed {
+            min-height: 200px;
+            position: relative;
+        }
+        .main-container {
+            display: flex;
+            width: 100%;
+            gap: 2rem;
+        }
+        .feed-section {
+            flex: 1;
+            max-width: 48rem;
+            min-width: 40rem;
+            overflow-y: auto;
+        }
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
     </style>
 </head>
-<body class="flex min-h-screen">
-    <!-- Left Sidebar -->
-    <aside class="sidebar w-72 flex flex-col py-12 px-8 min-h-screen mr-12">
-        <div class="logo text-3xl font-bold text-[#facc15] mb-8">
-            <span class="material-icons" style="font-size:2.5rem;">bubble_chart</span> Daffy
+<body class="flex flex-col min-h-screen">
+    <!-- Fixed Header -->
+    <div class="header sticky top-0 z-10 bg-black p-4">
+        <h1 class="text-3xl font-bold text-white mb-4">Trending Topics</h1>
+        <div class="flex items-center gap-4">
+            <div class="relative flex-1">
+                <input type="text" class="search-input w-full pl-12" placeholder="Search trends...">
+                <span class="material-icons absolute left-4 top-3 text-gray-400">search</span>
+            </div>
+            <div class="flex gap-2">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="popular">Popular</button>
+                <button class="filter-btn" data-filter="recent">Recent</button>
+                <button class="filter-btn">Technology</button>
+                <button class="filter-btn">Sports</button>
+                <button class="filter-btn">Entertainment</button>
+            </div>
         </div>
-        <nav class="flex flex-col gap-1">
-            <a href="home.html" class="sidebar-link"><span class="material-icons sidebar-icon">home</span> Home</a>
-            <a href="trends.html" class="sidebar-link active"><span class="material-icons sidebar-icon">trending_up</span> Trends</a>
-            <a href="clubs.html" class="sidebar-link"><span class="material-icons sidebar-icon">groups</span> Clubs</a>
-            <a href="messaging.html" class="sidebar-link"><span class="material-icons sidebar-icon">chat_bubble</span> Messages</a>
-            <a href="videos.html" class="sidebar-link"><span class="material-icons sidebar-icon">play_circle</span> Videos</a>
-            <a href="jobs.html" class="sidebar-link"><span class="material-icons sidebar-icon">work</span> Jobs</a>
-            <a href="settings.html" class="sidebar-link"><span class="material-icons sidebar-icon">settings</span> Settings</a>
-        </nav>
-        <div class="mt-auto">
-            <button onclick="logout()" class="sidebar-link w-full text-left">
-                <span class="material-icons sidebar-icon">logout</span> Logout
-            </button>
-        </div>
-    </aside>
+    </div>
 
     <!-- Main Content -->
-    <main class="flex-1 p-8">
-        <!-- Header -->
-        <div class="mb-8">
-            <div class="flex justify-between items-start">
-                <div class="flex-1">
-                    <h1 class="text-3xl font-bold text-white mb-4">Trending Topics</h1>
-                    <div class="flex items-center gap-4">
-                        <div class="relative flex-1">
-                            <input type="text" class="search-input w-full pl-12" placeholder="Search trends...">
-                            <span class="material-icons absolute left-4 top-3 text-gray-400">search</span>
-                        </div>
-                        <div class="flex gap-2">
-                            <button class="filter-btn active">All</button>
-                            <button class="filter-btn">Technology</button>
-                            <button class="filter-btn">Sports</button>
-                            <button class="filter-btn">Entertainment</button>
-                        </div>
+    <div class="main-container flex-1 p-8">
+        <!-- Left Sidebar -->
+        <aside class="sidebar flex flex-col py-12 px-8 min-h-screen">
+            <!-- Update the logo section -->
+            <a href="home.html" class="logo text-2xl font-bold text-white mb-8 flex items-center gap-2">
+              <span class="material-icons" style="font-size:2rem;">bubble_chart</span> Daffy
+            </a>
+            <nav class="flex flex-col gap-1">
+                <a href="home.html" class="sidebar-link"><span class="material-icons sidebar-icon">home</span> Home</a>
+                <a href="trends.html" class="sidebar-link active"><span class="material-icons sidebar-icon">trending_up</span> Trends</a>
+                <a href="clubs.html" class="sidebar-link"><span class="material-icons sidebar-icon">groups</span> Clubs</a>
+                <a href="messaging.html" class="sidebar-link"><span class="material-icons sidebar-icon">chat_bubble</span> Messages</a>
+                <a href="videos.html" class="sidebar-link"><span class="material-icons sidebar-icon">play_circle</span> Videos</a>
+                <a href="jobs.html" class="sidebar-link"><span class="material-icons sidebar-icon">work</span> Jobs</a>
+                <a href="settings.html" class="sidebar-link"><span class="material-icons sidebar-icon">settings</span> Settings</a>
+            </nav>
+            <div class="mt-auto">
+                <button onclick="logout()" class="sidebar-link w-full text-left">
+                    <span class="material-icons sidebar-icon">logout</span> Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Trending Feed Section -->
+        <section class="feed-section">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="section-title">Trending Now</h2>
+                <div class="flex gap-2">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="popular">Popular</button>
+                    <button class="filter-btn" data-filter="recent">Recent</button>
+                </div>
+            </div>
+            <div id="trendingFeed" class="space-y-4">
+                <div class="loading-indicator flex justify-center items-center py-4">
+                    <span class="material-icons animate-spin text-[#facc15]">autorenew</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Trending Topics (Right Side) -->
+        <div class="top-trends">
+            <h2 class="section-title">Top Trending Topics</h2>
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <span class="trend-rank top-3">1</span>
+                    <div>
+                        <h4 class="font-semibold text-white">#AI</h4>
+                        <p class="text-sm text-gray-400">32.1K posts</p>
                     </div>
                 </div>
-                
-                <!-- Top Trends Section -->
-                <div class="top-trends w-80 ml-8">
-                    <h2 class="section-title">Top Trends</h2>
-                    <div class="space-y-4">
-                        <div class="flex items-center gap-3">
-                            <span class="trend-rank top-3">1</span>
-                            <div>
-                                <h4 class="font-semibold text-white">#AI</h4>
-                                <p class="text-sm text-gray-400">32.1K posts</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="trend-rank top-3">2</span>
-                            <div>
-                                <h4 class="font-semibold text-white">#WebDevelopment</h4>
-                                <p class="text-sm text-gray-400">25.4K posts</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="trend-rank top-3">3</span>
-                            <div>
-                                <h4 class="font-semibold text-white">#WorldCup2024</h4>
-                                <p class="text-sm text-gray-400">18.7K posts</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="trend-rank">4</span>
-                            <div>
-                                <h4 class="font-semibold text-white">#OnlineLearning</h4>
-                                <p class="text-sm text-gray-400">15.8K posts</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="trend-rank">5</span>
-                            <div>
-                                <h4 class="font-semibold text-white">#NewMovies</h4>
-                                <p class="text-sm text-gray-400">12.3K posts</p>
-                            </div>
-                        </div>
+                <div class="flex items-center gap-3">
+                    <span class="trend-rank top-3">2</span>
+                    <div>
+                        <h4 class="font-semibold text-white">#WebDevelopment</h4>
+                        <p class="text-sm text-gray-400">25.4K posts</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="trend-rank top-3">3</span>
+                    <div>
+                        <h4 class="font-semibold text-white">#WorldCup2024</h4>
+                        <p class="text-sm text-gray-400">18.7K posts</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="trend-rank">4</span>
+                    <div>
+                        <h4 class="font-semibold text-white">#OnlineLearning</h4>
+                        <p class="text-sm text-gray-400">15.8K posts</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="trend-rank">5</span>
+                    <div>
+                        <h4 class="font-semibold text-white">#NewMovies</h4>
+                        <p class="text-sm text-gray-400">12.3K posts</p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Replace the existing Trends Grid section with this new feed-style layout -->
-        <div class="space-y-8">
-            <!-- Trending Feed Section -->
-            <section class="max-w-3xl mx-auto">
-                <div class="flex items-center justify-between mb-6">
-                    <h2 class="section-title">Trending Now</h2>
-                    <div class="flex gap-2">
-                        <button class="filter-btn active" data-filter="all">All</button>
-                        <button class="filter-btn" data-filter="popular">Popular</button>
-                        <button class="filter-btn" data-filter="recent">Recent</button>
-                    </div>
-                </div>
-                <div id="trendingFeed" class="space-y-4">
-                    <!-- Trending posts will be dynamically inserted here -->
-                </div>
-            </section>
-        </div>
-
-        <script>
+    <script>
+        // Sample trending posts data
         const trendingPosts = [
             {
                 id: 1,
-                user: { name: 'TechEnthusiast', avatar: 'T', verified: true },
-                category: 'Technology',
-                hashtag: '#WebDevelopment',
-                content: 'The future of web development is here! Check out these amazing new frameworks that are revolutionizing how we build applications. 🚀',
-                image: 'https://source.unsplash.com/random/800x400/?coding',
-                engagement: { likes: 25400, comments: 1200, shares: 850 },
-                timeAgo: '2h ago'
+                user: {
+                    name: "TechExplorer",
+                    avatar: "TE",
+                    verified: true
+                },
+                timeAgo: "2 hours ago",
+                category: "Technology",
+                hashtag: "#AI",
+                content: "The latest developments in AI are revolutionizing how we work and live. What are your thoughts on the future of artificial intelligence?",
+                image: "https://source.unsplash.com/random/800x600/?ai",
+                engagement: {
+                    likes: 1234,
+                    comments: 89,
+                    shares: 45
+                }
             },
             {
                 id: 2,
-                user: { name: 'AIResearcher', avatar: 'A', verified: true },
-                category: 'Technology',
-                hashtag: '#ArtificialIntelligence',
-                content: 'Breaking: New AI model achieves unprecedented performance in natural language understanding. The implications for future applications are mind-blowing! 🤖',
-                engagement: { likes: 32100, comments: 2400, shares: 1500 },
-                timeAgo: '1h ago'
+                user: {
+                    name: "SportsUpdate",
+                    avatar: "SU",
+                    verified: true
+                },
+                timeAgo: "3 hours ago",
+                category: "Sports",
+                hashtag: "#WorldCup2024",
+                content: "Incredible matches and unforgettable moments! The tournament is heating up as we head into the quarter-finals. Who's your pick to win it all?",
+                image: "https://source.unsplash.com/random/800x600/?soccer",
+                engagement: {
+                    likes: 2891,
+                    comments: 156,
+                    shares: 78
+                }
+            },
+            {
+                id: 3,
+                user: {
+                    name: "WebDevPro",
+                    avatar: "WD",
+                    verified: true
+                },
+                timeAgo: "4 hours ago",
+                category: "Technology",
+                hashtag: "#WebDevelopment",
+                content: "The rise of AI-powered development tools is changing how we code. Here's how you can stay ahead of the curve in 2024.",
+                image: "https://source.unsplash.com/random/800x600/?coding",
+                engagement: {
+                    likes: 1567,
+                    comments: 92,
+                    shares: 34
+                }
+            },
+            {
+                id: 4,
+                user: {
+                    name: "EduTech",
+                    avatar: "ET",
+                    verified: false
+                },
+                timeAgo: "5 hours ago",
+                category: "Education",
+                hashtag: "#OnlineLearning",
+                content: "Remote education is evolving! Check out these new platforms that are making learning more interactive and engaging than ever.",
+                image: "https://source.unsplash.com/random/800x600/?education",
+                engagement: {
+                    likes: 945,
+                    comments: 67,
+                    shares: 23
+                }
+            },
+            {
+                id: 5,
+                user: {
+                    name: "MovieBuff",
+                    avatar: "MB",
+                    verified: false
+                },
+                timeAgo: "6 hours ago",
+                category: "Entertainment",
+                hashtag: "#NewMovies",
+                content: "This year's lineup of films is incredible! From action-packed blockbusters to thought-provoking indies, there's something for everyone.",
+                image: "https://source.unsplash.com/random/800x600/?movies",
+                engagement: {
+                    likes: 723,
+                    comments: 45,
+                    shares: 12
+                }
             }
-            // Add more trending posts as needed
         ];
 
         function createTrendingPost(post) {
+            const isLiked = localStorage.getItem(`liked_${post.id}`);
             const postElement = document.createElement('div');
-            postElement.className = 'trend-card p-6 hover:shadow-lg transition-all duration-300';
+            postElement.className = 'trend-card p-6 mb-6';
             postElement.innerHTML = `
-                <div class="flex items-start justify-between mb-4">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-r from-[#1e2761] to-[#facc15] flex items-center justify-center text-white font-bold">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#1e2761] to-[#facc15] flex items-center justify-center text-white font-bold shadow-lg">
                             ${post.user.avatar}
                         </div>
                         <div>
-                            <div class="flex items-center gap-1">
-                                <span class="font-bold text-white">${post.user.name}</span>
-                                ${post.user.verified ? '<span class="material-icons text-[#facc15] text-sm">verified</span>' : ''}
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-white text-lg">${post.user.name}</span>
+                                ${post.user.verified ? '<span class="material-icons text-[#facc15]">verified</span>' : ''}
                             </div>
-                            <div class="text-sm text-gray-400">${post.timeAgo}</div>
+                            <div class="text-sm text-gray-400 flex items-center gap-2">
+                                <span>${post.timeAgo}</span>
+                                <span class="text-[#facc15]">•</span>
+                                <span class="trend-category">${post.category}</span>
+                            </div>
                         </div>
                     </div>
-                    <span class="trend-category">${post.category}</span>
+                    <button class="text-gray-400 hover:text-[#facc15] transition-all">
+                        <span class="material-icons">more_horiz</span>
+                    </button>
                 </div>
-                <div class="mb-4">
-                    <h3 class="trend-tag text-xl mb-2">${post.hashtag}</h3>
-                    <p class="text-gray-400">${post.content}</p>
-                    ${post.image ? `<img src="${post.image}" class="w-full h-64 object-cover rounded-lg mt-4">` : ''}
+                <div class="trend-content">
+                    <h3 class="trend-tag text-xl mb-3">${post.hashtag}</h3>
+                    <p class="text-gray-300 leading-relaxed">${post.content}</p>
+                    ${post.image ? `
+                        <div class="trend-image">
+                            <img src="${post.image}" class="w-full h-64 object-cover transition-transform hover:scale-105">
+                        </div>
+                    ` : post.video ? `
+                        <div class="trend-video">
+                            <iframe src="${post.video}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    ` : ''}
                 </div>
-                <div class="flex items-center justify-between text-sm">
-                    <div class="flex items-center gap-6">
-                        <button class="flex items-center gap-1 hover:text-[#facc15] transition-colors">
-                            <span class="material-icons">favorite_border</span>
-                            <span>${formatNumber(post.engagement.likes)}</span>
-                        </button>
-                        <button class="flex items-center gap-1 hover:text-[#facc15] transition-colors">
-                            <span class="material-icons">chat_bubble_outline</span>
-                            <span>${formatNumber(post.engagement.comments)}</span>
-                        </button>
-                        <button class="flex items-center gap-1 hover:text-[#facc15] transition-colors">
-                            <span class="material-icons">share</span>
-                            <span>${formatNumber(post.engagement.shares)}</span>
-                        </button>
-                    </div>
-                    <button class="text-white hover:text-[#facc15] transition-colors">
+                <div class="trend-stats">
+                    <button class="engagement-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike(${post.id})">
+                        <span class="material-icons">${isLiked ? 'favorite' : 'favorite_border'}</span>
+                        <span>${formatNumber(post.engagement.likes)}</span>
+                    </button>
+                    <button class="engagement-btn">
+                        <span class="material-icons">chat_bubble_outline</span>
+                        <span>${formatNumber(post.engagement.comments)}</span>
+                    </button>
+                    <button class="engagement-btn">
+                        <span class="material-icons">share</span>
+                        <span>${formatNumber(post.engagement.shares)}</span>
+                    </button>
+                    <button class="engagement-btn ml-auto">
                         <span class="material-icons">bookmark_border</span>
                     </button>
                 </div>
             `;
-        
-            // Add interaction handlers
-            const likeBtn = postElement.querySelector('button:first-child');
-            likeBtn.addEventListener('click', () => toggleLike(post.id));
-        
             return postElement;
         }
 
@@ -327,11 +522,111 @@
             });
         }
 
-        // Initialize the feed
+        function loadMorePosts() {
+            const feedContainer = document.getElementById('trendingFeed');
+            feedContainer.classList.add('loading');
+            setTimeout(() => {
+                const newPosts = generateMorePosts();
+                newPosts.forEach(post => {
+                    trendingPosts.push(post);
+                    feedContainer.appendChild(createTrendingPost(post));
+                });
+                feedContainer.classList.remove('loading');
+            }, 1000);
+        }
+
+        function generateMorePosts() {
+            const categories = ['Technology', 'Sports', 'Entertainment', 'Education', 'Gaming'];
+            const hashtags = ['#Innovation', '#Sports', '#Movies', '#Learning', '#Gaming'];
+            const contents = [
+                'Exciting developments in the tech world! What are your thoughts?',
+                'Another amazing match! The competition is heating up!',
+                'Must-watch new releases this weekend! Share your favorites!',
+                'Learning never stops! Check out these amazing resources!',
+                'New game releases that are breaking records!'
+            ];
+
+            return Array(5).fill(null).map((_, index) => ({
+                id: trendingPosts.length + index + 1,
+                user: {
+                    name: `User${Math.floor(Math.random() * 1000)}`,
+                    avatar: 'U',
+                    verified: Math.random() > 0.5
+                },
+                timeAgo: 'Just now',
+                category: categories[Math.floor(Math.random() * categories.length)],
+                hashtag: hashtags[Math.floor(Math.random() * hashtags.length)],
+                content: contents[Math.floor(Math.random() * contents.length)],
+                image: Math.random() > 0.5 ? `https://source.unsplash.com/random/800x600/?${Math.random()}` : null,
+                engagement: {
+                    likes: Math.floor(Math.random() * 1000),
+                    comments: Math.floor(Math.random() * 100),
+                    shares: Math.floor(Math.random() * 50)
+                }
+            }));
+        }
+
+        function filterTrendingPosts(filter) {
+            let filteredPosts = [...trendingPosts];
+            switch(filter) {
+                case 'popular':
+                    filteredPosts.sort((a, b) => b.engagement.likes - a.engagement.likes);
+                    break;
+                case 'recent':
+                    filteredPosts.sort((a, b) => {
+                        const timeA = a.timeAgo === 'Just now' ? new Date() : new Date(Date.now() - parseTimeAgo(a.timeAgo));
+                        const timeB = b.timeAgo === 'Just now' ? new Date() : new Date(Date.now() - parseTimeAgo(b.timeAgo));
+                        return timeB - timeA;
+                    });
+                    break;
+                default:
+                    break;
+            }
+            const feedContainer = document.getElementById('trendingFeed');
+            feedContainer.innerHTML = '';
+            filteredPosts.forEach(post => {
+                feedContainer.appendChild(createTrendingPost(post));
+            });
+        }
+
+        function parseTimeAgo(timeAgo) {
+            if (timeAgo === 'Just now') return 0;
+            const [value, unit] = timeAgo.split(' ');
+            const num = parseInt(value);
+            if (unit.includes('hour')) return num * 60 * 60 * 1000;
+            if (unit.includes('minute')) return num * 60 * 1000;
+            return num * 1000;
+        }
+
+        function checkAuth() {
+            if (!localStorage.getItem('isLoggedIn')) {
+                window.location.href = 'login.html';
+                return false;
+            }
+            return true;
+        }
+
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            window.location.href = 'login.html';
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
+            if (!checkAuth()) return;
             renderTrendingFeed();
-        
-            // Add filter functionality
+
+            let isLoading = false;
+            window.addEventListener('scroll', () => {
+                const feedContainer = document.getElementById('trendingFeed');
+                if (isLoading) return;
+                const rect = feedContainer.getBoundingClientRect();
+                if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 1000) {
+                    isLoading = true;
+                    loadMorePosts();
+                    setTimeout(() => { isLoading = false; }, 1000);
+                }
+            });
+
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -341,129 +636,6 @@
                 });
             });
         });
-
-        function filterTrendingPosts(filter) {
-            let filteredPosts = [...trendingPosts];
-            switch(filter) {
-                case 'popular':
-                    filteredPosts.sort((a, b) => b.engagement.likes - a.engagement.likes);
-                    break;
-                case 'recent':
-                    filteredPosts.sort((a, b) => new Date(b.timeAgo) - new Date(a.timeAgo));
-                    break;
-                default:
-                    // Keep original order for 'all'
-                    break;
-            }
-            const feedContainer = document.getElementById('trendingFeed');
-            feedContainer.innerHTML = '';
-            filteredPosts.forEach(post => {
-                feedContainer.appendChild(createTrendingPost(post));
-            });
-        }
-        </script>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Trend Card 3 -->
-            <div class="trend-card p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <span class="trend-category">Sports</span>
-                    <span class="material-icons text-[#facc15]">trending_up</span>
-                </div>
-                <h3 class="trend-tag mb-2">#WorldCup2024</h3>
-                <p class="text-gray-400 mb-4">Updates and discussions about the upcoming World Cup</p>
-                <div class="flex items-center justify-between">
-                    <div class="trend-stats">18.7K posts</div>
-                    <button class="text-white hover:text-[#facc15]">
-                        <span class="material-icons">add_circle_outline</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Trend Card 4 -->
-            <div class="trend-card p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <span class="trend-category">Entertainment</span>
-                    <span class="material-icons text-[#facc15]">trending_up</span>
-                </div>
-                <h3 class="trend-tag mb-2">#NewMovies</h3>
-                <p class="text-gray-400 mb-4">Latest movie releases and reviews</p>
-                <div class="flex items-center justify-between">
-                    <div class="trend-stats">12.3K posts</div>
-                    <button class="text-white hover:text-[#facc15]">
-                        <span class="material-icons">add_circle_outline</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Trend Card 5 -->
-            <div class="trend-card p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <span class="trend-category">Education</span>
-                    <span class="material-icons text-[#facc15]">trending_up</span>
-                </div>
-                <h3 class="trend-tag mb-2">#OnlineLearning</h3>
-                <p class="text-gray-400 mb-4">Tips and resources for online education</p>
-                <div class="flex items-center justify-between">
-                    <div class="trend-stats">15.8K posts</div>
-                    <button class="text-white hover:text-[#facc15]">
-                        <span class="material-icons">add_circle_outline</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Trend Card 6 -->
-            <div class="trend-card p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <span class="trend-category">Business</span>
-                    <span class="material-icons text-[#facc15]">trending_up</span>
-                </div>
-                <h3 class="trend-tag mb-2">#StartupLife</h3>
-                <p class="text-gray-400 mb-4">Entrepreneurship and startup culture</p>
-                <div class="flex items-center justify-between">
-                    <div class="trend-stats">9.5K posts</div>
-                    <button class="text-white hover:text-[#facc15]">
-                        <span class="material-icons">add_circle_outline</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <script>
-        // Check if user is logged in
-        function checkAuth() {
-            if (!localStorage.getItem('isLoggedIn')) {
-                window.location.href = 'login.html';
-                return false;
-            }
-            return true;
-        }
-
-        // Check authentication on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            if (!checkAuth()) return;
-            
-            // Initialize the page
-            
-            // Add click handlers for navigation
-            document.querySelectorAll('.sidebar-link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    if (!this.getAttribute('href').includes('logout')) {
-                        e.preventDefault();
-                        const href = this.getAttribute('href');
-                        if (checkAuth()) {
-                            window.location.href = href;
-                        }
-                    }
-                });
-            });
-        });
-
-        // Logout function
-        function logout() {
-            localStorage.removeItem('isLoggedIn');
-            window.location.href = 'login.html';
-        }
     </script>
 </body>
 </html>

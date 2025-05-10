@@ -24,6 +24,7 @@
             border-radius: 24px;
             overflow: hidden;
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
         .video-card:hover {
             transform: translateY(-4px);
@@ -76,14 +77,49 @@
         .category-pill:hover {
             background: #333;
         }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 1rem;
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        .modal-content iframe, .modal-content video {
+            width: 100%;
+            max-width: 800px;
+            aspect-ratio: 16 / 9;
+        }
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body class="flex min-h-screen">
     <!-- Left Sidebar -->
     <aside class="sidebar w-72 flex flex-col py-12 px-8 min-h-screen mr-12">
-        <div class="logo text-3xl font-bold text-[#facc15] mb-8">
-            <span class="material-icons" style="font-size:2.5rem;">bubble_chart</span> Daffy
-        </div>
+        <!-- Update the logo section -->
+        <a href="home.html" class="logo text-2xl font-bold text-white mb-8 flex items-center gap-2">
+          <span class="material-icons" style="font-size:2rem;">bubble_chart</span> Daffy
+        </a>
         <nav class="flex flex-col gap-1">
             <a href="home.html" class="sidebar-link"><span class="material-icons sidebar-icon">home</span> Home</a>
             <a href="trends.html" class="sidebar-link"><span class="material-icons sidebar-icon">trending_up</span> Trends</a>
@@ -122,7 +158,7 @@
         <!-- Video Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Video 1: Programming Tutorial -->
-            <div class="video-card">
+            <div class="video-card" data-video-url="https://www.youtube.com/embed/W6NZfCO5SIk">
                 <div class="video-thumbnail">
                     <img src="https://img.youtube.com/vi/W6NZfCO5SIk/maxresdefault.jpg" alt="JavaScript Tutorial">
                     <span class="video-duration">15:30</span>
@@ -138,7 +174,7 @@
             </div>
 
             <!-- Video 2: Lab Tutorial -->
-            <div class="video-card">
+            <div class="video-card" data-video-url="https://www.youtube.com/embed/PkZNo7MFNFg">
                 <div class="video-thumbnail">
                     <img src="https://img.youtube.com/vi/PkZNo7MFNFg/maxresdefault.jpg" alt="Database Lab">
                     <span class="video-duration">23:45</span>
@@ -154,7 +190,7 @@
             </div>
 
             <!-- Video 3: Student Project -->
-            <div class="video-card">
+            <div class="video-card" data-video-url="https://www.youtube.com/embed/Mus_vwhTCq0">
                 <div class="video-thumbnail">
                     <img src="https://img.youtube.com/vi/Mus_vwhTCq0/maxresdefault.jpg" alt="IoT Project">
                     <span class="video-duration">12:20</span>
@@ -169,14 +205,455 @@
                 </div>
             </div>
 
-            <!-- Add more video cards here with similar structure -->
+            <!-- Video 4: Lecture -->
+            <div class="video-card" data-video-url="https://www.youtube.com/embed/UB1O30fR-EE">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/UB1O30fR-EE/maxresdefault.jpg" alt="Data Structures">
+                    <span class="video-duration">45:00</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Data Structures: Linked Lists Explained</h3>
+                    <p class="text-sm text-gray-400 mb-2">CSE Department • Prof. Ahmed</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>4.5k views</span>
+                        <span>5 days ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 5: Campus Event -->
+            <div class="video-card" data-video-url="https://www.youtube.com/embed/9bZkp7q19f0">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/9bZkp7q19f0/maxresdefault.jpg" alt="Tech Fest">
+                    <span class="video-duration">10:15</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">DIU Tech Fest 2025 Highlights</h3>
+                    <p class="text-sm text-gray-400 mb-2">Student Council • Media Team</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>6.2k views</span>
+                        <span>1 day ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 6: Tech Talk -->
+            <div class="video-card" data-video-url="https://www.youtube.com/embed/zpOULjyy-n8">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/zpOULjyy-n8/maxresdefault.jpg" alt="AI Seminar">
+                    <span class="video-duration">30:25</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">AI in Healthcare: Future Prospects</h3>
+                    <p class="text-sm text-gray-400 mb-2">Guest Speaker • Dr. Sarah Khan</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>2.8k views</span>
+                        <span>4 days ago$ ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 7: Lab Tutorial -->
+            <div class="video-card" data-video-url="https://www.youtube.com/embed/8hly31xKli0">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/8hly31xKli0/maxresdefault.jpg" alt="Networking Lab">
+                    <span class="video-duration">18:40</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Networking Lab: Configuring Routers</h3>
+                    <p class="text-sm text-gray-400 mb-2">CSE Department • Lab Instructor Ali</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>1.5k views</span>
+                        <span>6 days ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 8: Student Project -->
+            <div class="video-card" data-video-url="https://www.youtube.com/embed/Ke90Tje7VS0">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/Ke90Tje7VS0/maxresdefault.jpg" alt="ML Project">
+                    <span class="video-duration">14:50</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Machine Learning Model for Image Recognition</h3>
+                    <p class="text-sm text-gray-400 mb-2">Final Year Project • Team Vision</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>2.9k views</span>
+                        <span>2 weeks ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 9: Lecture -->
+            <div class="video-card" data-video-url="https://www.youtube.com/embed/0IAPZzGSbME">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/0IAPZzGSbME/maxresdefault.jpg" alt="Algorithms Lecture">
+                    <span class="video-duration">40:10</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Introduction to Algorithms</h3>
+                    <p class="text-sm text-gray-400 mb-2">CSE Department • Prof. Zaman</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>3.7k views</span>
+                        <span>3 days ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 10: Lab Tutorial -->
+            <div class="video-card" data-video-url="https://www.youtube.com/embed/Qly4QJ_L9-o">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/Qly4QJ_L9-o/maxresdefault.jpg" alt="Optics Lab">
+                    <span class="video-duration">20:30</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Physics Lab: Optics Experiments</h3>
+                    <p class="text-sm text-gray-400 mb-2">Physics Department • Lab Instructor Nadia</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>1.2k views</span>
+                        <span>5 days ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 11: Student Project -->
+            <div class="video-card" data-video-url="https://www.youtube.com/embed/BYRTvoKGOQk">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/BYRTvoKGOQk/maxresdefault.jpg" alt="Blockchain Project">
+                    <span class="video-duration">13:45</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Blockchain-Based Voting System</h3>
+                    <p class="text-sm text-gray-400 mb-2">Final Year Project • Team SecureVote</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>4.1k views</span>
+                        <span>1 week ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 12: Campus Event -->
+            <div class="video-card" data-video-url="https://www.youtube.com/embed/7vQznL6a9Xw">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/7vQznL6a9Xw/maxresdefault.jpg" alt="Cultural Fest">
+                    <span class="video-duration">8:50</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">DIU Annual Cultural Fest 2025</h3>
+                    <p class="text-sm text-gray-400 mb-2">Cultural Club • Media Team</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>5.8k views</span>
+                        <span>2 days ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 13: Tech Talk -->
+            <div class="video-card" data-video-url="https://www.youtube.com/embed/5j2W7QeF_4Y">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/5j2W7QeF_4Y/maxresdefault.jpg" alt="Cybersecurity Talk">
+                    <span class="video-duration">35:20</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Cybersecurity Best Practices</h3>
+                    <p class="text-sm text-gray-400 mb-2">Guest Speaker • Mr. Imran</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>2.3k views</span>
+                        <span>6 days ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 14: Lecture -->
+            <div class="video-card" data-video-url="/videos/calculus_lecture.mp4">
+                <div class="video-thumbnail">
+                    <img src="https://via.placeholder.com/1280x720?text=Calculus+Lecture" alt="Calculus Lecture">
+                    <span class="video-duration">50:00</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Calculus I: Limits and Derivatives</h3>
+                    <p class="text-sm text-gray-400 mb-2">Math Department • Dr. Siddique</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>4.8k views</span>
+                        <span>4 days ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 15: Lab Tutorial -->
+            <div class="video-card" data-video-url="/videos/titration_lab.mp4">
+                <div class="video-thumbnail">
+                    <img src="https://via.placeholder.com/1280x720?text=Titration+Lab" alt="Titration Lab">
+                    <span class="video-duration">22:15</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Chemistry Lab: Titration Techniques</h3>
+                    <p class="text-sm text-gray-400 mb-2">Chemistry Department • Lab Instructor Sara</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>1.9k views</span>
+                        <span>1 week ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 16: Student Project -->
+            <div class="video-card" data-video-url="/videos/drone_project.mp4">
+                <div class="video-thumbnail">
+                    <img src="https://via.placeholder.com/1280x720?text=Drone+Project" alt="Drone Project">
+                    <span class="video-duration">15:30</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Autonomous Drone Navigation System</h3>
+                    <p class="text-sm text-gray-400 mb-2">Final Year Project • Team SkyNet</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>3.2k views</span>
+                        <span>10 days ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 17: Campus Event -->
+            <div class="video-card" data-video-url="/videos/hackathon_recap.mp4">
+                <div class="video-thumbnail">
+                    <img src="https://via.placeholder.com/1280x720?text=Hackathon+Recap" alt="Hackathon Recap">
+                    <span class="video-duration">9:40</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">DIU Hackathon 2025 Recap</h3>
+                    <p class="text-sm text-gray-400 mb-2">Coding Club • Event Organizers</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>6.5k views</span>
+                        <span>1 day ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 18: Tech Talk -->
+            <div class="video-card" data-video-url="/videos/quantum_talk.mp4">
+                <div class="video-thumbnail">
+                    <img src="https://via.placeholder.com/1280x720?text=Quantum+Talk" alt="Quantum Talk">
+                    <span class="video-duration">28:50</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Quantum Computing Basics</h3>
+                    <p class="text-sm text-gray-400 mb-2">Guest Speaker • Dr. Faisal</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>2.7k views</span>
+                        <span>5 days ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 19: Lecture -->
+            <div class="video-card" data-video-url="/videos/os_lecture.mp4">
+                <div class="video-thumbnail">
+                    <img src="https://via.placeholder.com/1280x720?text=OS+Lecture" alt="OS Lecture">
+                    <span class="video-duration">42:30</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Operating Systems: Process Scheduling</h3>
+                    <p class="text-sm text-gray-400 mb-2">CSE Department • Prof. Karim</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>3.9k views</span>
+                        <span>3 days ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 20: Lab Tutorial -->
+            <div class="video-card" data-video-url="/videos/circuit_lab.mp4">
+                <div class="video-thumbnail">
+                    <img src="https://via.placeholder.com/1280x720?text=Circuit+Lab" alt="Circuit Lab">
+                    <span class="video-duration">19:25</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Electronics Lab: Circuit Design</h3>
+                    <p class="text-sm text-gray-400 mb-2">EEE Department • Lab Instructor Reza</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>1.4k views</span>
+                        <span>6 days ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 21: Student Project -->
+            <div class="video-card" data-video-url="/videos/ar_project.mp4">
+                <div class="video-thumbnail">
+                    <img src="https://via.placeholder.com/1280x720?text=AR+Project" alt="AR Project">
+                    <span class="video-duration">11:55</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Augmented Reality App for Education</h3>
+                    <p class="text-sm text-gray-400 mb-2">Final Year Project • Team ARLearn</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>4.3k views</span>
+                        <span>2 weeks ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 22: Campus Event -->
+            <div class="video-card" data-video-url="/videos/sports_day.mp4">
+                <div class="video-thumbnail">
+                    <img src="https://via.placeholder.com/1280x720?text=Sports+Day" alt="Sports Day">
+                    <span class="video-duration">7:30</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">DIU Sports Day 2025 Highlights</h3>
+                    <p class="text-sm text-gray-400 mb-2">Sports Club • Media Team</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>7.1k views</span>
+                        <span>2 days ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 23: Tech Talk -->
+            <div class="video-card" data-video-url="/videos/data_science_talk.mp4">
+                <div class="video-thumbnail">
+                    <img src="https://via.placeholder.com/1280x720?text=Data+Science+Talk" alt="Data Science Talk">
+                    <span class="video-duration">33:10</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Data Science with Python</h3>
+                    <p class="text-sm text-gray-400 mb-2">Guest Speaker • Ms. Ayesha</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>3.0k views</span>
+                        <span>4 days ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 24: Lecture -->
+            <div class="video-card" data-video-url="/videos/linear_algebra.mp4">
+                <div class="video-thumbnail">
+                    <img src="https://via.placeholder.com/1280x720?text=Linear+Algebra" alt="Linear Algebra">
+                    <span class="video-duration">47:20</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Linear Algebra: Matrix Operations</h3>
+                    <p class="text-sm text-gray-400 mb-2">Math Department • Prof. Hossain</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>4.2k views</span>
+                        <span>5 days ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 25: Lab Tutorial -->
+            <div class="video-card" data-video-url="/videos/microscopy_lab.mp4">
+                <div class="video-thumbnail">
+                    <img src="https://via.placeholder.com/1280x720?text=Microscopy+Lab" alt="Microscopy Lab">
+                    <span class="video-duration">21:40</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Biology Lab: Microscopy Basics</h3>
+                    <p class="text-sm text-gray-400 mb-2">Biology Department • Lab Instructor Zain</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>1.6k views</span>
+                        <span>1 week ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 26: Student Project -->
+            <div class="video-card" data-video-url="/videos/traffic_project.mp4">
+                <div class="video-thumbnail">
+                    <img src="https://via.placeholder.com/1280x720?text=Traffic+Project" alt="Traffic Project">
+                    <span class="video-duration">14:20</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Smart Traffic Management System</h3>
+                    <p class="text-sm text-gray-400 mb-2">Final Year Project • Team TrafficTech</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>3.8k views</span>
+                        <span>8 days ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 27: Campus Event -->
+            <div class="video-card" data-video-url="/videos/career_fair.mp4">
+                <div class="video-thumbnail">
+                    <img src="https://via.placeholder.com/1280x720?text=Career+Fair" alt="Career Fair">
+                    <span class="video-duration">10:05</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">DIU Career Fair 2025</h3>
+                    <p class="text-sm text-gray-400 mb-2">Career Services • Event Team</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>5.4k views</span>
+                        <span>3 days ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 28: Tech Talk -->
+            <div class="video-card" data-video-url="/videos/cloud_talk.mp4">
+                <div class="video-thumbnail">
+                    <img src="https://via.placeholder.com/1280x720?text=Cloud+Talk" alt="Cloud Talk">
+                    <span class="video-duration">31:45</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Cloud Computing Fundamentals</h3>
+                    <p class="text-sm text-gray-400 mb-2">Guest Speaker • Mr. Rafiq</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>2.5k views</span>
+                        <span>6 days ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 29: Lecture -->
+            <div class="video-card" data-video-url="/videos/agile_lecture.mp4">
+                <div class="video-thumbnail">
+                    <img src="https://via.placeholder.com/1280x720?text=Agile+Lecture" alt="Agile Lecture">
+                    <span class="video-duration">44:15</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Software Engineering: Agile Methodology</h3>
+                    <p class="text-sm text-gray-400 mb-2">CSE Department • Dr. Nusrat</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>4.0k views</span>
+                        <span>4 days ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 30: Lab Tutorial -->
+            <div class="video-card" data-video-url="/videos/robotics_lab.mp4">
+                <div class="video-thumbnail">
+                    <img src="https://via.placeholder.com/1280x720?text=Robotics+Lab" alt="Robotics Lab">
+                    <span class="video-duration">17:50</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">Robotics Lab: Sensor Integration</h3>
+                    <p class="text-sm text-gray-400 mb-2">EEE Department • Lab Instructor Omar</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>1.7k views</span>
+                        <span>5 days ago</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
+
+    <!-- Video Modal -->
+    <div class="modal" id="videoModal">
+        <div class="modal-content">
+            <span class="close-modal material-icons">close</span>
+            <div id="videoPlayer"></div>
+        </div>
+    </div>
 
     <script>
         // Video upload handling with automatic categorization
         const videoUpload = document.getElementById('videoUpload');
         const videoGrid = document.querySelector('.grid');
+        const modal = document.getElementById('videoModal');
+        const videoPlayer = document.getElementById('videoPlayer');
+        const closeModal = document.querySelector('.close-modal');
 
         // Keywords for video categorization
         const categoryKeywords = {
@@ -203,6 +680,7 @@
         function createVideoCard(file, category) {
             const videoCard = document.createElement('div');
             videoCard.className = 'video-card';
+            videoCard.setAttribute('data-video-url', URL.createObjectURL(file));
             
             const timestamp = new Date().toLocaleDateString();
             const duration = '00:00'; // This would be extracted from actual video metadata
@@ -237,8 +715,45 @@
                 }, 300);
             };
 
+            // Add click event for modal
+            videoCard.addEventListener('click', () => openVideoModal(videoCard.getAttribute('data-video-url'), false));
+            
             return videoCard;
         }
+
+        // Open video modal
+        function openVideoModal(videoUrl, isYouTube) {
+            videoPlayer.innerHTML = '';
+            if (isYouTube) {
+                videoPlayer.innerHTML = `<iframe src="${videoUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+            } else {
+                videoPlayer.innerHTML = `<video controls><source src="${videoUrl}" type="video/mp4">Your browser does not support the video tag.</video>`;
+            }
+            modal.style.display = 'flex';
+        }
+
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+            videoPlayer.innerHTML = '';
+        });
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                videoPlayer.innerHTML = '';
+            }
+        });
+
+        // Add click events to existing video cards
+        document.querySelectorAll('.video-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const videoUrl = card.getAttribute('data-video-url');
+                const isYouTube = videoUrl.includes('youtube.com');
+                openVideoModal(videoUrl, isYouTube);
+            });
+        });
 
         videoUpload.addEventListener('change', async (e) => {
             const file = e.target.files[0];

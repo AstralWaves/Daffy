@@ -1,499 +1,805 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daffy - Messages</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #000000;
-            min-height: 100vh;
-            color: #ffffff;
-        }
-        .sidebar {
-            background: #1e2761;
-            min-height: 100vh;
-            width: 240px;
-            padding: 1.5rem 1rem;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 3rem;
-            color: #facc15;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        
-        .sidebar-link {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.875rem 1.25rem;
-            color: white;
-            text-decoration: none;
-            border-radius: 0.75rem;
-            margin-bottom: 0.75rem;
-            transition: background-color 0.2s;
-            font-size: 1rem;
-        }
-        
-        .sidebar-link:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .sidebar-link.active {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        .chat-card {
-            background: #1a1a1a;
-            border-radius: 24px;
-            box-shadow: 0 6px 32px 0 rgba(30, 64, 175, 0.10);
-            transition: transform 0.3s ease;
-        }
-        .chat-card:hover {
-            transform: translateY(-4px);
-            background: #2a2a2a;
-        }
-        .avatar {
-            background: linear-gradient(135deg, #facc15 0%, #1e2761 100%);
-            color: #fff;
-            font-weight: 700;
-            font-size: 1.3rem;
-            border-radius: 50%;
-            width: 3.2rem;
-            height: 3.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        .online-indicator {
-            position: absolute;
-            bottom: 2px;
-            right: 2px;
-            width: 12px;
-            height: 12px;
-            background: #22c55e;
-            border: 2px solid #000;
-            border-radius: 50%;
-        }
-        .message-input {
-            background: #2a2a2a;
-            border: 2px solid #333333;
-            border-radius: 24px;
-            padding: 12px 20px;
-            transition: all 0.3s ease;
-            color: #ffffff;
-            resize: none;
-            min-height: 48px;
-            max-height: 120px;
-        }
-        .message-input:focus {
-            border-color: #facc15;
-            box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.1);
-        }
-        .send-btn {
-            background: linear-gradient(90deg, #1e2761 60%, #facc15 100%);
-            color: white;
-            padding: 12px;
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-        .send-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
-        }
-        .message-bubble {
-            max-width: 70%;
-            padding: 12px 16px;
-            border-radius: 20px;
-            margin-bottom: 8px;
-            position: relative;
-            word-break: break-word;
-        }
-        .message-bubble.sent {
-            background: linear-gradient(90deg, #1e2761 60%, #facc15 100%);
-            color: white;
-            margin-left: auto;
-            border-bottom-right-radius: 4px;
-        }
-        .message-bubble.received {
-            background: #2a2a2a;
-            color: #ffffff;
-            margin-right: auto;
-            border-bottom-left-radius: 4px;
-        }
-        .message-time {
-            font-size: 0.7rem;
-            color: #888;
-            margin-top: 4px;
-            text-align: right;
-        }
-        .message-status {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 0.7rem;
-            color: #888;
-            margin-top: 4px;
-        }
-        .message-status .material-icons {
-            font-size: 1rem;
-        }
-        .typing-indicator {
-            display: flex;
-            gap: 2px;
-            padding: 8px 12px;
-            background: #2a2a2a;
-            border-radius: 16px;
-            width: fit-content;
-            margin: 8px 0;
-        }
-        .typing-dot {
-            width: 6px;
-            height: 6px;
-            background: #888;
-            border-radius: 50%;
-            animation: typing 1.4s infinite;
-        }
-        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes typing {
-            0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-4px); }
-        }
-        .reaction-button {
-            position: absolute;
-            right: -24px;
-            bottom: -4px;
-            background: #2a2a2a;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-        .message-bubble:hover .reaction-button {
-            opacity: 1;
-        }
-        .reactions {
-            position: absolute;
-            bottom: 100%;
-            right: 0;
-            background: #2a2a2a;
-            border-radius: 24px;
-            padding: 8px;
-            display: none;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 8px;
-        }
-        .reaction-button:hover .reactions {
-            display: grid;
-        }
-        .reaction {
-            cursor: pointer;
-            padding: 4px;
-            border-radius: 4px;
-            transition: background 0.2s;
-        }
-        .reaction:hover {
-            background: #333;
-        }
-        .search-input {
-            background: #2a2a2a;
-            border: 2px solid #333333;
-            border-radius: 9999px;
-            padding: 12px 20px 12px 48px;
-            transition: all 0.3s ease;
-            color: #ffffff;
-            width: 100%;
-        }
-        .search-input:focus {
-            border-color: #facc15;
-            box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.1);
-        }
-        .unread-indicator {
-            background: #facc15;
-            color: #000;
-            font-size: 0.8rem;
-            font-weight: 600;
-            padding: 2px 8px;
-            border-radius: 9999px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Daffy Messages - A premium messaging experience">
+  <title>Daffy Messages</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/emoji-picker-element@1.9.0/index.min.js"></script>
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-light: #818cf8;
+      --background: #0f0f14;
+      --surface: #1e1e29;
+      --surface-glass: rgba(30, 30, 41, 0.7);
+      --text: #f1f5f9;
+      --text-secondary: #9ca3af;
+      --border: #2d2d3a;
+      --success: #22c55e;
+      --danger: #ef4444;
+      --accent: #f59e0b;
+    }
+
+    [data-theme="light"] {
+      --background: #f1f5f9;
+      --surface: #ffffff;
+      --surface-glass: rgba(255, 255, 255, 0.7);
+      --text: #1e293b;
+      --text-secondary: #6b7280;
+      --border: #d1d5db;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--background), #1e1e29);
+      color: var(--text);
+      min-height: 100vh;
+      margin: 0;
+      transition: background 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+      overflow-x: hidden;
+    }
+
+    .messages-container {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      height: 100vh;
+      max-width: 1600px;
+      margin: 0 auto;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .chat-list {
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      background: var(--surface-glass);
+      backdrop-filter: blur(10px);
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .chat-header {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--surface-glass);
+      z-index: 10;
+      backdrop-filter: blur(12px);
+    }
+
+    .chat-item {
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-radius: 8px;
+      margin: 4px 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chat-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(99, 102, 241, 0.1));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .chat-item:hover::before {
+      opacity: 1;
+    }
+
+    .chat-item:hover {
+      transform: translateX(3px);
+    }
+
+    .chat-item.active {
+      background: var(--surface);
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 18px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .avatar:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .message-area {
+      display: flex;
+      flex-direction: column;
+      background: var(--background);
+      transition: background 0.3s ease;
+    }
+
+    .message-header {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface-glass);
+      backdrop-filter: blur(12px);
+    }
+
+    .message-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      scroll-behavior: smooth;
+      position: relative;
+    }
+
+    .message-input-container {
+      padding: 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--surface-glass);
+      backdrop-filter: blur(12px);
+    }
+
+    .message-input {
+      flex: 1;
+      background: var(--border);
+      border: 2px solid transparent;
+      border-radius: 24px;
+      padding: 12px 16px;
+      color: var(--text);
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+
+    .message-input:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    }
+
+    .message-bubble {
+      max-width: 70%;
+      padding: 12px 16px;
+      border-radius: 16px;
+      margin: 8px 0;
+      font-size: 14px;
+      position: relative;
+      transition: transform 0.2s ease, background 0.2s ease;
+      animation: slideUp 0.3s ease-out;
+    }
+
+    .message-bubble:hover {
+      transform: scale(1.01);
+    }
+
+    .message-bubble.sent {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      margin-left: auto;
+      border-bottom-right-radius: 4px;
+    }
+
+    .message-bubble.received {
+      background: var(--surface);
+      border-bottom-left-radius: 4px;
+    }
+
+    .message-bubble.pinned {
+      border: 2px solid var(--accent);
+      background: linear-gradient(135deg, var(--surface), var(--accent));
+    }
+
+    .message-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .message-actions {
+      display: none;
+      position: absolute;
+      top: -30px;
+      right: 10px;
+      background: var(--surface-glass);
+      border-radius: 8px;
+      padding: 4px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .message-bubble:hover .message-actions {
+      display: flex;
+      gap: 4px;
+    }
+
+    .reaction {
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .reaction:hover {
+      transform: scale(1.2);
+    }
+
+    .timestamp {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-align: center;
+      margin: 16px 0;
+      position: relative;
+    }
+
+    .timestamp::before,
+    .timestamp::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 40px;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .timestamp::before {
+      right: calc(50% + 50px);
+    }
+
+    .timestamp::after {
+      left: calc(50% + 50px);
+    }
+
+    .action-button {
+      padding: 8px;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+      background: transparent;
+      color: var(--text);
+    }
+
+    .action-button:hover {
+      background: var(--border);
+      transform: scale(1.1);
+    }
+
+    .nav-button {
+      padding: 8px 16px;
+      border-radius: 24px;
+      background: var(--primary);
+      color: var(--text);
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .nav-button:hover {
+      background: var(--primary-light);
+      transform: scale(1.05);
+    }
+
+    .theme-toggle {
+      padding: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      background: var(--primary);
+    }
+
+    .emoji-picker {
+      position: absolute;
+      bottom: 70px;
+      left: 16px;
+      z-index: 20;
+      display: none;
+    }
+
+    .active-status-section {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .active-status-list {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+
+    .active-user {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      min-width: 60px;
+    }
+
+    .active-indicator {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      width: 12px;
+      height: 12px;
+      background: var(--success);
+      border-radius: 50%;
+      border: 2px solid var(--surface);
+      animation: pulse 2s infinite;
+    }
+
+    .active-user .avatar {
+      width: 40px;
+      height: 40px;
+      font-size: 14px;
+    }
+
+    .active-user .name {
+      font-size: 12px;
+      text-align: center;
+      max-width: 60px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .last-seen {
+      font-size: 10px;
+      color: var(--text-secondary);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(-100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary);
+    }
+
+    /* Fade out for navigation */
+    .fade-out {
+      opacity: 0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .messages-container {
+        grid-template-columns: 1fr;
+      }
+
+      .chat-list {
+        display: none;
+        animation: slideIn 0.3s ease-out;
+      }
+
+      .chat-list.active {
+        display: block;
+        position: absolute;
+        width: 100%;
+        z-index: 20;
+      }
+
+      .message-header {
+        position: relative;
+      }
+
+      .nav-button.back-button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+    }
+  </style>
 </head>
-<body class="flex min-h-screen">
-    <!-- Left Sidebar -->
-    <aside class="sidebar w-72 flex flex-col py-12 px-8 min-h-screen mr-12">
-        <div class="logo text-3xl font-bold text-[#facc15] mb-8">
-            <span class="material-icons" style="font-size:2.5rem;">bubble_chart</span> Daffy
-        </div>
-        <nav class="flex flex-col gap-1">
-            <a href="home.html" class="sidebar-link"><span class="material-icons sidebar-icon">home</span> Home</a>
-            <a href="trends.html" class="sidebar-link"><span class="material-icons sidebar-icon">trending_up</span> Trends</a>
-            <a href="clubs.html" class="sidebar-link"><span class="material-icons sidebar-icon">groups</span> Clubs</a>
-            <a href="messaging.html" class="sidebar-link active"><span class="material-icons sidebar-icon">chat_bubble</span> Messages</a>
-            <a href="jobs.html" class="sidebar-link"><span class="material-icons sidebar-icon">work</span> Jobs</a>
-            <a href="settings.html" class="sidebar-link"><span class="material-icons sidebar-icon">settings</span> Settings</a>
-        </nav>
-        <div class="mt-auto">
-            <button onclick="logout()" class="sidebar-link w-full text-left">
-                <span class="material-icons sidebar-icon">logout</span> Logout
+<body>
+  <div class="messages-container">
+    <!-- Chat List -->
+    <div class="chat-list">
+      <div class="chat-header">
+        <div class="flex items-center justify-between mb-4">
+          <a href="index.html" class="logo text-2xl font-bold text-white flex items-center gap-2">
+            <span class="material-icons" style="font-size:2rem;">bubble_chart</span> Daffy
+          </a>
+          <div class="flex items-center gap-2">
+            <button class="nav-button" onclick="navigateTo('index.html')">Home</button>
+            <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+              <span class="material-icons">brightness_6</span>
             </button>
-        </div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="flex-1 p-8">
-        <div class="grid grid-cols-12 gap-8 h-[calc(100vh-4rem)]">
-            <!-- Chat List -->
-            <div class="col-span-4 flex flex-col">
-                <div class="mb-6">
-                    <h1 class="text-3xl font-bold text-white mb-4">Messages</h1>
-                    <div class="relative">
-                        <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">search</span>
-                        <input type="text" class="search-input" placeholder="Search messages...">
-                    </div>
-                </div>
-                <div class="space-y-4 overflow-y-auto flex-1">
-                    <!-- Active Chat -->
-                    <div class="chat-card p-4 cursor-pointer bg-[#2a2a2a]">
-                        <div class="flex items-center gap-4">
-                            <div class="avatar">
-                                R
-                                <div class="online-indicator"></div>
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex items-center justify-between">
-                                    <div class="font-semibold text-white">Rakib Hassan</div>
-                                    <div class="text-xs text-gray-400">2m ago</div>
-                                </div>
-                                <div class="text-gray-400 text-sm truncate">Hey, how's your project going? 🚀</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Unread Chat -->
-                    <div class="chat-card p-4 cursor-pointer">
-                        <div class="flex items-center gap-4">
-                            <div class="avatar">
-                                S
-                                <div class="online-indicator"></div>
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex items-center justify-between">
-                                    <div class="font-semibold text-white">Sarah Ahmed</div>
-                                    <div class="unread-indicator">2</div>
-                                </div>
-                                <div class="text-gray-400 text-sm truncate">Check out the latest updates!</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Offline Chat -->
-                    <div class="chat-card p-4 cursor-pointer">
-                        <div class="flex items-center gap-4">
-                            <div class="avatar">
-                                M
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex items-center justify-between">
-                                    <div class="font-semibold text-white">Mehedi Hasan</div>
-                                    <div class="text-xs text-gray-400">1h ago</div>
-                                </div>
-                                <div class="text-gray-400 text-sm truncate">Let's meet tomorrow at the lab</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Chat Area -->
-            <div class="col-span-8 flex flex-col">
-                <div class="chat-card p-6 flex-1 flex flex-col">
-                    <!-- Chat Header -->
-                    <div class="flex items-center justify-between mb-6 pb-4 border-b border-gray-800">
-                        <div class="flex items-center gap-4">
-                            <div class="avatar">
-                                R
-                                <div class="online-indicator"></div>
-                            </div>
-                            <div>
-                                <div class="font-semibold text-white">Rakib Hassan</div>
-                                <div class="text-sm text-gray-400">Active now</div>
-                            </div>
-                        </div>
-                        <div class="flex gap-4">
-                            <button class="p-2 hover:bg-gray-700 rounded-full" title="Voice Call">
-                                <span class="material-icons text-gray-400">phone</span>
-                            </button>
-                            <button class="p-2 hover:bg-gray-700 rounded-full" title="Video Call">
-                                <span class="material-icons text-gray-400">videocam</span>
-                            </button>
-                            <button class="p-2 hover:bg-gray-700 rounded-full" title="More Options">
-                                <span class="material-icons text-gray-400">more_vert</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Messages Container -->
-                    <div class="flex-1 overflow-y-auto space-y-4 mb-4 px-4">
-                        <!-- Date Separator -->
-                        <div class="flex items-center justify-center my-4">
-                            <div class="text-xs text-gray-400 bg-[#1a1a1a] px-4 py-1 rounded-full">Today</div>
-                        </div>
-
-                        <!-- Received Message -->
-                        <div class="message-bubble received">
-                            Hey, how's your project going? 🚀
-                            <div class="message-time">10:30 AM</div>
-                            <div class="reaction-button">
-                                <span class="material-icons text-sm">add_reaction</span>
-                                <div class="reactions">
-                                    <span class="reaction">👍</span>
-                                    <span class="reaction">❤️</span>
-                                    <span class="reaction">😊</span>
-                                    <span class="reaction">😮</span>
-                                    <span class="reaction">😢</span>
-                                    <span class="reaction">😡</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Sent Message -->
-                        <div class="message-bubble sent">
-                            It's going great! Just finished implementing the new features 🎉
-                            <div class="message-time">10:31 AM</div>
-                            <div class="message-status">
-                                <span class="material-icons">done_all</span>
-                                <span>Seen</span>
-                            </div>
-                        </div>
-
-                        <!-- Typing Indicator -->
-                        <div class="typing-indicator">
-                            <div class="typing-dot"></div>
-                            <div class="typing-dot"></div>
-                            <div class="typing-dot"></div>
-                        </div>
-                    </div>
-
-                    <!-- Message Input Area -->
-                    <div class="flex items-end gap-4 pt-4 border-t border-gray-800">
-                        <button class="p-3 hover:bg-gray-700 rounded-full" title="Add Attachment">
-                            <span class="material-icons text-gray-400">add_circle</span>
-                        </button>
-                        <div class="relative flex-1">
-                            <textarea 
-                                class="message-input w-full pr-12" 
-                                placeholder="Type a message..."
-                                rows="1"
-                                oninput="this.style.height = 'auto'; this.style.height = this.scrollHeight + 'px';"
-                            ></textarea>
-                            <button class="absolute right-3 bottom-3 p-2 hover:bg-gray-700 rounded-full">
-                                <span class="material-icons text-gray-400">emoji_emotions</span>
-                            </button>
-                        </div>
-                        <button class="send-btn">
-                            <span class="material-icons">send</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <script>
-        // Message handling
-        const messageInput = document.querySelector('textarea.message-input');
-        const sendButton = document.querySelector('.send-btn');
-        const messagesContainer = document.querySelector('.flex-1.overflow-y-auto');
-
-        function sendMessage(text) {
-            if (!text.trim()) return;
-
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message-bubble sent';
-            messageDiv.innerHTML = `
-                ${text}
-                <div class="message-time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
-                <div class="message-status">
-                    <span class="material-icons">done</span>
-                    <span>Sent</span>
-                </div>
-            `;
-
-            messagesContainer.appendChild(messageDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            messageInput.value = '';
-            messageInput.style.height = 'auto';
-
-            // Simulate message delivery and seen status
-            setTimeout(() => {
-                messageDiv.querySelector('.message-status').innerHTML = `
-                    <span class="material-icons">done_all</span>
-                    <span>Delivered</span>
-                `;
-            }, 1000);
-
-            setTimeout(() => {
-                messageDiv.querySelector('.message-status').innerHTML = `
-                    <span class="material-icons">done_all</span>
-                    <span>Seen</span>
-                `;
-            }, 2000);
-        }
-
-        // Send message on Enter (without Shift)
-        messageInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendMessage(messageInput.value);
-            }
-        });
-
-        sendButton.addEventListener('click', () => {
-            sendMessage(messageInput.value);
-        });
-
-        // Logout functionality
-        function logout() {
-            localStorage.removeItem('user');
-            window.location.href = 'login.html';
-        }
-    </script>
-
-        <!-- Video Section -->
-        <div class="video-section right-card mt-6">
-          <h3 class="text-lg font-semibold mb-4">Featured Videos</h3>
-          <div class="space-y-4">
-            <div class="video-card">
-              <div class="video-thumbnail">
-                <img src="https://img.youtube.com/vi/W6NZfCO5SIk/maxresdefault.jpg" alt="JavaScript Tutorial">
-                <span class="video-duration">15:30</span>
-              </div>
-              <div class="p-3">
-                <h4 class="font-semibold text-sm">JavaScript Fundamentals</h4>
-                <p class="text-xs text-gray-400">CSE Department • 2.1k views</p>
-              </div>
-            </div>
           </div>
         </div>
+        <div class="relative">
+          <input
+            type="text"
+            placeholder="Search conversations..."
+            class="w-full bg-border rounded-full py-2 px-4 text-sm transition-all focus:ring-2 focus:ring-primary focus:outline-none"
+            aria-label="Search conversations"
+          >
+        </div>
+      </div>
+
+      <!-- Active Status Section -->
+      <div class="active-status-section">
+        <h3 class="text-sm font-semibold mb-3">Active Now</h3>
+        <div class="active-status-list">
+          <div class="active-user">
+            <div class="avatar">R
+              <div class="active-indicator"></div>
+            </div>
+            <span class="name">Rakib</span>
+          </div>
+          <div class="active-user">
+            <div class="avatar">S
+              <div class="active-indicator"></div>
+            </div>
+            <span class="name">Sarah</span>
+          </div>
+          <div class="active-user">
+            <div class="avatar">J</div>
+            <span class="name">John</span>
+            <span class="last-seen">1h ago</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat Items -->
+      <div class="chat-item active" role="button" tabindex="0" aria-label="Chat with Rakib Hassan">
+        <div class="avatar">R</div>
+        <div class="flex-1">
+          <div class="flex items-center justify-between">
+            <span class="font-semibold">Rakib Hassan</span>
+            <span class="text-xs text-text-secondary">2m</span>
+          </div>
+          <p class="text-sm text-text-secondary truncate">Hey, how's your project going? 🚀</p>
+        </div>
+      </div>
+      <div class="chat-item" role="button" tabindex="0" aria-label="Chat with Sarah Ahmed">
+        <div class="avatar">S</div>
+        <div class="flex-1">
+          <div class="flex items-center justify-between">
+            <span class="font-semibold">Sarah Ahmed</span>
+            <span class="text-xs text-text-secondary">1h</span>
+          </div>
+          <p class="text-sm text-text-secondary truncate">Check out the latest updates!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Message Area -->
+    <div class="message-area">
+      <div class="message-header">
+        <div class="flex items-center gap-3">
+          <button class="nav-button back-button hidden" aria-label="Back to home page" onclick="navigateTo('index.html')">
+            <span class="material-icons">arrow_back</span> Back
+          </button>
+          <div class="avatar">R</div>
+          <div>
+            <h2 class="font-semibold">Rakib Hassan</h2>
+            <p class="text-sm text-text-secondary">Active now</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <input
+            type="text"
+            placeholder="Search messages..."
+            class="bg-border rounded-full py-1 px-3 text-sm transition-all focus:ring-2 focus:ring-primary focus:outline-none"
+            aria-label="Search messages in conversation"
+          >
+          <button class="action-button" aria-label="Start voice call">
+            <span class="material-icons">phone</span>
+          </button>
+          <button class="action-button" aria-label="Start video call">
+            <span class="material-icons">videocam</span>
+          </button>
+          <button class="action-button" aria-label="View chat info">
+            <span class="material-icons">info</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="message-content" id="messageContent">
+        <div class="timestamp">Today</div>
+        <div class="message-bubble received" data-message-id="1">
+          Hey, how's your project going? 🚀
+          <div class="message-meta">
+            <span>10:30 AM</span>
+            <span class="reaction">👍</span>
+          </div>
+          <div class="message-actions">
+            <button class="action-button edit-message" aria-label="Edit message">
+              <span class="material-icons">edit</span>
+            </button>
+            <button class="action-button delete-message" aria-label="Delete message">
+              <span class="material-icons">delete</span>
+            </button>
+            <button class="action-button pin-message" aria-label="Pin message">
+              <span class="material-icons">push_pin</span>
+            </button>
+          </div>
+        </div>
+        <div class="message-bubble sent" data-message-id="2">
+          It's going great! Just finished implementing the new features 🎉
+          <div class="message-meta">
+            <span>10:32 AM</span>
+            <span>Read</span>
+          </div>
+          <div class="message-actions">
+            <button class="action-button edit-message" aria-label="Edit message">
+              <span class="material-icons">edit</span>
+            </button>
+            <button class="action-button delete-message" aria-label="Delete message">
+              <span class="material-icons">delete</span>
+            </button>
+            <button class="action-button pin-message" aria-label="Pin message">
+              <span class="material-icons">push_pin</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="message-input-container">
+        <button class="action-button emoji-toggle" aria-label="Toggle emoji picker">
+          <span class="material-icons">emoji_emotions</span>
+        </button>
+        <emoji-picker class="emoji-picker"></emoji-picker>
+        <button class="action-button" aria-label="Attach image">
+          <span class="material-icons">image</span>
+        </button>
+        <input
+          type="text"
+          class="message-input"
+          placeholder="Message..."
+          id="messageInput"
+          aria-label="Type a message"
+        >
+        <button class="action-button" id="sendButton" aria-label="Send message">
+          <span class="material-icons">send</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Navigation with fade effect
+    function navigateTo(url) {
+      document.body.classList.add('fade-out');
+      setTimeout(() => {
+        window.location.href = url;
+      }, 300);
+    }
+
+    // Theme Toggle
+    const themeToggle = document.querySelector('.theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.dataset.theme = document.body.dataset.theme === 'light' ? 'dark' : 'light';
+    });
+
+    // Message Sending
+    const messageInput = document.querySelector('#messageInput');
+    const messageContent = document.querySelector('#messageContent');
+    const sendButton = document.querySelector('#sendButton');
+    let messageCounter = 2;
+
+    function sendMessage() {
+      const text = messageInput.value.trim();
+      if (!text) return;
+
+      messageCounter++;
+      const message = document.createElement('div');
+      message.className = 'message-bubble sent';
+      message.dataset.messageId = messageCounter;
+      message.innerHTML = `
+        ${text}
+        <div class="message-meta">
+          <span>${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+          <span>Sent</span>
+        </div>
+        <div class="message-actions">
+          <button class="action-button edit-message" aria-label="Edit message">
+            <span class="material-icons">edit</span>
+          </button>
+          <button class="action-button delete-message" aria-label="Delete message">
+            <span class="material-icons">delete</span>
+          </button>
+          <button class="action-button pin-message" aria-label="Pin message">
+            <span class="material-icons">push_pin</span>
+          </button>
+        </div>
+      `;
+      messageContent.appendChild(message);
+      messageInput.value = '';
+      messageContent.scrollTop = messageContent.scrollHeight;
+
+      // Simulate received message
+      setTimeout(() => {
+        const typing = document.createElement('div');
+        typing.className = 'text-sm text-text-secondary ml-2';
+        typing.textContent = 'Rakib is typing...';
+        messageContent.appendChild(typing);
+
+        setTimeout(() => {
+          messageContent.removeChild(typing);
+          messageCounter++;
+          const response = document.createElement('div');
+          response.className = 'message-bubble received';
+          response.dataset.messageId = messageCounter;
+          response.innerHTML = `
+            That sounds awesome! 🎉
+            <div class="message-meta">
+              <span>${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+              <span class="reaction">😊</span>
+            </div>
+            <div class="message-actions">
+              <button class="action-button edit-message" aria-label="Edit message">
+                <span class="material-icons">edit</span>
+              </button>
+              <button class="action-button delete-message" aria-label="Delete message">
+                <span class="material-icons">delete</span>
+              </button>
+              <button class="action-button pin-message" aria-label="Pin message">
+                <span class="material-icons">push_pin</span>
+              </button>
+            </div>
+          `;
+          messageContent.appendChild(response);
+          messageContent.scrollTop = messageContent.scrollHeight;
+        }, 2000);
+      }, 1000);
+    }
+
+    messageInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    sendButton.addEventListener('click', sendMessage);
+
+    // Chat Item Selection
+    document.querySelectorAll('.chat-item').forEach(item => {
+      const selectChat = () => {
+        document.querySelector('.chat-item.active')?.classList.remove('active');
+        item.classList.add('active');
+        document.querySelector('.chat-list').classList.remove('active');
+      };
+      item.addEventListener('click', selectChat);
+      item.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') selectChat();
+      });
+    });
+
+    // Active Status Simulation
+    function updateActiveStatus() {
+      document.querySelectorAll('.active-user').forEach(user => {
+        if (Math.random() > 0.7) {
+          const indicator = user.querySelector('.active-indicator');
+          const lastSeen = user.querySelector('.last-seen');
+          if (indicator) {
+            indicator.remove();
+            const newLastSeen = document.createElement('span');
+            newLastSeen.className = 'last-seen';
+            newLastSeen.textContent = 'just now';
+            user.appendChild(newLastSeen);
+          } else if (lastSeen) {
+            lastSeen.remove();
+            const newIndicator = document.createElement('div');
+            newIndicator.className = 'active-indicator';
+            user.querySelector('.avatar').appendChild(newIndicator);
+          }
+        }
+      });
+    }
+
+    setInterval(updateActiveStatus, 30000);
+
+    // Dynamic Placeholder
+    const placeholders = ['Message...', 'Type something cool...', 'Send a vibe...'];
+    let currentPlaceholder = 0;
+    setInterval(() => {
+      messageInput.placeholder = placeholders[currentPlaceholder];
+      currentPlaceholder = (currentPlaceholder + 1) % placeholders.length;
+    }, 3000);
+
+    // Message Reactions
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('reaction')) {
+        const reactions = ['👍', '❤️', '😊', '🚀'];
+        const currentIndex = reactions.indexOf(e.target.textContent);
+        e.target.textContent = reactions[(currentIndex + 1) % reactions.length];
+      }
+    });
+
+    // Message Actions
+    document.addEventListener('click', (e) => {
+      const target = e.target.closest('.action-button');
+      if (!target) return;
+      const messageBubble = target.closest('.message-bubble');
+      if (target.classList.contains('edit-message')) {
+        const text = messageBubble.childNodes[0].textContent.trim();
+        const newText = prompt('Edit message:', text);
+        if (newText) messageBubble.childNodes[0].textContent = newText;
+      } else if (target.classList.contains('delete-message')) {
+        messageBubble.remove();
+      } else if (target.classList.contains('pin-message')) {
+        messageBubble.classList.toggle('pinned');
+      }
+    });
+
+    // Emoji Picker
+    const emojiToggle = document.querySelector('.emoji-toggle');
+    const emojiPicker = document.querySelector('emoji-picker');
+    emojiToggle.addEventListener('click', () => {
+      emojiPicker.style.display = emojiPicker.style.display === 'block' ? 'none' : 'block';
+    });
+
+    emojiPicker.addEventListener('emoji-click', (e) => {
+      messageInput.value += e.detail.unicode;
+      messageInput.focus();
+      emojiPicker.style.display = 'none';
+    });
+
+    // Message Search
+    const messageSearch = document.querySelector('.message-header input');
+    messageSearch.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      document.querySelectorAll('.message-bubble').forEach(bubble => {
+        const text = bubble.childNodes[0].textContent.toLowerCase();
+        bubble.style.display = text.includes(query) ? 'block' : 'none';
+      });
+    });
+  </script>
 </body>
 </html>
