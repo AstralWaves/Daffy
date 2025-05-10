@@ -8,15 +8,33 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
+    @keyframes fadeInPage {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeOutPage {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(-20px); }
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
       background: #000000;
       min-height: 100vh;
       color: #ffffff;
       margin: 0;
+      animation: fadeInPage 0.6s ease-out;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    body.fade-out {
+      opacity: 0;
+      transform: translateY(-20px);
+      pointer-events: none;
     }
     .sidebar {
-      background: linear-gradient(135deg, #1e2761 80%, #facc15 100%);
+      background: linear-gradient(135deg, #000000 80%, #000000 100%);
       box-shadow: 2px 0 16px 0 rgba(30, 64, 175, 0.08);
       border-radius: 0 32px 32px 0;
       transition: transform 0.3s ease;
@@ -180,6 +198,14 @@
       background: #facc15;
       border-radius: 4px;
     }
+    #imageInput {
+      display: none;
+    }
+    .media-preview {
+      max-width: 100%;
+      margin-top: 10px;
+      border-radius: 12px;
+    }
   </style>
 </head>
 <body class="flex">
@@ -189,13 +215,13 @@
       <span class="material-icons" style="font-size:2.5rem;">bubble_chart</span> Daffy
     </a>
     <nav class="flex flex-col gap-1">
-      <a href="home.html" class="sidebar-link active"><span class="material-icons sidebar-icon">home</span> Home</a>
-      <a href="trends.html" class="sidebar-link"><span class="material-icons sidebar-icon">trending_up</span> Trends</a>
-      <a href="clubs.html" class="sidebar-link"><span class="material-icons sidebar-icon">groups</span> Clubs</a>
-      <a href="messaging.html" class="sidebar-link"><span class="material-icons sidebar-icon">chat_bubble</span> Messages</a>
-      <a href="videos.html" class="sidebar-link"><span class="material-icons sidebar-icon">play_circle</span> Videos</a>
-      <a href="jobs.html" class="sidebar-link"><span class="material-icons sidebar-icon">work</span> Jobs</a>
-      <a href="settings.html" class="sidebar-link"><span class="material-icons sidebar-icon">settings</span> Settings</a>
+      <a href="home.html" class="sidebar-link active" onclick="navigateTo('home.html'); return false;"><span class="material-icons sidebar-icon">home</span> Home</a>
+      <a href="trends.html" class="sidebar-link" onclick="navigateTo('trends.html'); return false;"><span class="material-icons sidebar-icon">trending_up</span> Trends</a>
+      <a href="clubs.html" class="sidebar-link" onclick="navigateTo('clubs.html'); return false;"><span class="material-icons sidebar-icon">groups</span> Clubs</a>
+      <a href="messaging.html" class="sidebar-link" onclick="navigateTo('messaging.html'); return false;"><span class="material-icons sidebar-icon">chat_bubble</span> Messages</a>
+      <a href="videos.html" class="sidebar-link" onclick="navigateTo('videos.html'); return false;"><span class="material-icons sidebar-icon">play_circle</span> Videos</a>
+      <a href="jobs.html" class="sidebar-link" onclick="navigateTo('jobs.html'); return false;"><span class="material-icons sidebar-icon">work</span> Jobs</a>
+      <a href="settings.html" class="sidebar-link" onclick="navigateTo('settings.html'); return false;"><span class="material-icons sidebar-icon">settings</span> Settings</a>
     </nav>
     <div class="mt-auto">
       <button onclick="logout()" class="sidebar-link w-full text-left">
@@ -210,14 +236,18 @@
     <div class="post-card p-6 mb-8">
       <div class="flex gap-4">
         <div class="avatar">S</div>
-        <textarea class="post-input w-full" placeholder="Share your thoughts with DIU community..." rows="3"></textarea>
+        <div class="w-full">
+          <textarea id="postInput" class="post-input w-full" placeholder="Share your thoughts with DIU community..." rows="3"></textarea>
+          <div id="mediaPreview" class="mt-2"></div>
+        </div>
       </div>
       <div class="flex justify-between items-center mt-4">
         <div class="flex gap-4">
-          <button class="text-gray-400 hover:text-[#facc15]" title="Add Image">
+          <button onclick="document.getElementById('imageInput').click()" class="text-gray-400 hover:text-[#facc15]" title="Add Image">
             <span class="material-icons">image</span>
           </button>
-          <button class="text-gray-400 hover:text-[#facc15]" title="Record Video">
+          <input type="file" id="imageInput" accept="image/*">
+          <button onclick="addVideo()" class="text-gray-400 hover:text-[#facc15]" title="Add Video">
             <span class="material-icons">videocam</span>
           </button>
           <button class="text-gray-400 hover:text-[#facc15]" title="Add File">
@@ -227,14 +257,14 @@
             <span class="material-icons">local_offer</span>
           </button>
         </div>
-        <button class="post-btn">Post</button>
+        <button class="post-btn" onclick="createPost()">Post</button>
       </div>
     </div>
 
     <!-- Feed Section -->
-    <div class="space-y-6">
+    <div id="feed" class="space-y-6">
       <!-- Post 1: Video Post (IoT Project) -->
-      <div class="post-card p-6">
+      <div class="post-card p-6" data-post-id="1">
         <div class="flex items-center gap-4 mb-4">
           <a href="profile.html" class="flex items-center gap-4">
             <div class="avatar">A</div>
@@ -277,7 +307,7 @@
       </div>
 
       <!-- Post 2: Image Post (Machine Learning Presentation) -->
-      <div class="post-card p-6">
+      <div class="post-card p-6" data-post-id="2">
         <div class="flex items-center gap-4 mb-4">
           <a href="profile.html" class="flex items-center gap-4">
             <div class="avatar">R</div>
@@ -318,7 +348,7 @@
       </div>
 
       <!-- Post 3: Image Post (Cultural Week) -->
-      <div class="post-card p-6">
+      <div class="post-card p-6" data-post-id="3">
         <div class="flex items-center gap-4 mb-4">
           <a href="profile.html" class="flex items-center gap-4">
             <div class="avatar">D</div>
@@ -359,7 +389,7 @@
       </div>
 
       <!-- Post 4: Image Post (Coding Bootcamp) -->
-      <div class="post-card p-6">
+      <div class="post-card p-6" data-post-id="4">
         <div class="flex items-center gap-4 mb-4">
           <a href="profile.html" class="flex items-center gap-4">
             <div class="avatar">C</div>
@@ -400,7 +430,7 @@
       </div>
 
       <!-- Post 5: Video Post (AI Research) -->
-      <div class="post-card p-6">
+      <div class="post-card p-6" data-post-id="5">
         <div class="flex items-center gap-4 mb-4">
           <a href="profile.html" class="flex items-center gap-4">
             <div class="avatar">S</div>
@@ -443,7 +473,7 @@
       </div>
 
       <!-- Post 6: Image Post (Cricket Match) -->
-      <div class="post-card p-6">
+      <div class="post-card p-6" data-post-id="6">
         <div class="flex items-center gap-4 mb-4">
           <a href="profile.html" class="flex items-center gap-4">
             <div class="avatar">S</div>
@@ -484,7 +514,7 @@
       </div>
 
       <!-- Post 7: Image Post (Cloud Workshop) -->
-      <div class="post-card p-6">
+      <div class="post-card p-6" data-post-id="7">
         <div class="flex items-center gap-4 mb-4">
           <a href="profile.html" class="flex items-center gap-4">
             <div class="avatar">T</div>
@@ -525,7 +555,7 @@
       </div>
 
       <!-- Post 8: Text Post (Bangla, Exam Prep) -->
-      <div class="post-card p-6">
+      <div class="post-card p-6" data-post-id="8">
         <div class="flex items-center gap-4 mb-4">
           <a href="profile.html" class="flex items-center gap-4">
             <div class="avatar">N</div>
@@ -565,7 +595,7 @@
       </div>
 
       <!-- Post 9: Image Post (Robotics Club) -->
-      <div class="post-card p-6">
+      <div class="post-card p-6" data-post-id="9">
         <div class="flex items-center gap-4 mb-4">
           <a href="profile.html" class="flex items-center gap-4">
             <div class="avatar">R</div>
@@ -606,7 +636,7 @@
       </div>
 
       <!-- Post 10: Text Post (English, Startup Pitch) -->
-      <div class="post-card p-6">
+      <div class="post-card p-6" data-post-id="10">
         <div class="flex items-center gap-4 mb-4">
           <a href="profile.html" class="flex items-center gap-4">
             <div class="avatar">M</div>
@@ -646,7 +676,7 @@
       </div>
 
       <!-- Post 11: Video Post (Cultural Dance) -->
-      <div class="post-card p-6">
+      <div class="post-card p-6" data-post-id="11">
         <div class="flex items-center gap-4 mb-4">
           <a href="profile.html" class="flex items-center gap-4">
             <div class="avatar">C</div>
@@ -689,7 +719,7 @@
       </div>
 
       <!-- Post 12: Text Post (Bangla, Library Update) -->
-      <div class="post-card p-6">
+      <div class="post-card p-6" data-post-id="12">
         <div class="flex items-center gap-4 mb-4">
           <a href="profile.html" class="flex items-center gap-4">
             <div class="avatar">L</div>
@@ -729,7 +759,7 @@
       </div>
 
       <!-- Post 13: Image Post (Hackathon) -->
-      <div class="post-card p-6">
+      <div class="post-card p-6" data-post-id="13">
         <div class="flex items-center gap-4 mb-4">
           <a href="profile.html" class="flex items-center gap-4">
             <div class="avatar">H</div>
@@ -770,7 +800,7 @@
       </div>
 
       <!-- Post 14: Text Post (English, Job Fair) -->
-      <div class="post-card p-6">
+      <div class="post-card p-6" data-post-id="14">
         <div class="flex items-center gap-4 mb-4">
           <a href="profile.html" class="flex items-center gap-4">
             <div class="avatar">J</div>
@@ -810,7 +840,7 @@
       </div>
 
       <!-- Post 15: Image Post (Art Exhibition) -->
-      <div class="post-card p-6">
+      <div class="post-card p-6" data-post-id="15">
         <div class="flex items-center gap-4 mb-4">
           <a href="profile.html" class="flex items-center gap-4">
             <div class="avatar">A</div>
@@ -851,7 +881,7 @@
       </div>
 
       <!-- Post 16: Text Post (Bangla, Volunteer Call) -->
-      <div class="post-card p-6">
+      <div class="post-card p-6" data-post-id="16">
         <div class="flex items-center gap-4 mb-4">
           <a href="profile.html" class="flex items-center gap-4">
             <div class="avatar">V</div>
@@ -891,7 +921,7 @@
       </div>
 
       <!-- Post 17: Video Post (Science Fair) -->
-      <div class="post-card p-6">
+      <div class="post-card p-6" data-post-id="17">
         <div class="flex items-center gap-4 mb-4">
           <a href="profile.html" class="flex items-center gap-4">
             <div class="avatar">S</div>
@@ -934,7 +964,7 @@
       </div>
 
       <!-- Post 18: Text Post (English, Study Group) -->
-      <div class="post-card p-6">
+      <div class="post-card p-6" data-post-id="18">
         <div class="flex items-center gap-4 mb-4">
           <a href="profile.html" class="flex items-center gap-4">
             <div class="avatar">F</div>
@@ -974,7 +1004,7 @@
       </div>
 
       <!-- Post 19: Image Post (Debate Club) -->
-      <div class="post-card p-6">
+      <div class="post-card p-6" data-post-id="19">
         <div class="flex items-center gap-4 mb-4">
           <a href="profile.html" class="flex items-center gap-4">
             <div class="avatar">D</div>
@@ -1015,7 +1045,7 @@
       </div>
 
       <!-- Post 20: Text Post (Bangla, Club Recruitment) -->
-      <div class="post-card p-6">
+      <div class="post-card p-6" data-post-id="20">
         <div class="flex items-center gap-4 mb-4">
           <a href="profile.html" class="flex items-center gap-4">
             <div class="avatar">P</div>
@@ -1114,14 +1144,18 @@
   </aside>
 
   <script>
+    let postCounter = 21; // Start counter after existing posts
+    let selectedImage = null;
+    let videoUrl = null;
+
     function logout() {
       localStorage.removeItem('user');
-      window.location.href = 'login.html';
+      navigateTo('login.html');
     }
 
     // Interaction Functions
     function toggleLike(postId) {
-      const likeBtn = document.querySelector(`.post-card:nth-child(${postId}) .interaction-btn:nth-child(3)`);
+      const likeBtn = document.querySelector(`.post-card[data-post-id="${postId}"] .interaction-btn:nth-child(3)`);
       const likeIcon = likeBtn.querySelector('.material-icons');
       const likeCount = likeBtn.querySelector('span:last-child');
       const isLiked = likeIcon.textContent === 'favorite';
@@ -1132,7 +1166,7 @@
     }
 
     function toggleRetweet(postId) {
-      const retweetBtn = document.querySelector(`.post-card:nth-child(${postId}) .interaction-btn:nth-child(2)`);
+      const retweetBtn = document.querySelector(`.post-card[data-post-id="${postId}"] .interaction-btn:nth-child(2)`);
       const retweetCount = retweetBtn.querySelector('span:last-child');
       retweetCount.textContent = parseInt(retweetCount.textContent) + 1;
       retweetBtn.classList.add('text-[#facc15]');
@@ -1142,6 +1176,155 @@
     function toggleComment(postId) {
       alert(`Comment section for post ${postId} would be implemented here!`);
     }
+
+    // Smooth page navigation
+    function navigateTo(url) {
+      document.body.classList.add('fade-out');
+      setTimeout(() => {
+        window.location.href = url;
+      }, 300);
+    }
+
+    // Handle image selection
+    document.getElementById('imageInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file && file.type.startsWith('image/')) {
+        selectedImage = file;
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          const preview = document.getElementById('mediaPreview');
+          preview.innerHTML = `<img src="${event.target.result}" class="media-preview" alt="Image Preview">`;
+        };
+        reader.readAsDataURL(file);
+        videoUrl = null; // Clear video if image is selected
+        document.getElementById('mediaPreview').innerHTML = ''; // Clear previous preview
+      } else {
+        alert('Please select a valid image file.');
+        selectedImage = null;
+      }
+    });
+
+    // Handle video URL input
+    function addVideo() {
+      const url = prompt('Enter a YouTube video URL (e.g., https://www.youtube.com/watch?v=VIDEO_ID):');
+      if (url) {
+        const videoId = extractYouTubeId(url);
+        if (videoId) {
+          videoUrl = `https://www.youtube.com/embed/${videoId}`;
+          const preview = document.getElementById('mediaPreview');
+          preview.innerHTML = `<div class="video-container"><iframe src="${videoUrl}" frameborder="0" allowfullscreen></iframe></div>`;
+          selectedImage = null; // Clear image if video is selected
+        } else {
+          alert('Invalid YouTube URL. Please enter a valid YouTube video URL.');
+          videoUrl = null;
+        }
+      }
+    }
+
+    // Extract YouTube video ID from URL
+    function extractYouTubeId(url) {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
+    }
+
+    // Create new post
+    function createPost() {
+      const postInput = document.getElementById('postInput');
+      const content = postInput.value.trim();
+      
+      if (!content && !selectedImage && !videoUrl) {
+        alert('Please enter some content or attach an image/video to post!');
+        return;
+      }
+
+      const feed = document.getElementById('feed');
+      const newPost = document.createElement('div');
+      newPost.className = 'post-card p-6';
+      newPost.setAttribute('data-post-id', postCounter);
+      
+      // Get current time for timestamp
+      const now = new Date();
+      const timeString = 'Just now';
+      
+      // Generate media content
+      let mediaContent = '';
+      if (selectedImage) {
+        const imageUrl = URL.createObjectURL(selectedImage);
+        mediaContent = `<img src="${imageUrl}" alt="Posted Image" class="w-full rounded-xl mb-4">`;
+      } else if (videoUrl) {
+        mediaContent = `<div class="video-container"><iframe src="${videoUrl}" frameborder="0" allowfullscreen></iframe></div>`;
+      }
+      
+      // Hardcoding user details for simplicity
+      newPost.innerHTML = `
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">S</div>
+            <div>
+              <div class="font-semibold text-white">Student User</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">${timeString}</span>
+                <span class="department-tag">General</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="text-white mb-4">
+          ${content ? `<p class="mb-4">${content}</p>` : ''}
+          ${mediaContent}
+          <div class="flex gap-2">
+            <span class="department-tag">#DIU</span>
+            <span class="department-tag">#Post</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleComment(${postCounter})">
+            <span class="material-icons">chat_bubble_outline</span>
+            <span>0</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleRetweet(${postCounter})">
+            <span class="material-icons">repeat</span>
+            <span>0</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleLike(${postCounter})">
+            <span class="material-icons">favorite_border</span>
+            <span>0</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15] interaction-btn">
+            <span class="material-icons">share</span>
+          </div>
+        </div>
+      `;
+      
+      // Prepend new post to feed
+      feed.insertBefore(newPost, feed.firstChild);
+      
+      // Clear inputs and reset state
+      postInput.value = '';
+      document.getElementById('imageInput').value = '';
+      document.getElementById('mediaPreview').innerHTML = '';
+      selectedImage = null;
+      videoUrl = null;
+      postCounter++;
+    }
+
+    // Update all navigation links
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('a[href], .sidebar-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          if (link.href && !link.href.includes('#') && !link.href.includes('javascript:')) {
+            e.preventDefault();
+            navigateTo(link.href);
+          }
+        });
+      });
+      
+      // Assign post IDs to existing posts
+      document.querySelectorAll('.post-card').forEach((post, index) => {
+        post.setAttribute('data-post-id', index + 1);
+      });
+    });
   </script>
 </body>
 </html>

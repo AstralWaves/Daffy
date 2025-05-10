@@ -5,74 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daffy - Jobs</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f7fafc 0%, #e0e7ff 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
             min-height: 100vh;
+            color: #ffffff;
         }
         .sidebar {
-            background: linear-gradient(135deg, #1e2761 80%, #facc15 100%);
-            box-shadow: 2px 0 16px 0 rgba(30, 64, 175, 0.08);
+            background: #000000;
+            box-shadow: 4px 0 24px 0 rgba(0, 0, 0, 0.3);
             border-radius: 0 32px 32px 0;
+            transition: all 0.3s ease;
         }
         .job-card {
-            background: #fff;
+            background: #1f1f1f;
             border-radius: 24px;
-            box-shadow: 0 6px 32px 0 rgba(30, 64, 175, 0.10);
-            transition: transform 0.3s ease;
+            box-shadow: 0 8px 40px 0 rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 1.5rem;
         }
         .job-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.3);
         }
         .company-logo {
-            width: 64px;
-            height: 64px;
+            width: 72px;
+            height: 72px;
             border-radius: 16px;
-            background: #f7f9fb;
+            background: #2a2a2a;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            color: #1e2761;
+            color: #facc15;
+            font-size: 1.5rem;
         }
         .job-type {
-            background: rgba(250, 204, 21, 0.1);
-            color: #1e2761;
-            padding: 4px 12px;
+            background: rgba(250, 204, 21, 0.15);
+            color: #facc15;
+            padding: 6px 16px;
             border-radius: 9999px;
             font-size: 0.875rem;
             font-weight: 500;
         }
         .apply-btn {
-            background: linear-gradient(90deg, #1e2761 60%, #facc15 100%);
-            color: white;
-            padding: 8px 24px;
+            background: linear-gradient(90deg, #facc15 0%, #ffd700 100%);
+            color: #1e2761;
+            padding: 10px 28px;
             border-radius: 9999px;
             font-weight: 600;
             transition: all 0.3s ease;
         }
         .apply-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(250, 204, 21, 0.4);
         }
         .search-input {
-            background: #fff;
-            border: 2px solid #e2e8f0;
+            background: #2a2a2a;
+            border: 2px solid #3a3a3a;
             border-radius: 9999px;
             padding: 12px 20px;
+            color: #ffffff;
             transition: all 0.3s ease;
         }
         .search-input:focus {
             border-color: #facc15;
-            box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.1);
+            box-shadow: 0 0 0 4px rgba(250, 204, 21, 0.2);
+        }
+        .search-input::placeholder {
+            color: #a0a0a0;
         }
         .filter-btn {
-            background: rgba(250, 204, 21, 0.1);
-            color: #1e2761;
-            padding: 8px 16px;
+            background: rgba(250, 204, 21, 0.15);
+            color: #facc15;
+            padding: 8px 20px;
             border-radius: 9999px;
             font-weight: 500;
             transition: all 0.3s ease;
@@ -83,31 +92,37 @@
         }
         .sidebar-link {
             color: #ffffff;
-            padding: 12px 16px;
+            padding: 14px 20px;
             border-radius: 12px;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             text-decoration: none;
+            position: relative;
         }
         .sidebar-link:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(250, 204, 21, 0.1);
+            transform: translateX(4px);
         }
         .sidebar-link.active {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(250, 204, 21, 0.2);
+            color: #facc15;
         }
         .sidebar-icon {
-            font-size: 1.5rem;
+            font-size: 1.75rem;
+        }
+        .main-content {
+            max-width: 800px;
+            margin: 0 auto;
         }
     </style>
 </head>
 <body class="flex min-h-screen">
     <!-- Left Sidebar -->
     <aside class="sidebar w-72 flex flex-col py-12 px-8 min-h-screen mr-12">
-        <!-- Update the logo section -->
         <a href="home.html" class="logo text-2xl font-bold text-white mb-8 flex items-center gap-2">
-          <span class="material-icons" style="font-size:2rem;">bubble_chart</span> Daffy
+            <span class="material-icons" style="font-size:2rem;">bubble_chart</span> Daffy
         </a>
         <nav class="flex flex-col gap-1">
             <a href="home.html" class="sidebar-link"><span class="material-icons sidebar-icon">home</span> Home</a>
@@ -115,6 +130,7 @@
             <a href="clubs.html" class="sidebar-link"><span class="material-icons sidebar-icon">groups</span> Clubs</a>
             <a href="messaging.html" class="sidebar-link"><span class="material-icons sidebar-icon">chat_bubble</span> Messages</a>
             <a href="jobs.html" class="sidebar-link active"><span class="material-icons sidebar-icon">work</span> Jobs</a>
+            <a href="videos.html" class="sidebar-link"><span class="material-icons sidebar-icon">video_library</span> Videos</a>
             <a href="settings.html" class="sidebar-link"><span class="material-icons sidebar-icon">settings</span> Settings</a>
         </nav>
         <div class="mt-auto">
@@ -125,10 +141,10 @@
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 p-8">
+    <main class="flex-1 p-8 main-content">
         <!-- Header -->
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-[#1e2761] mb-4">Job Opportunities</h1>
+            <h1 class="text-4xl font-bold text-white mb-6">Job Opportunities</h1>
             <div class="flex items-center gap-4">
                 <div class="relative flex-1">
                     <input type="text" class="search-input w-full pl-12" placeholder="Search jobs...">
@@ -143,22 +159,22 @@
             </div>
         </div>
 
-        <!-- Jobs Grid -->
-        <div class="grid grid-cols-1 gap-6">
+        <!-- Jobs List -->
+        <div class="space-y-6">
             <!-- Job Card 1 -->
             <div class="job-card p-6">
                 <div class="flex items-start justify-between">
                     <div class="flex gap-4">
                         <div class="company-logo">G</div>
                         <div>
-                            <h3 class="text-xl font-bold text-[#1e2761] mb-1">Senior Web Developer</h3>
-                            <p class="text-gray-600 mb-2">Google Inc.</p>
+                            <h3 class="text-xl font-bold text-white mb-1">Senior Web Developer</h3>
+                            <p class="text-gray-400 mb-2">Google Inc.</p>
                             <div class="flex items-center gap-4">
-                                <span class="text-gray-600 flex items-center gap-1">
+                                <span class="text-gray-400 flex items-center gap-1">
                                     <span class="material-icons text-[#facc15]">location_on</span>
                                     San Francisco, CA
                                 </span>
-                                <span class="text-gray-600 flex items-center gap-1">
+                                <span class="text-gray-400 flex items-center gap-1">
                                     <span class="material-icons text-[#facc15]">attach_money</span>
                                     $120k - $150k
                                 </span>
@@ -176,14 +192,14 @@
                     <div class="flex gap-4">
                         <div class="company-logo">M</div>
                         <div>
-                            <h3 class="text-xl font-bold text-[#1e2761] mb-1">UI/UX Designer</h3>
-                            <p class="text-gray-600 mb-2">Microsoft</p>
+                            <h3 class="text-xl font-bold text-white mb-1">UI/UX Designer</h3>
+                            <p class="text-gray-400 mb-2">Microsoft</p>
                             <div class="flex items-center gap-4">
-                                <span class="text-gray-600 flex items-center gap-1">
+                                <span class="text-gray-400 flex items-center gap-1">
                                     <span class="material-icons text-[#facc15]">location_on</span>
                                     Remote
                                 </span>
-                                <span class="text-gray-600 flex items-center gap-1">
+                                <span class="text-gray-400 flex items-center gap-1">
                                     <span class="material-icons text-[#facc15]">attach_money</span>
                                     $90k - $120k
                                 </span>
@@ -201,14 +217,14 @@
                     <div class="flex gap-4">
                         <div class="company-logo">A</div>
                         <div>
-                            <h3 class="text-xl font-bold text-[#1e2761] mb-1">Data Scientist</h3>
-                            <p class="text-gray-600 mb-2">Amazon</p>
+                            <h3 class="text-xl font-bold text-white mb-1">Data Scientist</h3>
+                            <p class="text-gray-400 mb-2">Amazon</p>
                             <div class="flex items-center gap-4">
-                                <span class="text-gray-600 flex items-center gap-1">
+                                <span class="text-gray-400 flex items-center gap-1">
                                     <span class="material-icons text-[#facc15]">location_on</span>
                                     Seattle, WA
                                 </span>
-                                <span class="text-gray-600 flex items-center gap-1">
+                                <span class="text-gray-400 flex items-center gap-1">
                                     <span class="material-icons text-[#facc15]">attach_money</span>
                                     $130k - $160k
                                 </span>
@@ -219,23 +235,6 @@
                     <button class="apply-btn">Apply Now</button>
                 </div>
             </div>
-        </div>
-
-        <!-- Video Section -->
-        <div class="video-section right-card mt-6">
-          <h3 class="text-lg font-semibold mb-4">Featured Videos</h3>
-          <div class="space-y-4">
-            <div class="video-card">
-              <div class="video-thumbnail">
-                <img src="https://img.youtube.com/vi/W6NZfCO5SIk/maxresdefault.jpg" alt="JavaScript Tutorial">
-                <span class="video-duration">15:30</span>
-              </div>
-              <div class="p-3">
-                <h4 class="font-semibold text-sm">JavaScript Fundamentals</h4>
-                <p class="text-xs text-gray-400">CSE Department • 2.1k views</p>
-              </div>
-            </div>
-          </div>
         </div>
     </main>
 
@@ -250,6 +249,15 @@
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
+                const filter = btn.textContent.toLowerCase();
+                document.querySelectorAll('.job-card').forEach(card => {
+                    const jobType = card.querySelector('.job-type').textContent.toLowerCase();
+                    if (filter === 'all' || jobType.includes(filter)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
             });
         });
 
@@ -260,7 +268,7 @@
             document.querySelectorAll('.job-card').forEach(card => {
                 const jobTitle = card.querySelector('h3').textContent.toLowerCase();
                 const company = card.querySelector('p').textContent.toLowerCase();
-                const location = card.querySelector('.text-gray-600').textContent.toLowerCase();
+                const location = card.querySelectorAll('.text-gray-400')[0].textContent.toLowerCase();
                 
                 if (jobTitle.includes(searchTerm) || company.includes(searchTerm) || location.includes(searchTerm)) {
                     card.style.display = 'block';
