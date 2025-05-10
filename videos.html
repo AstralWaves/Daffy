@@ -174,25 +174,110 @@
     </main>
 
     <script>
-        // Video upload handling
+        // Video upload handling with automatic categorization
         const videoUpload = document.getElementById('videoUpload');
-        videoUpload.addEventListener('change', (e) => {
+        const videoGrid = document.querySelector('.grid');
+
+        // Keywords for video categorization
+        const categoryKeywords = {
+            'lectures': ['lecture', 'class', 'course', 'professor', 'teacher'],
+            'lab_tutorials': ['lab', 'tutorial', 'practical', 'experiment', 'demonstration'],
+            'student_projects': ['project', 'thesis', 'presentation', 'student work'],
+            'campus_events': ['event', 'ceremony', 'festival', 'competition', 'workshop'],
+            'tech_talks': ['tech talk', 'seminar', 'conference', 'symposium', 'webinar']
+        };
+
+        function detectVideoCategory(fileName, fileMetadata) {
+            const fileNameLower = fileName.toLowerCase();
+            
+            for (const [category, keywords] of Object.entries(categoryKeywords)) {
+                if (keywords.some(keyword => fileNameLower.includes(keyword))) {
+                    return category;
+                }
+            }
+            
+            // Default to 'others' if no category matches
+            return 'others';
+        }
+
+        function createVideoCard(file, category) {
+            const videoCard = document.createElement('div');
+            videoCard.className = 'video-card';
+            
+            const timestamp = new Date().toLocaleDateString();
+            const duration = '00:00'; // This would be extracted from actual video metadata
+            
+            videoCard.innerHTML = `
+                <div class="video-thumbnail">
+                    <video src="${URL.createObjectURL(file)}" class="hidden"></video>
+                    <img src="" alt="${file.name}" class="video-preview">
+                    <span class="video-duration">${duration}</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold mb-2">${file.name}</h3>
+                    <p class="text-sm text-gray-400 mb-2">Category: ${category}</p>
+                    <div class="flex items-center justify-between text-sm text-gray-400">
+                        <span>0 views</span>
+                        <span>${timestamp}</span>
+                    </div>
+                </div>
+            `;
+
+            // Generate video thumbnail
+            const video = videoCard.querySelector('video');
+            const img = videoCard.querySelector('img');
+            video.onloadeddata = () => {
+                video.currentTime = 1;
+                setTimeout(() => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+                    canvas.getContext('2d').drawImage(video, 0, 0);
+                    img.src = canvas.toDataURL();
+                }, 300);
+            };
+
+            return videoCard;
+        }
+
+        videoUpload.addEventListener('change', async (e) => {
             const file = e.target.files[0];
             if (file) {
-                // Here you would typically handle the video upload
-                // For now, we'll just show an alert
-                alert(`Video "${file.name}" selected for upload`);
+                // Detect video category
+                const category = detectVideoCategory(file.name);
+                
+                // Create and add video card to grid
+                const videoCard = createVideoCard(file, category);
+                videoGrid.insertBefore(videoCard, videoGrid.firstChild);
+                
+                // Update category pills
+                const categoryPills = document.querySelectorAll('.category-pill');
+                categoryPills.forEach(pill => {
+                    if (pill.textContent.toLowerCase().includes(category)) {
+                        pill.classList.add('highlight');
+                        setTimeout(() => pill.classList.remove('highlight'), 2000);
+                    }
+                });
+                
+                // Show success message
+                alert(`Video "${file.name}" uploaded and categorized as ${category}`);
             }
         });
 
-        // Category selection
-        const categories = document.querySelectorAll('.category-pill');
-        categories.forEach(category => {
-            category.addEventListener('click', () => {
-                categories.forEach(c => c.classList.remove('active'));
-                category.classList.add('active');
-            });
-        });
+        // Add styles for category pill highlight
+        const style = document.createElement('style');
+        style.textContent = `
+            .category-pill.highlight {
+                animation: pulse 2s;
+                border: 2px solid #facc15;
+            }
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>

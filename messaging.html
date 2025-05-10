@@ -15,9 +15,41 @@
             color: #ffffff;
         }
         .sidebar {
-            background: linear-gradient(135deg, #1e2761 80%, #facc15 100%);
-            box-shadow: 2px 0 16px 0 rgba(30, 64, 175, 0.08);
-            border-radius: 0 32px 32px 0;
+            background: #1e2761;
+            min-height: 100vh;
+            width: 240px;
+            padding: 1.5rem 1rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+            color: #facc15;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.875rem 1.25rem;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.75rem;
+            margin-bottom: 0.75rem;
+            transition: background-color 0.2s;
+            font-size: 1rem;
+        }
+        
+        .sidebar-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-link.active {
+            background-color: rgba(255, 255, 255, 0.2);
         }
         .chat-card {
             background: #1a1a1a;
@@ -446,5 +478,22 @@
             window.location.href = 'login.html';
         }
     </script>
+
+        <!-- Video Section -->
+        <div class="video-section right-card mt-6">
+          <h3 class="text-lg font-semibold mb-4">Featured Videos</h3>
+          <div class="space-y-4">
+            <div class="video-card">
+              <div class="video-thumbnail">
+                <img src="https://img.youtube.com/vi/W6NZfCO5SIk/maxresdefault.jpg" alt="JavaScript Tutorial">
+                <span class="video-duration">15:30</span>
+              </div>
+              <div class="p-3">
+                <h4 class="font-semibold text-sm">JavaScript Fundamentals</h4>
+                <p class="text-xs text-gray-400">CSE Department • 2.1k views</p>
+              </div>
+            </div>
+          </div>
+        </div>
 </body>
 </html>

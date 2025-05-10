@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +10,9 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f7fafc 0%, #e0e7ff 100%);
+            background: #000000;
             min-height: 100vh;
+            color: #ffffff;
         }
         .sidebar {
             background: linear-gradient(135deg, #1e2761 80%, #facc15 100%);
@@ -20,7 +20,7 @@
             border-radius: 0 32px 32px 0;
         }
         .trend-card {
-            background: #fff;
+            background: #1a1a1a;
             border-radius: 24px;
             box-shadow: 0 6px 32px 0 rgba(30, 64, 175, 0.10);
             transition: transform 0.3s ease;
@@ -29,7 +29,7 @@
             transform: translateY(-4px);
         }
         .trend-tag {
-            color: #1e2761;
+            color: #facc15;
             font-weight: 600;
             font-size: 1.1rem;
         }
@@ -39,15 +39,16 @@
             font-weight: 500;
         }
         .trend-stats {
-            color: #6b7280;
+            color: #888888;
             font-size: 0.9rem;
         }
         .search-input {
-            background: #fff;
-            border: 2px solid #e2e8f0;
+            background: #2a2a2a;
+            border: 2px solid #333333;
             border-radius: 9999px;
             padding: 12px 20px;
             transition: all 0.3s ease;
+            color: #ffffff;
         }
         .search-input:focus {
             border-color: #facc15;
@@ -55,7 +56,7 @@
         }
         .filter-btn {
             background: rgba(250, 204, 21, 0.1);
-            color: #1e2761;
+            color: #ffffff;
             padding: 8px 16px;
             border-radius: 9999px;
             font-weight: 500;
@@ -63,10 +64,10 @@
         }
         .filter-btn:hover, .filter-btn.active {
             background: #facc15;
-            color: #1e2761;
+            color: #000000;
         }
         .top-trends {
-            background: #fff;
+            background: #1a1a1a;
             border-radius: 24px;
             box-shadow: 0 6px 32px 0 rgba(30, 64, 175, 0.10);
             padding: 1.5rem;
@@ -76,7 +77,7 @@
         .trend-rank {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #1e2761;
+            color: #ffffff;
             opacity: 0.7;
         }
         .trend-rank.top-3 {
@@ -84,7 +85,7 @@
             opacity: 1;
         }
         .section-title {
-            color: #1e2761;
+            color: #ffffff;
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
@@ -123,6 +124,7 @@
             <a href="trends.html" class="sidebar-link active"><span class="material-icons sidebar-icon">trending_up</span> Trends</a>
             <a href="clubs.html" class="sidebar-link"><span class="material-icons sidebar-icon">groups</span> Clubs</a>
             <a href="messaging.html" class="sidebar-link"><span class="material-icons sidebar-icon">chat_bubble</span> Messages</a>
+            <a href="videos.html" class="sidebar-link"><span class="material-icons sidebar-icon">play_circle</span> Videos</a>
             <a href="jobs.html" class="sidebar-link"><span class="material-icons sidebar-icon">work</span> Jobs</a>
             <a href="settings.html" class="sidebar-link"><span class="material-icons sidebar-icon">settings</span> Settings</a>
         </nav>
@@ -139,7 +141,7 @@
         <div class="mb-8">
             <div class="flex justify-between items-start">
                 <div class="flex-1">
-                    <h1 class="text-3xl font-bold text-[#1e2761] mb-4">Trending Topics</h1>
+                    <h1 class="text-3xl font-bold text-white mb-4">Trending Topics</h1>
                     <div class="flex items-center gap-4">
                         <div class="relative flex-1">
                             <input type="text" class="search-input w-full pl-12" placeholder="Search trends...">
@@ -161,43 +163,43 @@
                         <div class="flex items-center gap-3">
                             <span class="trend-rank top-3">1</span>
                             <div>
-                                <h4 class="font-semibold text-[#1e2761]">#AI</h4>
-                                <p class="text-sm text-gray-600">32.1K posts</p>
+                                <h4 class="font-semibold text-white">#AI</h4>
+                                <p class="text-sm text-gray-400">32.1K posts</p>
                             </div>
                         </div>
                         <div class="flex items-center gap-3">
                             <span class="trend-rank top-3">2</span>
                             <div>
-                                <h4 class="font-semibold text-[#1e2761]">#WebDevelopment</h4>
-                                <p class="text-sm text-gray-600">25.4K posts</p>
+                                <h4 class="font-semibold text-white">#WebDevelopment</h4>
+                                <p class="text-sm text-gray-400">25.4K posts</p>
                             </div>
                         </div>
                         <div class="flex items-center gap-3">
                             <span class="trend-rank top-3">3</span>
                             <div>
-                                <h4 class="font-semibold text-[#1e2761]">#WorldCup2024</h4>
-                                <p class="text-sm text-gray-600">18.7K posts</p>
+                                <h4 class="font-semibold text-white">#WorldCup2024</h4>
+                                <p class="text-sm text-gray-400">18.7K posts</p>
                             </div>
                         </div>
                         <div class="flex items-center gap-3">
                             <span class="trend-rank">4</span>
                             <div>
-                                <h4 class="font-semibold text-[#1e2761]">#OnlineLearning</h4>
-                                <p class="text-sm text-gray-600">15.8K posts</p>
+                                <h4 class="font-semibold text-white">#OnlineLearning</h4>
+                                <p class="text-sm text-gray-400">15.8K posts</p>
                             </div>
                         </div>
                         <div class="flex items-center gap-3">
                             <span class="trend-rank">5</span>
                             <div>
-                                <h4 class="font-semibold text-[#1e2761]">#NewMovies</h4>
-                                <p class="text-sm text-gray-600">12.3K posts</p>
+                                <h4 class="font-semibold text-white">#NewMovies</h4>
+                                <p class="text-sm text-gray-400">12.3K posts</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-ll        </div>
-ro
+        </div>
+
         <!-- Replace the existing Trends Grid section with this new feed-style layout -->
         <div class="space-y-8">
             <!-- Trending Feed Section -->
@@ -251,17 +253,17 @@ ro
                         </div>
                         <div>
                             <div class="flex items-center gap-1">
-                                <span class="font-bold text-[#1e2761]">${post.user.name}</span>
+                                <span class="font-bold text-white">${post.user.name}</span>
                                 ${post.user.verified ? '<span class="material-icons text-[#facc15] text-sm">verified</span>' : ''}
                             </div>
-                            <div class="text-sm text-gray-500">${post.timeAgo}</div>
+                            <div class="text-sm text-gray-400">${post.timeAgo}</div>
                         </div>
                     </div>
                     <span class="trend-category">${post.category}</span>
                 </div>
                 <div class="mb-4">
                     <h3 class="trend-tag text-xl mb-2">${post.hashtag}</h3>
-                    <p class="text-gray-600">${post.content}</p>
+                    <p class="text-gray-400">${post.content}</p>
                     ${post.image ? `<img src="${post.image}" class="w-full h-64 object-cover rounded-lg mt-4">` : ''}
                 </div>
                 <div class="flex items-center justify-between text-sm">
@@ -279,7 +281,7 @@ ro
                             <span>${formatNumber(post.engagement.shares)}</span>
                         </button>
                     </div>
-                    <button class="text-[#1e2761] hover:text-[#facc15] transition-colors">
+                    <button class="text-white hover:text-[#facc15] transition-colors">
                         <span class="material-icons">bookmark_border</span>
                     </button>
                 </div>
@@ -368,10 +370,10 @@ ro
                     <span class="material-icons text-[#facc15]">trending_up</span>
                 </div>
                 <h3 class="trend-tag mb-2">#WorldCup2024</h3>
-                <p class="text-gray-600 mb-4">Updates and discussions about the upcoming World Cup</p>
+                <p class="text-gray-400 mb-4">Updates and discussions about the upcoming World Cup</p>
                 <div class="flex items-center justify-between">
                     <div class="trend-stats">18.7K posts</div>
-                    <button class="text-[#1e2761] hover:text-[#facc15]">
+                    <button class="text-white hover:text-[#facc15]">
                         <span class="material-icons">add_circle_outline</span>
                     </button>
                 </div>
@@ -384,10 +386,10 @@ ro
                     <span class="material-icons text-[#facc15]">trending_up</span>
                 </div>
                 <h3 class="trend-tag mb-2">#NewMovies</h3>
-                <p class="text-gray-600 mb-4">Latest movie releases and reviews</p>
+                <p class="text-gray-400 mb-4">Latest movie releases and reviews</p>
                 <div class="flex items-center justify-between">
                     <div class="trend-stats">12.3K posts</div>
-                    <button class="text-[#1e2761] hover:text-[#facc15]">
+                    <button class="text-white hover:text-[#facc15]">
                         <span class="material-icons">add_circle_outline</span>
                     </button>
                 </div>
@@ -400,10 +402,10 @@ ro
                     <span class="material-icons text-[#facc15]">trending_up</span>
                 </div>
                 <h3 class="trend-tag mb-2">#OnlineLearning</h3>
-                <p class="text-gray-600 mb-4">Tips and resources for online education</p>
+                <p class="text-gray-400 mb-4">Tips and resources for online education</p>
                 <div class="flex items-center justify-between">
                     <div class="trend-stats">15.8K posts</div>
-                    <button class="text-[#1e2761] hover:text-[#facc15]">
+                    <button class="text-white hover:text-[#facc15]">
                         <span class="material-icons">add_circle_outline</span>
                     </button>
                 </div>
@@ -416,10 +418,10 @@ ro
                     <span class="material-icons text-[#facc15]">trending_up</span>
                 </div>
                 <h3 class="trend-tag mb-2">#StartupLife</h3>
-                <p class="text-gray-600 mb-4">Entrepreneurship and startup culture</p>
+                <p class="text-gray-400 mb-4">Entrepreneurship and startup culture</p>
                 <div class="flex items-center justify-between">
                     <div class="trend-stats">9.5K posts</div>
-                    <button class="text-[#1e2761] hover:text-[#facc15]">
+                    <button class="text-white hover:text-[#facc15]">
                         <span class="material-icons">add_circle_outline</span>
                     </button>
                 </div>
@@ -442,7 +444,6 @@ ro
             if (!checkAuth()) return;
             
             // Initialize the page
-            sortTrends();
             
             // Add click handlers for navigation
             document.querySelectorAll('.sidebar-link').forEach(link => {
@@ -458,573 +459,11 @@ ro
             });
         });
 
-        // Filter button functionality
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-            });
-        });
-
-        // Search functionality
-        const searchInput = document.querySelector('.search-input');
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            document.querySelectorAll('.trend-card').forEach(card => {
-                const trendTag = card.querySelector('.trend-tag').textContent.toLowerCase();
-                const trendDesc = card.querySelector('p').textContent.toLowerCase();
-                const category = card.querySelector('.trend-category').textContent.toLowerCase();
-                
-                if (trendTag.includes(searchTerm) || trendDesc.includes(searchTerm) || category.includes(searchTerm)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-
-        // Add sorting functionality
-        function sortTrends() {
-            const trendCards = Array.from(document.querySelectorAll('.trend-card'));
-            trendCards.sort((a, b) => {
-                const aPosts = parseInt(a.querySelector('.trend-stats').textContent);
-                const bPosts = parseInt(b.querySelector('.trend-stats').textContent);
-                return bPosts - aPosts;
-            });
-            
-            const mostPopularSection = document.querySelector('.section-title').parentElement;
-            const otherTrendsSection = document.querySelectorAll('.section-title')[1].parentElement;
-            
-            trendCards.forEach((card, index) => {
-                if (index < 2) {
-                    mostPopularSection.querySelector('.grid').appendChild(card);
-                } else {
-                    otherTrendsSection.querySelector('.grid').appendChild(card);
-                }
-            });
-        }
-
-        // Logout functionality
+        // Logout function
         function logout() {
             localStorage.removeItem('isLoggedIn');
-            localStorage.removeItem('userData');
             window.location.href = 'login.html';
         }
     </script>
 </body>
-=======
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daffy - Trends</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f7fafc 0%, #e0e7ff 100%);
-            min-height: 100vh;
-        }
-        .sidebar {
-            background: linear-gradient(135deg, #1e2761 80%, #facc15 100%);
-            box-shadow: 2px 0 16px 0 rgba(30, 64, 175, 0.08);
-            border-radius: 0 32px 32px 0;
-        }
-        .trend-card {
-            background: #fff;
-            border-radius: 24px;
-            box-shadow: 0 6px 32px 0 rgba(30, 64, 175, 0.10);
-            transition: transform 0.3s ease;
-        }
-        .trend-card:hover {
-            transform: translateY(-4px);
-        }
-        .trend-tag {
-            color: #1e2761;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-        .trend-category {
-            color: #facc15;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-        .trend-stats {
-            color: #6b7280;
-            font-size: 0.9rem;
-        }
-        .search-input {
-            background: #fff;
-            border: 2px solid #e2e8f0;
-            border-radius: 9999px;
-            padding: 12px 20px;
-            transition: all 0.3s ease;
-        }
-        .search-input:focus {
-            border-color: #facc15;
-            box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.1);
-        }
-        .filter-btn {
-            background: rgba(250, 204, 21, 0.1);
-            color: #1e2761;
-            padding: 8px 16px;
-            border-radius: 9999px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        .filter-btn:hover, .filter-btn.active {
-            background: #facc15;
-            color: #1e2761;
-        }
-        .top-trends {
-            background: #fff;
-            border-radius: 24px;
-            box-shadow: 0 6px 32px 0 rgba(30, 64, 175, 0.10);
-            padding: 1.5rem;
-            position: sticky;
-            top: 2rem;
-        }
-        .trend-rank {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #1e2761;
-            opacity: 0.7;
-        }
-        .trend-rank.top-3 {
-            color: #facc15;
-            opacity: 1;
-        }
-        .section-title {
-            color: #1e2761;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #facc15;
-        }
-        .sidebar-link {
-            color: #ffffff;
-            padding: 12px 16px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-        .sidebar-link:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-        .sidebar-link.active {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        .sidebar-icon {
-            font-size: 1.5rem;
-        }
-    </style>
-</head>
-<body class="flex min-h-screen">
-    <!-- Left Sidebar -->
-    <aside class="sidebar w-72 flex flex-col py-12 px-8 min-h-screen mr-12">
-        <div class="logo text-3xl font-bold text-[#facc15] mb-8">
-            <span class="material-icons" style="font-size:2.5rem;">bubble_chart</span> Daffy
-        </div>
-        <nav class="flex flex-col gap-1">
-            <a href="home.html" class="sidebar-link"><span class="material-icons sidebar-icon">home</span> Home</a>
-            <a href="trends.html" class="sidebar-link active"><span class="material-icons sidebar-icon">trending_up</span> Trends</a>
-            <a href="clubs.html" class="sidebar-link"><span class="material-icons sidebar-icon">groups</span> Clubs</a>
-            <a href="messaging.html" class="sidebar-link"><span class="material-icons sidebar-icon">chat_bubble</span> Messages</a>
-            <a href="jobs.html" class="sidebar-link"><span class="material-icons sidebar-icon">work</span> Jobs</a>
-            <a href="settings.html" class="sidebar-link"><span class="material-icons sidebar-icon">settings</span> Settings</a>
-        </nav>
-        <div class="mt-auto">
-            <button onclick="logout()" class="sidebar-link w-full text-left">
-                <span class="material-icons sidebar-icon">logout</span> Logout
-            </button>
-        </div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="flex-1 p-8">
-        <!-- Header -->
-        <div class="mb-8">
-            <div class="flex justify-between items-start">
-                <div class="flex-1">
-                    <h1 class="text-3xl font-bold text-[#1e2761] mb-4">Trending Topics</h1>
-                    <div class="flex items-center gap-4">
-                        <div class="relative flex-1">
-                            <input type="text" class="search-input w-full pl-12" placeholder="Search trends...">
-                            <span class="material-icons absolute left-4 top-3 text-gray-400">search</span>
-                        </div>
-                        <div class="flex gap-2">
-                            <button class="filter-btn active">All</button>
-                            <button class="filter-btn">Technology</button>
-                            <button class="filter-btn">Sports</button>
-                            <button class="filter-btn">Entertainment</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Top Trends Section -->
-                <div class="top-trends w-80 ml-8">
-                    <h2 class="section-title">Top Trends</h2>
-                    <div class="space-y-4">
-                        <div class="flex items-center gap-3">
-                            <span class="trend-rank top-3">1</span>
-                            <div>
-                                <h4 class="font-semibold text-[#1e2761]">#AI</h4>
-                                <p class="text-sm text-gray-600">32.1K posts</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="trend-rank top-3">2</span>
-                            <div>
-                                <h4 class="font-semibold text-[#1e2761]">#WebDevelopment</h4>
-                                <p class="text-sm text-gray-600">25.4K posts</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="trend-rank top-3">3</span>
-                            <div>
-                                <h4 class="font-semibold text-[#1e2761]">#WorldCup2024</h4>
-                                <p class="text-sm text-gray-600">18.7K posts</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="trend-rank">4</span>
-                            <div>
-                                <h4 class="font-semibold text-[#1e2761]">#OnlineLearning</h4>
-                                <p class="text-sm text-gray-600">15.8K posts</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="trend-rank">5</span>
-                            <div>
-                                <h4 class="font-semibold text-[#1e2761]">#NewMovies</h4>
-                                <p class="text-sm text-gray-600">12.3K posts</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-ll        </div>
-ro
-        <!-- Replace the existing Trends Grid section with this new feed-style layout -->
-        <div class="space-y-8">
-            <!-- Trending Feed Section -->
-            <section class="max-w-3xl mx-auto">
-                <div class="flex items-center justify-between mb-6">
-                    <h2 class="section-title">Trending Now</h2>
-                    <div class="flex gap-2">
-                        <button class="filter-btn active" data-filter="all">All</button>
-                        <button class="filter-btn" data-filter="popular">Popular</button>
-                        <button class="filter-btn" data-filter="recent">Recent</button>
-                    </div>
-                </div>
-                <div id="trendingFeed" class="space-y-4">
-                    <!-- Trending posts will be dynamically inserted here -->
-                </div>
-            </section>
-        </div>
-
-        <script>
-        const trendingPosts = [
-            {
-                id: 1,
-                user: { name: 'TechEnthusiast', avatar: 'T', verified: true },
-                category: 'Technology',
-                hashtag: '#WebDevelopment',
-                content: 'The future of web development is here! Check out these amazing new frameworks that are revolutionizing how we build applications. 🚀',
-                image: 'https://source.unsplash.com/random/800x400/?coding',
-                engagement: { likes: 25400, comments: 1200, shares: 850 },
-                timeAgo: '2h ago'
-            },
-            {
-                id: 2,
-                user: { name: 'AIResearcher', avatar: 'A', verified: true },
-                category: 'Technology',
-                hashtag: '#ArtificialIntelligence',
-                content: 'Breaking: New AI model achieves unprecedented performance in natural language understanding. The implications for future applications are mind-blowing! 🤖',
-                engagement: { likes: 32100, comments: 2400, shares: 1500 },
-                timeAgo: '1h ago'
-            }
-            // Add more trending posts as needed
-        ];
-
-        function createTrendingPost(post) {
-            const postElement = document.createElement('div');
-            postElement.className = 'trend-card p-6 hover:shadow-lg transition-all duration-300';
-            postElement.innerHTML = `
-                <div class="flex items-start justify-between mb-4">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-r from-[#1e2761] to-[#facc15] flex items-center justify-center text-white font-bold">
-                            ${post.user.avatar}
-                        </div>
-                        <div>
-                            <div class="flex items-center gap-1">
-                                <span class="font-bold text-[#1e2761]">${post.user.name}</span>
-                                ${post.user.verified ? '<span class="material-icons text-[#facc15] text-sm">verified</span>' : ''}
-                            </div>
-                            <div class="text-sm text-gray-500">${post.timeAgo}</div>
-                        </div>
-                    </div>
-                    <span class="trend-category">${post.category}</span>
-                </div>
-                <div class="mb-4">
-                    <h3 class="trend-tag text-xl mb-2">${post.hashtag}</h3>
-                    <p class="text-gray-600">${post.content}</p>
-                    ${post.image ? `<img src="${post.image}" class="w-full h-64 object-cover rounded-lg mt-4">` : ''}
-                </div>
-                <div class="flex items-center justify-between text-sm">
-                    <div class="flex items-center gap-6">
-                        <button class="flex items-center gap-1 hover:text-[#facc15] transition-colors">
-                            <span class="material-icons">favorite_border</span>
-                            <span>${formatNumber(post.engagement.likes)}</span>
-                        </button>
-                        <button class="flex items-center gap-1 hover:text-[#facc15] transition-colors">
-                            <span class="material-icons">chat_bubble_outline</span>
-                            <span>${formatNumber(post.engagement.comments)}</span>
-                        </button>
-                        <button class="flex items-center gap-1 hover:text-[#facc15] transition-colors">
-                            <span class="material-icons">share</span>
-                            <span>${formatNumber(post.engagement.shares)}</span>
-                        </button>
-                    </div>
-                    <button class="text-[#1e2761] hover:text-[#facc15] transition-colors">
-                        <span class="material-icons">bookmark_border</span>
-                    </button>
-                </div>
-            `;
-        
-            // Add interaction handlers
-            const likeBtn = postElement.querySelector('button:first-child');
-            likeBtn.addEventListener('click', () => toggleLike(post.id));
-        
-            return postElement;
-        }
-
-        function toggleLike(postId) {
-            const post = trendingPosts.find(p => p.id === postId);
-            if (post) {
-                const isLiked = localStorage.getItem(`liked_${postId}`);
-                if (isLiked) {
-                    post.engagement.likes--;
-                    localStorage.removeItem(`liked_${postId}`);
-                } else {
-                    post.engagement.likes++;
-                    localStorage.setItem(`liked_${postId}`, 'true');
-                }
-                renderTrendingFeed();
-            }
-        }
-
-        function formatNumber(num) {
-            if (num >= 1000000) {
-                return (num / 1000000).toFixed(1) + 'M';
-            }
-            if (num >= 1000) {
-                return (num / 1000).toFixed(1) + 'K';
-            }
-            return num.toString();
-        }
-
-        function renderTrendingFeed() {
-            const feedContainer = document.getElementById('trendingFeed');
-            feedContainer.innerHTML = '';
-            trendingPosts.forEach(post => {
-                feedContainer.appendChild(createTrendingPost(post));
-            });
-        }
-
-        // Initialize the feed
-        document.addEventListener('DOMContentLoaded', () => {
-            renderTrendingFeed();
-        
-            // Add filter functionality
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    const filter = btn.dataset.filter;
-                    filterTrendingPosts(filter);
-                });
-            });
-        });
-
-        function filterTrendingPosts(filter) {
-            let filteredPosts = [...trendingPosts];
-            switch(filter) {
-                case 'popular':
-                    filteredPosts.sort((a, b) => b.engagement.likes - a.engagement.likes);
-                    break;
-                case 'recent':
-                    filteredPosts.sort((a, b) => new Date(b.timeAgo) - new Date(a.timeAgo));
-                    break;
-                default:
-                    // Keep original order for 'all'
-                    break;
-            }
-            const feedContainer = document.getElementById('trendingFeed');
-            feedContainer.innerHTML = '';
-            filteredPosts.forEach(post => {
-                feedContainer.appendChild(createTrendingPost(post));
-            });
-        }
-        </script>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Trend Card 3 -->
-            <div class="trend-card p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <span class="trend-category">Sports</span>
-                    <span class="material-icons text-[#facc15]">trending_up</span>
-                </div>
-                <h3 class="trend-tag mb-2">#WorldCup2024</h3>
-                <p class="text-gray-600 mb-4">Updates and discussions about the upcoming World Cup</p>
-                <div class="flex items-center justify-between">
-                    <div class="trend-stats">18.7K posts</div>
-                    <button class="text-[#1e2761] hover:text-[#facc15]">
-                        <span class="material-icons">add_circle_outline</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Trend Card 4 -->
-            <div class="trend-card p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <span class="trend-category">Entertainment</span>
-                    <span class="material-icons text-[#facc15]">trending_up</span>
-                </div>
-                <h3 class="trend-tag mb-2">#NewMovies</h3>
-                <p class="text-gray-600 mb-4">Latest movie releases and reviews</p>
-                <div class="flex items-center justify-between">
-                    <div class="trend-stats">12.3K posts</div>
-                    <button class="text-[#1e2761] hover:text-[#facc15]">
-                        <span class="material-icons">add_circle_outline</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Trend Card 5 -->
-            <div class="trend-card p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <span class="trend-category">Education</span>
-                    <span class="material-icons text-[#facc15]">trending_up</span>
-                </div>
-                <h3 class="trend-tag mb-2">#OnlineLearning</h3>
-                <p class="text-gray-600 mb-4">Tips and resources for online education</p>
-                <div class="flex items-center justify-between">
-                    <div class="trend-stats">15.8K posts</div>
-                    <button class="text-[#1e2761] hover:text-[#facc15]">
-                        <span class="material-icons">add_circle_outline</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Trend Card 6 -->
-            <div class="trend-card p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <span class="trend-category">Business</span>
-                    <span class="material-icons text-[#facc15]">trending_up</span>
-                </div>
-                <h3 class="trend-tag mb-2">#StartupLife</h3>
-                <p class="text-gray-600 mb-4">Entrepreneurship and startup culture</p>
-                <div class="flex items-center justify-between">
-                    <div class="trend-stats">9.5K posts</div>
-                    <button class="text-[#1e2761] hover:text-[#facc15]">
-                        <span class="material-icons">add_circle_outline</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <script>
-        // Check if user is logged in
-        function checkAuth() {
-            if (!localStorage.getItem('isLoggedIn')) {
-                window.location.href = 'login.html';
-                return false;
-            }
-            return true;
-        }
-
-        // Check authentication on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            if (!checkAuth()) return;
-            
-            // Initialize the page
-            sortTrends();
-            
-            // Add click handlers for navigation
-            document.querySelectorAll('.sidebar-link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    if (!this.getAttribute('href').includes('logout')) {
-                        e.preventDefault();
-                        const href = this.getAttribute('href');
-                        if (checkAuth()) {
-                            window.location.href = href;
-                        }
-                    }
-                });
-            });
-        });
-
-        // Filter button functionality
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-            });
-        });
-
-        // Search functionality
-        const searchInput = document.querySelector('.search-input');
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            document.querySelectorAll('.trend-card').forEach(card => {
-                const trendTag = card.querySelector('.trend-tag').textContent.toLowerCase();
-                const trendDesc = card.querySelector('p').textContent.toLowerCase();
-                const category = card.querySelector('.trend-category').textContent.toLowerCase();
-                
-                if (trendTag.includes(searchTerm) || trendDesc.includes(searchTerm) || category.includes(searchTerm)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-
-        // Add sorting functionality
-        function sortTrends() {
-            const trendCards = Array.from(document.querySelectorAll('.trend-card'));
-            trendCards.sort((a, b) => {
-                const aPosts = parseInt(a.querySelector('.trend-stats').textContent);
-                const bPosts = parseInt(b.querySelector('.trend-stats').textContent);
-                return bPosts - aPosts;
-            });
-            
-            const mostPopularSection = document.querySelector('.section-title').parentElement;
-            const otherTrendsSection = document.querySelectorAll('.section-title')[1].parentElement;
-            
-            trendCards.forEach((card, index) => {
-                if (index < 2) {
-                    mostPopularSection.querySelector('.grid').appendChild(card);
-                } else {
-                    otherTrendsSection.querySelector('.grid').appendChild(card);
-                }
-            });
-        }
-
-        // Logout functionality
-        function logout() {
-            localStorage.removeItem('isLoggedIn');
-            localStorage.removeItem('userData');
-            window.location.href = 'login.html';
-        }
-    </script>
-</body>
->>>>>>> c387e841511f6a3a5c4b54e6051c8e91e8e26d18
 </html>
