@@ -34,10 +34,10 @@
       pointer-events: none;
     }
     .sidebar {
-      background: linear-gradient(135deg, #000000 80%, #000000 100%);
-      box-shadow: 2px 0 16px 0 rgba(30, 64, 175, 0.08);
+      background: #000000;
+      box-shadow: 4px 0 24px 0 rgba(0, 0, 0, 0.3);
       border-radius: 0 32px 32px 0;
-      transition: transform 0.3s ease;
+      transition: all 0.3s ease;
     }
     .sidebar:hover {
       transform: translateX(5px);
@@ -212,7 +212,7 @@
   <!-- Left Sidebar -->
   <aside class="sidebar w-72 flex flex-col py-12 px-8 min-h-screen mr-12">
     <a href="home.html" class="logo text-3xl font-bold text-[#facc15] mb-8">
-      <span class="material-icons" style="font-size:2.5rem;">bubble_chart</span> Daffy
+      <span class="material-icons text-[#facc15]" style="font-size:2.5rem;">bubble_chart</span> <span class="text-[#facc15]">Daffy</span>
     </a>
     <nav class="flex flex-col gap-1">
       <a href="home.html" class="sidebar-link active" onclick="navigateTo('home.html'); return false;"><span class="material-icons sidebar-icon">home</span> Home</a>

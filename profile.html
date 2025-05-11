@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,57 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daffy - Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
             background: #000000;
             min-height: 100vh;
             color: #ffffff;
         }
         .sidebar {
-            background: linear-gradient(135deg, #1e2761 80%, #facc15 100%);
-            box-shadow: 2px 0 16px 0 rgba(30, 64, 175, 0.08);
+            background: linear-gradient(180deg, #1e2761 0%, #000000 100%);
             border-radius: 0 32px 32px 0;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
         }
         .profile-header {
-            background: linear-gradient(135deg, #1e2761 80%, #facc15 100%);
+            position: relative;
             border-radius: 24px;
-            box-shadow: 0 4px 20px rgba(30, 64, 175, 0.2);
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+        .profile-background {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
         }
         .profile-avatar {
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(135deg, #facc15 0%, #1e2761 100%);
+            width: 120px;
+            height: 120px;
             border: 4px solid #ffffff;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: absolute;
+            bottom: -60px;
+            left: 32px;
+            object-fit: cover;
         }
         .profile-stats {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border-radius: 12px;
+            padding: 8px 16px;
         }
         .post-card {
             background: #1a1a1a;
-            border-radius: 24px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
         }
         .post-card:hover {
             transform: translateY(-4px);
         }
-        .edit-btn {
+        .edit-btn, .upload-btn {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 9999px;
             padding: 8px 16px;
             color: white;
             transition: all 0.3s ease;
         }
-        .edit-btn:hover {
+        .edit-btn:hover, .upload-btn:hover {
             background: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
         }
@@ -76,9 +84,6 @@
         .sidebar-link.active {
             background: rgba(255, 255, 255, 0.2);
         }
-        .sidebar-icon {
-            font-size: 1.5rem;
-        }
         .tab-btn {
             color: #ffffff;
             padding: 12px 24px;
@@ -87,10 +92,22 @@
         }
         .tab-btn.active {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
         }
         .tab-btn:hover:not(.active) {
             background: rgba(255, 255, 255, 0.05);
+        }
+        .input-field {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 10px;
+            color: white;
+            width: 100%;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #facc15;
         }
     </style>
 </head>
@@ -98,19 +115,19 @@
     <!-- Left Sidebar -->
     <aside class="sidebar w-72 flex flex-col py-12 px-8 min-h-screen mr-12">
         <a href="home.html" class="logo text-3xl font-bold text-[#facc15] mb-8 flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <span class="material-icons" style="font-size:2.5rem;">bubble_chart</span> Daffy
+            <span class="material-icons text-[#facc15]" style="font-size:2.5rem;">bubble_chart</span> Daffy
         </a>
         <nav class="flex flex-col gap-1">
-            <a href="home.html" class="sidebar-link"><span class="material-icons sidebar-icon">home</span> Home</a>
-            <a href="trends.html" class="sidebar-link"><span class="material-icons sidebar-icon">trending_up</span> Trends</a>
-            <a href="clubs.html" class="sidebar-link"><span class="material-icons sidebar-icon">groups</span> Clubs</a>
-            <a href="messaging.html" class="sidebar-link"><span class="material-icons sidebar-icon">chat_bubble</span> Messages</a>
-            <a href="jobs.html" class="sidebar-link"><span class="material-icons sidebar-icon">work</span> Jobs</a>
-            <a href="settings.html" class="sidebar-link"><span class="material-icons sidebar-icon">settings</span> Settings</a>
+            <a href="home.html" class="sidebar-link"><span class="material-icons">home</span> Home</a>
+            <a href="trends.html" class="sidebar-link"><span class="material-icons">trending_up</span> Trends</a>
+            <a href="clubs.html" class="sidebar-link"><span class="material-icons">groups</span> Clubs</a>
+            <a href="messaging.html" class="sidebar-link"><span class="material-icons">chat_bubble</span> Messages</a>
+            <a href="jobs.html" class="sidebar-link"><span class="material-icons">work</span> Jobs</a>
+            <a href="settings.html" class="sidebar-link"><span class="material-icons">settings</span> Settings</a>
         </nav>
         <div class="mt-auto">
             <button onclick="logout()" class="sidebar-link w-full text-left">
-                <span class="material-icons sidebar-icon">logout</span> Logout
+                <span class="material-icons">logout</span> Logout
             </button>
         </div>
     </aside>
@@ -118,36 +135,41 @@
     <!-- Main Content -->
     <main class="flex-1 p-8">
         <!-- Profile Header -->
-        <div class="profile-header p-8 mb-8">
-            <div class="flex items-start gap-8">
-                <div class="profile-avatar rounded-full flex items-center justify-center text-4xl font-bold">
-                    <span id="userAvatar">U</span>
+        <div class="profile-header mb-8">
+            <img id="profileBackground" src="https://via.placeholder.com/1200x200" class="profile-background" alt="Profile Background">
+            <div class="pt-20 px-8 pb-8 relative">
+                <img id="profileAvatar" src="https://via.placeholder.com/120" class="profile-avatar" alt="Profile Avatar">
+                <div class="flex justify-end gap-4 mt-4">
+                    <label class="upload-btn cursor-pointer">
+                        <span class="material-icons mr-2">image</span> Change Background
+                        <input type="file" id="backgroundUpload" accept="image/*" class="hidden">
+                    </label>
+                    <label class="upload-btn cursor-pointer">
+                        <span class="material-icons mr-2">person</span> Change Avatar
+                        <input type="file" id="avatarUpload" accept="image/*" class="hidden">
+                    </label>
+                    <button onclick="toggleEditProfile()" class="edit-btn">
+                        <span class="material-icons mr-2">edit</span> Edit Profile
+                    </button>
                 </div>
-                <div class="flex-1">
-                    <div class="flex items-center justify-between mb-4">
-                        <div>
-                            <h1 class="text-3xl font-bold text-white" id="userName">User Name</h1>
-                            <p class="text-gray-300" id="userUsername">@username</p>
-                        </div>
-                        <button onclick="toggleEditProfile()" class="edit-btn">
-                            <span class="material-icons mr-2">edit</span> Edit Profile
-                        </button>
-                    </div>
-                    <p class="text-gray-300 mb-4" id="userBio">No bio yet</p>
-                    <div class="flex items-center gap-4 text-gray-300 mb-4">
+                <div class="mt-16">
+                    <h1 class="text-3xl font-bold text-white" id="userName">User Name</h1>
+                    <p class="text-gray-300" id="userUsername">@username</p>
+                    <p class="text-gray-200 mt-2" id="userBio">No bio yet</p>
+                    <div class="flex items-center gap-4 text-gray-300 mt-2">
                         <span class="material-icons">school</span>
                         <span id="userDepartment">Department</span>
                         <span class="mx-2">•</span>
                         <span id="userSemester">Semester</span>
                     </div>
-                    <div class="flex items-center gap-8">
-                        <div class="profile-stats px-4 py-2">
+                    <div class="flex items-center gap-6 mt-4">
+                        <div class="profile-stats">
                             <span class="font-bold text-white" id="userPosts">0</span> Posts
                         </div>
-                        <div class="profile-stats px-4 py-2">
+                        <div class="profile-stats">
                             <span class="font-bold text-white" id="userFollowers">0</span> Followers
                         </div>
-                        <div class="profile-stats px-4 py-2">
+                        <div class="profile-stats">
                             <span class="font-bold text-white" id="userFollowing">0</span> Following
                         </div>
                     </div>
@@ -170,7 +192,18 @@
 
         <!-- Content Sections -->
         <div id="postsSection" class="space-y-6">
-            <!-- Posts will be dynamically added here -->
+            <div class="post-card p-6">
+                <textarea id="newPost" class="input-field" rows="3" placeholder="What's on your mind?"></textarea>
+                <div class="flex justify-between mt-4">
+                    <label class="upload-btn cursor-pointer">
+                        <span class="material-icons">image</span>
+                        <input type="file" id="postImageUpload" accept="image/*" class="hidden" multiple>
+                    </label>
+                    <button onclick="createPost()" class="px-6 py-2 rounded-lg bg-[#1e2761] text-white hover:bg-[#2a3a8f]">
+                        Post
+                    </button>
+                </div>
+            </div>
         </div>
 
         <div id="aboutSection" class="hidden">
@@ -182,9 +215,14 @@
                         <p class="text-white" id="userEducation">Department • Semester</p>
                     </div>
                     <div>
+                        <h3 class="text-gray-300 font-semibold mb-2">Skills</h3>
+                        <p class="text-white" id="userSkills">No skills added yet</p>
+                    </div>
+                    <div>
                         <h3 class="text-gray-300 font-semibold mb-2">Contact</h3>
                         <p class="text-white" id="userEmail">email@example.com</p>
                         <p class="text-white" id="userPhone">+880 1234567890</p>
+                        <p class="text-white" id="userWebsite"><a href="#" target="_blank">website.com</a></p>
                     </div>
                     <div>
                         <h3 class="text-gray-300 font-semibold mb-2">Joined</h3>
@@ -222,6 +260,10 @@
                 <div>
                     <label class="block text-gray-300 mb-2">Bio</label>
                     <textarea id="editBio" class="input-field" rows="3"></textarea>
+                </div>
+                <div>
+                    <label class="block text-gray-300 mb-2">Skills (comma-separated)</label>
+                    <input type="text" id="editSkills" class="input-field">
                 </div>
                 <div class="grid grid-cols-2 gap-6">
                     <div>
@@ -261,430 +303,9 @@
                         <input type="tel" id="editPhone" class="input-field" required>
                     </div>
                 </div>
-                <div class="flex justify-end gap-4">
-                    <button type="button" onclick="toggleEditProfile()" class="px-6 py-2 rounded-lg bg-gray-700 text-white hover:bg-gray-600">
-                        Cancel
-                    </button>
-                    <button type="submit" class="px-6 py-2 rounded-lg bg-[#1e2761] text-white hover:bg-[#2a3a8f]">
-                        Save Changes
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <script>
-        // Check if user is logged in
-        if (!localStorage.getItem('isLoggedIn')) {
-            window.location.href = 'login.html';
-        }
-
-        // Load user data
-        const userData = JSON.parse(localStorage.getItem('userData')) || {};
-        
-        // Update profile information
-        document.getElementById('userAvatar').textContent = userData.avatar || 'U';
-        document.getElementById('userName').textContent = userData.fullName || 'User Name';
-        document.getElementById('userUsername').textContent = '@' + (userData.username || 'username');
-        document.getElementById('userBio').textContent = userData.bio || 'No bio yet';
-        document.getElementById('userDepartment').textContent = userData.department || 'Department';
-        document.getElementById('userSemester').textContent = userData.semester ? `${userData.semester}th Semester` : 'Semester';
-        document.getElementById('userEmail').textContent = userData.email || 'email@example.com';
-        document.getElementById('userPhone').textContent = userData.phone || '+880 1234567890';
-        document.getElementById('userJoined').textContent = new Date(userData.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-
-        // Generate sample posts
-        function generatePosts() {
-            const postsSection = document.getElementById('postsSection');
-            postsSection.innerHTML = ''; // Clear existing posts
-            const topics = ['Technology', 'Art', 'Music', 'Sports', 'Food', 'Travel'];
-            const emojis = ['🎉', '🎨', '🎵', '⚽', '🍕', '✈️'];
-
-            for (let i = 0; i < 5; i++) {
-                const topic = topics[Math.floor(Math.random() * topics.length)];
-                const emoji = emojis[Math.floor(Math.random() * emojis.length)];
-                const likes = Math.floor(Math.random() * 100);
-                const comments = Math.floor(Math.random() * 20);
-
-                const post = document.createElement('div');
-                post.className = 'post-card p-6';
-                post.innerHTML = `
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="profile-avatar w-12 h-12 rounded-full flex items-center justify-center text-xl">
-                            ${userData.avatar}
-                        </div>
-                        <div>
-                            <div class="font-semibold text-white">${userData.fullName}</div>
-                            <div class="text-xs text-gray-400">${Math.floor(Math.random() * 24)}h ago</div>
-                        </div>
-                    </div>
-                    <div class="text-white mb-4">
-                        <p class="font-bold text-lg mb-2">${topic} ${emoji}</p>
-                        <p>This is a sample post about ${topic.toLowerCase()}. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-                    <div class="flex items-center gap-8 text-white">
-                        <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15]">
-                            <span class="material-icons">chat_bubble_outline</span>
-                            <span>${comments}</span>
-                        </div>
-                        <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15]">
-                            <span class="material-icons">favorite_border</span>
-                            <span>${likes}</span>
-                        </div>
-                        <div class="cursor-pointer hover:text-[#facc15]">
-                            <span class="material-icons">share</span>
-                        </div>
-                    </div>
-                `;
-                postsSection.appendChild(post);
-            }
-        }
-
-        // Add refresh animation to logo
-        document.querySelector('.logo').addEventListener('click', function(e) {
-            e.preventDefault();
-            const logo = this;
-            logo.style.transform = 'rotate(360deg)';
-            logo.style.transition = 'transform 0.5s ease';
-            
-            setTimeout(() => {
-                logo.style.transform = 'rotate(0deg)';
-                generatePosts(); // Refresh posts
-            }, 500);
-        });
-
-        // Switch tabs
-        function switchTab(tab) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-
-            document.getElementById('postsSection').classList.add('hidden');
-            document.getElementById('aboutSection').classList.add('hidden');
-            document.getElementById('photosSection').classList.add('hidden');
-
-            document.getElementById(tab + 'Section').classList.remove('hidden');
-        }
-
-        // Toggle edit profile modal
-        function toggleEditProfile() {
-            const modal = document.getElementById('editProfileModal');
-            modal.classList.toggle('hidden');
-            modal.classList.toggle('flex');
-
-            // Fill form with current user data
-            document.getElementById('editFullName').value = userData.fullName || '';
-            document.getElementById('editUsername').value = userData.username || '';
-            document.getElementById('editBio').value = userData.bio || '';
-            document.getElementById('editDepartment').value = userData.department || '';
-            document.getElementById('editSemester').value = userData.semester || '';
-            document.getElementById('editEmail').value = userData.email || '';
-            document.getElementById('editPhone').value = userData.phone || '';
-        }
-
-        // Handle profile edit form submission
-        document.getElementById('editProfileForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            // Update user data
-            userData.fullName = document.getElementById('editFullName').value;
-            userData.username = document.getElementById('editUsername').value;
-            userData.bio = document.getElementById('editBio').value;
-            userData.department = document.getElementById('editDepartment').value;
-            userData.semester = document.getElementById('editSemester').value;
-            userData.email = document.getElementById('editEmail').value;
-            userData.phone = document.getElementById('editPhone').value;
-            userData.avatar = userData.fullName.charAt(0).toUpperCase();
-
-            // Save updated data
-            localStorage.setItem('userData', JSON.stringify(userData));
-
-            // Update profile display
-            document.getElementById('userAvatar').textContent = userData.avatar;
-            document.getElementById('userName').textContent = userData.fullName;
-            document.getElementById('userUsername').textContent = '@' + userData.username;
-            document.getElementById('userBio').textContent = userData.bio;
-            document.getElementById('userDepartment').textContent = userData.department;
-            document.getElementById('userSemester').textContent = `${userData.semester}th Semester`;
-            document.getElementById('userEmail').textContent = userData.email;
-            document.getElementById('userPhone').textContent = userData.phone;
-
-            // Close modal
-            toggleEditProfile();
-        });
-
-        // Logout function
-        function logout() {
-            localStorage.removeItem('isLoggedIn');
-            localStorage.removeItem('userData');
-            window.location.href = 'login.html';
-        }
-
-        // Initialize
-        generatePosts();
-    </script>
-</body>
-=======
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daffy - Profile</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #000000;
-            min-height: 100vh;
-            color: #ffffff;
-        }
-        .sidebar {
-            background: linear-gradient(135deg, #1e2761 80%, #facc15 100%);
-            box-shadow: 2px 0 16px 0 rgba(30, 64, 175, 0.08);
-            border-radius: 0 32px 32px 0;
-        }
-        .profile-header {
-            background: linear-gradient(135deg, #1e2761 80%, #facc15 100%);
-            border-radius: 24px;
-            box-shadow: 0 4px 20px rgba(30, 64, 175, 0.2);
-        }
-        .profile-avatar {
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(135deg, #facc15 0%, #1e2761 100%);
-            border: 4px solid #ffffff;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        }
-        .profile-stats {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .post-card {
-            background: #1a1a1a;
-            border-radius: 24px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-        .post-card:hover {
-            transform: translateY(-4px);
-        }
-        .edit-btn {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 9999px;
-            padding: 8px 16px;
-            color: white;
-            transition: all 0.3s ease;
-        }
-        .edit-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-        .sidebar-link {
-            color: #ffffff;
-            padding: 12px 16px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-        .sidebar-link:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-        .sidebar-link.active {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        .sidebar-icon {
-            font-size: 1.5rem;
-        }
-        .tab-btn {
-            color: #ffffff;
-            padding: 12px 24px;
-            border-radius: 9999px;
-            transition: all 0.3s ease;
-        }
-        .tab-btn.active {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-        }
-        .tab-btn:hover:not(.active) {
-            background: rgba(255, 255, 255, 0.05);
-        }
-    </style>
-</head>
-<body class="flex min-h-screen">
-    <!-- Left Sidebar -->
-    <aside class="sidebar w-72 flex flex-col py-12 px-8 min-h-screen mr-12">
-        <a href="home.html" class="logo text-3xl font-bold text-[#facc15] mb-8 flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <span class="material-icons" style="font-size:2.5rem;">bubble_chart</span> Daffy
-        </a>
-        <nav class="flex flex-col gap-1">
-            <a href="home.html" class="sidebar-link"><span class="material-icons sidebar-icon">home</span> Home</a>
-            <a href="trends.html" class="sidebar-link"><span class="material-icons sidebar-icon">trending_up</span> Trends</a>
-            <a href="clubs.html" class="sidebar-link"><span class="material-icons sidebar-icon">groups</span> Clubs</a>
-            <a href="messaging.html" class="sidebar-link"><span class="material-icons sidebar-icon">chat_bubble</span> Messages</a>
-            <a href="jobs.html" class="sidebar-link"><span class="material-icons sidebar-icon">work</span> Jobs</a>
-            <a href="settings.html" class="sidebar-link"><span class="material-icons sidebar-icon">settings</span> Settings</a>
-        </nav>
-        <div class="mt-auto">
-            <button onclick="logout()" class="sidebar-link w-full text-left">
-                <span class="material-icons sidebar-icon">logout</span> Logout
-            </button>
-        </div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="flex-1 p-8">
-        <!-- Profile Header -->
-        <div class="profile-header p-8 mb-8">
-            <div class="flex items-start gap-8">
-                <div class="profile-avatar rounded-full flex items-center justify-center text-4xl font-bold">
-                    <span id="userAvatar">U</span>
-                </div>
-                <div class="flex-1">
-                    <div class="flex items-center justify-between mb-4">
-                        <div>
-                            <h1 class="text-3xl font-bold text-white" id="userName">User Name</h1>
-                            <p class="text-gray-300" id="userUsername">@username</p>
-                        </div>
-                        <button onclick="toggleEditProfile()" class="edit-btn">
-                            <span class="material-icons mr-2">edit</span> Edit Profile
-                        </button>
-                    </div>
-                    <p class="text-gray-300 mb-4" id="userBio">No bio yet</p>
-                    <div class="flex items-center gap-4 text-gray-300 mb-4">
-                        <span class="material-icons">school</span>
-                        <span id="userDepartment">Department</span>
-                        <span class="mx-2">•</span>
-                        <span id="userSemester">Semester</span>
-                    </div>
-                    <div class="flex items-center gap-8">
-                        <div class="profile-stats px-4 py-2">
-                            <span class="font-bold text-white" id="userPosts">0</span> Posts
-                        </div>
-                        <div class="profile-stats px-4 py-2">
-                            <span class="font-bold text-white" id="userFollowers">0</span> Followers
-                        </div>
-                        <div class="profile-stats px-4 py-2">
-                            <span class="font-bold text-white" id="userFollowing">0</span> Following
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Profile Tabs -->
-        <div class="flex gap-4 mb-8">
-            <button class="tab-btn active" onclick="switchTab('posts')">
-                <span class="material-icons mr-2">grid_on</span> Posts
-            </button>
-            <button class="tab-btn" onclick="switchTab('about')">
-                <span class="material-icons mr-2">info</span> About
-            </button>
-            <button class="tab-btn" onclick="switchTab('photos')">
-                <span class="material-icons mr-2">photo_library</span> Photos
-            </button>
-        </div>
-
-        <!-- Content Sections -->
-        <div id="postsSection" class="space-y-6">
-            <!-- Posts will be dynamically added here -->
-        </div>
-
-        <div id="aboutSection" class="hidden">
-            <div class="post-card p-6">
-                <h2 class="text-xl font-bold text-white mb-4">About</h2>
-                <div class="space-y-4">
-                    <div>
-                        <h3 class="text-gray-300 font-semibold mb-2">Education</h3>
-                        <p class="text-white" id="userEducation">Department • Semester</p>
-                    </div>
-                    <div>
-                        <h3 class="text-gray-300 font-semibold mb-2">Contact</h3>
-                        <p class="text-white" id="userEmail">email@example.com</p>
-                        <p class="text-white" id="userPhone">+880 1234567890</p>
-                    </div>
-                    <div>
-                        <h3 class="text-gray-300 font-semibold mb-2">Joined</h3>
-                        <p class="text-white" id="userJoined">January 2024</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="photosSection" class="hidden grid grid-cols-3 gap-4">
-            <!-- Photos will be dynamically added here -->
-        </div>
-    </main>
-
-    <!-- Edit Profile Modal -->
-    <div id="editProfileModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
-        <div class="bg-[#1a1a1a] rounded-2xl p-8 w-full max-w-2xl">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-white">Edit Profile</h2>
-                <button onclick="toggleEditProfile()" class="text-gray-400 hover:text-white">
-                    <span class="material-icons">close</span>
-                </button>
-            </div>
-            <form id="editProfileForm" class="space-y-6">
-                <div class="grid grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-gray-300 mb-2">Full Name</label>
-                        <input type="text" id="editFullName" class="input-field" required>
-                    </div>
-                    <div>
-                        <label class="block text-gray-300 mb-2">Username</label>
-                        <input type="text" id="editUsername" class="input-field" required>
-                    </div>
-                </div>
                 <div>
-                    <label class="block text-gray-300 mb-2">Bio</label>
-                    <textarea id="editBio" class="input-field" rows="3"></textarea>
-                </div>
-                <div class="grid grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-gray-300 mb-2">Department</label>
-                        <select id="editDepartment" class="input-field" required>
-                            <option value="CSE">Computer Science & Engineering</option>
-                            <option value="EEE">Electrical & Electronic Engineering</option>
-                            <option value="CE">Civil Engineering</option>
-                            <option value="ME">Mechanical Engineering</option>
-                            <option value="IPE">Industrial & Production Engineering</option>
-                            <option value="TE">Textile Engineering</option>
-                            <option value="ARCH">Architecture</option>
-                            <option value="URP">Urban & Regional Planning</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-gray-300 mb-2">Semester</label>
-                        <select id="editSemester" class="input-field" required>
-                            <option value="1">1st Semester</option>
-                            <option value="2">2nd Semester</option>
-                            <option value="3">3rd Semester</option>
-                            <option value="4">4th Semester</option>
-                            <option value="5">5th Semester</option>
-                            <option value="6">6th Semester</option>
-                            <option value="7">7th Semester</option>
-                            <option value="8">8th Semester</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-gray-300 mb-2">Email</label>
-                        <input type="email" id="editEmail" class="input-field" required>
-                    </div>
-                    <div>
-                        <label class="block text-gray-300 mb-2">Phone</label>
-                        <input type="tel" id="editPhone" class="input-field" required>
-                    </div>
+                    <label class="block text-gray-300 mb-2">Website</label>
+                    <input type="url" id="editWebsite" class="input-field">
                 </div>
                 <div class="flex justify-end gap-4">
                     <button type="button" onclick="toggleEditProfile()" class="px-6 py-2 rounded-lg bg-gray-700 text-white hover:bg-gray-600">
@@ -705,78 +326,122 @@
         }
 
         // Load user data
-        const userData = JSON.parse(localStorage.getItem('userData')) || {};
-        
-        // Update profile information
-        document.getElementById('userAvatar').textContent = userData.avatar || 'U';
-        document.getElementById('userName').textContent = userData.fullName || 'User Name';
-        document.getElementById('userUsername').textContent = '@' + (userData.username || 'username');
-        document.getElementById('userBio').textContent = userData.bio || 'No bio yet';
-        document.getElementById('userDepartment').textContent = userData.department || 'Department';
-        document.getElementById('userSemester').textContent = userData.semester ? `${userData.semester}th Semester` : 'Semester';
-        document.getElementById('userEmail').textContent = userData.email || 'email@example.com';
-        document.getElementById('userPhone').textContent = userData.phone || '+880 1234567890';
-        document.getElementById('userJoined').textContent = new Date(userData.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        let userData = JSON.parse(localStorage.getItem('userData')) || {};
+        let posts = JSON.parse(localStorage.getItem('posts')) || [];
 
-        // Generate sample posts
+        // Update profile information
+        function updateProfileDisplay() {
+            document.getElementById('userAvatar').src = userData.avatar || 'https://via.placeholder.com/120';
+            document.getElementById('profileBackground').src = userData.background || 'https://via.placeholder.com/1200x200';
+            document.getElementById('userName').textContent = userData.fullName || 'User Name';
+            document.getElementById('userUsername').textContent = '@' + (userData.username || 'username');
+            document.getElementById('userBio').textContent = userData.bio || 'No bio yet';
+            document.getElementById('userDepartment').textContent = userData.department || 'Department';
+            document.getElementById('userSemester').textContent = userData.semester ? `${userData.semester}th Semester` : 'Semester';
+            document.getElementById('userEmail').textContent = userData.email || 'email@example.com';
+            document.getElementById('userPhone').textContent = userData.phone || '+880 1234567890';
+            document.getElementById('userWebsite').innerHTML = userData.website ? `<a href="${userData.website}" target="_blank">${userData.website}</a>` : 'No website';
+            document.getElementById('userSkills').textContent = userData.skills || 'No skills added yet';
+            document.getElementById('userJoined').textContent = userData.createdAt ? new Date(userData.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : 'January 2024';
+        }
+
+        // Handle image uploads
+        document.getElementById('avatarUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    userData.avatar = e.target.result;
+                    localStorage.setItem('userData', JSON.stringify(userData));
+                    updateProfileDisplay();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('backgroundUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    userData.background = e.target.result;
+                    localStorage.setItem('userData', JSON.stringify(userData));
+                    updateProfileDisplay();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Generate posts
         function generatePosts() {
             const postsSection = document.getElementById('postsSection');
-            postsSection.innerHTML = ''; // Clear existing posts
-            const topics = ['Technology', 'Art', 'Music', 'Sports', 'Food', 'Travel'];
-            const emojis = ['🎉', '🎨', '🎵', '⚽', '🍕', '✈️'];
+            postsSection.innerHTML = '<div class="post-card p-6"><textarea id="newPost" class="input-field" rows="3" placeholder="What\'s on your mind?"></textarea><div class="flex justify-between mt-4"><label class="upload-btn cursor-pointer"><span class="material-icons">image</span><input type="file" id="postImageUpload" accept="image/*" class="hidden" multiple></label><button onclick="createPost()" class="px-6 py-2 rounded-lg bg-[#1e2761] text-white hover:bg-[#2a3a8f]">Post</button></div></div>';
 
-            for (let i = 0; i < 5; i++) {
-                const topic = topics[Math.floor(Math.random() * topics.length)];
-                const emoji = emojis[Math.floor(Math.random() * emojis.length)];
-                const likes = Math.floor(Math.random() * 100);
-                const comments = Math.floor(Math.random() * 20);
-
-                const post = document.createElement('div');
-                post.className = 'post-card p-6';
-                post.innerHTML = `
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'post-card p-6';
+                postElement.innerHTML = `
                     <div class="flex items-center gap-4 mb-4">
-                        <div class="profile-avatar w-12 h-12 rounded-full flex items-center justify-center text-xl">
-                            ${userData.avatar}
-                        </div>
+                        <img src="${userData.avatar || 'https://via.placeholder.com/120'}" class="w-12 h-12 rounded-full">
                         <div>
                             <div class="font-semibold text-white">${userData.fullName}</div>
-                            <div class="text-xs text-gray-400">${Math.floor(Math.random() * 24)}h ago</div>
+                            <div class="text-xs text-gray-400">${new Date(post.timestamp).toLocaleTimeString()}</div>
                         </div>
                     </div>
                     <div class="text-white mb-4">
-                        <p class="font-bold text-lg mb-2">${topic} ${emoji}</p>
-                        <p>This is a sample post about ${topic.toLowerCase()}. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <p>${post.content}</p>
+                        ${post.images ? post.images.map(img => `<img src="${img}" class="mt-2 rounded-lg max-w-full" alt="Post image">`).join('') : ''}
                     </div>
                     <div class="flex items-center gap-8 text-white">
                         <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15]">
                             <span class="material-icons">chat_bubble_outline</span>
-                            <span>${comments}</span>
+                            <span>${post.comments || 0}</span>
                         </div>
                         <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15]">
                             <span class="material-icons">favorite_border</span>
-                            <span>${likes}</span>
+                            <span>${post.likes || 0}</span>
                         </div>
                         <div class="cursor-pointer hover:text-[#facc15]">
                             <span class="material-icons">share</span>
                         </div>
                     </div>
                 `;
-                postsSection.appendChild(post);
-            }
+                postsSection.appendChild(postElement);
+            });
         }
 
-        // Add refresh animation to logo
-        document.querySelector('.logo').addEventListener('click', function(e) {
-            e.preventDefault();
-            const logo = this;
-            logo.style.transform = 'rotate(360deg)';
-            logo.style.transition = 'transform 0.5s ease';
-            
-            setTimeout(() => {
-                logo.style.transform = 'rotate(0deg)';
-                generatePosts(); // Refresh posts
-            }, 500);
-        });
+        // Create new post
+        function createPost() {
+            const content = document.getElementById('newPost').value;
+            const files = document.getElementById('postImageUpload').files;
+            if (content || files.length) {
+                const newPost = {
+                    content,
+                    timestamp: new Date().toISOString(),
+                    images: [],
+                    likes: 0,
+                    comments: 0
+                };
+                if (files.length) {
+                    Array.from(files).forEach(file => {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            newPost.images.push(e.target.result);
+                            posts.unshift(newPost);
+                            localStorage.setItem('posts', JSON.stringify(posts));
+                            generatePosts();
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                } else {
+                    posts.unshift(newPost);
+                    localStorage.setItem('posts', JSON.stringify(posts));
+                    generatePosts();
+                }
+                document.getElementById('newPost').value = '';
+                document.getElementById('postImageUpload').value = '';
+            }
+        }
 
         // Switch tabs
         function switchTab(tab) {
@@ -788,6 +453,21 @@
             document.getElementById('photosSection').classList.add('hidden');
 
             document.getElementById(tab + 'Section').classList.remove('hidden');
+
+            if (tab === 'photos') {
+                const photosSection = document.getElementById('photosSection');
+                photosSection.innerHTML = '';
+                posts.forEach(post => {
+                    if (post.images) {
+                        post.images.forEach(img => {
+                            const imgElement = document.createElement('img');
+                            imgElement.src = img;
+                            imgElement.className = 'rounded-lg w-full object-cover';
+                            photosSection.appendChild(imgElement);
+                        });
+                    }
+                });
+            }
         }
 
         // Toggle edit profile modal
@@ -796,44 +476,34 @@
             modal.classList.toggle('hidden');
             modal.classList.toggle('flex');
 
-            // Fill form with current user data
             document.getElementById('editFullName').value = userData.fullName || '';
             document.getElementById('editUsername').value = userData.username || '';
             document.getElementById('editBio').value = userData.bio || '';
+            document.getElementById('editSkills').value = userData.skills || '';
             document.getElementById('editDepartment').value = userData.department || '';
             document.getElementById('editSemester').value = userData.semester || '';
             document.getElementById('editEmail').value = userData.email || '';
             document.getElementById('editPhone').value = userData.phone || '';
+            document.getElementById('editWebsite').value = userData.website || '';
         }
 
         // Handle profile edit form submission
         document.getElementById('editProfileForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Update user data
             userData.fullName = document.getElementById('editFullName').value;
             userData.username = document.getElementById('editUsername').value;
             userData.bio = document.getElementById('editBio').value;
+            userData.skills = document.getElementById('editSkills').value;
             userData.department = document.getElementById('editDepartment').value;
             userData.semester = document.getElementById('editSemester').value;
             userData.email = document.getElementById('editEmail').value;
             userData.phone = document.getElementById('editPhone').value;
-            userData.avatar = userData.fullName.charAt(0).toUpperCase();
+            userData.website = document.getElementById('editWebsite').value;
+            userData.avatar = userData.avatar || userData.fullName.charAt(0).toUpperCase();
 
-            // Save updated data
             localStorage.setItem('userData', JSON.stringify(userData));
-
-            // Update profile display
-            document.getElementById('userAvatar').textContent = userData.avatar;
-            document.getElementById('userName').textContent = userData.fullName;
-            document.getElementById('userUsername').textContent = '@' + userData.username;
-            document.getElementById('userBio').textContent = userData.bio;
-            document.getElementById('userDepartment').textContent = userData.department;
-            document.getElementById('userSemester').textContent = `${userData.semester}th Semester`;
-            document.getElementById('userEmail').textContent = userData.email;
-            document.getElementById('userPhone').textContent = userData.phone;
-
-            // Close modal
+            updateProfileDisplay();
             toggleEditProfile();
         });
 
@@ -841,12 +511,13 @@
         function logout() {
             localStorage.removeItem('isLoggedIn');
             localStorage.removeItem('userData');
+            localStorage.removeItem('posts');
             window.location.href = 'login.html';
         }
 
         // Initialize
+        updateProfileDisplay();
         generatePosts();
     </script>
 </body>
->>>>>>> c387e841511f6a3a5c4b54e6051c8e91e8e26d18
-</html> 
+</html>
