@@ -117,20 +117,56 @@
 <body class="flex min-h-screen">
     <!-- Left Sidebar -->
     <aside class="sidebar w-72 flex flex-col py-12 px-8 min-h-screen mr-12">
-        <!-- Update the logo section -->
         <a href="home.html" class="logo text-2xl font-bold text-white mb-8 flex items-center gap-2">
-          <span class="material-icons text-[#facc15]" style="font-size:2rem;">bubble_chart</span> <span class="text-[#facc15]">Daffy</span>
+            <span class="material-icons text-[#facc15]" style="font-size:2rem;">bubble_chart</span> <span class="text-[#facc15]">Daffy</span>
         </a>
         <nav class="flex flex-col gap-1">
             <a href="home.html" class="sidebar-link"><span class="material-icons sidebar-icon">home</span> Home</a>
             <a href="trends.html" class="sidebar-link"><span class="material-icons sidebar-icon">trending_up</span> Trends</a>
             <a href="clubs.html" class="sidebar-link"><span class="material-icons sidebar-icon">groups</span> Clubs</a>
             <a href="messaging.html" class="sidebar-link"><span class="material-icons sidebar-icon">chat_bubble</span> Messages</a>
-            <a href="videos.html" class="sidebar-link active"><span class="material-icons sidebar-icon">play_circle</span> Videos</a>
             <a href="jobs.html" class="sidebar-link"><span class="material-icons sidebar-icon">work</span> Jobs</a>
+            <a href="videos.html" class="sidebar-link active"><span class="material-icons sidebar-icon">video_library</span> Videos</a>
             <a href="settings.html" class="sidebar-link"><span class="material-icons sidebar-icon">settings</span> Settings</a>
         </nav>
+        <div class="mt-auto">
+            <button onclick="logout()" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white rounded-xl hover:bg-gray-800 transition-all duration-300">
+                <span class="material-icons">logout</span>
+                <span>Logout</span>
+            </button>
+        </div>
     </aside>
+    
+    <style>
+        .sidebar {
+            background: #000000;
+            box-shadow: 4px 0 24px 0 rgba(0, 0, 0, 0.3);
+            border-radius: 0 32px 32px 0;
+            transition: all 0.3s ease;
+        }
+        .sidebar-link {
+            color: #ffffff;
+            padding: 14px 20px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            position: relative;
+        }
+        .sidebar-link:hover {
+            background: rgba(250, 204, 21, 0.1);
+            transform: translateX(4px);
+        }
+        .sidebar-link.active {
+            background: rgba(250, 204, 21, 0.2);
+            color: #facc15;
+        }
+        .sidebar-icon {
+            font-size: 1.75rem;
+        }
+    </style>
 
     <!-- Main Content -->
     <main class="flex-1 p-8">

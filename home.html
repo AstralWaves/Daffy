@@ -1144,13 +1144,19 @@
   </aside>
 
   <script>
+    if (!localStorage.getItem('isLoggedIn')) {
+        window.location.href = 'login.html';
+    }
+
     let postCounter = 21; // Start counter after existing posts
     let selectedImage = null;
     let videoUrl = null;
 
     function logout() {
-      localStorage.removeItem('user');
-      navigateTo('login.html');
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('userData');
+        window.location.href = 'login.html';
     }
 
     // Interaction Functions

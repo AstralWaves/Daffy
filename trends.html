@@ -11,9 +11,10 @@
         body {
             font-family: 'Inter', sans-serif;
             background: #000000;
-            min-height: 100vh;
             color: #ffffff;
             margin: 0;
+            height: 100vh;
+            overflow: hidden;
         }
         .sidebar {
             background: linear-gradient(135deg, #000000 80%, #000000 100%);
@@ -21,6 +22,10 @@
             border-radius: 0 32px 32px 0;
             width: 18rem;
             flex-shrink: 0;
+            position: sticky;
+            top: 0;
+            height: 100%;
+            overflow-y: auto;
         }
         .trend-card {
             background: linear-gradient(145deg, #1a1a1a, #262626);
@@ -71,16 +76,30 @@
         .search-input {
             background: rgba(42, 42, 42, 0.8);
             border: 2px solid rgba(250, 204, 21, 0.1);
-            padding: 8px 12px;
-            border-radius: 16px;
-            font-size: 0.8rem;
+            padding: 6px 10px; /* Reduced padding for smaller size */
+            border-radius: 12px; /* Slightly smaller radius */
+            font-size: 0.75rem; /* Smaller font size */
             transition: all 0.3s ease;
             backdrop-filter: blur(12px);
+            width: 200px; /* Fixed smaller width */
+            color: #ffffff; /* Ensure text is visible */
         }
         .search-input:focus {
             border-color: #facc15;
             box-shadow: 0 0 0 4px rgba(250, 204, 21, 0.1);
             transform: scale(1.02);
+        }
+        .search-container {
+            position: relative;
+            width: 200px; /* Match input width */
+        }
+        .search-icon {
+            position: absolute;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1rem; /* Smaller icon size */
+            color: #888;
         }
         .filter-btn {
             background: rgba(250, 204, 21, 0.1);
@@ -118,11 +137,11 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 24px;
             padding: 24px;
-            animation: slideUp 0.8s ease-out;
-            position: sticky;
-            top: 8rem;
             width: 20rem;
             flex-shrink: 0;
+            position: sticky;
+            top: 0;
+            height: fit-content;
         }
         .trend-rank {
             font-size: 1.5rem;
@@ -207,13 +226,37 @@
         .main-container {
             display: flex;
             width: 100%;
+            height: calc(100vh - 8rem);
             gap: 2rem;
+            padding: 0 2rem;
         }
         .feed-section {
             flex: 1;
             max-width: 48rem;
             min-width: 40rem;
             overflow-y: auto;
+            padding-bottom: 2rem;
+        }
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: #000000;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Align title and search bar */
+        }
+        .feed-section::-webkit-scrollbar {
+            width: 8px;
+        }
+        .feed-section::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+        .feed-section::-webkit-scrollbar-thumb {
+            background: #facc15;
+            border-radius: 4px;
         }
         @keyframes fadeInUp {
             from { transform: translateY(20px); opacity: 0; }
@@ -233,17 +276,15 @@
 <body class="flex flex-col min-h-screen">
     <!-- Fixed Header -->
     <div class="header sticky top-0 z-10 bg-black p-4">
-        <h1 class="text-3xl font-bold text-white mb-4">Trending Topics</h1>
-        <div class="flex items-center gap-4">
-            <div class="relative flex-1">
-                <input type="text" class="search-input w-full pl-12" placeholder="Search trends...">
-                <span class="material-icons absolute left-4 top-3 text-gray-400">search</span>
-            </div>
+        <h1 class="text-2xl font-bold text-white">Trending Topics</h1> <!-- Reduced title size -->
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search trends...">
+            <span class="material-icons search-icon">search</span>
         </div>
     </div>
 
     <!-- Main Content -->
-    <div class="main-container flex-1 p-8">
+    <div class="main-container flex-1">
         <!-- Left Sidebar -->
         <aside class="sidebar flex flex-col py-12 px-8 min-h-screen">
             <a href="home.html" class="logo text-2xl font-bold text-white mb-8 flex items-center gap-2">
@@ -267,9 +308,7 @@
 
         <!-- Trending Feed Section -->
         <section class="feed-section">
-            <div class="mb-6">
-                <!-- Removed filter buttons from feed section header as well -->
-            </div>
+            <div class="mb-6"></div>
             <div id="trendingFeed" class="space-y-4">
                 <div class="loading-indicator flex justify-center items-center py-4">
                     <span class="material-icons animate-spin text-[#facc15]">autorenew</span>
@@ -602,24 +641,14 @@
             renderTrendingFeed();
 
             let isLoading = false;
-            window.addEventListener('scroll', () => {
-                const feedContainer = document.getElementById('trendingFeed');
+            const feedSection = document.querySelector('.feed-section');
+            feedSection.addEventListener('scroll', () => {
                 if (isLoading) return;
-                const rect = feedContainer.getBoundingClientRect();
-                if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 1000) {
+                if ((feedSection.scrollTop + feedSection.clientHeight) >= feedSection.scrollHeight - 1000) {
                     isLoading = true;
                     loadMorePosts();
                     setTimeout(() => { isLoading = false; }, 1000);
                 }
-            });
-
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    const filter = btn.dataset.filter;
-                    filterTrendingPosts(filter);
-                });
             });
         });
     </script>
