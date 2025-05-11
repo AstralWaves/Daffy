@@ -13,57 +13,77 @@
             background: #000000;
             min-height: 100vh;
             color: #ffffff;
+            margin: 0;
         }
         .sidebar {
             background: #000000;
             box-shadow: 4px 0 24px 0 rgba(0, 0, 0, 0.3);
             border-radius: 0 32px 32px 0;
-            transition: all 0.3s ease;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 288px;
+            z-index: 1000;
+        }
+        .main-content {
+            margin-left: 300px;
+            margin-right: 40px; /* Increased right margin for scrollbar */
+            overflow-y: auto;
+            height: 100vh;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content horizontally */
         }
         .video-card {
             background: #1a1a1a;
             border-radius: 24px;
             overflow: hidden;
-            transition: transform 0.3s ease;
-            cursor: pointer;
+            margin-bottom: 2rem;
+            max-width: 900px;
+            width: 100%; /* Ensure responsiveness */
+            margin-left: auto;
+            margin-right: auto;
         }
-        .video-card:hover {
-            transform: translateY(-4px);
-        }
-        .video-thumbnail {
+        .video-player {
             position: relative;
-            padding-top: 56.25%;
-            background: #2a2a2a;
-            overflow: hidden;
+            padding-top: 56.25%; /* Maintains 16:9 aspect ratio */
+            background: #000;
         }
-        .video-thumbnail img {
+        .video-player video,
+        .video-player iframe {
+            display: block;
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
         }
         .video-duration {
             position: absolute;
-            bottom: 8px;
-            right: 8px;
+            bottom: 12px;
+            right: 12px;
             background: rgba(0, 0, 0, 0.8);
-            padding: 2px 8px;
+            padding: 4px 10px;
             border-radius: 4px;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
         }
-        .upload-area {
-            border: 2px dashed #333;
-            border-radius: 24px;
-            padding: 2rem;
-            text-align: center;
+        .fullscreen-btn {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 6px;
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            color: #fff;
+            display: none;
+            transition: opacity 0.3s ease;
+            font-size: 1.5rem;
         }
-        .upload-area:hover {
-            border-color: #facc15;
-            background: rgba(250, 204, 21, 0.1);
+        .video-player:hover .fullscreen-btn {
+            display: block;
         }
         .category-pill {
             background: #2a2a2a;
@@ -78,72 +98,6 @@
         .category-pill:hover {
             background: #333;
         }
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-        .modal-content {
-            background: #1a1a1a;
-            border-radius: 16px;
-            padding: 1rem;
-            max-width: 90%;
-            max-height: 90%;
-            position: relative;
-        }
-        .modal-content iframe, .modal-content video {
-            width: 100%;
-            max-width: 800px;
-            aspect-ratio: 16 / 9;
-        }
-        .close-modal {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            color: #fff;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body class="flex min-h-screen">
-    <!-- Left Sidebar -->
-    <aside class="sidebar w-72 flex flex-col py-12 px-8 min-h-screen mr-12">
-        <a href="home.html" class="logo text-2xl font-bold text-white mb-8 flex items-center gap-2">
-            <span class="material-icons text-[#facc15]" style="font-size:2rem;">bubble_chart</span> <span class="text-[#facc15]">Daffy</span>
-        </a>
-        <nav class="flex flex-col gap-1">
-            <a href="home.html" class="sidebar-link"><span class="material-icons sidebar-icon">home</span> Home</a>
-            <a href="trends.html" class="sidebar-link"><span class="material-icons sidebar-icon">trending_up</span> Trends</a>
-            <a href="clubs.html" class="sidebar-link"><span class="material-icons sidebar-icon">groups</span> Clubs</a>
-            <a href="messaging.html" class="sidebar-link"><span class="material-icons sidebar-icon">chat_bubble</span> Messages</a>
-            <a href="jobs.html" class="sidebar-link"><span class="material-icons sidebar-icon">work</span> Jobs</a>
-            <a href="videos.html" class="sidebar-link active"><span class="material-icons sidebar-icon">video_library</span> Videos</a>
-            <a href="settings.html" class="sidebar-link"><span class="material-icons sidebar-icon">settings</span> Settings</a>
-        </nav>
-        <div class="mt-auto">
-            <button onclick="logout()" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white rounded-xl hover:bg-gray-800 transition-all duration-300">
-                <span class="material-icons">logout</span>
-                <span>Logout</span>
-            </button>
-        </div>
-    </aside>
-    
-    <style>
-        .sidebar {
-            background: #000000;
-            box-shadow: 4px 0 24px 0 rgba(0, 0, 0, 0.3);
-            border-radius: 0 32px 32px 0;
-            transition: all 0.3s ease;
-        }
         .sidebar-link {
             color: #ffffff;
             padding: 14px 20px;
@@ -153,7 +107,6 @@
             align-items: center;
             gap: 14px;
             text-decoration: none;
-            position: relative;
         }
         .sidebar-link:hover {
             background: rgba(250, 204, 21, 0.1);
@@ -166,670 +119,1079 @@
         .sidebar-icon {
             font-size: 1.75rem;
         }
+        .fullscreen-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        .fullscreen-video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .exit-fullscreen {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 8px;
+            border-radius: 50%;
+        }
+        .profile-section {
+            display: none;
+            background: #1a1a1a;
+            border-radius: 24px;
+            padding: 2rem;
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .profile-picture {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .profile-videos {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .uploader-name {
+            cursor: pointer;
+            color: #facc15;
+            text-decoration: underline;
+        }
+        .uploader-name:hover {
+            color: #e0b514;
+        }
+        .interaction-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .interaction-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #2a2a2a;
+            padding: 8px 16px;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .interaction-btn:hover {
+            background: #333;
+        }
+        .liked {
+            color: #facc15;
+        }
+        .comment-section {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #222;
+            border-radius: 12px;
+        }
+        .comment-input {
+            width: 100%;
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        .comment {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #444;
+        }
+        .comment:last-child {
+            border-bottom: none;
+        }
     </style>
+</head>
+<body class="flex">
+    <!-- Left Sidebar -->
+    <aside class="sidebar w-72 flex flex-col py-12 px-8">
+        <a href="home.html" class="logo text-2xl font-bold text-white mb-8 flex items-center gap-2">
+            <span class="material-icons text-[#facc15]" style="font-size:2rem;">bubble_chart</span> <span class="text-[#facc15]">Daffy</span>
+        </a>
+        <nav class="flex flex-col gap-1">
+            <a href="home.html" class="sidebar-link"><span class="material-icons sidebar-icon">home</span> Home</a>
+            <a href="trends.html" class="sidebar-link"><span class="material-icons sidebar-icon">trending_up</span> Trends</a>
+            <a href="clubs.html" class="sidebar-link"><span class="material-icons sidebar-icon">groups</span> Clubs</a>
+            <a href="messaging.html" class="sidebar-link"><span class="material-icons sidebar-icon">chat_bubble</span> Messages</a>
+            <a href="jobs.html" class="sidebar-link"><span class="material-icons sidebar-icon">work</span> Jobs</a>
+            <a href="videos.html" class="sidebar-link active"><span class="material-icons sidebar-icon">video_library</span> Videos</a>
+            <a href="#profile" class="sidebar-link profile-link"><span class="material-icons sidebar-icon">person</span> Profile</a>
+            <a href="settings.html" class="sidebar-link"><span class="material-icons sidebar-icon">settings</span> Settings</a>
+        </nav>
+        GenAuto
+        <div class="mt-auto">
+            <button onclick="logout()" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white rounded-xl hover:bg-gray-800 transition-all duration-300">
+                <span class="material-icons">logout</span>
+                <span>Logout</span>
+            </button>
+        </div>
+    </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 p-8">
-        <div class="mb-8">
-            <h1 class="text-3xl font-bold mb-6">DIU Video Hub</h1>
-            
-            <!-- Upload Section -->
-            <div class="upload-area mb-8" onclick="document.getElementById('videoUpload').click()">
-                <input type="file" id="videoUpload" class="hidden" accept="video/*">
-                <span class="material-icons text-4xl text-gray-400 mb-2">cloud_upload</span>
-                <p class="text-lg font-semibold">Upload Your Video</p>
-                <p class="text-sm text-gray-400">Share your academic content, projects, or campus moments</p>
-            </div>
-
-            <!-- Categories -->
-            <div class="flex gap-4 mb-8 overflow-x-auto pb-4">
-                <button class="category-pill active">All Videos</button>
-                <button class="category-pill">Lectures</button>
-                <button class="category-pill">Lab Tutorials</button>
-                <button class="category-pill">Student Projects</button>
-                <button class="category-pill">Campus Events</button>
-                <button class="category-pill">Tech Talks</button>
-            </div>
-        </div>
-
-        <!-- Video Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Video 1: Programming Tutorial -->
-            <div class="video-card" data-video-url="https://www.youtube.com/embed/W6NZfCO5SIk">
-                <div class="video-thumbnail">
-                    <img src="https://img.youtube.com/vi/W6NZfCO5SIk/maxresdefault.jpg" alt="JavaScript Tutorial">
-                    <span class="video-duration">15:30</span>
+    <main class="main-content">
+        <!-- Video Feed -->
+        <div class="video-feed w-full max-w-900px">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold mb-6 text-center">DIU Video Hub</h1>
+                <!-- Categories -->
+                <div class="flex gap-4 mb-8 overflow-x-auto pb-4 justify-center">
+                    <button class="category-pill active">All Videos</button>
+                    <button class="category-pill">Lectures</button>
+                    <button class="category-pill">Lab Tutorials</button>
+                    <button class="category-pill">Student Projects</button>
+                    <button class="category-pill">Campus Events</button>
+                    <button class="category-pill">Tech Talks</button>
                 </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">JavaScript Fundamentals for Beginners</h3>
-                    <p class="text-sm text-gray-400 mb-2">CSE Department • Dr. Rahman</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
+            </div>
+
+            <!-- Video 1: Programming Tutorial -->
+            <div class="video-card" data-video-id="1">
+                <div class="video-player">
+                    <iframe src="https://www.youtube.com/embed/W6NZfCO5SIk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <span class="video-duration">15:30</span>
+                    <span class="fullscreen-btn material-icons">fullscreen</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-semibold text-lg mb-2">JavaScript Fundamentals for Beginners</h3>
+                    <p class="text-sm text-gray-400 mb-2">Uploaded by <span class="uploader-name" data-user="Rahman">Dr. Rahman</span></p>
+                    <div class="flex items-center justify-between text-sm text-gray-400 mb-2">
                         <span>2.1k views</span>
                         <span>2 days ago</span>
+                    </div>
+                    <div class="interaction-buttons">
+                        <button class="interaction-btn like-btn" data-liked="false">
+                            <span class="material-icons">thumb_up</span>
+                            <span class="like-count">0</span>
+                        </button>
+                        <button class="interaction-btn share-btn">
+                            <span class="material-icons">share</span>
+                            <span>Share</span>
+                        </button>
+                        <button class="interaction-btn comment-btn">
+                            <span class="material-icons">comment</span>
+                            <span>Comment</span>
+                        </button>
+                    </div>
+                    <div class="comment-section">
+                        <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+                        <button class="interaction-btn submit-comment">Post</button>
+                        <div class="comments-list"></div>
                     </div>
                 </div>
             </div>
 
             <!-- Video 2: Lab Tutorial -->
-            <div class="video-card" data-video-url="https://www.youtube.com/embed/PkZNo7MFNFg">
-                <div class="video-thumbnail">
-                    <img src="https://img.youtube.com/vi/PkZNo7MFNFg/maxresdefault.jpg" alt="Database Lab">
+            <div class="video-card" data-video-id="2">
+                <div class="video-player">
+                    <iframe src="https://www.youtube.com/embed/PkZNo7MFNFg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                     <span class="video-duration">23:45</span>
+                    <span class="fullscreen-btn material-icons">fullscreen</span>
                 </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Database Lab: SQL Queries and Joins</h3>
-                    <p class="text-sm text-gray-400 mb-2">CSE Department • Lab Instructor Fatima</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
+                <div class="p-6">
+                    <h3 class="font-semibold text-lg mb-2">Database Lab: SQL Queries and Joins</h3>
+                    <p class="text-sm text-gray-400 mb-2">Uploaded by <span class="uploader-name" data-user="Fatima">Fatima</span></p>
+                    <div class="flex items-center justify-between text-sm text-gray-400 mb-2">
                         <span>1.8k views</span>
                         <span>3 days ago</span>
+                    </div>
+                    <div class="interaction-buttons">
+                        <button class="interaction-btn like-btn" data-liked="false">
+                            <span class="material-icons">thumb_up</span>
+                            <span class="like-count">0</span>
+                        </button>
+                        <button class="interaction-btn share-btn">
+                            <span class="material-icons">share</span>
+                            <span>Share</span>
+                        </button>
+                        <button class="interaction-btn comment-btn">
+                            <span class="material-icons">comment</span>
+                            <span>Comment</span>
+                        </button>
+                    </div>
+                    <div class="comment-section">
+                        <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+                        <button class="interaction-btn submit-comment">Post</button>
+                        <div class="comments-list"></div>
                     </div>
                 </div>
             </div>
 
             <!-- Video 3: Student Project -->
-            <div class="video-card" data-video-url="https://www.youtube.com/embed/Mus_vwhTCq0">
-                <div class="video-thumbnail">
-                    <img src="https://img.youtube.com/vi/Mus_vwhTCq0/maxresdefault.jpg" alt="IoT Project">
+            <div class="video-card" data-video-id="3">
+                <div class="video-player">
+                    <iframe src="https://www.youtube.com/embed/Mus_vwhTCq0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                     <span class="video-duration">12:20</span>
+                    <span class="fullscreen-btn material-icons">fullscreen</span>
                 </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Smart Home Automation using IoT</h3>
-                    <p class="text-sm text-gray-400 mb-2">Final Year Project • Team Innovators</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
+                <div class="p-6">
+                    <h3 class="font-semibold text-lg mb-2">Smart Home Automation using IoT</h3>
+                    <p class="text-sm text-gray-400 mb-2">Uploaded by <span class="uploader-name" data-user="Innovators">Team Innovators</span></p>
+                    <div class="flex items-center justify-between text-sm text-gray-400 mb-2">
                         <span>3.4k views</span>
                         <span>1 week ago</span>
+                    </div>
+                    <div class="interaction-buttons">
+                        <button class="interaction-btn like-btn" data-liked="false">
+                            <span class="material-icons">thumb_up</span>
+                            <span class="like-count">0</span>
+                        </button>
+                        <button class="interaction-btn share-btn">
+                            <span class="material-icons">share</span>
+                            <span>Share</span>
+                        </button>
+                        <button class="interaction-btn comment-btn">
+                            <span class="material-icons">comment</span>
+                            <span>Comment</span>
+                        </button>
+                    </div>
+                    <div class="comment-section">
+                        <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+                        <button class="interaction-btn submit-comment">Post</button>
+                        <div class="comments-list"></div>
                     </div>
                 </div>
             </div>
 
             <!-- Video 4: Lecture -->
-            <div class="video-card" data-video-url="https://www.youtube.com/embed/UB1O30fR-EE">
-                <div class="video-thumbnail">
-                    <img src="https://img.youtube.com/vi/UB1O30fR-EE/maxresdefault.jpg" alt="Data Structures">
-                    <span class="video-duration">45:00</span>
+            <div class="video-card" data-video-id="4">
+                <div class="video-player">
+                    <video controls><source src="/videos/calculus_lecture.mp4" type="video/mp4">Your browser does not support the video tag.</video>
+                    <span class="video-duration">50:00</span>
+                    <span class="fullscreen-btn material-icons">fullscreen</span>
                 </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Data Structures: Linked Lists Explained</h3>
-                    <p class="text-sm text-gray-400 mb-2">CSE Department • Prof. Ahmed</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>4.5k views</span>
-                        <span>5 days ago</span>
+                <div class="p-6">
+                    <h3 class="font-semibold text-lg mb-2">Calculus I: Limits and Derivatives</h3>
+                    <p class="text-sm text-gray-400 mb-2">Uploaded by <span class="uploader-name" data-user="Siddique">Dr. Siddique</span></p>
+                    <div class="flex items-center justify-between text-sm text-gray-400 mb-2">
+                        <span>4.8k views</span>
+                        <span>4 days ago</span>
+                    </div>
+                    <div class="interaction-buttons">
+                        <button class="interaction-btn like-btn" data-liked="false">
+                            <span class="material-icons">thumb_up</span>
+                            <span class="like-count">0</span>
+                        </button>
+                        <button class="interaction-btn share-btn">
+                            <span class="material-icons">share</span>
+                            <span>Share</span>
+                        </button>
+                        <button class="interaction-btn comment-btn">
+                            <span class="material-icons">comment</span>
+                            <span>Comment</span>
+                        </button>
+                    </div>
+                    <div class="comment-section">
+                        <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+                        <button class="interaction-btn submit-comment">Post</button>
+                        <div class="comments-list"></div>
                     </div>
                 </div>
             </div>
 
             <!-- Video 5: Campus Event -->
-            <div class="video-card" data-video-url="https://www.youtube.com/embed/9bZkp7q19f0">
-                <div class="video-thumbnail">
-                    <img src="https://img.youtube.com/vi/9bZkp7q19f0/maxresdefault.jpg" alt="Tech Fest">
+            <div class="video-card" data-video-id="5">
+                <div class="video-player">
+                    <iframe src="https://www.youtube.com/embed/9bZkp7q19f0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                     <span class="video-duration">10:15</span>
+                    <span class="fullscreen-btn material-icons">fullscreen</span>
                 </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">DIU Tech Fest 2025 Highlights</h3>
-                    <p class="text-sm text-gray-400 mb-2">Student Council • Media Team</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
+                <div class="p-6">
+                    <h3 class="font-semibold text-lg mb-2">DIU Tech Fest 2025 Highlights</h3>
+                    <p class="text-sm text-gray-400 mb-2">Uploaded by <span class="uploader-name" data-user="MediaTeam">Media Team</span></p>
+                    <div class="flex items-center justify-between text-sm text-gray-400 mb-2">
                         <span>6.2k views</span>
                         <span>1 day ago</span>
+                    </div>
+                    <div class="interaction-buttons">
+                        <button class="interaction-btn like-btn" data-liked="false">
+                            <span class="material-icons">thumb_up</span>
+                            <span class="like-count">0</span>
+                        </button>
+                        <button class="interaction-btn share-btn">
+                            <span class="material-icons">share</span>
+                            <span>Share</span>
+                        </button>
+                        <button class="interaction-btn comment-btn">
+                            <span class="material-icons">comment</span>
+                            <span>Comment</span>
+                        </button>
+                    </div>
+                    <div class="comment-section">
+                        <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+                        <button class="interaction-btn submit-comment">Post</button>
+                        <div class="comments-list"></div>
                     </div>
                 </div>
             </div>
 
             <!-- Video 6: Tech Talk -->
-            <div class="video-card" data-video-url="https://www.youtube.com/embed/zpOULjyy-n8">
-                <div class="video-thumbnail">
-                    <img src="https://img.youtube.com/vi/zpOULjyy-n8/maxresdefault.jpg" alt="AI Seminar">
+            <div class="video-card" data-video-id="6">
+                <div class="video-player">
+                    <iframe src="https://www.youtube.com/embed/zpOULjyy-n8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                     <span class="video-duration">30:25</span>
+                    <span class="fullscreen-btn material-icons">fullscreen</span>
                 </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">AI in Healthcare: Future Prospects</h3>
-                    <p class="text-sm text-gray-400 mb-2">Guest Speaker • Dr. Sarah Khan</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
+                <div class="p-6">
+                    <h3 class="font-semibold text-lg mb-2">AI in Healthcare: Future Prospects</h3>
+                    <p class="text-sm text-gray-400 mb-2">Uploaded by <span class="uploader-name" data-user="Sarah">Dr. Sarah Khan</span></p>
+                    <div class="flex items-center justify-between text-sm text-gray-400 mb-2">
                         <span>2.8k views</span>
-                        <span>4 days ago$ ago</span>
+                        <span>4 days ago</span>
+                    </div>
+                    <div class="interaction-buttons">
+                        <button class="interaction-btn like-btn" data-liked="false">
+                            <span class="material-icons">thumb_up</span>
+                            <span class="like-count">0</span>
+                        </button>
+                        <button class="interaction-btn share-btn">
+                            <span class="material-icons">share</span>
+                            <span>Share</span>
+                        </button>
+                        <button class="interaction-btn comment-btn">
+                            <span class="material-icons">comment</span>
+                            <span>Comment</span>
+                        </button>
+                    </div>
+                    <div class="comment-section">
+                        <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+                        <button class="interaction-btn submit-comment">Post</button>
+                        <div class="comments-list"></div>
                     </div>
                 </div>
             </div>
 
             <!-- Video 7: Lab Tutorial -->
-            <div class="video-card" data-video-url="https://www.youtube.com/embed/8hly31xKli0">
-                <div class="video-thumbnail">
-                    <img src="https://img.youtube.com/vi/8hly31xKli0/maxresdefault.jpg" alt="Networking Lab">
-                    <span class="video-duration">18:40</span>
+            <div class="video-card" data-video-id="7">
+                <div class="video-player">
+                    <video controls><source src="/videos/titration_lab.mp4" type="video/mp4">Your browser does not support the video tag.</video>
+                    <span class="video-duration">22:15</span>
+                    <span class="fullscreen-btn material-icons">fullscreen</span>
                 </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Networking Lab: Configuring Routers</h3>
-                    <p class="text-sm text-gray-400 mb-2">CSE Department • Lab Instructor Ali</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>1.5k views</span>
-                        <span>6 days ago</span>
+                <div class="p-6">
+                    <h3 class="font-semibold text-lg mb-2">Chemistry Lab: Titration Techniques</h3>
+                    <p class="text-sm text-gray-400 mb-2">Uploaded by <span class="uploader-name" data-user="Sara">Sara</span></p>
+                    <div class="flex items-center justify-between text-sm text-gray-400 mb-2">
+                        <span>1.9k views</span>
+                        <span>1 week ago</span>
+                    </div>
+                    <div class="interaction-buttons">
+                        <button class="interaction-btn like-btn" data-liked="false">
+                            <span class="material-icons">thumb_up</span>
+                            <span class="like-count">0</span>
+                        </button>
+                        <button class="interaction-btn share-btn">
+                            <span class="material-icons">share</span>
+                            <span>Share</span>
+                        </button>
+                        <button class="interaction-btn comment-btn">
+                            <span class="material-icons">comment</span>
+                            <span>Comment</span>
+                        </button>
+                    </div>
+                    <div class="comment-section">
+                        <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+                        <button class="interaction-btn submit-comment">Post</button>
+                        <div class="comments-list"></div>
                     </div>
                 </div>
             </div>
 
             <!-- Video 8: Student Project -->
-            <div class="video-card" data-video-url="https://www.youtube.com/embed/Ke90Tje7VS0">
-                <div class="video-thumbnail">
-                    <img src="https://img.youtube.com/vi/Ke90Tje7VS0/maxresdefault.jpg" alt="ML Project">
-                    <span class="video-duration">14:50</span>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Machine Learning Model for Image Recognition</h3>
-                    <p class="text-sm text-gray-400 mb-2">Final Year Project • Team Vision</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>2.9k views</span>
-                        <span>2 weeks ago</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video 9: Lecture -->
-            <div class="video-card" data-video-url="https://www.youtube.com/embed/0IAPZzGSbME">
-                <div class="video-thumbnail">
-                    <img src="https://img.youtube.com/vi/0IAPZzGSbME/maxresdefault.jpg" alt="Algorithms Lecture">
-                    <span class="video-duration">40:10</span>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Introduction to Algorithms</h3>
-                    <p class="text-sm text-gray-400 mb-2">CSE Department • Prof. Zaman</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>3.7k views</span>
-                        <span>3 days ago</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video 10: Lab Tutorial -->
-            <div class="video-card" data-video-url="https://www.youtube.com/embed/Qly4QJ_L9-o">
-                <div class="video-thumbnail">
-                    <img src="https://img.youtube.com/vi/Qly4QJ_L9-o/maxresdefault.jpg" alt="Optics Lab">
-                    <span class="video-duration">20:30</span>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Physics Lab: Optics Experiments</h3>
-                    <p class="text-sm text-gray-400 mb-2">Physics Department • Lab Instructor Nadia</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>1.2k views</span>
-                        <span>5 days ago</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video 11: Student Project -->
-            <div class="video-card" data-video-url="https://www.youtube.com/embed/BYRTvoKGOQk">
-                <div class="video-thumbnail">
-                    <img src="https://img.youtube.com/vi/BYRTvoKGOQk/maxresdefault.jpg" alt="Blockchain Project">
-                    <span class="video-duration">13:45</span>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Blockchain-Based Voting System</h3>
-                    <p class="text-sm text-gray-400 mb-2">Final Year Project • Team SecureVote</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>4.1k views</span>
-                        <span>1 week ago</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video 12: Campus Event -->
-            <div class="video-card" data-video-url="https://www.youtube.com/embed/7vQznL6a9Xw">
-                <div class="video-thumbnail">
-                    <img src="https://img.youtube.com/vi/7vQznL6a9Xw/maxresdefault.jpg" alt="Cultural Fest">
-                    <span class="video-duration">8:50</span>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">DIU Annual Cultural Fest 2025</h3>
-                    <p class="text-sm text-gray-400 mb-2">Cultural Club • Media Team</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>5.8k views</span>
-                        <span>2 days ago</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video 13: Tech Talk -->
-            <div class="video-card" data-video-url="https://www.youtube.com/embed/5j2W7QeF_4Y">
-                <div class="video-thumbnail">
-                    <img src="https://img.youtube.com/vi/5j2W7QeF_4Y/maxresdefault.jpg" alt="Cybersecurity Talk">
-                    <span class="video-duration">35:20</span>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Cybersecurity Best Practices</h3>
-                    <p class="text-sm text-gray-400 mb-2">Guest Speaker • Mr. Imran</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>2.3k views</span>
-                        <span>6 days ago</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video 14: Lecture -->
-            <div class="video-card" data-video-url="/videos/calculus_lecture.mp4">
-                <div class="video-thumbnail">
-                    <img src="https://via.placeholder.com/1280x720?text=Calculus+Lecture" alt="Calculus Lecture">
-                    <span class="video-duration">50:00</span>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Calculus I: Limits and Derivatives</h3>
-                    <p class="text-sm text-gray-400 mb-2">Math Department • Dr. Siddique</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>4.8k views</span>
-                        <span>4 days ago</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video 15: Lab Tutorial -->
-            <div class="video-card" data-video-url="/videos/titration_lab.mp4">
-                <div class="video-thumbnail">
-                    <img src="https://via.placeholder.com/1280x720?text=Titration+Lab" alt="Titration Lab">
-                    <span class="video-duration">22:15</span>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Chemistry Lab: Titration Techniques</h3>
-                    <p class="text-sm text-gray-400 mb-2">Chemistry Department • Lab Instructor Sara</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>1.9k views</span>
-                        <span>1 week ago</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video 16: Student Project -->
-            <div class="video-card" data-video-url="/videos/drone_project.mp4">
-                <div class="video-thumbnail">
-                    <img src="https://via.placeholder.com/1280x720?text=Drone+Project" alt="Drone Project">
+            <div class="video-card" data-video-id="8">
+                <div class="video-player">
+                    <video controls><source src="/videos/drone_project.mp4" type="video/mp4">Your browser does not support the video tag.</video>
                     <span class="video-duration">15:30</span>
+                    <span class="fullscreen-btn material-icons">fullscreen</span>
                 </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Autonomous Drone Navigation System</h3>
-                    <p class="text-sm text-gray-400 mb-2">Final Year Project • Team SkyNet</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
+                <div class="p-6">
+                    <h3 class="font-semibold text-lg mb-2">Autonomous Drone Navigation System</h3>
+                    <p class="text-sm text-gray-400 mb-2">Uploaded by <span class="uploader-name" data-user="SkyNet">Team SkyNet</span></p>
+                    <div class="flex items-center justify-between text-sm text-gray-400 mb-2">
                         <span>3.2k views</span>
                         <span>10 days ago</span>
                     </div>
+                    <div class="interaction-buttons">
+                        <button class="interaction-btn like-btn" data-liked="false">
+                            <span class="material-icons">thumb_up</span>
+                            <span class="like-count">0</span>
+                        </button>
+                        <button class="interaction-btn share-btn">
+                            <span class="material-icons">share</span>
+                            <span>Share</span>
+                        </button>
+                        <button class="interaction-btn comment-btn">
+                            <span class="material-icons">comment</span>
+                            <span>Comment</span>
+                        </button>
+                    </div>
+                    <div class="comment-section">
+                        <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+                        <button class="interaction-btn submit-comment">Post</button>
+                        <div class="comments-list"></div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Video 17: Campus Event -->
-            <div class="video-card" data-video-url="/videos/hackathon_recap.mp4">
-                <div class="video-thumbnail">
-                    <img src="https://via.placeholder.com/1280x720?text=Hackathon+Recap" alt="Hackathon Recap">
+            <!-- Video 9: Campus Event -->
+            <div class="video-card" data-video-id="9">
+                <div class="video-player">
+                    <video controls><source src="/videos/hackathon_recap.mp4" type="video/mp4">Your browser does not support the video tag.</video>
                     <span class="video-duration">9:40</span>
+                    <span class="fullscreen-btn material-icons">fullscreen</span>
                 </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">DIU Hackathon 2025 Recap</h3>
-                    <p class="text-sm text-gray-400 mb-2">Coding Club • Event Organizers</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
+                <div class="p-6">
+                    <h3 class="font-semibold text-lg mb-2">DIU Hackathon 2025 Recap</h3>
+                    <p class="text-sm text-gray-400 mb-2">Uploaded by <span class="uploader-name" data-user="CodingClub">Coding Club</span></p>
+                    <div class="flex items-center justify-between text-sm text-gray-400 mb-2">
                         <span>6.5k views</span>
                         <span>1 day ago</span>
                     </div>
+                    <div class="interaction-buttons">
+                        <button class="interaction-btn like-btn" data-liked="false">
+                            <span class="material-icons">thumb_up</span>
+                            <span class="like-count">0</span>
+                        </button>
+                        <button class="interaction-btn share-btn">
+                            <span class="material-icons">share</span>
+                            <span>Share</span>
+                        </button>
+                        <button class="interaction-btn comment-btn">
+                            <span class="material-icons">comment</span>
+                            <span>Comment</span>
+                        </button>
+                    </div>
+                    <div class="comment-section">
+                        <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+                        <button class="interaction-btn submit-comment">Post</button>
+                        <div class="comments-list"></div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Video 18: Tech Talk -->
-            <div class="video-card" data-video-url="/videos/quantum_talk.mp4">
-                <div class="video-thumbnail">
-                    <img src="https://via.placeholder.com/1280x720?text=Quantum+Talk" alt="Quantum Talk">
+            <!-- Video 10: Tech Talk -->
+            <div class="video-card" data-video-id="10">
+                <div class="video-player">
+                    <video controls><source src="/videos/quantum_talk.mp4" type="video/mp4">Your browser does not support the video tag.</video>
                     <span class="video-duration">28:50</span>
+                    <span class="fullscreen-btn material-icons">fullscreen</span>
                 </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Quantum Computing Basics</h3>
-                    <p class="text-sm text-gray-400 mb-2">Guest Speaker • Dr. Faisal</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
+                <div class="p-6">
+                    <h3 class="font-semibold text-lg mb-2">Quantum Computing Basics</h3>
+                    <p class="text-sm text-gray-400 mb-2">Uploaded by <span class="uploader-name" data-user="Faisal">Dr. Faisal</span></p>
+                    <div class="flex items-center justify-between text-sm text-gray-400 mb-2">
                         <span>2.7k views</span>
                         <span>5 days ago</span>
                     </div>
-                </div>
-            </div>
-
-            <!-- Video 19: Lecture -->
-            <div class="video-card" data-video-url="/videos/os_lecture.mp4">
-                <div class="video-thumbnail">
-                    <img src="https://via.placeholder.com/1280x720?text=OS+Lecture" alt="OS Lecture">
-                    <span class="video-duration">42:30</span>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Operating Systems: Process Scheduling</h3>
-                    <p class="text-sm text-gray-400 mb-2">CSE Department • Prof. Karim</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>3.9k views</span>
-                        <span>3 days ago</span>
+                    <div class="interaction-buttons">
+                        <button class="interaction-btn like-btn" data-liked="false">
+                            <span class="material-icons">thumb_up</span>
+                            <span class="like-count">0</span>
+                        </button>
+                        <button class="interaction-btn share-btn">
+                            <span class="material-icons">share</span>
+                            <span>Share</span>
+                        </button>
+                        <button class="interaction-btn comment-btn">
+                            <span class="material-icons">comment</span>
+                            <span>Comment</span>
+                        </button>
+                    </div>
+                    <div class="comment-section">
+                        <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+                        <button class="interaction-btn submit-comment">Post</button>
+                        <div class="comments-list"></div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Video 20: Lab Tutorial -->
-            <div class="video-card" data-video-url="/videos/circuit_lab.mp4">
-                <div class="video-thumbnail">
-                    <img src="https://via.placeholder.com/1280x720?text=Circuit+Lab" alt="Circuit Lab">
-                    <span class="video-duration">19:25</span>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Electronics Lab: Circuit Design</h3>
-                    <p class="text-sm text-gray-400 mb-2">EEE Department • Lab Instructor Reza</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>1.4k views</span>
-                        <span>6 days ago</span>
-                    </div>
+        <!-- Profile Section -->
+        <div class="profile-section" id="profileSection">
+            <div class="profile-header">
+                <img src="/images/sample_profile.jpg" alt="User Profile" class="profile-picture">
+                <div>
+                    <h2 class="text-2xl font-bold">John Doe</h2>
+                    <p class="text-gray-400">DIU Student • CSE Department</p>
                 </div>
             </div>
-
-            <!-- Video 21: Student Project -->
-            <div class="video-card" data-video-url="/videos/ar_project.mp4">
-                <div class="video-thumbnail">
-                    <img src="https://via.placeholder.com/1280x720?text=AR+Project" alt="AR Project">
-                    <span class="video-duration">11:55</span>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Augmented Reality App for Education</h3>
-                    <p class="text-sm text-gray-400 mb-2">Final Year Project • Team ARLearn</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>4.3k views</span>
-                        <span>2 weeks ago</span>
+            <h3 class="text-xl font-semibold mb-4">Uploaded Videos</h3>
+            <div class="profile-videos" id="profileVideos">
+                <!-- Sample videos for John Doe -->
+                <div class="video-card" data-video-id="11">
+                    <div class="video-player">
+                        <video controls><source src="/videos/drone_project.mp4" type="video/mp4">Your browser does not support the video tag.</video>
+                        <span class="video-duration">15:30</span>
+                        <span class="fullscreen-btn material-icons">fullscreen</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-semibold text-lg mb-2">Autonomous Drone Navigation System</h3>
+                        <p class="text-sm text-gray-400 mb-2">Final Year Project by John Doe</p>
+                        <div class="flex items-center justify-between text-sm text-gray-400 mb-2">
+                            <span>3.2k views</span>
+                            <span>10 days ago</span>
+                        </div>
+                        <div class="interaction-buttons">
+                            <button class="interaction-btn like-btn" data-liked="false">
+                                <span class="material-icons">thumb_up</span>
+                                <span class="like-count">0</span>
+                            </button>
+                            <button class="interaction.skyNet-btn share-btn">
+                                <span class="material-icons">share</span>
+                                <span>Share</span>
+                            </button>
+                            <button class="interaction-btn comment-btn">
+                                <span class="material-icons">comment</span>
+                                <span>Comment</span>
+                            </button>
+                        </div>
+                        <div class="comment-section">
+                            <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+                            <button class="interaction-btn submit-comment">Post</button>
+                            <div class="comments-list"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Video 22: Campus Event -->
-            <div class="video-card" data-video-url="/videos/sports_day.mp4">
-                <div class="video-thumbnail">
-                    <img src="https://via.placeholder.com/1280x720?text=Sports+Day" alt="Sports Day">
-                    <span class="video-duration">7:30</span>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">DIU Sports Day 2025 Highlights</h3>
-                    <p class="text-sm text-gray-400 mb-2">Sports Club • Media Team</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>7.1k views</span>
-                        <span>2 days ago</span>
+                <div class="video-card" data-video-id="12">
+                    <div class="video-player">
+                        <video controls><source src="/videos/hackathon_recap.mp4" type="video/mp4">Your browser does not support the video tag.</video>
+                        <span class="video-duration">9:40</span>
+                        <span class="fullscreen-btn material-icons">fullscreen</span>
                     </div>
-                </div>
-            </div>
-
-            <!-- Video 23: Tech Talk -->
-            <div class="video-card" data-video-url="/videos/data_science_talk.mp4">
-                <div class="video-thumbnail">
-                    <img src="https://via.placeholder.com/1280x720?text=Data+Science+Talk" alt="Data Science Talk">
-                    <span class="video-duration">33:10</span>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Data Science with Python</h3>
-                    <p class="text-sm text-gray-400 mb-2">Guest Speaker • Ms. Ayesha</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>3.0k views</span>
-                        <span>4 days ago</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video 24: Lecture -->
-            <div class="video-card" data-video-url="/videos/linear_algebra.mp4">
-                <div class="video-thumbnail">
-                    <img src="https://via.placeholder.com/1280x720?text=Linear+Algebra" alt="Linear Algebra">
-                    <span class="video-duration">47:20</span>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Linear Algebra: Matrix Operations</h3>
-                    <p class="text-sm text-gray-400 mb-2">Math Department • Prof. Hossain</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>4.2k views</span>
-                        <span>5 days ago</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video 25: Lab Tutorial -->
-            <div class="video-card" data-video-url="/videos/microscopy_lab.mp4">
-                <div class="video-thumbnail">
-                    <img src="https://via.placeholder.com/1280x720?text=Microscopy+Lab" alt="Microscopy Lab">
-                    <span class="video-duration">21:40</span>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Biology Lab: Microscopy Basics</h3>
-                    <p class="text-sm text-gray-400 mb-2">Biology Department • Lab Instructor Zain</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>1.6k views</span>
-                        <span>1 week ago</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video 26: Student Project -->
-            <div class="video-card" data-video-url="/videos/traffic_project.mp4">
-                <div class="video-thumbnail">
-                    <img src="https://via.placeholder.com/1280x720?text=Traffic+Project" alt="Traffic Project">
-                    <span class="video-duration">14:20</span>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Smart Traffic Management System</h3>
-                    <p class="text-sm text-gray-400 mb-2">Final Year Project • Team TrafficTech</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>3.8k views</span>
-                        <span>8 days ago</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video 27: Campus Event -->
-            <div class="video-card" data-video-url="/videos/career_fair.mp4">
-                <div class="video-thumbnail">
-                    <img src="https://via.placeholder.com/1280x720?text=Career+Fair" alt="Career Fair">
-                    <span class="video-duration">10:05</span>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">DIU Career Fair 2025</h3>
-                    <p class="text-sm text-gray-400 mb-2">Career Services • Event Team</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>5.4k views</span>
-                        <span>3 days ago</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video 28: Tech Talk -->
-            <div class="video-card" data-video-url="/videos/cloud_talk.mp4">
-                <div class="video-thumbnail">
-                    <img src="https://via.placeholder.com/1280x720?text=Cloud+Talk" alt="Cloud Talk">
-                    <span class="video-duration">31:45</span>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Cloud Computing Fundamentals</h3>
-                    <p class="text-sm text-gray-400 mb-2">Guest Speaker • Mr. Rafiq</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>2.5k views</span>
-                        <span>6 days ago</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video 29: Lecture -->
-            <div class="video-card" data-video-url="/videos/agile_lecture.mp4">
-                <div class="video-thumbnail">
-                    <img src="https://via.placeholder.com/1280x720?text=Agile+Lecture" alt="Agile Lecture">
-                    <span class="video-duration">44:15</span>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Software Engineering: Agile Methodology</h3>
-                    <p class="text-sm text-gray-400 mb-2">CSE Department • Dr. Nusrat</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>4.0k views</span>
-                        <span>4 days ago</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video 30: Lab Tutorial -->
-            <div class="video-card" data-video-url="/videos/robotics_lab.mp4">
-                <div class="video-thumbnail">
-                    <img src="https://via.placeholder.com/1280x720?text=Robotics+Lab" alt="Robotics Lab">
-                    <span class="video-duration">17:50</span>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">Robotics Lab: Sensor Integration</h3>
-                    <p class="text-sm text-gray-400 mb-2">EEE Department • Lab Instructor Omar</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>1.7k views</span>
-                        <span>5 days ago</span>
+                    <div class="p-6">
+                        <h3 class="font-semibold text-lg mb-2">DIU Hackathon 2025 Recap</h3>
+                        <p class="text-sm text-gray-400 mb-2">Event video by John Doe</p>
+                        <div class="flex items-center justify-between text-sm text-gray-400 mb-2">
+                            <span>6.5k views</span>
+                            <span>1 day ago</span>
+                        </div>
+                        <div class="interaction-buttons">
+                            <button class="interaction-btn like-btn" data-liked="false">
+                                <span class="material-icons">thumb_up</span>
+                                <span class="like-count">0</span>
+                            </button>
+                            <button class="interaction-btn share-btn">
+                                <span class="material-icons">share</span>
+                                <span>Share</span>
+                            </button>
+                            <button class="interaction-btn comment-btn">
+                                <span class="material-icons">comment</span>
+                                <span>Comment</span>
+                            </button>
+                        </div>
+                        <div class="comment-section">
+                            <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+                            <button class="interaction-btn submit-comment">Post</button>
+                            <div class="comments-list"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Video Modal -->
-    <div class="modal" id="videoModal">
-        <div class="modal-content">
-            <span class="close-modal material-icons">close</span>
-            <div id="videoPlayer"></div>
-        </div>
+    <!-- Fullscreen Container -->
+    <div class="fullscreen-container" id="fullscreenContainer">
+        <span class="exit-fullscreen material-icons">close</span>
+        <div id="fullscreenVideo"></div>
     </div>
 
     <script>
-        // Video upload handling with automatic categorization
-        const videoUpload = document.getElementById('videoUpload');
-        const videoGrid = document.querySelector('.grid');
-        const modal = document.getElementById('videoModal');
-        const videoPlayer = document.getElementById('videoPlayer');
-        const closeModal = document.querySelector('.close-modal');
-
-        // Keywords for video categorization
-        const categoryKeywords = {
-            'lectures': ['lecture', 'class', 'course', 'professor', 'teacher'],
-            'lab_tutorials': ['lab', 'tutorial', 'practical', 'experiment', 'demonstration'],
-            'student_projects': ['project', 'thesis', 'presentation', 'student work'],
-            'campus_events': ['event', 'ceremony', 'festival', 'competition', 'workshop'],
-            'tech_talks': ['tech talk', 'seminar', 'conference', 'symposium', 'webinar']
+        // Simulated user data and videos
+        const users = {
+            'JohnDoe': [
+                {
+                    title: 'Autonomous Drone Navigation System',
+                    src: '/videos/drone_project.mp4',
+                    duration: '15:30',
+                    description: 'Final Year Project by John Doe',
+                    views: '3.2k',
+                    uploaded: '10 days ago',
+                    videoId: '11'
+                },
+                {
+                    title: 'DIU Hackathon 2025 Recap',
+                    src: '/videos/hackathon_recap.mp4',
+                    duration: '9:40',
+                    description: 'Event video by John Doe',
+                    views: '6.5k',
+                    uploaded: '1 day ago',
+                    videoId: '12'
+                }
+            ],
+            'Rahman': [
+                {
+                    title: 'JavaScript Fundamentals for Beginners',
+                    src: 'https://www.youtube.com/embed/W6NZfCO5SIk',
+                    duration: '15:30',
+                    description: 'Uploaded by Dr. Rahman',
+                    views: '2.1k',
+                    uploaded: '2 days ago',
+                    videoId: '1'
+                }
+            ],
+            'Fatima': [
+                {
+                    title: 'Database Lab: SQL Queries and Joins',
+                    src: 'https://www.youtube.com/embed/PkZNo7MFNFg',
+                    duration: '23:45',
+                    description: 'Uploaded by Fatima',
+                    views: '1.8k',
+                    uploaded: '3 days ago',
+                    videoId: '2'
+                }
+            ],
+            'Innovators': [
+                {
+                    title: 'Smart Home Automation using IoT',
+                    src: 'https://www.youtube.com/embed/Mus_vwhTCq0',
+                    duration: '12:20',
+                    description: 'Uploaded by Team Innovators',
+                    views: '3.4k',
+                    uploaded: '1 week ago',
+                    videoId: '3'
+                }
+            ],
+            'Siddique': [
+                {
+                    title: 'Calculus I: Limits and Derivatives',
+                    src: '/videos/calculus_lecture.mp4',
+                    duration: '50:00',
+                    description: 'Uploaded by Dr. Siddique',
+                    views: '4.8k',
+                    uploaded: '4 days ago',
+                    videoId: '4'
+                }
+            ],
+            'MediaTeam': [
+                {
+                    title: 'DIU Tech Fest 2025 Highlights',
+                    src: 'https://www.youtube.com/embed/9bZkp7q19f0',
+                    duration: '10:15',
+                    description: 'Uploaded by Media Team',
+                    views: '6.2k',
+                    uploaded: '1 day ago',
+                    videoId: '5'
+                }
+            ],
+            'Sarah': [
+                {
+                    title: 'AI in Healthcare: Future Prospects',
+                    src: 'https://www.youtube.com/embed/zpOULjyy-n8',
+                    duration: '30:25',
+                    description: 'Uploaded by Dr. Sarah Khan',
+                    views: '2.8k',
+                    uploaded: '4 days ago',
+                    videoId: '6'
+                }
+            ],
+            'Sara': [
+                {
+                    title: 'Chemistry Lab: Titration Techniques',
+                    src: '/videos/titration_lab.mp4',
+                    duration: '22:15',
+                    description: 'Uploaded by Sara',
+                    views: '1.9k',
+                    uploaded: '1 week ago',
+                    videoId: '7'
+                }
+            ],
+            'SkyNet': [
+                {
+                    title: 'Autonomous Drone Navigation System',
+                    src: '/videos/drone_project.mp4',
+                    duration: '15:30',
+                    description: 'Uploaded by Team SkyNet',
+                    views: '3.2k',
+                    uploaded: '10 days ago',
+                    videoId: '8'
+                }
+            ],
+            'CodingClub': [
+                {
+                    title: 'DIU Hackathon 2025 Recap',
+                    src: '/videos/hackathon_recap.mp4',
+                    duration: '9:40',
+                    description: 'Uploaded by Coding Club',
+                    views: '6.5k',
+                    uploaded: '1 day ago',
+                    videoId: '9'
+                }
+            ],
+            'Faisal': [
+                {
+                    title: 'Quantum Computing Basics',
+                    src: '/videos/quantum_talk.mp4',
+                    duration: '28:50',
+                    description: 'Uploaded by Dr. Faisal',
+                    views: '2.7k',
+                    uploaded: '5 days ago',
+                    videoId: '10'
+                }
+            ]
         };
 
-        function detectVideoCategory(fileName, fileMetadata) {
-            const fileNameLower = fileName.toLowerCase();
-            
-            for (const [category, keywords] of Object.entries(categoryKeywords)) {
-                if (keywords.some(keyword => fileNameLower.includes(keyword))) {
-                    return category;
-                }
-            }
-            
-            // Default to 'others' if no category matches
-            return 'others';
+        // Simulated interaction data
+        const videoInteractions = {
+            // Format: videoId: { likes: number, comments: [{user: string, text: string}] }
+            '1': { likes: 0, comments: [] },
+            '2': { likes: 0, comments: [] },
+            '3': { likes: 0, comments: [] },
+            '4': { likes: 0, comments: [] },
+            '5': { likes: 0, comments: [] },
+            '6': { likes: 0, comments: [] },
+            '7': { likes: 0, comments: [] },
+            '8': { likes: 0, comments: [] },
+            '9': { likes: 0, comments: [] },
+            '10': { likes: 0, comments: [] },
+            '11': { likes: 0, comments: [] },
+            '12': { likes: 0, comments: [] }
+        };
+
+        // Logout function
+        function logout() {
+            alert('Logged out successfully!');
+            window.location.href = 'login.html';
         }
 
-        function createVideoCard(file, category) {
-            const videoCard = document.createElement('div');
-            videoCard.className = 'video-card';
-            videoCard.setAttribute('data-video-url', URL.createObjectURL(file));
-            
-            const timestamp = new Date().toLocaleDateString();
-            const duration = '00:00'; // This would be extracted from actual video metadata
-            
-            videoCard.innerHTML = `
-                <div class="video-thumbnail">
-                    <video src="${URL.createObjectURL(file)}" class="hidden"></video>
-                    <img src="" alt="${file.name}" class="video-preview">
-                    <span class="video-duration">${duration}</span>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-semibold mb-2">${file.name}</h3>
-                    <p class="text-sm text-gray-400 mb-2">Category: ${category}</p>
-                    <div class="flex items-center justify-between text-sm text-gray-400">
-                        <span>0 views</span>
-                        <span>${timestamp}</span>
-                    </div>
-                </div>
-            `;
+        // Category filter functionality
+        const categoryPills = document.querySelectorAll('.category-pill');
+        const videoCards = document.querySelectorAll('.video-card');
+        const fullscreenContainer = document.getElementById('fullscreenContainer');
+        const fullscreenVideo = document.getElementById('fullscreenVideo');
+        const exitFullscreen = document.querySelector('.exit-fullscreen');
+        const videoFeed = document.querySelector('.video-feed');
+        const profileSection = document.getElementById('profileSection');
+        const profileLink = document.querySelector('.profile-link');
+        const profileVideos = document.getElementById('profileVideos');
 
-            // Generate video thumbnail
-            const video = videoCard.querySelector('video');
-            const img = videoCard.querySelector('img');
-            video.onloadeddata = () => {
-                video.currentTime = 1;
-                setTimeout(() => {
-                    const canvas = document.createElement('canvas');
-                    canvas.width = video.videoWidth;
-                    canvas.height = video.videoHeight;
-                    canvas.getContext('2d').drawImage(video, 0, 0);
-                    img.src = canvas.toDataURL();
-                }, 300);
-            };
+        categoryPills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                categoryPills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
 
-            // Add click event for modal
-            videoCard.addEventListener('click', () => openVideoModal(videoCard.getAttribute('data-video-url'), false));
-            
-            return videoCard;
-        }
-
-        // Open video modal
-        function openVideoModal(videoUrl, isYouTube) {
-            videoPlayer.innerHTML = '';
-            if (isYouTube) {
-                videoPlayer.innerHTML = `<iframe src="${videoUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-            } else {
-                videoPlayer.innerHTML = `<video controls><source src="${videoUrl}" type="video/mp4">Your browser does not support the video tag.</video>`;
-            }
-            modal.style.display = 'flex';
-        }
-
-        // Close modal
-        closeModal.addEventListener('click', () => {
-            modal.style.display = 'none';
-            videoPlayer.innerHTML = '';
-        });
-
-        // Close modal when clicking outside
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-                videoPlayer.innerHTML = '';
-            }
-        });
-
-        // Add click events to existing video cards
-        document.querySelectorAll('.video-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const videoUrl = card.getAttribute('data-video-url');
-                const isYouTube = videoUrl.includes('youtube.com');
-                openVideoModal(videoUrl, isYouTube);
+                const category = pill.textContent.toLowerCase();
+                videoCards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const description = card.querySelector('p').textContent.toLowerCase();
+                    
+                    if (category === 'all videos' || 
+                        title.includes(category) || 
+                        description.includes(category)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
             });
         });
 
-        videoUpload.addEventListener('change', async (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                // Detect video category
-                const category = detectVideoCategory(file.name);
-                
-                // Create and add video card to grid
-                const videoCard = createVideoCard(file, category);
-                videoGrid.insertBefore(videoCard, videoGrid.firstChild);
-                
-                // Update category pills
-                const categoryPills = document.querySelectorAll('.category-pill');
-                categoryPills.forEach(pill => {
-                    if (pill.textContent.toLowerCase().includes(category)) {
-                        pill.classList.add('highlight');
-                        setTimeout(() => pill.classList.remove('highlight'), 2000);
+        // Auto-pause other videos when one starts playing
+        const videos = document.querySelectorAll('video');
+        videos.forEach(video => {
+            video.addEventListener('play', () => {
+                videos.forEach(v => {
+                    if (v !== video) {
+                        v.pause();
                     }
                 });
+            });
+        });
+
+        // Fullscreen functionality
+        document.querySelectorAll('.fullscreen-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const videoPlayer = btn.parentElement;
+                const isIframe = videoPlayer.querySelector('iframe');
+                const videoSrc = isIframe 
+                    ? videoPlayer.querySelector('iframe').src 
+                    : videoPlayer.querySelector('video').querySelector('source').src;
+
+                fullscreenVideo.innerHTML = isIframe
+                    ? `<iframe src="${videoSrc}" class="fullscreen-video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
+                    : `<video controls autoplay class="fullscreen-video"><source src="${videoSrc}" type="video/mp4">Your browser does not support the video tag.</video>`;
+
+                fullscreenContainer.style.display = 'flex';
                 
-                // Show success message
-                alert(`Video "${file.name}" uploaded and categorized as ${category}`);
+                if (!isIframe) {
+                    videoPlayer.querySelector('video').pause();
+                }
+            });
+        });
+
+        // Exit fullscreen
+        exitFullscreen.addEventListener('click', () => {
+            fullscreenContainer.style.display = 'none';
+            fullscreenVideo.innerHTML = '';
+        });
+
+        fullscreenContainer.addEventListener('click', (e) => {
+            if (e.target === fullscreenContainer) {
+                fullscreenContainer.style.display = 'none';
+                fullscreenVideo.innerHTML = '';
             }
         });
 
-        // Add styles for category pill highlight
-        const style = document.createElement('style');
-        style.textContent = `
-            .category-pill.highlight {
-                animation: pulse 2s;
-                border: 2px solid #facc15;
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && fullscreenContainer.style.display === 'flex') {
+                fullscreenContainer.style.display = 'none';
+                fullscreenVideo.innerHTML = '';
             }
-            @keyframes pulse {
-                0% { transform: scale(1); }
-                50% { transform: scale(1.05); }
-                100% { transform: scale(1); }
-            }
-        `;
-        document.head.appendChild(style);
+        });
+
+        // Like functionality
+        document.querySelectorAll('.like-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const videoId = btn.closest('.video-card').dataset.videoId;
+                const isLiked = btn.dataset.liked === 'true';
+                const likeCountSpan = btn.querySelector('.like-count');
+                let likeCount = parseInt(likeCountSpan.textContent);
+
+                if (isLiked) {
+                    likeCount--;
+                    btn.dataset.liked = 'false';
+                    btn.classList.remove('liked');
+                } else {
+                    likeCount++;
+                    btn.dataset.liked = 'true';
+                    btn.classList.add('liked');
+                }
+
+                likeCountSpan.textContent = likeCount;
+                videoInteractions[videoId].likes = likeCount;
+            });
+        });
+
+        // Share functionality
+        document.querySelectorAll('.share-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const videoId = btn.closest('.video-card').dataset.videoId;
+                const video = Object.values(users).flat().find(v => v.videoId === videoId);
+                const url = video.src.includes('youtube.com') ? video.src : `https://example.com/videos/${videoId}`;
+                
+                navigator.clipboard.write(url)
+                    .then(() => alert('Video URL copied to clipboard!'))
+                    .catch(() => alert('Failed to copy URL.'));
+            });
+        });
+
+        // Comment functionality
+        document.querySelectorAll('.comment-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const commentSection = btn.closest('.video-card').querySelector('.comment-section');
+                commentSection.style.display = commentSection.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+
+        document.querySelectorAll('.submit-comment').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const videoId = btn.closest('.video-card').dataset.videoId;
+                const commentInput = btn.previousElementSibling;
+                const commentText = commentInput.value.trim();
+
+                if (commentText) {
+                    const comment = {
+                        user: 'Anonymous', // Replace with actual user data in a real app
+                        text: commentText
+                    };
+                    videoInteractions[videoId].comments.push(comment);
+                    renderComments(videoId, btn.closest('.video-card').querySelector('.comments-list'));
+                    commentInput.value = '';
+                }
+            });
+        });
+
+        function renderComments(videoId, commentsList) {
+            commentsList.innerHTML = '';
+            videoInteractions[videoId].comments.forEach(comment => {
+                const commentDiv = document.createElement('div');
+                commentDiv.className = 'comment';
+                commentDiv.innerHTML = `<strong>${comment.user}:</strong> ${comment.text}`;
+                commentsList.appendChild(commentDiv);
+            });
+        }
+
+        // Profile view functionality
+        profileLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            videoFeed.style.display = 'none';
+            profileSection.style.display = 'block';
+            profileLink.classList.add('active');
+            document.querySelector('.sidebar-link[href="videos.html"]').classList.remove('active');
+
+            // Show John Doe's videos by default
+            loadProfileVideos('JohnDoe');
+        });
+
+        document.querySelector('.sidebar-link[href="videos.html"]').addEventListener('click', (e) => {
+            e.preventDefault();
+            videoFeed.style.display = 'block';
+            profileSection.style.display = 'none';
+            profileLink.classList.remove('active');
+            document.querySelector('.sidebar-link[href="videos.html"]').classList.add('active');
+        });
+
+        // Load videos for a specific user in the profile section
+        function loadProfileVideos(userId) {
+            profileVideos.innerHTML = '';
+            const userVideos = users[userId] || [];
+            userVideos.forEach(video => {
+                const videoCard = document.createElement('div');
+                videoCard.className = 'video-card';
+                videoCard.dataset.videoId = video.videoId;
+                const isIframe = video.src.includes('youtube.com');
+                videoCard.innerHTML = `
+                    <div class="video-player">
+                        ${isIframe 
+                            ? `<iframe src="${video.src}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
+                            : `<video controls><source src="${video.src}" type="video/mp4">Your browser does not support the video tag.</video>`}
+                        <span class="video-duration">${video.duration}</span>
+                        <span class="fullscreen-btn material-icons">fullscreen</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-semibold text-lg mb-2">${video.title}</h3>
+                        <p class="text-sm text-gray-400 mb-2">${video.description}</p>
+                        <div class="flex items-center justify-between text-sm text-gray-400 mb-2">
+                            <span>${video.views} views</span>
+                            <span>${video.uploaded}</span>
+                        </div>
+                        <div class="interaction-buttons">
+                            <button class="interaction-btn like-btn" data-liked="false">
+                                <span class="material-icons">thumb_up</span>
+                                <span class="like-count">${videoInteractions[video.videoId].likes}</span>
+                            </button>
+                            <button class="interaction-btn share-btn">
+                                <span class="material-icons">share</span>
+                                <span>Share</span>
+                            </button>
+                            <button class="interaction-btn comment TESTS-btn">
+                                <span class="material-icons">comment</span>
+                                <span>Comment</span>
+                            </button>
+                        </div>
+                        <div class="comment-section">
+                            <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+                            <button class="interaction-btn submit-comment">Post</button>
+                            <div class="comments-list"></div>
+                        </div>
+                    </div>
+                `;
+                profileVideos.appendChild(videoCard);
+
+                // Attach fullscreen event
+                videoCard.querySelector('.fullscreen-btn').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    fullscreenVideo.innerHTML = isIframe
+                        ? `<iframe src="${video.src}" class="fullscreen-video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
+                        : `<video controls autoplay class="fullscreen-video"><source src="${video.src}" type="video/mp4">Your browser does not support the video tag.</video>`;
+                    fullscreenContainer.style.display = 'flex';
+                    if (!isIframe) {
+                        videoCard.querySelector('video')?.pause();
+                    }
+                });
+
+                // Attach like event
+                videoCard.querySelector('.like-btn').addEventListener('click', () => {
+                    const btn = videoCard.querySelector('.like-btn');
+                    const isLiked = btn.dataset.liked === 'true';
+                    const likeCountSpan = btn.querySelector('.like-count');
+                    let likeCount = parseInt(likeCountSpan.textContent);
+
+                    if (isLiked) {
+                        likeCount--;
+                        btn.dataset.liked = 'false';
+                        btn.classList.remove('liked');
+                    } else {
+                        likeCount++;
+                        btn.dataset.liked = 'true';
+                        btn.classList.add('liked');
+                    }
+
+                    likeCountSpan.textContent = likeCount;
+                    videoInteractions[video.videoId].likes = likeCount;
+                });
+
+                // Attach share event
+                videoCard.querySelector('.share-btn').addEventListener('click', () => {
+                    const url = isIframe ? video.src : `https://example.com/videos/${video.videoId}`;
+                    navigator.clipboard.write(url)
+                        .then(() => alert('Video URL copied to clipboard!'))
+                        .catch(() => alert('Failed to copy URL.'));
+                });
+
+                // Attach comment toggle event
+                videoCard.querySelector('.comment-btn').addEventListener('click', () => {
+                    const commentSection = videoCard.querySelector('.comment-section');
+                    commentSection.style.display = commentSection.style.display === 'block' ? 'none' : 'block';
+                });
+
+                // Attach submit comment event
+                videoCard.querySelector('.submit-comment').addEventListener('click', () => {
+                    const commentInput = videoCard.querySelector('.comment-input');
+                    const commentText = commentInput.value.trim();
+
+                    if (commentText) {
+                        const comment = {
+                            user: 'Anonymous',
+                            text: commentText
+                        };
+                        videoInteractions[video.videoId].comments.push(comment);
+                        renderComments(video.videoId, videoCard.querySelector('.comments-list'));
+                        commentInput.value = '';
+                    }
+                });
+
+                // Render initial comments
+                renderComments(video.videoId, videoCard.querySelector('.comments-list'));
+            });
+        }
+
+        // Click on uploader name to view their profile
+        document.querySelectorAll('.uploader-name').forEach(name => {
+            name.addEventListener('click', () => {
+                const userId = name.getAttribute('data-user');
+                videoFeed.style.display = 'none';
+                profileSection.style.display = 'block';
+                profileLink.classList.add('active');
+                document.querySelector('.sidebar-link[href="videos.html"]').classList.remove('active');
+
+                // Update profile section for clicked user
+                const profileHeader = profileSection.querySelector('.profile-header');
+                profileHeader.innerHTML = `
+                    <img src="/images/sample_profile_${userId}.jpg" alt="${userId} Profile" class="profile-picture" onerror="this.src='/images/sample_profile.jpg'">
+                    <div>
+                        <h2 class="text-2xl font-bold">${name.textContent}</h2>
+                        <p class="text-gray-400">DIU ${userId.includes('Team') || userId === 'CodingClub' ? 'Club' : userId.includes('Dr.') ? 'Faculty' : 'Student'} • ${userId.includes('CSE') ? 'CSE' : userId.includes('Math') ? 'Math' : userId.includes('Chemistry') ? 'Chemistry' : 'Various'} Department</p>
+                    </div>
+                `;
+                loadProfileVideos(userId);
+            });
+        });
     </script>
 </body>
 </html>

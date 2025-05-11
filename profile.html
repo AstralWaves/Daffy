@@ -5,519 +5,876 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daffy - Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif;
             background: #000000;
             min-height: 100vh;
             color: #ffffff;
+            margin: 0;
         }
-        .sidebar {
-            background: linear-gradient(180deg, #1e2761 0%, #000000 100%);
-            border-radius: 0 32px 32px 0;
-            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+        .profile-link {
+            color: #facc15;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+        .profile-link:hover {
+            opacity: 0.8;
         }
         .profile-header {
+            background: #1a1a1a;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 16px;
             position: relative;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
         }
         .profile-background {
             height: 200px;
             object-fit: cover;
             width: 100%;
+            filter: brightness(0.8);
         }
         .profile-avatar {
-            width: 120px;
-            height: 120px;
-            border: 4px solid #ffffff;
+            width: 152px;
+            height: 152px;
+            border: 3px solid #ffffff;
             border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             position: absolute;
-            bottom: -60px;
-            left: 32px;
+            top: 120px;
+            left: 24px;
             object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
-        .profile-stats {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            border-radius: 12px;
-            padding: 8px 16px;
-        }
-        .post-card {
+        .section-card {
             background: #1a1a1a;
-            border-radius: 16px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            padding: 16px;
+            margin-bottom: 16px;
         }
-        .post-card:hover {
-            transform: translateY(-4px);
-        }
-        .edit-btn, .upload-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        .btn-primary {
+            background: #facc15;
+            color: #000000;
             border-radius: 9999px;
             padding: 8px 16px;
-            color: white;
-            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s ease;
         }
-        .edit-btn:hover, .upload-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
+        .btn-primary:hover {
+            background: #e0b514;
         }
-        .sidebar-link {
-            color: #ffffff;
-            padding: 12px 16px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-        .sidebar-link:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-        .sidebar-link.active {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        .tab-btn {
-            color: #ffffff;
-            padding: 12px 24px;
+        .btn-secondary {
+            border: 1px solid #facc15;
+            color: #facc15;
             border-radius: 9999px;
-            transition: all 0.3s ease;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s ease;
         }
-        .tab-btn.active {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
+        .btn-secondary:hover {
+            background: rgba(10, 102, 194, 0.1);
         }
-        .tab-btn:hover:not(.active) {
-            background: rgba(255, 255, 255, 0.05);
+        .btn-follow {
+            background: #0a66c2;
+            color: #ffffff;
+            border-radius: 9999px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+        .btn-follow:hover {
+            background: #004182;
+        }
+        .btn-following {
+            background: #1a1a1a;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            border-radius: 9999px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+        .btn-following:hover {
+            background: #333333;
+        }
+        .btn-icon {
+            color: #cccccc;
+            padding: 4px;
+            border-radius: 50%;
+            transition: background 0.2s ease;
+        }
+        .btn-icon:hover {
+            background: #333333;
         }
         .input-field {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            padding: 10px;
-            color: white;
+            border: 1px solid #444444;
+            border-radius: 4px;
+            padding: 8px;
             width: 100%;
+            background: #2a2a2a;
+            color: #ffffff;
+            font-size: 14px;
         }
         .input-field:focus {
             outline: none;
-            border-color: #facc15;
+            border-color: #0a66c2;
+        }
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #0a66c2;
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transition: opacity 0.3s ease;
+            font-size: 14px;
+        }
+        .open-to-work {
+            border: 2px solid #0a66c2;
+            border-radius: 50%;
+            position: absolute;
+            top: 120px;
+            left: 148px;
+            width: 152px;
+            height: 152px;
+            pointer-events: none;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+        @media (max-width: 768px) {
+            .profile-avatar {
+                width: 72px;
+                height: 72px;
+                top: 120px;
+                left: 16px;
+                border: 2px solid #ffffff;
+            }
+            .open-to-work {
+                width: 72px;
+                height: 72px;
+                top: 120px;
+                left: 68px;
+            }
+            .profile-background {
+                height: 140px;
+            }
+            .profile-header {
+                margin-bottom: 12px;
+            }
+            .section-card {
+                padding: 12px;
+                margin-bottom: 12px;
+            }
         }
     </style>
 </head>
-<body class="flex min-h-screen">
-    <!-- Left Sidebar -->
-    <aside class="sidebar w-72 flex flex-col py-12 px-8 min-h-screen mr-12">
-        <a href="home.html" class="logo text-3xl font-bold text-[#facc15] mb-8 flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <span class="material-icons text-[#facc15]" style="font-size:2.5rem;">bubble_chart</span> Daffy
+<body>
+    <!-- Header with Daffy Logo -->
+    <header class="p-4">
+        <a href="home.html" class="logo text-2xl font-bold text-white flex items-center gap-2">
+            <span class="material-icons text-[#facc15]" style="font-size:2rem;">bubble_chart</span>
+            <span class="text-[#facc15]">Daffy</span>
         </a>
-        <nav class="flex flex-col gap-1">
-            <a href="home.html" class="sidebar-link"><span class="material-icons">home</span> Home</a>
-            <a href="trends.html" class="sidebar-link"><span class="material-icons">trending_up</span> Trends</a>
-            <a href="clubs.html" class="sidebar-link"><span class="material-icons">groups</span> Clubs</a>
-            <a href="messaging.html" class="sidebar-link"><span class="material-icons">chat_bubble</span> Messages</a>
-            <a href="jobs.html" class="sidebar-link"><span class="material-icons">work</span> Jobs</a>
-            <a href="settings.html" class="sidebar-link"><span class="material-icons">settings</span> Settings</a>
-        </nav>
-        <div class="mt-auto">
-            <button onclick="logout()" class="sidebar-link w-full text-left">
-                <span class="material-icons">logout</span> Logout
-            </button>
-        </div>
-    </aside>
+    </header>
 
     <!-- Main Content -->
-    <main class="flex-1 p-8">
+    <main class="p-8">
+        <script>
+            if (!localStorage.getItem('isLoggedIn')) {
+                window.location.href = 'login.html';
+            }
+        </script>
         <!-- Profile Header -->
-        <div class="profile-header mb-8">
+        <div class="profile-header relative">
             <img id="profileBackground" src="https://via.placeholder.com/1200x200" class="profile-background" alt="Profile Background">
-            <div class="pt-20 px-8 pb-8 relative">
-                <img id="profileAvatar" src="https://via.placeholder.com/120" class="profile-avatar" alt="Profile Avatar">
-                <div class="flex justify-end gap-4 mt-4">
-                    <label class="upload-btn cursor-pointer">
-                        <span class="material-icons mr-2">image</span> Change Background
+            <div class="relative pt-24 pb-6 px-6">
+                <img id="profileAvatar" src="https://via.placeholder.com/152" class="profile-avatar" alt="Profile Avatar">
+                <div id="openToWorkFrame" class="open-to-work hidden"></div>
+                <div class="flex justify-end gap-2 mb-4">
+                    <label class="btn-icon cursor-pointer" title="Edit Background Photo">
+                        <span class="material-icons">photo_camera</span>
                         <input type="file" id="backgroundUpload" accept="image/*" class="hidden">
                     </label>
-                    <label class="upload-btn cursor-pointer">
-                        <span class="material-icons mr-2">person</span> Change Avatar
+                    <label class="btn-icon cursor-pointer" title="Edit Profile Photo">
+                        <span class="material-icons">edit</span>
                         <input type="file" id="avatarUpload" accept="image/*" class="hidden">
                     </label>
-                    <button onclick="toggleEditProfile()" class="edit-btn">
-                        <span class="material-icons mr-2">edit</span> Edit Profile
+                    <button onclick="toggleEditProfile()" class="btn-primary">Edit profile</button>
+                    <button onclick="toggleFollow()" class="btn-follow hidden" id="followBtn">Follow</button>
+                </div>
+                <div class="mt-4">
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-xl font-bold" id="userName">User Name</h1>
+                        <button onclick="playPronunciation()" class="text-gray-400 hover:text-white" title="Name Pronunciation">
+                            <span class="material-icons">volume_up</span>
+                        </button>
+                    </div>
+                    <p class="text-base font-semibold text-gray-300" id="userHeadline">Professional Headline</p>
+                    <p class="text-sm text-gray-400" id="userLocation">Location</p>
+                    <p class="text-sm text-gray-400" id="userFollowers">0 followers</p>
+                    <p class="text-sm text-gray-400">Contact info: <a id="userContactInfo" href="#" class="text-blue-400 hover:underline">View contact info</a></p>
+                    <p class="text-sm text-gray-400">Profile URL: <a id="userCustomUrl" href="#" class="text-blue-400 hover:underline">linkedin.com/in/username</a></p>
+                    <div class="flex gap-2 mt-3">
+                        <button onclick="toggleOpenToWork()" class="btn-secondary" id="openToWorkBtn">Open to</button>
+                        <button onclick="toggleHiring()" class="btn-secondary" id="hiringBtn">Add profile section</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="section-card">
+            <h2 class="section-title mb-3">About</h2>
+            <p id="userAbout" class="text-sm text-gray-300">No summary provided.</p>
+        </div>
+
+        <!-- Featured Section -->
+        <div class="section-card">
+            <h2 class="section-title mb-3">Featured</h2>
+            <div id="featuredSection" class="grid grid-cols-1 gap-3"></div>
+            <button onclick="addFeaturedItem()" class="btn-secondary mt-3">Add featured</button>
+        </div>
+
+        <!-- Activity Section -->
+        <div class="section-card">
+            <h2 class="section-title mb-3">Activity</h2>
+            <div id="activitySection" class="space-y-4"></div>
+        </div>
+
+        <!-- Experience Section -->
+        <div class="section-card">
+            <h2 class="section-title mb-3">Experience</h2>
+            <div id="experienceSection" class="space-y-4"></div>
+            <button onclick="addExperience()" class="btn-secondary mt-3">Add position</button>
+        </div>
+
+        <!-- Education Section -->
+        <div class="section-card">
+            <h2 class="section-title mb-3">Education</h2>
+            <div id="educationSection" class="space-y-4"></div>
+            <button onclick="addEducation()" class="btn-secondary mt-3">Add education</button>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="section-card">
+            <h2 class="section-title mb-3">Skills</h2>
+            <div id="skillsSection" class="space-y-2"></div>
+            <button onclick="addSkill()" class="btn-secondary mt-3">Add skill</button>
+        </div>
+
+        <!-- Recommendations Section -->
+        <div class="section-card">
+            <h2 class="section-title mb-3">Recommendations</h2>
+            <div id="recommendationsSection" class="space-y-4"></div>
+            <button onclick="requestRecommendation()" class="btn-secondary mt-3">Request a recommendation</button>
+        </div>
+
+        <!-- Edit Profile Modal -->
+        <div id="editProfileModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+            <div class="bg-[#1a1a1a] rounded-lg p-6 w-full max-w-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-semibold text-white">Edit intro</h2>
+                    <button onclick="toggleEditProfile()" class="text-gray-400 hover:text-white">
+                        <span class="material-icons">close</span>
                     </button>
                 </div>
-                <div class="mt-16">
-                    <h1 class="text-3xl font-bold text-white" id="userName">User Name</h1>
-                    <p class="text-gray-300" id="userUsername">@username</p>
-                    <p class="text-gray-200 mt-2" id="userBio">No bio yet</p>
-                    <div class="flex items-center gap-4 text-gray-300 mt-2">
-                        <span class="material-icons">school</span>
-                        <span id="userDepartment">Department</span>
-                        <span class="mx-2">•</span>
-                        <span id="userSemester">Semester</span>
-                    </div>
-                    <div class="flex items-center gap-6 mt-4">
-                        <div class="profile-stats">
-                            <span class="font-bold text-white" id="userPosts">0</span> Posts
-                        </div>
-                        <div class="profile-stats">
-                            <span class="font-bold text-white" id="userFollowers">0</span> Followers
-                        </div>
-                        <div class="profile-stats">
-                            <span class="font-bold text-white" id="userFollowing">0</span> Following
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Profile Tabs -->
-        <div class="flex gap-4 mb-8">
-            <button class="tab-btn active" onclick="switchTab('posts')">
-                <span class="material-icons mr-2">grid_on</span> Posts
-            </button>
-            <button class="tab-btn" onclick="switchTab('about')">
-                <span class="material-icons mr-2">info</span> About
-            </button>
-            <button class="tab-btn" onclick="switchTab('photos')">
-                <span class="material-icons mr-2">photo_library</span> Photos
-            </button>
-        </div>
-
-        <!-- Content Sections -->
-        <div id="postsSection" class="space-y-6">
-            <div class="post-card p-6">
-                <textarea id="newPost" class="input-field" rows="3" placeholder="What's on your mind?"></textarea>
-                <div class="flex justify-between mt-4">
-                    <label class="upload-btn cursor-pointer">
-                        <span class="material-icons">image</span>
-                        <input type="file" id="postImageUpload" accept="image/*" class="hidden" multiple>
-                    </label>
-                    <button onclick="createPost()" class="px-6 py-2 rounded-lg bg-[#1e2761] text-white hover:bg-[#2a3a8f]">
-                        Post
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div id="aboutSection" class="hidden">
-            <div class="post-card p-6">
-                <h2 class="text-xl font-bold text-white mb-4">About</h2>
-                <div class="space-y-4">
+                <form id="editProfileForm" class="space-y-4">
                     <div>
-                        <h3 class="text-gray-300 font-semibold mb-2">Education</h3>
-                        <p class="text-white" id="userEducation">Department • Semester</p>
+                        <label class="block text-sm text-gray-300 mb-1">First name *</label>
+                        <input type="text" id="editFirstName" class="input-field" required>
                     </div>
                     <div>
-                        <h3 class="text-gray-300 font-semibold mb-2">Skills</h3>
-                        <p class="text-white" id="userSkills">No skills added yet</p>
+                        <label class="block text-sm text-gray-300 mb-1">Last name *</label>
+                        <input type="text" id="editLastName" class="input-field" required>
                     </div>
                     <div>
-                        <h3 class="text-gray-300 font-semibold mb-2">Contact</h3>
-                        <p class="text-white" id="userEmail">email@example.com</p>
-                        <p class="text-white" id="userPhone">+880 1234567890</p>
-                        <p class="text-white" id="userWebsite"><a href="#" target="_blank">website.com</a></p>
+                        <label class="block text-sm text-gray-300 mb-1">Headline *</label>
+                        <input type="text" id="editHeadline" class="input-field" maxlength="220" required>
                     </div>
                     <div>
-                        <h3 class="text-gray-300 font-semibold mb-2">Joined</h3>
-                        <p class="text-white" id="userJoined">January 2024</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="photosSection" class="hidden grid grid-cols-3 gap-4">
-            <!-- Photos will be dynamically added here -->
-        </div>
-    </main>
-
-    <!-- Edit Profile Modal -->
-    <div id="editProfileModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
-        <div class="bg-[#1a1a1a] rounded-2xl p-8 w-full max-w-2xl">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-white">Edit Profile</h2>
-                <button onclick="toggleEditProfile()" class="text-gray-400 hover:text-white">
-                    <span class="material-icons">close</span>
-                </button>
-            </div>
-            <form id="editProfileForm" class="space-y-6">
-                <div class="grid grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-gray-300 mb-2">Full Name</label>
-                        <input type="text" id="editFullName" class="input-field" required>
+                        <label class="block text-sm text-gray-300 mb-1">Location *</label>
+                        <input type="text" id="editLocation" class="input-field" required>
                     </div>
                     <div>
-                        <label class="block text-gray-300 mb-2">Username</label>
-                        <input type="text" id="editUsername" class="input-field" required>
+                        <label class="block text-sm text-gray-300 mb-1">Contact info</label>
+                        <input type="text" id="editContactInfo" class="input-field" placeholder="e.g., email or phone">
                     </div>
-                </div>
-                <div>
-                    <label class="block text-gray-300 mb-2">Bio</label>
-                    <textarea id="editBio" class="input-field" rows="3"></textarea>
-                </div>
-                <div>
-                    <label class="block text-gray-300 mb-2">Skills (comma-separated)</label>
-                    <input type="text" id="editSkills" class="input-field">
-                </div>
-                <div class="grid grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-gray-300 mb-2">Department</label>
-                        <select id="editDepartment" class="input-field" required>
-                            <option value="CSE">Computer Science & Engineering</option>
-                            <option value="EEE">Electrical & Electronic Engineering</option>
-                            <option value="CE">Civil Engineering</option>
-                            <option value="ME">Mechanical Engineering</option>
-                            <option value="IPE">Industrial & Production Engineering</option>
-                            <option value="TE">Textile Engineering</option>
-                            <option value="ARCH">Architecture</option>
-                            <option value="URP">Urban & Regional Planning</option>
+                        <label class="block text-sm text-gray-300 mb-1">Profile URL</label>
+                        <input type="text" id="editCustomUrl" class="input-field" placeholder="linkedin.com/in/yourname">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-300 mb-1">Name pronunciation</label>
+                        <input type="text" id="editPronunciation" class="input-field" placeholder="e.g., John Doe (Jawn Doh)">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-300 mb-1">About</label>
+                        <textarea id="editAbout" class="input-field" rows="5" maxlength="2600"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-300 mb-1">Privacy</label>
+                        <select id="editPrivacy" class="input-field">
+                            <option value="public">Public</option>
+                            <option value="connections">Connections only</option>
+                            <option value="private">Private</option>
                         </select>
                     </div>
-                    <div>
-                        <label class="block text-gray-300 mb-2">Semester</label>
-                        <select id="editSemester" class="input-field" required>
-                            <option value="1">1st Semester</option>
-                            <option value="2">2nd Semester</option>
-                            <option value="3">3rd Semester</option>
-                            <option value="4">4th Semester</option>
-                            <option value="5">5th Semester</option>
-                            <option value="6">6th Semester</option>
-                            <option value="7">7th Semester</option>
-                            <option value="8">8th Semester</option>
-                        </select>
+                    <div class="flex justify-end gap-2">
+                        <button type="button" onclick="toggleEditProfile()" class="btn-secondary">Cancel</button>
+                        <button type="submit" class="btn-primary">Save</button>
                     </div>
-                </div>
-                <div class="grid grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-gray-300 mb-2">Email</label>
-                        <input type="email" id="editEmail" class="input-field" required>
-                    </div>
-                    <div>
-                        <label class="block text-gray-300 mb-2">Phone</label>
-                        <input type="tel" id="editPhone" class="input-field" required>
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-gray-300 mb-2">Website</label>
-                    <input type="url" id="editWebsite" class="input-field">
-                </div>
-                <div class="flex justify-end gap-4">
-                    <button type="button" onclick="toggleEditProfile()" class="px-6 py-2 rounded-lg bg-gray-700 text-white hover:bg-gray-600">
-                        Cancel
-                    </button>
-                    <button type="submit" class="px-6 py-2 rounded-lg bg-[#1e2761] text-white hover:bg-[#2a3a8f]">
-                        Save Changes
-                    </button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
 
-    <script>
-        // Check if user is logged in
-        if (!localStorage.getItem('isLoggedIn')) {
-            window.location.href = 'login.html';
-        }
+        <script>
+            // Initialize user data
+            let userData = JSON.parse(localStorage.getItem('userData')) || {
+                firstName: 'User',
+                lastName: 'Name',
+                headline: 'Professional Headline',
+                location: 'Location',
+                contactInfo: 'email@example.com',
+                about: 'No summary provided.',
+                customUrl: 'daffy.com/profile/username',
+                pronunciation: '',
+                avatar: 'https://via.placeholder.com/152',
+                background: 'https://via.placeholder.com/1200x200',
+                followers: [],
+                openToWork: false,
+                hiring: false,
+                privacy: 'public',
+                views: 0,
+                impressions: 0
+            };
+            let featured = JSON.parse(localStorage.getItem('featured')) || [];
+            let posts = JSON.parse(localStorage.getItem('posts')) || [];
+            let experience = JSON.parse(localStorage.getItem('experience')) || [];
+            let education = JSON.parse(localStorage.getItem('education')) || [];
+            let skills = JSON.parse(localStorage.getItem('skills')) || [];
+            let recommendations = JSON.parse(localStorage.getItem('recommendations')) || [];
+            let isOwnProfile = true;
+            let currentUser = JSON.parse(localStorage.getItem('currentUser')) || { id: 'user1' };
 
-        // Load user data
-        let userData = JSON.parse(localStorage.getItem('userData')) || {};
-        let posts = JSON.parse(localStorage.getItem('posts')) || [];
+            // Update profile display
+            function updateProfileDisplay() {
+                userData.views++;
+                userData.impressions += 10;
+                localStorage.setItem('userData', JSON.stringify(userData));
 
-        // Update profile information
-        function updateProfileDisplay() {
-            document.getElementById('userAvatar').src = userData.avatar || 'https://via.placeholder.com/120';
-            document.getElementById('profileBackground').src = userData.background || 'https://via.placeholder.com/1200x200';
-            document.getElementById('userName').textContent = userData.fullName || 'User Name';
-            document.getElementById('userUsername').textContent = '@' + (userData.username || 'username');
-            document.getElementById('userBio').textContent = userData.bio || 'No bio yet';
-            document.getElementById('userDepartment').textContent = userData.department || 'Department';
-            document.getElementById('userSemester').textContent = userData.semester ? `${userData.semester}th Semester` : 'Semester';
-            document.getElementById('userEmail').textContent = userData.email || 'email@example.com';
-            document.getElementById('userPhone').textContent = userData.phone || '+880 1234567890';
-            document.getElementById('userWebsite').innerHTML = userData.website ? `<a href="${userData.website}" target="_blank">${userData.website}</a>` : 'No website';
-            document.getElementById('userSkills').textContent = userData.skills || 'No skills added yet';
-            document.getElementById('userJoined').textContent = userData.createdAt ? new Date(userData.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : 'January 2024';
-        }
+                document.getElementById('profileAvatar').src = userData.avatar;
+                document.getElementById('profileBackground').src = userData.background;
+                document.getElementById('userName').textContent = `${userData.firstName} ${userData.lastName}`;
+                document.getElementById('userHeadline').textContent = userData.headline;
+                document.getElementById('userLocation').textContent = userData.location;
+                document.getElementById('userFollowers').textContent = `${userData.followers.length} followers`;
+                document.getElementById('userContactInfo').textContent = userData.contactInfo || 'View contact info';
+                document.getElementById('userContactInfo').href = userData.contactInfo ? `mailto:${userData.contactInfo}` : '#';
+                document.getElementById('userCustomUrl').textContent = userData.customUrl;
+                document.getElementById('userCustomUrl').href = userData.customUrl;
+                document.getElementById('userAbout').textContent = userData.about;
+                document.getElementById('openToWorkFrame').classList.toggle('hidden', !userData.openToWork);
+                document.getElementById('openToWorkBtn').textContent = userData.openToWork ? 'Edit open to' : 'Open to';
+                document.getElementById('hiringBtn').textContent = userData.hiring ? 'Edit profile section' : 'Add profile section';
+                const followBtn = document.getElementById('followBtn');
+                followBtn.classList.toggle('hidden', isOwnProfile);
+                followBtn.classList.toggle('btn-follow', !userData.followers.includes(currentUser.id));
+                followBtn.classList.toggle('btn-following', userData.followers.includes(currentUser.id));
+                followBtn.textContent = userData.followers.includes(currentUser.id) ? 'Following' : 'Follow';
 
-        // Handle image uploads
-        document.getElementById('avatarUpload').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    userData.avatar = e.target.result;
-                    localStorage.setItem('userData', JSON.stringify(userData));
-                    updateProfileDisplay();
-                };
-                reader.readAsDataURL(file);
+                updateFeaturedSection();
+                updateActivitySection();
+                updateExperienceSection();
+                updateEducationSection();
+                updateSkillsSection();
+                updateRecommendationsSection();
             }
-        });
 
-        document.getElementById('backgroundUpload').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    userData.background = e.target.result;
-                    localStorage.setItem('userData', JSON.stringify(userData));
-                    updateProfileDisplay();
-                };
-                reader.readAsDataURL(file);
+            // Image uploads
+            document.getElementById('avatarUpload').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    if (!file.type.startsWith('image/')) {
+                        showNotification('Please upload an image file.');
+                        return;
+                    }
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        userData.avatar = e.target.result;
+                        localStorage.setItem('userData', JSON.stringify(userData));
+                        updateProfileDisplay();
+                        showNotification('Profile photo updated.');
+                    };
+                    reader.onerror = function() {
+                        showNotification('Failed to upload profile photo.');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            document.getElementById('backgroundUpload').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    if (!file.type.startsWith('image/')) {
+                        showNotification('Please upload an image file.');
+                        return;
+                    }
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        userData.background = e.target.result;
+                        localStorage.setItem('userData', JSON.stringify(userData));
+                        updateProfileDisplay();
+                        showNotification('Background photo updated.');
+                    };
+                    reader.onerror = function() {
+                        showNotification('Failed to upload background photo.');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Edit profile
+            function toggleEditProfile() {
+                const modal = document.getElementById('editProfileModal');
+                modal.classList.toggle('hidden');
+                modal.classList.toggle('flex');
+
+                document.getElementById('editFirstName').value = userData.firstName;
+                document.getElementById('editLastName').value = userData.lastName;
+                document.getElementById('editHeadline').value = userData.headline;
+                document.getElementById('editLocation').value = userData.location;
+                document.getElementById('editContactInfo').value = userData.contactInfo;
+                document.getElementById('editCustomUrl').value = userData.customUrl;
+                document.getElementById('editPronunciation').value = userData.pronunciation;
+                document.getElementById('editAbout').value = userData.about;
+                document.getElementById('editPrivacy').value = userData.privacy;
             }
-        });
 
-        // Generate posts
-        function generatePosts() {
-            const postsSection = document.getElementById('postsSection');
-            postsSection.innerHTML = '<div class="post-card p-6"><textarea id="newPost" class="input-field" rows="3" placeholder="What\'s on your mind?"></textarea><div class="flex justify-between mt-4"><label class="upload-btn cursor-pointer"><span class="material-icons">image</span><input type="file" id="postImageUpload" accept="image/*" class="hidden" multiple></label><button onclick="createPost()" class="px-6 py-2 rounded-lg bg-[#1e2761] text-white hover:bg-[#2a3a8f]">Post</button></div></div>';
+            document.getElementById('editProfileForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                userData.firstName = document.getElementById('editFirstName').value.trim();
+                userData.lastName = document.getElementById('editLastName').value.trim();
+                userData.headline = document.getElementById('editHeadline').value.trim();
+                userData.location = document.getElementById('editLocation').value.trim();
+                userData.contactInfo = document.getElementById('editContactInfo').value.trim();
+                userData.customUrl = document.getElementById('editCustomUrl').value.trim();
+                userData.pronunciation = document.getElementById('editPronunciation').value.trim();
+                userData.about = document.getElementById('editAbout').value.trim();
+                userData.privacy = document.getElementById('editPrivacy').value;
+                localStorage.setItem('userData', JSON.stringify(userData));
+                updateProfileDisplay();
+                toggleEditProfile();
+                showNotification('Profile updated successfully.');
+            });
 
-            posts.forEach(post => {
-                const postElement = document.createElement('div');
-                postElement.className = 'post-card p-6';
-                postElement.innerHTML = `
-                    <div class="flex items-center gap-4 mb-4">
-                        <img src="${userData.avatar || 'https://via.placeholder.com/120'}" class="w-12 h-12 rounded-full">
-                        <div>
-                            <div class="font-semibold text-white">${userData.fullName}</div>
-                            <div class="text-xs text-gray-400">${new Date(post.timestamp).toLocaleTimeString()}</div>
-                        </div>
-                    </div>
-                    <div class="text-white mb-4">
-                        <p>${post.content}</p>
-                        ${post.images ? post.images.map(img => `<img src="${img}" class="mt-2 rounded-lg max-w-full" alt="Post image">`).join('') : ''}
-                    </div>
-                    <div class="flex items-center gap-8 text-white">
-                        <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15]">
-                            <span class="material-icons">chat_bubble_outline</span>
-                            <span>${post.comments || 0}</span>
-                        </div>
-                        <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15]">
-                            <span class="material-icons">favorite_border</span>
-                            <span>${post.likes || 0}</span>
-                        </div>
-                        <div class="cursor-pointer hover:text-[#facc15]">
-                            <span class="material-icons">share</span>
+            // Follow
+            function toggleFollow() {
+                if (userData.followers.includes(currentUser.id)) {
+                    userData.followers = userData.followers.filter(id => id !== currentUser.id);
+                    showNotification('Unfollowed.');
+                } else {
+                    userData.followers.push(currentUser.id);
+                    showNotification('Followed.');
+                }
+                localStorage.setItem('userData', JSON.stringify(userData));
+                updateProfileDisplay();
+            }
+
+            // Open to Work
+            function toggleOpenToWork() {
+                userData.openToWork = !userData.openToWork;
+                userData.hiring = false;
+                localStorage.setItem('userData', JSON.stringify(userData));
+                updateProfileDisplay();
+                showNotification(userData.openToWork ? 'Open to work added.' : 'Open to work removed.');
+            }
+
+            // Hiring
+            function toggleHiring() {
+                userData.hiring = !userData.hiring;
+                userData.openToWork = false;
+                localStorage.setItem('userData', JSON.stringify(userData));
+                updateProfileDisplay();
+                showNotification(userData.hiring ? 'Hiring status added.' : 'Hiring status removed.');
+            }
+
+            // Name pronunciation
+            function playPronunciation() {
+                if (userData.pronunciation) {
+                    showNotification(`Pronunciation: ${userData.pronunciation}`);
+                } else {
+                    showNotification('No pronunciation provided.');
+                }
+            }
+
+            // Featured section
+            function addFeaturedItem() {
+                const url = prompt('Enter URL for featured item (post, article, or media):');
+                if (url && url.trim()) {
+                    featured.push({ id: `featured_${Date.now()}`, url: url.trim(), timestamp: new Date().toISOString() });
+                    localStorage.setItem('featured', JSON.stringify(featured));
+                    updateFeaturedSection();
+                    showNotification('Featured item added.');
+                } else {
+                    showNotification('Please enter a valid URL.');
+                }
+            }
+
+            function updateFeaturedSection() {
+                const section = document.getElementById('featuredSection');
+                section.innerHTML = featured.length ? '' : '<p class="text-sm text-gray-400">No featured items.</p>';
+                featured.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'border border-gray-600 rounded p-3';
+                    div.innerHTML = `
+                        <a href="${item.url}" target="_blank" class="text-blue-400 text-sm hover:underline">${item.url}</a>
+                        <p class="text-xs text-gray-500">${new Date(item.timestamp).toLocaleDateString()}</p>
+                        ${isOwnProfile ? `<button onclick="removeFeatured('${item.id}')" class="btn-icon mt-1"><span class="material-icons">delete</span></button>` : ''}
+                    `;
+                    section.appendChild(div);
+                });
+            }
+
+            function removeFeatured(id) {
+                featured = featured.filter(item => item.id !== id);
+                localStorage.setItem('featured', JSON.stringify(featured));
+                updateFeaturedSection();
+                showNotification('Featured item removed.');
+            }
+
+            // Activity section
+            function updateActivitySection() {
+                const section = document.getElementById('activitySection');
+                section.innerHTML = `
+                    <div class="border border-gray-600 rounded p-3">
+                        <textarea id="newPost" class="input-field mb-2" rows="2" placeholder="Start a post..."></textarea>
+                        <div class="flex justify-between">
+                            <label class="btn-icon cursor-pointer" title="Add Media">
+                                <span class="material-icons">image</span>
+                                <input type="file" id="postImageUpload" accept="image/*" class="hidden" multiple>
+                            </label>
+                            <button onclick="createPost()" class="btn-primary">Post</button>
                         </div>
                     </div>
                 `;
-                postsSection.appendChild(postElement);
-            });
-        }
+                posts.forEach(post => {
+                    const div = document.createElement('div');
+                    div.className = 'border border-gray-600 rounded p-3';
+                    div.innerHTML = `
+                        <div class="flex items-center gap-2 mb-2">
+                            <img src="${userData.avatar}" class="w-10 h-10 rounded-full">
+                            <div>
+                                <div class="text-sm font-semibold text-white">${userData.firstName} ${userData.lastName}</div>
+                                <div class="text-xs text-gray-500">${new Date(post.timestamp).toLocaleDateString()}</div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-300">${post.content}</p>
+                        ${post.images ? post.images.map(img => `<img src="${img}" class="mt-2 rounded max-w-full" alt="Post image">`).join('') : ''}
+                        <div class="flex items-center gap-4 mt-2 text-gray-400 text-sm">
+                            <button class="flex items-center gap-1 hover:text-blue-400" onclick="likePost('${post.id}')">
+                                <span class="material-icons text-base">${post.likedBy?.includes(currentUser.id) ? 'thumb_up' : 'thumb_up_off_alt'}</span>
+                                <span>${post.likes || 0}</span>
+                            </button>
+                            <button class="flex items-center gap-1 hover:text-blue-400">
+                                <span class="material-icons text-base">comment</span>
+                                <span>${post.comments || 0}</span>
+                            </button>
+                            <button class="flex items-center gap-1 hover:text-blue-400">
+                                <span class="material-icons text-base">share</span>
+                                <span>Share</span>
+                            </button>
+                        </div>
+                    `;
+                    section.appendChild(div);
+                });
+            }
 
-        // Create new post
-        function createPost() {
-            const content = document.getElementById('newPost').value;
-            const files = document.getElementById('postImageUpload').files;
-            if (content || files.length) {
+            function createPost() {
+                const content = document.getElementById('newPost').value.trim();
+                const files = document.getElementById('postImageUpload').files;
+                if (!content && !files.length) {
+                    showNotification('Please add content or images.');
+                    return;
+                }
                 const newPost = {
+                    id: `post_${Date.now()}`,
                     content,
                     timestamp: new Date().toISOString(),
                     images: [],
                     likes: 0,
-                    comments: 0
+                    comments: 0,
+                    likedBy: []
                 };
                 if (files.length) {
                     Array.from(files).forEach(file => {
+                        if (!file.type.startsWith('image/')) {
+                            showNotification('Please upload image files only.');
+                            return;
+                        }
                         const reader = new FileReader();
                         reader.onload = function(e) {
                             newPost.images.push(e.target.result);
                             posts.unshift(newPost);
                             localStorage.setItem('posts', JSON.stringify(posts));
-                            generatePosts();
+                            updateActivitySection();
+                            showNotification('Post created.');
+                        };
+                        reader.onerror = function() {
+                            showNotification('Failed to upload image.');
                         };
                         reader.readAsDataURL(file);
                     });
                 } else {
                     posts.unshift(newPost);
                     localStorage.setItem('posts', JSON.stringify(posts));
-                    generatePosts();
+                    updateActivitySection();
+                    showNotification('Post created.');
                 }
                 document.getElementById('newPost').value = '';
                 document.getElementById('postImageUpload').value = '';
             }
-        }
 
-        // Switch tabs
-        function switchTab(tab) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-
-            document.getElementById('postsSection').classList.add('hidden');
-            document.getElementById('aboutSection').classList.add('hidden');
-            document.getElementById('photosSection').classList.add('hidden');
-
-            document.getElementById(tab + 'Section').classList.remove('hidden');
-
-            if (tab === 'photos') {
-                const photosSection = document.getElementById('photosSection');
-                photosSection.innerHTML = '';
-                posts.forEach(post => {
-                    if (post.images) {
-                        post.images.forEach(img => {
-                            const imgElement = document.createElement('img');
-                            imgElement.src = img;
-                            imgElement.className = 'rounded-lg w-full object-cover';
-                            photosSection.appendChild(imgElement);
-                        });
+            function likePost(postId) {
+                const post = posts.find(p => p.id === postId);
+                if (post) {
+                    if (post.likedBy?.includes(currentUser.id)) {
+                        post.likes--;
+                        post.likedBy = post.likedBy.filter(id => id !== currentUser.id);
+                    } else {
+                        post.likes++;
+                        post.likedBy = post.likedBy || [];
+                        post.likedBy.push(currentUser.id);
                     }
+                    localStorage.setItem('posts', JSON.stringify(posts));
+                    updateActivitySection();
+                    showNotification(post.likedBy.includes(currentUser.id) ? 'Post liked.' : 'Post unliked.');
+                }
+            }
+
+            // Experience section
+            function addExperience() {
+                const title = prompt('Enter job title:');
+                const company = prompt('Enter company:');
+                const duration = prompt('Enter duration (e.g., Jan 2020 - Present):');
+                const description = prompt('Enter description (optional):');
+                if (title && company && duration) {
+                    experience.push({
+                        id: `exp_${Date.now()}`,
+                        title: title.trim(),
+                        company: company.trim(),
+                        duration: duration.trim(),
+                        description: description ? description.trim() : ''
+                    });
+                    localStorage.setItem('experience', JSON.stringify(experience));
+                    updateExperienceSection();
+                    showNotification('Experience added.');
+                } else {
+                    showNotification('Please fill all required fields.');
+                }
+            }
+
+            function updateExperienceSection() {
+                const section = document.getElementById('experienceSection');
+                section.innerHTML = experience.length ? '' : '<p class="text-sm text-gray-400">No experience added.</p>';
+                experience.forEach(exp => {
+                    const div = document.createElement('div');
+                    div.className = 'pb-4';
+                    div.innerHTML = `
+                        <h3 class="text-sm font-semibold text-white">${exp.title}</h3>
+                        <p class="text-sm text-gray-300">${exp.company}</p>
+                        <p class="text-xs text-gray-500">${exp.duration}</p>
+                        ${exp.description ? `<p class="text-sm text-gray-300 mt-1">${exp.description}</p>` : ''}
+                        ${isOwnProfile ? `<button onclick="removeExperience('${exp.id}')" class="btn-icon mt-1"><span class="material-icons">delete</span></button>` : ''}
+                    `;
+                    section.appendChild(div);
                 });
             }
-        }
 
-        // Toggle edit profile modal
-        function toggleEditProfile() {
-            const modal = document.getElementById('editProfileModal');
-            modal.classList.toggle('hidden');
-            modal.classList.toggle('flex');
+            function removeExperience(id) {
+                experience = experience.filter(exp => exp.id !== id);
+                localStorage.setItem('experience', JSON.stringify(experience));
+                updateExperienceSection();
+                showNotification('Experience removed.');
+            }
 
-            document.getElementById('editFullName').value = userData.fullName || '';
-            document.getElementById('editUsername').value = userData.username || '';
-            document.getElementById('editBio').value = userData.bio || '';
-            document.getElementById('editSkills').value = userData.skills || '';
-            document.getElementById('editDepartment').value = userData.department || '';
-            document.getElementById('editSemester').value = userData.semester || '';
-            document.getElementById('editEmail').value = userData.email || '';
-            document.getElementById('editPhone').value = userData.phone || '';
-            document.getElementById('editWebsite').value = userData.website || '';
-        }
+            // Education section
+            function addEducation() {
+                const school = prompt('Enter school:');
+                const degree = prompt('Enter degree:');
+                const duration = prompt('Enter duration (e.g., 2016 - 2020):');
+                if (school && degree && duration) {
+                    education.push({
+                        id: `edu_${Date.now()}`,
+                        school: school.trim(),
+                        degree: degree.trim(),
+                        duration: duration.trim()
+                    });
+                    localStorage.setItem('education', JSON.stringify(education));
+                    updateEducationSection();
+                    showNotification('Education added.');
+                } else {
+                    showNotification('Please fill all required fields.');
+                }
+            }
 
-        // Handle profile edit form submission
-        document.getElementById('editProfileForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+            function updateEducationSection() {
+                const section = document.getElementById('educationSection');
+                section.innerHTML = education.length ? '' : '<p class="text-sm text-gray-400">No education added.</p>';
+                education.forEach(edu => {
+                    const div = document.createElement('div');
+                    div.className = 'pb-4';
+                    div.innerHTML = `
+                        <h3 class="text-sm font-semibold text-white">${edu.school}</h3>
+                        <p class="text-sm text-gray-300">${edu.degree}</p>
+                        <p class="text-xs text-gray-500">${edu.duration}</p>
+                        ${isOwnProfile ? `<button onclick="removeEducation('${edu.id}')" class="btn-icon mt-1"><span class="material-icons">delete</span></button>` : ''}
+                    `;
+                    section.appendChild(div);
+                });
+            }
 
-            userData.fullName = document.getElementById('editFullName').value;
-            userData.username = document.getElementById('editUsername').value;
-            userData.bio = document.getElementById('editBio').value;
-            userData.skills = document.getElementById('editSkills').value;
-            userData.department = document.getElementById('editDepartment').value;
-            userData.semester = document.getElementById('editSemester').value;
-            userData.email = document.getElementById('editEmail').value;
-            userData.phone = document.getElementById('editPhone').value;
-            userData.website = document.getElementById('editWebsite').value;
-            userData.avatar = userData.avatar || userData.fullName.charAt(0).toUpperCase();
+            function removeEducation(id) {
+                education = education.filter(edu => edu.id !== id);
+                localStorage.setItem('education', JSON.stringify(education));
+                updateEducationSection();
+                showNotification('Education removed.');
+            }
 
-            localStorage.setItem('userData', JSON.stringify(userData));
+            // Skills section
+            function addSkill() {
+                const skill = prompt('Enter skill:');
+                if (skill && skill.trim()) {
+                    skills.push({
+                        id: `skill_${Date.now()}`,
+                        name: skill.trim(),
+                        endorsements: 0
+                    });
+                    localStorage.setItem('skills', JSON.stringify(skills));
+                    updateSkillsSection();
+                    showNotification('Skill added.');
+                } else {
+                    showNotification('Please enter a valid skill.');
+                }
+            }
+
+            function updateSkillsSection() {
+                const section = document.getElementById('skillsSection');
+                section.innerHTML = skills.length ? '' : '<p class="text-sm text-gray-400">No skills added.</p>';
+                skills.forEach(skill => {
+                    const div = document.createElement('div');
+                    div.className = 'flex items-center justify-between py-1';
+                    div.innerHTML = `
+                        <div>
+                            <span class="text-sm font-semibold text-white">${skill.name}</span>
+                            <span class="text-xs text-gray-500"> • ${skill.endorsements} endorsements</span>
+                        </div>
+                        ${isOwnProfile ? `
+                            <div class="flex gap-2">
+                                <button onclick="endorseSkill('${skill.id}')" class="btn-icon"><span class="material-icons">thumb_up</span></button>
+                                <button onclick="removeSkill('${skill.id}')" class="btn-icon"><span class="material-icons">delete</span></button>
+                            </div>
+                        ` : `
+                            <button onclick="endorseSkill('${skill.id}')" class="btn-icon"><span class="material-icons">thumb_up</span></button>
+                        `}
+                    `;
+                    section.appendChild(div);
+                });
+            }
+
+            function endorseSkill(id) {
+                const skill = skills.find(s => s.id === id);
+                if (skill) {
+                    skill.endorsements++;
+                    localStorage.setItem('skills', JSON.stringify(skills));
+                    updateSkillsSection();
+                    showNotification('Skill endorsed.');
+                }
+            }
+
+            function removeSkill(id) {
+                skills = skills.filter(s => s.id !== id);
+                localStorage.setItem('skills', JSON.stringify(skills));
+                updateSkillsSection();
+                showNotification('Skill removed.');
+            }
+
+            // Recommendations section
+            function requestRecommendation() {
+                const name = prompt('Enter recommender’s name:');
+                const text = prompt('Enter recommendation text:');
+                if (name && text && name.trim && text.trim()) {
+                    recommendations.push({
+                        id: `rec_${Date.now()}`,
+                        name: name.trim(),
+                        text: text.trim(),
+                        timestamp: new Date().toISOString()
+                    });
+                    localStorage.setItem('recommendations', JSON.stringify(recommendations));
+                    updateRecommendationsSection();
+                    showNotification('Recommendation added.');
+                } else {
+                    showNotification('Please fill all required fields.');
+                }
+            }
+
+            function updateRecommendationsSection() {
+                const section = document.getElementById('recommendationsSection');
+                section.innerHTML = recommendations.length ? '' : '<p class="text-sm text-gray-400">No recommendations added.</p>';
+                recommendations.forEach(rec => {
+                    const div = document.createElement('div');
+                    div.className = 'pb-4';
+                    div.innerHTML = `
+                        <p class="text-sm font-semibold text-white">${rec.name}</p>
+                        <p class="text-sm text-gray-300">${rec.text}</p>
+                        <p class="text-xs text-gray-500">${new Date(rec.timestamp).toLocaleDateString()}</p>
+                        ${isOwnProfile ? `<button onclick="removeRecommendation('${rec.id}')" class="btn-icon mt-1"><span class="material-icons">delete</span></button>` : ''}
+                    `;
+                    section.appendChild(div);
+                });
+            }
+
+            function removeRecommendation(id) {
+                recommendations = recommendations.filter(rec => rec.id !== id);
+                localStorage.setItem('recommendations', JSON.stringify(recommendations));
+                updateRecommendationsSection();
+                showNotification('Recommendation removed.');
+            }
+
+            // Notification
+            function showNotification(message) {
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+                notification.textContent = message;
+                document.body.appendChild(notification);
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+
+            // Logout
+            function logout() {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('currentUser');
+                localStorage.removeItem('userData');
+                window.location.href = 'login.html';
+            }
+
+            // Initialize
             updateProfileDisplay();
-            toggleEditProfile();
-        });
-
-        // Logout function
-        function logout() {
-            localStorage.removeItem('isLoggedIn');
-            localStorage.removeItem('userData');
-            localStorage.removeItem('posts');
-            window.location.href = 'login.html';
-        }
-
-        // Initialize
-        updateProfileDisplay();
-        generatePosts();
-    </script>
+        </script>
+    </main>
 </body>
 </html>
