@@ -329,25 +329,166 @@ body {
   }
 }
 
-/* Touch Device Optimizations */
-@media (hover: none) {
-  .sidebar-link:hover,
-  .btn-primary:hover,
-  .btn-google:hover,
-  .job-card:hover {
-    transform: none;
-    box-shadow: none;
+/* Enhanced Mobile Responsiveness */
+@media (max-width: 480px) {
+  .container {
+    padding: 0.5rem;
   }
-  
-  .apply-btn:active,
-  .filter-btn:active {
-    transform: scale(0.98);
+
+  .main-content {
+    padding: 0.75rem;
+  }
+
+  .job-card, .video-card, .post-card, .settings-card, .auth-card {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    background: var(--surface-glass);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+  }
+
+  .sidebar-link {
+    padding: 0.5rem;
+    margin: 0;
+    flex-direction: column;
+    font-size: 0.75rem;
+  }
+
+  .sidebar-link .material-icons {
+    font-size: 1.5rem;
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .search-input {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .filter-section {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .filter-btn {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .input-field, .select-field {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .auth-btn, .save-btn {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .messages-container {
+    grid-template-columns: 1fr;
+  }
+
+  .chat-list {
+    position: fixed;
+    width: 100%;
+    height: calc(100vh - 60px);
+    left: -100%;
+    transition: left 0.3s ease;
+  }
+
+  .chat-list.active {
+    left: 0;
   }
 }
 
-/* Dark Mode Optimizations */
-@media (prefers-color-scheme: dark) {
-  body {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+/* Tablet Optimization */
+@media (min-width: 481px) and (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .sidebar {
+    width: 180px;
+  }
+
+  .main-content {
+    margin-left: 180px;
+    padding: 1rem;
+  }
+
+  .job-card, .video-card, .post-card, .settings-card {
+    padding: 1.25rem;
+  }
+
+  .messages-container {
+    grid-template-columns: 240px 1fr;
+  }
+
+  .chat-list {
+    width: 240px;
+  }
+}
+
+/* Touch Device Optimization */
+@media (hover: none) {
+  .sidebar-link, .job-card, .video-card, .post-card, .auth-btn, .save-btn {
+    transition: transform 0.2s ease;
+  }
+
+  .sidebar-link:active, .job-card:active, .video-card:active, .post-card:active {
+    transform: scale(0.98);
+  }
+
+  .auth-btn:active, .save-btn:active {
+    transform: scale(0.95);
+  }
+
+  .input-field, .select-field {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+
+  .search-input {
+    -webkit-appearance: none;
+    border-radius: 9999px;
+  }
+
+  select {
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+  }
+}
+
+/* Performance Optimizations */
+.sidebar, .job-card, .video-card, .post-card {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
