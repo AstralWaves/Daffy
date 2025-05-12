@@ -185,20 +185,10 @@
       transform: scale(1.1);
     }
     .main-content {
-      overflow-y: auto;
-      max-height: 100vh;
-      scrollbar-width: thin;
-      scrollbar-color: #facc15 #1a1a1a;
-    }
-    .main-content::-webkit-scrollbar {
-      width: 8px;
-    }
-    .main-content::-webkit-scrollbar-track {
-      background: #1a1a1a;
-    }
-    .main-content::-webkit-scrollbar-thumb {
-      background: #facc15;
-      border-radius: 4px;
+      flex: 1;
+      padding: 1.5rem;
+      max-width: 800px;
+      margin: 0 auto;
     }
     #imageInput {
       display: none;
@@ -208,173 +198,1007 @@
       margin-top: 10px;
       border-radius: 12px;
     }
+
+    /* Main Container */
+    .main-container {
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+      padding: 0 1rem;
+    }
+
+    /* Right Sidebar */
+    .right-sidebar {
+      width: 300px;
+      padding: 1.5rem;
+      position: fixed;
+      right: 0;
+      top: 0;
+      height: 100vh;
+      background: #000000;
+      border-left: 1px solid #333333;
+    }
+
+    /* Left Sidebar */
+    .sidebar {
+      width: 260px;
+      padding: 1.5rem;
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      background: #000000;
+      border-right: 1px solid #333333;
+    }
+
+    /* Post Card */
+    .post-card {
+      margin-bottom: 1.5rem;
+      padding: 1.5rem;
+    }
+
+    /* Feed Section */
+    #feed {
+      padding: 0.5rem 0;
+    }
+
+    /* Create Post Box */
+    .create-post {
+      margin-bottom: 1.5rem;
+      padding: 1.5rem;
+    }
+
+    /* Avatar */
+    .avatar {
+      width: 2.8rem;
+      height: 2.8rem;
+      font-size: 1.2rem;
+    }
+
+    /* Department Tag */
+    .department-tag {
+      padding: 3px 10px;
+      font-size: 0.75rem;
+    }
   </style>
 </head>
 <body class="flex">
   <button class="mobile-menu-toggle">
     <span class="material-icons">menu</span>
   </button>
-  <!-- Header -->
-  <header class="header">
-    <div class="header-content">
-      <a href="home.html" class="logo">
-        <span class="material-icons">bubble_chart</span>
-        <span>Daffy</span>
-      </a>
-      <div class="flex items-center gap-4">
-        <div class="relative">
-          <input type="text" placeholder="Search Daffy" class="bg-[#f0f2f5] rounded-full px-4 py-2 w-64 focus:outline-none">
-          <span class="material-icons absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">search</span>
+  <!-- Left Sidebar -->
+  <aside class="sidebar w-72 flex flex-col py-12 px-8 min-h-screen mr-12">
+    <a href="home.html" class="logo text-3xl font-bold text-[#facc15] mb-8">
+      <span class="material-icons text-[#facc15]" style="font-size:2.5rem;">bubble_chart</span> <span class="text-[#facc15]">Daffy</span>
+    </a>
+    <nav class="flex flex-col gap-1">
+      <a href="home.html" class="sidebar-link active" onclick="navigateTo('home.html'); return false;"><span class="material-icons sidebar-icon">home</span> Home</a>
+      <a href="trends.html" class="sidebar-link" onclick="navigateTo('trends.html'); return false;"><span class="material-icons sidebar-icon">trending_up</span> Trends</a>
+      <a href="clubs.html" class="sidebar-link" onclick="navigateTo('clubs.html'); return false;"><span class="material-icons sidebar-icon">groups</span> Clubs</a>
+      <a href="messaging.html" class="sidebar-link" onclick="navigateTo('messaging.html'); return false;"><span class="material-icons sidebar-icon">chat_bubble</span> Messages</a>
+      <a href="videos.html" class="sidebar-link" onclick="navigateTo('videos.html'); return false;"><span class="material-icons sidebar-icon">play_circle</span> Videos</a>
+      <a href="jobs.html" class="sidebar-link" onclick="navigateTo('jobs.html'); return false;"><span class="material-icons sidebar-icon">work</span> Jobs</a>
+      <a href="settings.html" class="sidebar-link" onclick="navigateTo('settings.html'); return false;"><span class="material-icons sidebar-icon">settings</span> Settings</a>
+    </nav>
+    <div class="mt-auto">
+      <button onclick="logout()" class="sidebar-link w-full text-left">
+        <span class="material-icons sidebar-icon">logout</span> Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 main-content p-8">
+    <!-- Post Creation Box -->
+    <div class="post-card p-6 mb-8">
+      <div class="flex gap-4">
+        <div class="avatar">S</div>
+        <div class="w-full">
+          <textarea id="postInput" class="post-input w-full" placeholder="Share your thoughts with DIU community..." rows="3"></textarea>
+          <div id="mediaPreview" class="mt-2"></div>
         </div>
-        <button class="w-10 h-10 rounded-full bg-[#f0f2f5] flex items-center justify-center">
-          <span class="material-icons text-gray-600">notifications</span>
-        </button>
-        <button class="w-10 h-10 rounded-full bg-[#f0f2f5] flex items-center justify-center">
-          <span class="material-icons text-gray-600">chat</span>
-        </button>
-        <div class="w-10 h-10 rounded-full bg-[#1877f2] flex items-center justify-center text-white font-semibold">
-          S
+      </div>
+      <div class="flex justify-between items-center mt-4">
+        <div class="flex gap-4">
+          <button onclick="document.getElementById('imageInput').click()" class="text-gray-400 hover:text-[#facc15]" title="Add Image">
+            <span class="material-icons">image</span>
+          </button>
+          <input type="file" id="imageInput" accept="image/*">
+          <button onclick="addVideo()" class="text-gray-400 hover:text-[#facc15]" title="Add Video">
+            <span class="material-icons">videocam</span>
+          </button>
+          <button class="text-gray-400 hover:text-[#facc15]" title="Add File">
+            <span class="material-icons">attach_file</span>
+          </button>
+          <button class="text-gray-400 hover:text-[#facc15]" title="Tag Department">
+            <span class="material-icons">local_offer</span>
+          </button>
+        </div>
+        <button class="post-btn" onclick="createPost()">Post</button>
+      </div>
+    </div>
+
+    <!-- Feed Section -->
+    <div id="feed" class="space-y-6">
+      <!-- Post 1: Video Post (IoT Project) -->
+      <div class="post-card p-6" data-post-id="1">
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">A</div>
+            <div>
+              <div class="font-semibold text-white">Ayesha Siddiqa</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">2 hours ago</span>
+                <span class="department-tag">EEE</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="text-white mb-4">
+          <p class="mb-4">Check out our latest IoT project demo at the DIU Innovation Lab! 🚀 #DIUTechFest2025</p>
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div class="flex gap-2">
+            <span class="department-tag">#DIUInnovation</span>
+            <span class="department-tag">#IoT</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleComment(1)">
+            <span class="material-icons">chat_bubble_outline</span>
+            <span>32</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleRetweet(1)">
+            <span class="material-icons">repeat</span>
+            <span>20</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleLike(1)">
+            <span class="material-icons">favorite_border</span>
+            <span>120</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15] interaction-btn">
+            <span class="material-icons">share</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 2: Image Post (Machine Learning Presentation) -->
+      <div class="post-card p-6" data-post-id="2">
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">R</div>
+            <div>
+              <div class="font-semibold text-white">Rakib Hassan</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">1 hour ago</span>
+                <span class="department-tag">CSE</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="text-white mb-4">
+          <p class="mb-4">Just finished my presentation on Machine Learning algorithms! Thanks to everyone who attended and provided feedback. 🎯</p>
+          <img src="https://picsum.photos/800/400" alt="Presentation" class="w-full rounded-xl mb-4">
+          <div class="flex gap-2">
+            <span class="department-tag">#DIUTechTalks</span>
+            <span class="department-tag">#MachineLearning</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleComment(2)">
+            <span class="material-icons">chat_bubble_outline</span>
+            <span>24</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleRetweet(2)">
+            <span class="material-icons">repeat</span>
+            <span>15</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleLike(2)">
+            <span class="material-icons">favorite_border</span>
+            <span>89</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15] interaction-btn">
+            <span class="material-icons">share</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 3: Image Post (Cultural Week) -->
+      <div class="post-card p-6" data-post-id="3">
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">D</div>
+            <div>
+              <div class="font-semibold text-white">DIU Cultural Club</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">3 hours ago</span>
+                <span class="department-tag">Cultural</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="text-white mb-4">
+          <p class="mb-4">Get ready for DIU Cultural Week 2025! Join us for music, dance, and art exhibitions. 🎭 #DIUCulturalWeek</p>
+          <img src="https://picsum.photos/800/400?cultural" alt="Cultural Event" class="w-full rounded-xl mb-4">
+          <div class="flex gap-2">
+            <span class="department-tag">#DIUCulturalWeek</span>
+            <span class="department-tag">#DIUArts</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleComment(3)">
+            <span class="material-icons">chat_bubble_outline</span>
+            <span>45</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleRetweet(3)">
+            <span class="material-icons">repeat</span>
+            <span>30</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleLike(3)">
+            <span class="material-icons">favorite_border</span>
+            <span>150</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15] interaction-btn">
+            <span class="material-icons">share</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 4: Image Post (Coding Bootcamp) -->
+      <div class="post-card p-6" data-post-id="4">
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">C</div>
+            <div>
+              <div class="font-semibold text-white">DIU Coding Club</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">4 hours ago</span>
+                <span class="department-tag">CSE</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="text-white mb-4">
+          <p class="mb-4">Join our weekly coding bootcamp! This week, we're diving into competitive programming with Python. 💻 #DIUHacks</p>
+          <img src="https://picsum.photos/800/400?coding" alt="Coding Bootcamp" class="w-full rounded-xl mb-4">
+          <div class="flex gap-2">
+            <span class="department-tag">#DIUHacks</span>
+            <span class="department-tag">#CodingBootcamp</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleComment(4)">
+            <span class="material-icons">chat_bubble_outline</span>
+            <span>18</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleRetweet(4)">
+            <span class="material-icons">repeat</span>
+            <span>10</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleLike(4)">
+            <span class="material-icons">favorite_border</span>
+            <span>75</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15] interaction-btn">
+            <span class="material-icons">share</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 5: Video Post (AI Research) -->
+      <div class="post-card p-6" data-post-id="5">
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">S</div>
+            <div>
+              <div class="font-semibold text-white">Sadia Rahman</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">5 hours ago</span>
+                <span class="department-tag">CSE</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="text-white mb-4">
+          <p class="mb-4">Excited to share our research paper on AI-driven healthcare solutions presented at DIU Research Symposium! 🧠 #DIUResearch</p>
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/3NycM9lY4ng" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div class="flex gap-2">
+            <span class="department-tag">#DIUResearch</span>
+            <span class="department-tag">#AIHealthcare</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleComment(5)">
+            <span class="material-icons">chat_bubble_outline</span>
+            <span>28</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleRetweet(5)">
+            <span class="material-icons">repeat</span>
+            <span>22</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleLike(5)">
+            <span class="material-icons">favorite_border</span>
+            <span>95</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15] interaction-btn">
+            <span class="material-icons">share</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 6: Image Post (Cricket Match) -->
+      <div class="post-card p-6" data-post-id="6">
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">S</div>
+            <div>
+              <div class="font-semibold text-white">DIU Sports Club</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">6 hours ago</span>
+                <span class="department-tag">Sports</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="text-white mb-4">
+          <p class="mb-4">What a match! DIU Cricket Team won against NSU in the Inter-University Tournament! 🏏 #DIUSports</p>
+          <img src="https://picsum.photos/800/400?cricket" alt="Cricket Match" class="w-full rounded-xl mb-4">
+          <div class="flex gap-2">
+            <span class="department-tag">#DIUSports</span>
+            <span class="department-tag">#Cricket</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleComment(6)">
+            <span class="material-icons">chat_bubble_outline</span>
+            <span>50</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleRetweet(6)">
+            <span class="material-icons">repeat</span>
+            <span>35</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleLike(6)">
+            <span class="material-icons">favorite_border</span>
+            <span>200</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15] interaction-btn">
+            <span class="material-icons">share</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 7: Image Post (Cloud Workshop) -->
+      <div class="post-card p-6" data-post-id="7">
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">T</div>
+            <div>
+              <div class="font-semibold text-white">DIU Tech Club</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">7 hours ago</span>
+                <span class="department-tag">Tech</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="text-white mb-4">
+          <p class="mb-4">Don't miss our workshop on Cloud Computing with AWS this weekend! Register now! ☁️ #DIUTechFest2025</p>
+          <img src="https://picsum.photos/800/400?cloud" alt="Cloud Workshop" class="w-full rounded-xl mb-4">
+          <div class="flex gap-2">
+            <span class="department-tag">#DIUTechFest2025</span>
+            <span class="department-tag">#CloudComputing</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleComment(7)">
+            <span class="material-icons">chat_bubble_outline</span>
+            <span>15</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleRetweet(7)">
+            <span class="material-icons">repeat</span>
+            <span>12</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleLike(7)">
+            <span class="material-icons">favorite_border</span>
+            <span>60</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15] interaction-btn">
+            <span class="material-icons">share</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 8: Text Post (Bangla, Exam Prep) -->
+      <div class="post-card p-6" data-post-id="8">
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">N</div>
+            <div>
+              <div class="font-semibold text-white">Nusrat Jahan</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">8 hours ago</span>
+                <span class="department-tag">BBA</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="text-white mb-4">
+          <p class="mb-4">মিড-টার্ম পরীক্ষার জন্য প্রস্তুতি নিচ্ছি। কেউ কি মার্কেটিং নোট শেয়ার করতে পারবে? 📚 #DIUStudy</p>
+          <div class="flex gap-2">
+            <span class="department-tag">#DIUStudy</span>
+            <span class="department-tag">#BBA</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleComment(8)">
+            <span class="material-icons">chat_bubble_outline</span>
+            <span>10</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleRetweet(8)">
+            <span class="material-icons">repeat</span>
+            <span>5</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleLike(8)">
+            <span class="material-icons">favorite_border</span>
+            <span>30</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15] interaction-btn">
+            <span class="material-icons">share</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 9: Image Post (Robotics Club) -->
+      <div class="post-card p-6" data-post-id="9">
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">R</div>
+            <div>
+              <div class="font-semibold text-white">DIU Robotics Club</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">9 hours ago</span>
+                <span class="department-tag">EEE</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="text-white mb-4">
+          <p class="mb-4">Our new robot prototype is ready for the National Robotics Competition! 🤖 #DIURobotics</p>
+          <img src="https://picsum.photos/800/400?robotics" alt="Robot Prototype" class="w-full rounded-xl mb-4">
+          <div class="flex gap-2">
+            <span class="department-tag">#DIURobotics</span>
+            <span class="department-tag">#TechCompetition</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleComment(9)">
+            <span class="material-icons">chat_bubble_outline</span>
+            <span>40</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleRetweet(9)">
+            <span class="material-icons">repeat</span>
+            <span>25</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleLike(9)">
+            <span class="material-icons">favorite_border</span>
+            <span>110</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15] interaction-btn">
+            <span class="material-icons">share</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 10: Text Post (English, Startup Pitch) -->
+      <div class="post-card p-6" data-post-id="10">
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">M</div>
+            <div>
+              <div class="font-semibold text-white">Mehedi Hasan</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">10 hours ago</span>
+                <span class="department-tag">BBA</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="text-white mb-4">
+          <p class="mb-4">Preparing for the DIU Startup Pitch Competition. Any tips for a killer pitch deck? 💼 #DIUStartups</p>
+          <div class="flex gap-2">
+            <span class="department-tag">#DIUStartups</span>
+            <span class="department-tag">#Entrepreneurship</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleComment(10)">
+            <span class="material-icons">chat_bubble_outline</span>
+            <span>12</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleRetweet(10)">
+            <span class="material-icons">repeat</span>
+            <span>8</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleLike(10)">
+            <span class="material-icons">favorite_border</span>
+            <span>45</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15] interaction-btn">
+            <span class="material-icons">share</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 11: Video Post (Cultural Dance) -->
+      <div class="post-card p-6" data-post-id="11">
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">C</div>
+            <div>
+              <div class="font-semibold text-white">DIU Dance Club</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">11 hours ago</span>
+                <span class="department-tag">Cultural</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="text-white mb-4">
+          <p class="mb-4">Our performance at the DIU Cultural Week rehearsal! Ready for the main event? 💃 #DIUCulturalWeek</p>
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/9bZkp7q19f0" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div class="flex gap-2">
+            <span class="department-tag">#DIUCulturalWeek</span>
+            <span class="department-tag">#Dance</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleComment(11)">
+            <span class="material-icons">chat_bubble_outline</span>
+            <span>60</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleRetweet(11)">
+            <span class="material-icons">repeat</span>
+            <span>40</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleLike(11)">
+            <span class="material-icons">favorite_border</span>
+            <span>250</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15] interaction-btn">
+            <span class="material-icons">share</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 12: Text Post (Bangla, Library Update) -->
+      <div class="post-card p-6" data-post-id="12">
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">L</div>
+            <div>
+              <div class="font-semibold text-white">DIU Library</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">12 hours ago</span>
+                <span class="department-tag">Library</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="text-white mb-4">
+          <p class="mb-4">নতুন বই এসেছে DIU লাইব্রেরিতে! ইঞ্জিনিয়ারিং এবং বিজনেস সেকশনে নতুন সংযোজন দেখুন। 📖 #DIULibrary</p>
+          <div class="flex gap-2">
+            <span class="department-tag">#DIULibrary</span>
+            <span class="department-tag">#NewBooks</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleComment(12)">
+            <span class="material-icons">chat_bubble_outline</span>
+            <span>8</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleRetweet(12)">
+            <span class="material-icons">repeat</span>
+            <span>4</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleLike(12)">
+            <span class="material-icons">favorite_border</span>
+            <span>25</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15] interaction-btn">
+            <span class="material-icons">share</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 13: Image Post (Hackathon) -->
+      <div class="post-card p-6" data-post-id="13">
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">H</div>
+            <div>
+              <div class="font-semibold text-white">DIU Hackathon Team</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">13 hours ago</span>
+                <span class="department-tag">CSE</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="text-white mb-4">
+          <p class="mb-4">Teamwork makes the dream work! Our hackathon prep is in full swing. 🖥️ #DIUHacks</p>
+          <img src="https://picsum.photos/800/400?hackathon" alt="Hackathon Prep" class="w-full rounded-xl mb-4">
+          <div class="flex gap-2">
+            <span class="department-tag">#DIUHacks</span>
+            <span class="department-tag">#Hackathon</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleComment(13)">
+            <span class="material-icons">chat_bubble_outline</span>
+            <span>35</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleRetweet(13)">
+            <span class="material-icons">repeat</span>
+            <span>20</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleLike(13)">
+            <span class="material-icons">favorite_border</span>
+            <span>90</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15] interaction-btn">
+            <span class="material-icons">share</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 14: Text Post (English, Job Fair) -->
+      <div class="post-card p-6" data-post-id="14">
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">J</div>
+            <div>
+              <div class="font-semibold text-white">DIU Career Center</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">14 hours ago</span>
+                <span class="department-tag">Career</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="text-white mb-4">
+          <p class="mb-4">DIU Job Fair 2025 is coming! Connect with top companies and land your dream job. 💼 #DIUJobs</p>
+          <div class="flex gap-2">
+            <span class="department-tag">#DIUJobs</span>
+            <span class="department-tag">#CareerFair</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleComment(14)">
+            <span class="material-icons">chat_bubble_outline</span>
+            <span>20</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleRetweet(14)">
+            <span class="material-icons">repeat</span>
+            <span>15</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleLike(14)">
+            <span class="material-icons">favorite_border</span>
+            <span>80</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15] interaction-btn">
+            <span class="material-icons">share</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 15: Image Post (Art Exhibition) -->
+      <div class="post-card p-6" data-post-id="15">
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">A</div>
+            <div>
+              <div class="font-semibold text-white">DIU Art Club</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">15 hours ago</span>
+                <span class="department-tag">Cultural</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="text-white mb-4">
+          <p class="mb-4">Our art exhibition at DIU Cultural Week was a blast! Check out the amazing artworks. 🎨 #DIUArts</p>
+          <img src="https://picsum.photos/800/400?art" alt="Art Exhibition" class="w-full rounded-xl mb-4">
+          <div class="flex gap-2">
+            <span class="department-tag">#DIUArts</span>
+            <span class="department-tag">#ArtExhibition</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleComment(15)">
+            <span class="material-icons">chat_bubble_outline</span>
+            <span>30</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleRetweet(15)">
+            <span class="material-icons">repeat</span>
+            <span>18</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleLike(15)">
+            <span class="material-icons">favorite_border</span>
+            <span>100</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15] interaction-btn">
+            <span class="material-icons">share</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 16: Text Post (Bangla, Volunteer Call) -->
+      <div class="post-card p-6" data-post-id="16">
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">V</div>
+            <div>
+              <div class="font-semibold text-white">DIU Volunteer Club</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">16 hours ago</span>
+                <span class="department-tag">Volunteer</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="text-white mb-4">
+          <p class="mb-4">ডিআইইউ টেক ফেস্ট ২০২৫-এর জন্য ভলান্টিয়ার প্রয়োজন! আজই যোগ দিন। 🤝 #DIUVolunteers</p>
+          <div class="flex gap-2">
+            <span class="department-tag">#DIUVolunteers</span>
+            <span class="department-tag">#TechFest</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleComment(16)">
+            <span class="material-icons">chat_bubble_outline</span>
+            <span>15</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleRetweet(16)">
+            <span class="material-icons">repeat</span>
+            <span>10</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleLike(16)">
+            <span class="material-icons">favorite_border</span>
+            <span>50</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15] interaction-btn">
+            <span class="material-icons">share</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 17: Video Post (Science Fair) -->
+      <div class="post-card p-6" data-post-id="17">
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">S</div>
+            <div>
+              <div class="font-semibold text-white">DIU Science Club</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">17 hours ago</span>
+                <span class="department-tag">Science</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="text-white mb-4">
+          <p class="mb-4">Highlights from the DIU Science Fair! Amazing projects by our students. 🔬 #DIUScience</p>
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/7bX7eXwI4kE" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div class="flex gap-2">
+            <span class="department-tag">#DIUScience</span>
+            <span class="department-tag">#ScienceFair</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleComment(17)">
+            <span class="material-icons">chat_bubble_outline</span>
+            <span>25</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleRetweet(17)">
+            <span class="material-icons">repeat</span>
+            <span>15</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleLike(17)">
+            <span class="material-icons">favorite_border</span>
+            <span>85</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15] interaction-btn">
+            <span class="material-icons">share</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 18: Text Post (English, Study Group) -->
+      <div class="post-card p-6" data-post-id="18">
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">F</div>
+            <div>
+              <div class="font-semibold text-white">Fatima Akter</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">18 hours ago</span>
+                <span class="department-tag">CSE</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="text-white mb-4">
+          <p class="mb-4">Forming a study group for Data Structures. Anyone interested? 📝 #DIUStudy</p>
+          <div class="flex gap-2">
+            <span class="department-tag">#DIUStudy</span>
+            <span class="department-tag">#DataStructures</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleComment(18)">
+            <span class="material-icons">chat_bubble_outline</span>
+            <span>10</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleRetweet(18)">
+            <span class="material-icons">repeat</span>
+            <span>5</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleLike(18)">
+            <span class="material-icons">favorite_border</span>
+            <span>30</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15] interaction-btn">
+            <span class="material-icons">share</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 19: Image Post (Debate Club) -->
+      <div class="post-card p-6" data-post-id="19">
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">D</div>
+            <div>
+              <div class="font-semibold text-white">DIU Debate Club</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">19 hours ago</span>
+                <span class="department-tag">Debate</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="text-white mb-4">
+          <p class="mb-4">Our team won the National Debate Championship! Proud moment for DIU! 🗣️ #DIUDebate</p>
+          <img src="https://picsum.photos/800/400?debate" alt="Debate Team" class="w-full rounded-xl mb-4">
+          <div class="flex gap-2">
+            <span class="department-tag">#DIUDebate</span>
+            <span class="department-tag">#Champions</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleComment(19)">
+            <span class="material-icons">chat_bubble_outline</span>
+            <span>45</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleRetweet(19)">
+            <span class="material-icons">repeat</span>
+            <span>30</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleLike(19)">
+            <span class="material-icons">favorite_border</span>
+            <span>150</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15] interaction-btn">
+            <span class="material-icons">share</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 20: Text Post (Bangla, Club Recruitment) -->
+      <div class="post-card p-6" data-post-id="20">
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">P</div>
+            <div>
+              <div class="font-semibold text-white">DIU Photography Club</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">20 hours ago</span>
+                <span class="department-tag">Photography</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="text-white mb-4">
+          <p class="mb-4">ডিআইইউ ফটোগ্রাফি ক্লাবে নতুন সদস্য নিয়োগ! আগ্রহী হলে আজই যোগাযোগ করুন। 📸 #DIUPhotography</p>
+          <div class="flex gap-2">
+            <span class="department-tag">#DIUPhotography</span>
+            <span class="department-tag">#ClubRecruitment</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleComment(20)">
+            <span class="material-icons">chat_bubble_outline</span>
+            <span>12</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleRetweet(20)">
+            <span class="material-icons">repeat</span>
+            <span>8</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleLike(20)">
+            <span class="material-icons">favorite_border</span>
+            <span>40</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15] interaction-btn">
+            <span class="material-icons">share</span>
+          </div>
         </div>
       </div>
     </div>
-  </header>
+  </main>
 
-  <!-- Main Container -->
-  <div class="main-container">
-    <!-- Left Sidebar -->
-    <aside class="sidebar">
-      <nav class="flex flex-col gap-1">
-        <a href="home.html" class="sidebar-link active">
-          <span class="material-icons">home</span>
-          Home
-        </a>
-        <a href="trends.html" class="sidebar-link">
-          <span class="material-icons">trending_up</span>
-          Trends
-        </a>
-        <a href="clubs.html" class="sidebar-link">
-          <span class="material-icons">groups</span>
-          Clubs
-        </a>
-        <a href="messaging.html" class="sidebar-link">
-          <span class="material-icons">chat_bubble</span>
-          Messages
-        </a>
-        <a href="videos.html" class="sidebar-link">
-          <span class="material-icons">play_circle</span>
-          Videos
-        </a>
-        <a href="jobs.html" class="sidebar-link">
-          <span class="material-icons">work</span>
-          Jobs
-        </a>
-        <a href="settings.html" class="sidebar-link">
-          <span class="material-icons">settings</span>
-          Settings
-        </a>
-      </nav>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="main-content">
-      <!-- Create Post Box -->
-      <div class="create-post">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="avatar">S</div>
-          <input type="text" placeholder="What's on your mind?" class="post-input">
+  <!-- Right Sidebar -->
+  <aside class="w-80 p-8 right-sidebar">
+    <div class="right-card">
+      <h3 class="text-lg font-semibold mb-4">DIU Trending</h3>
+      <div class="space-y-4">
+        <div>
+          <div class="trending-tag">#DIUTechFest2025</div>
+          <div class="trending-title">Annual Tech Festival</div>
+          <div class="trending-stats">1.5k posts</div>
         </div>
-        <div class="post-options">
-          <button class="post-option">
-            <span class="material-icons text-red-500">videocam</span>
-            Live Video
-          </button>
-          <button class="post-option">
-            <span class="material-icons text-green-500">photo_library</span>
-            Photo/Video
-          </button>
-          <button class="post-option">
-            <span class="material-icons text-yellow-500">mood</span>
-            Feeling/Activity
-          </button>
+        <div>
+          <div class="trending-tag">#DIUStartups</div>
+          <div class="trending-title">Student Innovations</div>
+          <div class="trending-stats">950 posts</div>
+        </div>
+        <div>
+          <div class="trending-tag">#DIUCulturalWeek</div>
+          <div class="trending-title">Cultural Events</div>
+          <div class="trending-stats">720 posts</div>
+        </div>
+        <div>
+          <div class="trending-tag">#DIUHacks</div>
+          <div class="trending-title">Hackathon Challenges</div>
+          <div class="trending-stats">500 posts</div>
         </div>
       </div>
+    </div>
 
-      <!-- Posts Feed -->
-      <div id="feed" class="space-y-4">
-        <!-- Post Template -->
-        <div class="post-card">
-          <div class="post-header">
-            <div class="avatar">A</div>
-            <div>
-              <div class="font-semibold">Ayesha Siddiqa</div>
-              <div class="text-sm text-gray-500">2 hours ago</div>
-            </div>
-          </div>
-          <div class="post-content">
-            <p class="mb-4">Check out our latest IoT project demo at the DIU Innovation Lab! 🚀 #DIUTechFest2025</p>
-            <div class="video-container">
-              <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-            </div>
-          </div>
-          <div class="post-actions">
-            <button class="action-button">
-              <span class="material-icons">thumb_up</span>
-              Like
-            </button>
-            <button class="action-button">
-              <span class="material-icons">chat_bubble_outline</span>
-              Comment
-            </button>
-            <button class="action-button">
-              <span class="material-icons">share</span>
-              Share
-            </button>
-          </div>
-        </div>
-      </div>
-    </main>
-
-    <!-- Right Sidebar -->
-    <aside class="right-sidebar">
-      <div class="right-card">
-        <h3 class="font-semibold mb-4">Trending Topics</h3>
-        <div class="space-y-4">
+    <!-- Department Updates -->
+    <div class="right-card mt-6">
+      <h3 class="text-lg font-semibold mb-4">Department Updates</h3>
+      <div class="space-y-3">
+        <div class="flex items-center gap-2">
+          <span class="material-icons text-[#facc15]">school</span>
           <div>
-            <div class="text-[#1877f2] font-medium">#DIUTechFest2025</div>
-            <div class="text-sm text-gray-500">1.5k posts</div>
+            <div class="text-sm font-medium">CSE Department</div>
+            <div class="text-xs text-gray-400">Project Showcase - Tomorrow</div>
           </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="material-icons text-[#facc15]">event</span>
           <div>
-            <div class="text-[#1877f2] font-medium">#DIUStartups</div>
-            <div class="text-sm text-gray-500">950 posts</div>
+            <div class="text-sm font-medium">EEE Department</div>
+            <div class="text-xs text-gray-400">Seminar on IoT - Next Week</div>
           </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="material-icons text-[#facc15]">palette</span>
           <div>
-            <div class="text-[#1877f2] font-medium">#DIUCulturalWeek</div>
-            <div class="text-sm text-gray-500">720 posts</div>
+            <div class="text-sm font-medium">Cultural Club</div>
+            <div class="text-xs text-gray-400">Art Exhibition - This Friday</div>
           </div>
         </div>
       </div>
-
-      <div class="right-card">
-        <h3 class="font-semibold mb-4">Department Updates</h3>
-        <div class="space-y-3">
-          <div class="flex items-center gap-2">
-            <span class="material-icons text-[#1877f2]">school</span>
-            <div>
-              <div class="text-sm font-medium">CSE Department</div>
-              <div class="text-xs text-gray-500">Project Showcase - Tomorrow</div>
-            </div>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="material-icons text-[#1877f2]">event</span>
-            <div>
-              <div class="text-sm font-medium">EEE Department</div>
-              <div class="text-xs text-gray-500">Seminar on IoT - Next Week</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </aside>
-  </div>
+    </div>
+  </aside>
 
   <script>
     if (!localStorage.getItem('isLoggedIn')) {
@@ -469,7 +1293,7 @@
 
     // Create new post
     function createPost() {
-      const postInput = document.querySelector('.post-input');
+      const postInput = document.getElementById('postInput');
       const content = postInput.value.trim();
       
       if (!content && !selectedImage && !videoUrl) {
@@ -497,14 +1321,19 @@
       
       // Hardcoding user details for simplicity
       newPost.innerHTML = `
-        <div class="post-header">
-          <div class="avatar">S</div>
-          <div>
-            <div class="font-semibold">Student User</div>
-            <div class="text-sm text-gray-500">${timeString}</div>
-          </div>
+        <div class="flex items-center gap-4 mb-4">
+          <a href="profile.html" class="flex items-center gap-4">
+            <div class="avatar">S</div>
+            <div>
+              <div class="font-semibold text-white">Student User</div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400">${timeString}</span>
+                <span class="department-tag">General</span>
+              </div>
+            </div>
+          </a>
         </div>
-        <div class="post-content">
+        <div class="text-white mb-4">
           ${content ? `<p class="mb-4">${content}</p>` : ''}
           ${mediaContent}
           <div class="flex gap-2">
@@ -512,19 +1341,22 @@
             <span class="department-tag">#Post</span>
           </div>
         </div>
-        <div class="post-actions">
-          <button class="action-button">
-            <span class="material-icons">thumb_up</span>
-            Like
-          </button>
-          <button class="action-button">
+        <div class="flex items-center gap-8 text-white">
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleComment(${postCounter})">
             <span class="material-icons">chat_bubble_outline</span>
-            Comment
-          </button>
-          <button class="action-button">
+            <span>0</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleRetweet(${postCounter})">
+            <span class="material-icons">repeat</span>
+            <span>0</span>
+          </div>
+          <div class="flex items-center gap-2 cursor-pointer hover:text-[#facc15] interaction-btn" onclick="toggleLike(${postCounter})">
+            <span class="material-icons">favorite_border</span>
+            <span>0</span>
+          </div>
+          <div class="cursor-pointer hover:text-[#facc15] interaction-btn">
             <span class="material-icons">share</span>
-            Share
-          </button>
+          </div>
         </div>
       `;
       

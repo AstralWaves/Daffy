@@ -2,13 +2,13 @@
 :root {
   --sidebar-width: 240px;
   --sidebar-mobile-height: 60px;
-  --primary-blue: #1877f2;
+  --primary-blue: #1e2761;
   --gold: #facc15;
-  --surface-color: #ffffff;
-  --text-color: #1f2937;
-  --border-radius: 8px;
+  --surface-color: #1a1a1a;
+  --text-color: #ffffff;
+  --border-radius: 24px;
   --header-height: 60px;
-  --facebook-gray: #f0f2f5;
+  --facebook-gray: #2a2a2a;
 }
 
 * {
@@ -22,28 +22,26 @@ body {
   padding: 0;
   min-height: 100vh;
   font-family: 'Poppins', sans-serif;
-  background: var(--facebook-gray);
+  background: #000000;
   color: var(--text-color);
   overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
-  padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* Header */
 .header {
-  background: white;
+  background: #000000;
   height: var(--header-height);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   padding: 0 16px;
-  padding-top: env(safe-area-inset-top);
 }
 
 .header-content {
@@ -59,7 +57,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--primary-blue);
+  color: var(--gold);
   font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
@@ -68,49 +66,60 @@ body {
 /* Main Layout */
 .main-container {
   display: flex;
-  margin-top: calc(var(--header-height) + env(safe-area-inset-top));
+  margin-top: var(--header-height);
   min-height: calc(100vh - var(--header-height));
 }
 
 /* Sidebar */
 .sidebar {
-  background: white;
+  background: #000000;
   width: var(--sidebar-width);
   height: calc(100vh - var(--header-height));
   position: fixed;
   left: 0;
-  top: calc(var(--header-height) + env(safe-area-inset-top));
+  top: var(--header-height);
   padding: 1rem;
   overflow-y: auto;
-  border-right: 1px solid #e4e6eb;
-  z-index: 900;
+  border-right: 1px solid #333333;
+  box-shadow: 4px 0 24px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 0 32px 32px 0;
+  transition: all 0.3s ease;
+}
+
+.sidebar:hover {
+  transform: translateX(5px);
 }
 
 .sidebar-link {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.75rem;
+  padding: 12px 16px;
   color: var(--text-color);
   text-decoration: none;
-  border-radius: var(--border-radius);
+  border-radius: 12px;
   margin-bottom: 0.25rem;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
   font-size: 0.9375rem;
-  min-height: 44px; /* Minimum touch target size */
+  min-height: 44px;
 }
 
 .sidebar-link:hover {
-  background-color: var(--facebook-gray);
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
 }
 
 .sidebar-link.active {
-  background-color: var(--facebook-gray);
-  font-weight: 600;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .sidebar-link .material-icons {
-  color: var(--primary-blue);
+  color: var(--gold);
+  transition: transform 0.3s ease;
+}
+
+.sidebar-link:hover .material-icons {
+  transform: scale(1.2);
 }
 
 /* Main Content */
@@ -124,11 +133,17 @@ body {
 
 /* Post Card */
 .post-card {
-  background: white;
+  background: var(--surface-color);
   border-radius: var(--border-radius);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 32px 0 rgba(30, 64, 175, 0.10);
   margin-bottom: 1rem;
-  padding: 1rem;
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 40px 0 rgba(30, 64, 175, 0.15);
 }
 
 .post-header {
@@ -139,15 +154,21 @@ body {
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 3.2rem;
+  height: 3.2rem;
   border-radius: 50%;
-  background: var(--primary-blue);
-  color: white;
+  background: linear-gradient(135deg, #facc15 0%, #1e2761 100%);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 1.3rem;
+  transition: transform 0.3s ease;
+}
+
+.avatar:hover {
+  transform: rotate(360deg);
 }
 
 .post-content {
@@ -156,7 +177,7 @@ body {
 
 .post-actions {
   display: flex;
-  border-top: 1px solid #e4e6eb;
+  border-top: 1px solid #333333;
   padding-top: 0.5rem;
 }
 
@@ -167,17 +188,18 @@ body {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.5rem;
-  color: #65676b;
+  color: #888888;
   font-weight: 600;
   font-size: 0.9375rem;
   cursor: pointer;
   border-radius: var(--border-radius);
-  transition: background-color 0.2s;
-  min-height: 44px; /* Minimum touch target size */
+  transition: all 0.3s ease;
+  min-height: 44px;
 }
 
 .action-button:hover {
-  background-color: var(--facebook-gray);
+  color: var(--gold);
+  transform: scale(1.1);
 }
 
 .action-button .material-icons {
@@ -186,26 +208,30 @@ body {
 
 /* Create Post Box */
 .create-post {
-  background: white;
+  background: var(--surface-color);
   border-radius: var(--border-radius);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  padding: 1rem;
+  box-shadow: 0 6px 32px 0 rgba(30, 64, 175, 0.10);
+  padding: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
 .post-input {
   width: 100%;
-  border: none;
+  border: 2px solid #333333;
   background: var(--facebook-gray);
-  border-radius: 20px;
-  padding: 0.75rem 1rem;
+  border-radius: 24px;
+  padding: 12px 20px;
   margin-bottom: 0.75rem;
   font-size: 0.9375rem;
   resize: none;
-  min-height: 44px; /* Minimum touch target size */
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  min-height: 44px;
 }
 
 .post-input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.1);
   outline: none;
 }
 
@@ -213,7 +239,7 @@ body {
   display: flex;
   gap: 0.5rem;
   padding-top: 0.75rem;
-  border-top: 1px solid #e4e6eb;
+  border-top: 1px solid #333333;
 }
 
 .post-option {
@@ -223,17 +249,18 @@ body {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.5rem;
-  color: #65676b;
+  color: #888888;
   font-weight: 600;
   font-size: 0.9375rem;
   cursor: pointer;
   border-radius: var(--border-radius);
-  transition: background-color 0.2s;
-  min-height: 44px; /* Minimum touch target size */
+  transition: all 0.3s ease;
+  min-height: 44px;
 }
 
 .post-option:hover {
-  background-color: var(--facebook-gray);
+  color: var(--gold);
+  transform: scale(1.05);
 }
 
 /* Right Sidebar */
@@ -242,27 +269,33 @@ body {
   padding: 1.5rem;
   position: fixed;
   right: 0;
-  top: calc(var(--header-height) + env(safe-area-inset-top));
+  top: var(--header-height);
   height: calc(100vh - var(--header-height));
   overflow-y: auto;
 }
 
 .right-card {
-  background: white;
+  background: var(--surface-color);
   border-radius: var(--border-radius);
-  padding: 1rem;
-  margin-bottom: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 6px 32px 0 rgba(30, 64, 175, 0.10);
+  transition: transform 0.3s ease;
+}
+
+.right-card:hover {
+  transform: scale(1.02);
 }
 
 /* Mobile Menu */
 .mobile-menu-toggle {
   display: none;
   position: fixed;
-  top: calc(1rem + env(safe-area-inset-top));
+  top: 1rem;
   left: 1rem;
   z-index: 1001;
   background: var(--primary-blue);
-  color: white;
+  color: var(--gold);
   border: none;
   padding: 0.5rem;
   border-radius: 50%;
@@ -271,7 +304,7 @@ body {
   height: 44px;
   align-items: center;
   justify-content: center;
-  min-height: 44px; /* Minimum touch target size */
+  min-height: 44px;
 }
 
 /* Media Queries */
@@ -293,7 +326,7 @@ body {
   .sidebar {
     transform: translateX(-100%);
     transition: transform 0.3s ease;
-    width: 280px; /* Wider sidebar on mobile for better touch targets */
+    width: 280px;
   }
   
   .sidebar.active {
@@ -315,11 +348,11 @@ body {
   }
 
   .logo span:last-child {
-    display: none; /* Hide logo text on mobile */
+    display: none;
   }
 
   .search-bar {
-    display: none; /* Hide search bar on mobile */
+    display: none;
   }
 
   .nav-icons {
@@ -360,7 +393,7 @@ body {
   }
 
   .post-input {
-    font-size: 1rem; /* Prevent zoom on iOS */
+    font-size: 1rem;
   }
 
   .avatar {
@@ -394,24 +427,6 @@ body {
   .sidebar-link:active,
   .action-button:active,
   .post-option:active {
-    background-color: var(--facebook-gray);
-  }
-}
-
-/* Safe Area Insets for Modern Mobile Devices */
-@supports (padding: max(0px)) {
-  body {
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
-  }
-
-  .header {
-    padding-left: max(16px, env(safe-area-inset-left));
-    padding-right: max(16px, env(safe-area-inset-right));
-  }
-
-  .main-content {
-    padding-left: max(1rem, env(safe-area-inset-left));
-    padding-right: max(1rem, env(safe-area-inset-right));
+    background: rgba(255, 255, 255, 0.1);
   }
 }
