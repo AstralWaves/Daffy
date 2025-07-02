@@ -800,49 +800,62 @@
             function createPost() {
                 try {
                     const content = document.getElementById('newPost').value.trim();
-                    const files = document.getElementById('postImageUpload').files;
-                    if (!content && !files.length) {
-                        showNotification('Please add content or images.');
+                    const imageFile = document.getElementById('postImageUpload').files[0];
+                    
+                    // Validate post content
+                    if (!content && !imageFile) {
+                        showNotification('Please enter some content or attach an image to post.');
                         return;
                     }
-                    const newPost = {
-                        id: `post_${Date.now()}`,
-                        content,
+                    
+                    // Validate content length and format
+                    if (content.length > 1000) {
+                        showNotification('Post content is too long. Maximum 1000 characters allowed.');
+                        return;
+                    }
+                    
+                    // Check for spam patterns
+                    const spamPatterns = [
+                        /\b(buy|sell|discount|offer)\b/i,
+                        /\b(\$\d+|\d+%)\b/,
+                        /\b(click here|buy now)\b/i
+                    ];
+                    
+                    if (spamPatterns.some(pattern => pattern.test(content))) {
+                        showNotification('Your post appears to be promotional content.');
+                        return;
+                    }
+                    
+                    // Create post with validated content
+                    const post = {
+                        id: Date.now().toString(),
+                        content: content,
                         timestamp: new Date().toISOString(),
-                        images: [],
+                        userId: currentUser.id,
                         likes: 0,
-                        comments: 0,
-                        likedBy: []
+                        likedBy: [],
+                        images: []
                     };
-                    if (files.length) {
-                        let processed = 0;
-                        Array.from(files).forEach(file => {
-                            if (!file.type.startsWith('image/')) {
-                                showNotification('Please upload image files only.');
-                                return;
-                            }
-                            const reader = new FileReader();
-                            reader.onload = function(e) {
-                                newPost.images.push(e.target.result);
-                                processed++;
-                                if (processed === files.length) {
-                                    posts.unshift(newPost);
-                                    localStorage.setItem('posts', JSON.stringify(posts));
-                                    updateActivitySection();
-                                    showNotification('Post created.');
-                                }
-                            };
-                            reader.onerror = function() {
-                                showNotification('Failed to upload image.');
-                            };
-                            reader.readAsDataURL(file);
-                        });
+                    
+                    // Handle image upload if present
+                    if (imageFile) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            post.images.push(e.target.result);
+                            posts.unshift(post);
+                            localStorage.setItem('posts', JSON.stringify(posts));
+                            updateActivitySection();
+                            showNotification('Post created successfully.');
+                        };
+                        reader.readAsDataURL(imageFile);
                     } else {
-                        posts.unshift(newPost);
+                        posts.unshift(post);
                         localStorage.setItem('posts', JSON.stringify(posts));
                         updateActivitySection();
-                        showNotification('Post created.');
+                        showNotification('Post created successfully.');
                     }
+                    
+                    // Clear form
                     document.getElementById('newPost').value = '';
                     document.getElementById('postImageUpload').value = '';
                 } catch (error) {

@@ -368,19 +368,24 @@
                 fullName,
                 username,
                 email,
-                password, // Note: In production, hash passwords
+                password,
                 department,
                 userType,
+                firstName: fullName.split(' ')[0],
+                lastName: fullName.split(' ').slice(1).join(' '),
                 createdAt: new Date().toISOString()
             };
 
+            // Add badge and semester/batch info for all user types
             if (userType === 'student') {
                 newUser.semester = document.getElementById('semester').value;
-            } else {
+                newUser.badge = '<span class="badge-icon student" style="color:#facc15;"><span class="material-icons" style="font-size:1.1em;vertical-align:middle;">school</span>Student</span>';
+            } else if (userType === 'teacher') {
                 newUser.batch = document.getElementById('batch').value;
-                newUser.badge = userType === 'teacher' ?
-                    '<span class="badge-icon teacher"><span class="material-icons">school</span>Teacher</span>' :
-                    '<span class="badge-icon alumni"><span class="material-icons">workspace_premium</span>Alumni</span>';
+                newUser.badge = '<span class="badge-icon teacher" style="color:#10b981;"><span class="material-icons" style="font-size:1.1em;vertical-align:middle;">school</span>Teacher</span>';
+            } else if (userType === 'alumni') {
+                newUser.batch = document.getElementById('batch').value;
+                newUser.badge = '<span class="badge-icon alumni" style="color:#3b82f6;"><span class="material-icons" style="font-size:1.1em;vertical-align:middle;">workspace_premium</span>Alumni</span>';
             }
 
             // Add new user

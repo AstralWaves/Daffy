@@ -612,6 +612,47 @@
   </div>
 
   <script>
+    // WebSocket Connection
+    const ws = new WebSocket('ws://localhost:8080');
+    
+    ws.onopen = () => {
+      console.log('Connected to WebSocket server');
+      // Send user data when connected
+      const userData = JSON.parse(localStorage.getItem('userData'));
+      if (userData) {
+        ws.send(JSON.stringify({
+          type: 'user_connected',
+          user: userData
+        }));
+      }
+    };
+
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      switch(data.type) {
+        case 'message':
+          displayMessage(data.message, false);
+          break;
+        case 'typing':
+          showTypingIndicator(data.user);
+          break;
+        case 'user_status':
+          updateUserStatus(data.user, data.status);
+          break;
+      }
+    };
+
+    ws.onerror = (error) => {
+      console.error('WebSocket error:', error);
+    };
+
+    ws.onclose = () => {
+      console.log('Disconnected from WebSocket server');
+      // Attempt to reconnect
+      setTimeout(() => {
+        window.location.reload();
+      }, 5000);
+    };
     // Navigation with fade effect
     function navigateTo(url) {
       document.body.classList.add('fade-out');
@@ -636,67 +677,53 @@
       const text = messageInput.value.trim();
       if (!text) return;
 
-      messageCounter++;
-      const message = document.createElement('div');
-      message.className = 'message-bubble sent';
-      message.dataset.messageId = messageCounter;
-      message.innerHTML = `
-        ${text}
-        <div class="message-meta">
-          <span>${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-          <span>Sent</span>
-        </div>
-        <div class="message-actions">
-          <button class="action-button edit-message" aria-label="Edit message">
-            <span class="material-icons">edit</span>
-          </button>
-          <button class="action-button delete-message" aria-label="Delete message">
-            <span class="material-icons">delete</span>
-          </button>
-          <button class="action-button pin-message" aria-label="Pin message">
-            <span class="material-icons">push_pin</span>
-          </button>
-        </div>
-      `;
-      messageContent.appendChild(message);
+      const userData = JSON.parse(localStorage.getItem('userData'));
+      const messageData = {
+        type: 'message',
+        message: {
+          id: Date.now(),
+          text: text,
+          sender: userData.username,
+          timestamp: new Date().toISOString()
+        }
+      };
+
+      // Send message through WebSocket
+      ws.send(JSON.stringify(messageData));
+      
+      // Display message locally
+      displayMessage(messageData.message, true);
+      
+      // Clear input
       messageInput.value = '';
       messageContent.scrollTop = messageContent.scrollHeight;
+    }
 
-      // Simulate received message
-      setTimeout(() => {
-        const typing = document.createElement('div');
-        typing.className = 'text-sm text-text-secondary ml-2';
-        typing.textContent = 'Rakib is typing...';
-        messageContent.appendChild(typing);
-
-        setTimeout(() => {
-          messageContent.removeChild(typing);
-          messageCounter++;
-          const response = document.createElement('div');
-          response.className = 'message-bubble received';
-          response.dataset.messageId = messageCounter;
-          response.innerHTML = `
-            That sounds awesome! 🎉
-            <div class="message-meta">
-              <span>${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-              <span class="reaction">😊</span>
-            </div>
-            <div class="message-actions">
-              <button class="action-button edit-message" aria-label="Edit message">
-                <span class="material-icons">edit</span>
-              </button>
-              <button class="action-button delete-message" aria-label="Delete message">
-                <span class="material-icons">delete</span>
-              </button>
-              <button class="action-button pin-message" aria-label="Pin message">
-                <span class="material-icons">push_pin</span>
-              </button>
-            </div>
-          `;
-          messageContent.appendChild(response);
-          messageContent.scrollTop = messageContent.scrollHeight;
-        }, 2000);
-      }, 1000);
+    function displayMessage(message, isSent) {
+      const messageElement = document.createElement('div');
+      messageElement.className = `message-bubble ${isSent ? 'sent' : 'received'}`;
+      messageElement.dataset.messageId = message.id;
+      messageElement.innerHTML = `
+        ${message.text}
+        <div class="message-meta">
+          <span>${new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+          <span>${isSent ? 'Sent' : ''}</span>
+        </div>
+        <div class="message-actions">
+          ${isSent ? `
+            <button class="action-button edit-message" aria-label="Edit message">
+              <span class="material-icons">edit</span>
+            </button>
+            <button class="action-button delete-message" aria-label="Delete message">
+              <span class="material-icons">delete</span>
+            </button>
+            <button class="action-button pin-message" aria-label="Pin message">
+              <span class="material-icons">push_pin</span>
+            </button>
+          ` : ''}
+        </div>
+      `;
+      messageContent.appendChild(messageElement);
     }
 
     messageInput.addEventListener('keypress', (e) => {
@@ -803,3 +830,58 @@
   </script>
 </body>
 </html>
+
+let typingTimeout;
+messageInput.addEventListener('input', () => {
+  if (!typingTimeout) {
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    ws.send(JSON.stringify({
+      type: 'typing',
+      user: userData.username
+    }));
+  }
+  clearTimeout(typingTimeout);
+  typingTimeout = setTimeout(() => {
+    typingTimeout = null;
+  }, 1000);
+});
+
+function showTypingIndicator(username) {
+  const existingTyping = document.querySelector('.typing-indicator');
+  if (existingTyping) {
+    existingTyping.remove();
+  }
+  const typing = document.createElement('div');
+  typing.className = 'typing-indicator text-sm text-text-secondary ml-2';
+  typing.textContent = `${username} is typing...`;
+  messageContent.appendChild(typing);
+  setTimeout(() => typing.remove(), 3000);
+}
+
+    function updateUserStatus(username, status) {
+      const userElements = document.querySelectorAll('.active-user');
+      userElements.forEach(userEl => {
+        const nameEl = userEl.querySelector('.name');
+        if (nameEl && nameEl.textContent === username) {
+          const indicator = userEl.querySelector('.active-indicator');
+          const lastSeen = userEl.querySelector('.last-seen');
+          
+          if (status === 'online') {
+            if (lastSeen) lastSeen.remove();
+            if (!indicator) {
+              const newIndicator = document.createElement('div');
+              newIndicator.className = 'active-indicator';
+              userEl.querySelector('.avatar').appendChild(newIndicator);
+            }
+          } else {
+            if (indicator) indicator.remove();
+            if (!lastSeen) {
+              const newLastSeen = document.createElement('span');
+              newLastSeen.className = 'last-seen';
+              newLastSeen.textContent = 'just now';
+              userEl.appendChild(newLastSeen);
+            }
+          }
+        }
+      });
+    }
