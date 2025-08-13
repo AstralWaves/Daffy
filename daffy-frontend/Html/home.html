@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Daffy</title>
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="brand-container">
+                    <i class="fas fa-star brand-icon"></i>
+                    <span class="brand-name">Daffy</span>
+                </div>
+            </div>
+            <div class="nav-center">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Search Daffy...">
+                </div>
+            </div>
+            <div class="nav-right">
+                <button class="nav-btn" onclick="toggleTheme()" title="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="nav-btn" title="Notifications">
+                    <i class="fas fa-bell"></i>
+                </button>
+                <div class="user-menu">
+                    <img src="https://via.placeholder.com/32x32" alt="Profile" class="user-avatar" id="userAvatar">
+                    <div class="user-dropdown" id="userDropdown">
+                        <div class="user-info">
+                            <span class="user-name" id="userName">User Name</span>
+                            <span class="user-email" id="userEmail">user@example.com</span>
+                        </div>
+                        <div class="dropdown-actions">
+                            <a href="profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i> Profile
+                            </a>
+                            <a href="settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i> Settings
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <button onclick="logout()" class="dropdown-item logout-btn">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container page-transition">
+        <div class="main-container">
+            <!-- Left Sidebar -->
+            <aside class="left-sidebar">
+                <nav class="sidebar-nav">
+                    <a href="home.html" class="nav-item active">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="trends.html" class="nav-item">
+                        <i class="fas fa-fire"></i>
+                        <span>Trends</span>
+                    </a>
+                    <a href="clubs.html" class="nav-item">
+                        <i class="fas fa-users"></i>
+                        <span>Clubs</span>
+                    </a>
+                    <a href="settings.html" class="nav-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Create Post Section -->
+                <div class="create-post-section">
+                    <div class="post-input-container">
+                        <img src="https://via.placeholder.com/40x40" alt="User Avatar" class="user-avatar-small" id="userAvatarSmall">
+                        <div class="post-input-wrapper">
+                            <input type="text" class="post-input" placeholder="What's on your mind?" id="postInput">
+                            <div class="post-actions">
+                                <button class="post-action-btn" onclick="openPostModal('photo')">
+                                    <i class="fas fa-image"></i>
+                                    <span>Photo</span>
+                                </button>
+                                <button class="post-action-btn" onclick="openPostModal('video')">
+                                    <i class="fas fa-video"></i>
+                                    <span>Video</span>
+                                </button>
+                                <button class="post-action-btn" onclick="openPostModal('feeling')">
+                                    <i class="fas fa-smile"></i>
+                                    <span>Feeling</span>
+                                </button>
+                                <button class="post-action-btn" onclick="openPostModal('share')">
+                                    <i class="fas fa-share"></i>
+                                    <span>Share</span>
+                                </button>
+                            </div>
+                            <button class="post-btn" onclick="createPost()">
+                                <i class="fas fa-paper-plane"></i>
+                                Share
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stories Section -->
+                <div class="stories-section">
+                    <div class="stories-container">
+                        <div class="story-item" onclick="createStory()">
+                            <div class="story-avatar">
+                                <img src="https://via.placeholder.com/60x60" alt="Your Story" class="story-img">
+                                <div class="story-add-icon">
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                            </div>
+                            <span class="story-username">Your Story</span>
+                        </div>
+                        <div class="story-item" onclick="openStory(1)">
+                            <div class="story-avatar has-story">
+                                <img src="https://via.placeholder.com/60x60" alt="John Doe" class="story-img">
+                            </div>
+                            <span class="story-username">John Doe</span>
+                        </div>
+                        <div class="story-item" onclick="openStory(2)">
+                            <div class="story-avatar has-story">
+                                <img src="https://via.placeholder.com/60x60" alt="Jane Smith" class="story-img">
+                            </div>
+                            <span class="story-username">Jane Smith</span>
+                        </div>
+                        <div class="story-item" onclick="openStory(3)">
+                            <div class="story-avatar has-story">
+                                <img src="https://via.placeholder.com/60x60" alt="Mike Johnson" class="story-img">
+                            </div>
+                            <span class="story-username">Mike Johnson</span>
+                        </div>
+                        <div class="story-item" onclick="openStory(4)">
+                            <div class="story-avatar has-story">
+                                <img src="https://via.placeholder.com/60x60" alt="Sarah Wilson" class="story-img">
+                            </div>
+                            <span class="story-username">Sarah Wilson</span>
+                        </div>
+                        <div class="story-item" onclick="openStory(5)">
+                            <div class="story-avatar has-story">
+                                <img src="https://via.placeholder.com/60x60" alt="Alex Brown" class="story-img">
+                            </div>
+                            <span class="story-username">Alex Brown</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Posts Feed -->
+                <div class="posts-feed">
+                    <!-- Sample Post -->
+                    <div class="post-card">
+                        <div class="post-header">
+                            <img src="https://via.placeholder.com/40x40" alt="User" class="post-user-avatar">
+                            <div class="post-user-info">
+                                <h4 class="post-user-name">John Doe</h4>
+                                <span class="post-time">2 hours ago</span>
+                            </div>
+                            <button class="post-menu-btn">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                        <div class="post-content">
+                            <p class="post-text">Just finished an amazing project! Can't wait to share more details with everyone. #coding #webdev #excited</p>
+                            <img src="https://via.placeholder.com/600x400" alt="Post Image" class="post-image">
+                        </div>
+                        <div class="post-actions">
+                            <button class="post-action">
+                                <i class="fas fa-heart"></i>
+                                <span>Like</span>
+                            </button>
+                            <button class="post-action">
+                                <i class="fas fa-comment"></i>
+                                <span>Comment</span>
+                            </button>
+                            <button class="post-action">
+                                <i class="fas fa-share"></i>
+                                <span>Share</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Another Sample Post -->
+                    <div class="post-card">
+                        <div class="post-header">
+                            <img src="https://via.placeholder.com/40x40" alt="User" class="post-user-avatar">
+                            <div class="post-user-info">
+                                <h4 class="post-user-name">Jane Smith</h4>
+                                <span class="post-time">5 hours ago</span>
+                            </div>
+                            <button class="post-menu-btn">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                        <div class="post-content">
+                            <p class="post-text">Beautiful sunset today! Nature never fails to amaze me. 🌅</p>
+                        </div>
+                        <div class="post-actions">
+                            <button class="post-action">
+                                <i class="fas fa-heart"></i>
+                                <span>Like</span>
+                            </button>
+                            <button class="post-action">
+                                <i class="fas fa-comment"></i>
+                                <span>Comment</span>
+                            </button>
+                            <button class="post-action">
+                                <i class="fas fa-share"></i>
+                                <span>Share</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <!-- Notices Section -->
+            <div class="sidebar-section">
+                <h3 class="section-title">
+                    <i class="fas fa-bullhorn"></i>
+                    Notices
+                </h3>
+                <div class="notice-list">
+                    <div class="notice-item">
+                        <div class="notice-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="notice-content">
+                            <h4>Exam Schedule Updated</h4>
+                            <p>Final exam schedule has been updated. Check your portal.</p>
+                            <span class="notice-time">2 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="notice-item">
+                        <div class="notice-icon">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <div class="notice-content">
+                            <h4>Annual Sports Day</h4>
+                            <p>Annual sports day will be held next month. Register now!</p>
+                            <span class="notice-time">1 day ago</span>
+                        </div>
+                    </div>
+                    <div class="notice-item">
+                        <div class="notice-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="notice-content">
+                            <h4>Graduation Ceremony</h4>
+                            <p>Graduation ceremony details announced. Check your email.</p>
+                            <span class="notice-time">3 days ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Department Updates -->
+            <div class="sidebar-section">
+                <h3 class="section-title">
+                    <i class="fas fa-building"></i>
+                    Department Updates
+                </h3>
+                <div class="department-list">
+                    <div class="department-item">
+                        <div class="department-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="department-content">
+                            <h4>CSE Department</h4>
+                            <p>New programming workshop this weekend</p>
+                            <span class="update-time">4 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="department-item">
+                        <div class="department-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="department-content">
+                            <h4>EEE Department</h4>
+                            <p>Circuit design competition registration open</p>
+                            <span class="update-time">1 day ago</span>
+                        </div>
+                    </div>
+                    <div class="department-item">
+                        <div class="department-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <div class="department-content">
+                            <h4>ME Department</h4>
+                            <p>Robotics workshop next week</p>
+                            <span class="update-time">2 days ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="../Js/home.js"></script>
+    <script src="../Js/transitions.js"></script>
+    <script src="../Js/auth.js"></script>
+</body>
+</html>

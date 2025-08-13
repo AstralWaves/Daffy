@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Daffy</title>
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="brand-logo">
+                    <i class="fas fa-star"></i>
+                    <h1>Daffy</h1>
+                </div>
+                <h2>Create Account</h2>
+                <p>Join Daffy to connect with friends and share your moments</p>
+            </div>
+
+            <form id="signup-form" class="auth-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="firstName" placeholder="Enter first name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="lastName" placeholder="Enter last name" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-at"></i>
+                        <input type="text" id="username" placeholder="Choose a username" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Create a password" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword('password')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="password-strength" id="password-strength">
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strength-fill"></div>
+                        </div>
+                        <span class="strength-text" id="strength-text">Password strength</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" id="phone" placeholder="Enter phone number" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="userType">User Type</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-users"></i>
+                        <select id="userType" required>
+                            <option value="">Select User Type</option>
+                            <option value="student">Student</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="alumni">Alumni</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="department">Department</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-building"></i>
+                        <select id="department" required>
+                            <option value="">Select Department</option>
+                            <option value="cse">Computer Science & Engineering</option>
+                            <option value="eee">Electrical & Electronic Engineering</option>
+                            <option value="civil">Civil Engineering</option>
+                            <option value="mechanical">Mechanical Engineering</option>
+                            <option value="ipe">Industrial & Production Engineering</option>
+                            <option value="textile">Textile Engineering</option>
+                            <option value="architecture">Architecture</option>
+                            <option value="urp">Urban & Regional Planning</option>
+                            <option value="bme">Biomedical Engineering</option>
+                            <option value="ce">Computer Engineering</option>
+                            <option value="sw">Software Engineering</option>
+                            <option value="ai">Artificial Intelligence</option>
+                            <option value="ds">Data Science</option>
+                            <option value="cyber">Cybersecurity</option>
+                            <option value="business">Business Administration</option>
+                            <option value="economics">Economics</option>
+                            <option value="english">English</option>
+                            <option value="law">Law</option>
+                            <option value="pharmacy">Pharmacy</option>
+                            <option value="nursing">Nursing</option>
+                            <option value="public_health">Public Health</option>
+                            <option value="nutrition">Nutrition & Food Engineering</option>
+                            <option value="agriculture">Agriculture</option>
+                            <option value="fisheries">Fisheries</option>
+                            <option value="veterinary">Veterinary Medicine</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Conditional fields based on user type -->
+                <div class="form-group" id="semesterGroup" style="display: none;">
+                    <label for="semester">Semester</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-graduation-cap"></i>
+                        <select id="semester">
+                            <option value="">Select Semester</option>
+                            <option value="1">1st Semester</option>
+                            <option value="2">2nd Semester</option>
+                            <option value="3">3rd Semester</option>
+                            <option value="4">4th Semester</option>
+                            <option value="5">5th Semester</option>
+                            <option value="6">6th Semester</option>
+                            <option value="7">7th Semester</option>
+                            <option value="8">8th Semester</option>
+                            <option value="9">9th Semester</option>
+                            <option value="10">10th Semester</option>
+                            <option value="11">11th Semester</option>
+                            <option value="12">12th Semester</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group" id="joiningYearGroup" style="display: none;">
+                    <label for="joiningYear">Joining Year</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-calendar"></i>
+                        <select id="joiningYear">
+                            <option value="">Select Joining Year</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group" id="graduationYearGroup" style="display: none;">
+                    <label for="graduationYear">Graduation Year</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-calendar-check"></i>
+                        <select id="graduationYear">
+                            <option value="">Select Graduation Year</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="terms" required>
+                        <span class="checkmark"></span>
+                        I agree to the <a href="#" class="link">Terms of Service</a> and <a href="#" class="link">Privacy Policy</a>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="newsletter">
+                        <span class="checkmark"></span>
+                        Subscribe to newsletter and updates
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-primary">
+                    <i class="fas fa-user-plus"></i>
+                    Create Account
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Already have an account? <a href="signin.html">Sign In</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../Js/auth.js"></script>
+</body>
+</html>

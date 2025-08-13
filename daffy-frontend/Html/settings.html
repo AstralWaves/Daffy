@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Daffy</title>
+    <link rel="stylesheet" href="../css/settings.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="brand-container">
+                    <i class="fas fa-star brand-icon"></i>
+                    <span class="brand-name">Daffy</span>
+                </div>
+            </div>
+            <div class="nav-center">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Search settings...">
+                </div>
+            </div>
+            <div class="nav-right">
+                <button class="nav-btn" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="nav-btn">
+                    <i class="fas fa-bell"></i>
+                </button>
+                <div class="user-menu">
+                    <img src="https://via.placeholder.com/32x32" alt="Profile" class="user-avatar">
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <!-- Settings Sidebar -->
+        <aside class="settings-sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-cog"></i> Settings</h2>
+            </div>
+            <nav class="settings-nav">
+                <a href="#account" class="nav-item active" data-section="account">
+                    <i class="fas fa-user"></i>
+                    <span>Account</span>
+                </a>
+                <a href="#privacy" class="nav-item" data-section="privacy">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Privacy</span>
+                </a>
+                <a href="#notifications" class="nav-item" data-section="notifications">
+                    <i class="fas fa-bell"></i>
+                    <span>Notifications</span>
+                </a>
+                <a href="#appearance" class="nav-item" data-section="appearance">
+                    <i class="fas fa-palette"></i>
+                    <span>Appearance</span>
+                </a>
+                <a href="#security" class="nav-item" data-section="security">
+                    <i class="fas fa-lock"></i>
+                    <span>Security</span>
+                </a>
+                <a href="#help" class="nav-item" data-section="help">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Help & Support</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="settings-content">
+            <!-- Account Settings -->
+            <section id="account" class="settings-section active">
+                <div class="section-header">
+                    <div class="header-content">
+                        <h1>Account Settings</h1>
+                        <p>Manage your account information and preferences</p>
+                    </div>
+                </div>
+
+                <div class="settings-container">
+                    <!-- Profile Information Card -->
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="header-icon">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="header-text">
+                                <h3>Profile Information</h3>
+                                <p>Update your personal information and contact details</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form id="profile-form" class="settings-form">
+                                <div class="form-grid">
+                                    <div class="form-field">
+                                        <label for="name">Full Name</label>
+                                        <input type="text" id="name" placeholder="Enter your full name" required>
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="email">Email Address</label>
+                                        <input type="email" id="email" placeholder="Enter your email" required>
+                                    </div>
+                                    <div class="form-field full-width">
+                                        <label for="phone">Phone Number</label>
+                                        <input type="tel" id="phone" placeholder="Enter your phone number" required>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn-primary">
+                                        <i class="fas fa-save"></i> Save Changes
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Profile Picture Card -->
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="header-icon">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="header-text">
+                                <h3>Profile Picture</h3>
+                                <p>Update your profile picture to personalize your account</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="profile-picture-container">
+                                <div class="picture-preview">
+                                    <img src="https://via.placeholder.com/120x120" alt="Current Profile Picture" id="current-profile-pic">
+                                    <div class="picture-overlay">
+                                        <i class="fas fa-camera"></i>
+                                    </div>
+                                </div>
+                                <div class="picture-actions">
+                                    <div class="upload-info">
+                                        <h4>Upload New Photo</h4>
+                                        <p>Choose a new profile picture from your device</p>
+                                    </div>
+                                    <div class="upload-buttons">
+                                        <input type="file" id="profile-picture" accept="image/*" class="file-input">
+                                        <label for="profile-picture" class="btn-secondary">
+                                            <i class="fas fa-upload"></i> Choose File
+                                        </label>
+                                        <button type="button" onclick="uploadProfilePicture()" class="btn-primary">
+                                            <i class="fas fa-check"></i> Upload
+                                        </button>
+                                    </div>
+                                    <div class="file-requirements">
+                                        <p><i class="fas fa-info-circle"></i> JPG, PNG or GIF. Max size 5MB.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Change Password Card -->
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="header-icon">
+                                <i class="fas fa-key"></i>
+                            </div>
+                            <div class="header-text">
+                                <h3>Change Password</h3>
+                                <p>Update your password to keep your account secure</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form id="change-password-form" class="settings-form">
+                                <div class="form-field">
+                                    <label for="current-password">Current Password</label>
+                                    <input type="password" id="current-password" placeholder="Enter current password" required>
+                                </div>
+                                <div class="form-grid">
+                                    <div class="form-field">
+                                        <label for="new-password">New Password</label>
+                                        <input type="password" id="new-password" placeholder="Enter new password" required>
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="confirm-password">Confirm New Password</label>
+                                        <input type="password" id="confirm-password" placeholder="Confirm new password" required>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn-primary">
+                                        <i class="fas fa-key"></i> Update Password
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Delete Account Card -->
+                    <div class="settings-card danger-card">
+                        <div class="card-header">
+                            <div class="header-icon danger">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="header-text">
+                <h3>Delete Account</h3>
+                                <p>Permanently delete your account and all associated data</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="danger-warning">
+                                <div class="warning-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="warning-content">
+                                    <h4>Warning: This action cannot be undone</h4>
+                                    <p>Once you delete your account, all your data, posts, connections, and settings will be permanently removed from our servers.</p>
+                                    <ul class="warning-list">
+                                        <li>All your posts and comments will be deleted</li>
+                                        <li>Your profile and connections will be removed</li>
+                                        <li>You won't be able to recover any data</li>
+                                        <li>This action is irreversible</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button onclick="deleteAccount()" class="btn-danger">
+                                    <i class="fas fa-trash"></i> Delete Account
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </section>
+
+        <!-- Privacy Settings -->
+            <section id="privacy" class="settings-section">
+                <div class="section-header">
+                    <div class="header-content">
+                        <h1>Privacy Settings</h1>
+                        <p>Control who can see your profile and contact you</p>
+                    </div>
+                </div>
+
+                <div class="settings-container">
+                    <!-- Profile Visibility Card -->
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="header-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="header-text">
+                <h3>Profile Visibility</h3>
+                                <p>Control who can see your profile information</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="setting-control">
+                                <div class="control-info">
+                                    <h4>Profile Visibility</h4>
+                                    <p>Choose who can see your profile and posts</p>
+                                </div>
+                                <div class="control-input">
+                                    <select id="profile-visibility" class="form-select">
+                                        <option value="public">Public - Anyone can see</option>
+                                        <option value="friends">Friends only</option>
+                                        <option value="private">Private - Only you</option>
+                </select>
+            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Message Privacy Card -->
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="header-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <div class="header-text">
+                                <h3>Message Privacy</h3>
+                                <p>Control who can send you messages</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="setting-control">
+                                <div class="control-info">
+                                    <h4>Who can message me</h4>
+                                    <p>Choose who can send you direct messages</p>
+            </div>
+                                <div class="control-input">
+                                    <select id="message-privacy" class="form-select">
+                    <option value="everyone">Everyone</option>
+                                        <option value="friends">Friends only</option>
+                                        <option value="none">No one</option>
+                </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Block Users Card -->
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <div class="header-icon">
+                                <i class="fas fa-ban"></i>
+                            </div>
+                            <div class="header-text">
+                                <h3>Block Users</h3>
+                                <p>Block users you don't want to interact with</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="block-user-control">
+                                <div class="control-info">
+                                    <h4>Block a User</h4>
+                                    <p>Enter a username to block them from contacting you</p>
+                                </div>
+                                <div class="block-input-group">
+                                    <input type="text" id="block-user" placeholder="Enter username to block" class="form-input">
+                                    <button type="button" onclick="blockUser()" class="btn-secondary">
+                                        <i class="fas fa-ban"></i> Block User
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </section>
+
+        <!-- Notification Settings -->
+            <section id="notifications" class="settings-section">
+                <div class="section-header">
+                    <h1>Notification Settings</h1>
+                    <p>Choose what notifications you want to receive</p>
+                </div>
+
+                <div class="settings-grid">
+                    <div class="setting-card">
+                        <div class="card-header">
+                            <i class="fas fa-bell"></i>
+                            <h3>General Notifications</h3>
+                        </div>
+                        <div class="toggle-section">
+                            <div class="toggle-option">
+                                <div class="option-info">
+                                    <h4>Enable Notifications</h4>
+                                    <p>Receive notifications for important updates</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="notifications-toggle" checked>
+                                    <span class="slider"></span>
+                </label>
+            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-card">
+                        <div class="card-header">
+                            <i class="fas fa-user-plus"></i>
+                <h3>Notification Types</h3>
+                        </div>
+                        <div class="checkbox-section">
+                            <div class="checkbox-option">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="friend-request-notif" checked>
+                                    <span class="checkmark"></span>
+                                    <div class="checkbox-text">
+                                        <h4>Friend Requests</h4>
+                                        <p>When someone sends you a friend request</p>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="checkbox-option">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="messages-notif" checked>
+                                    <span class="checkmark"></span>
+                                    <div class="checkbox-text">
+                                        <h4>Messages</h4>
+                                        <p>When you receive new messages</p>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="checkbox-option">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="comments-notif" checked>
+                                    <span class="checkmark"></span>
+                                    <div class="checkbox-text">
+                                        <h4>Comments</h4>
+                                        <p>When someone comments on your posts</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </section>
+
+            <!-- Appearance Settings -->
+            <section id="appearance" class="settings-section">
+                <div class="section-header">
+                    <h1>Appearance</h1>
+                    <p>Customize how Daffy looks and feels</p>
+                </div>
+
+                <div class="settings-grid">
+                    <div class="setting-card">
+                        <div class="card-header">
+                            <i class="fas fa-moon"></i>
+                <h3>Theme</h3>
+                        </div>
+                        <div class="theme-section">
+                            <div class="theme-options">
+                                <div class="theme-option" data-theme="light">
+                                    <div class="theme-preview light-theme"></div>
+                                    <span>Light</span>
+                                </div>
+                                <div class="theme-option active" data-theme="dark">
+                                    <div class="theme-preview dark-theme"></div>
+                                    <span>Dark</span>
+                                </div>
+                                <div class="theme-option" data-theme="auto">
+                                    <div class="theme-preview auto-theme"></div>
+                                    <span>Auto</span>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+
+                    <div class="setting-card">
+                        <div class="card-header">
+                            <i class="fas fa-language"></i>
+                <h3>Language</h3>
+                        </div>
+                        <div class="setting-option">
+                            <div class="option-info">
+                                <h4>Display Language</h4>
+                                <p>Choose your preferred language</p>
+                            </div>
+                            <select id="language" class="setting-select">
+                    <option value="en">English</option>
+                                <option value="bn">বাংলা (Bangla)</option>
+                                <option value="es">Español</option>
+                                <option value="fr">Français</option>
+                </select>
+                        </div>
+                    </div>
+            </div>
+        </section>
+
+        <!-- Security Settings -->
+            <section id="security" class="settings-section">
+                <div class="section-header">
+                    <h1>Security</h1>
+                    <p>Keep your account secure</p>
+                </div>
+
+                <div class="settings-grid">
+                    <div class="setting-card">
+                        <div class="card-header">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <h3>Active Sessions</h3>
+                        </div>
+                        <div class="session-section">
+                            <p>You're currently signed in on this device</p>
+                            <button onclick="logoutAllDevices()" class="btn-secondary">
+                                <i class="fas fa-sign-out-alt"></i> Sign Out All Devices
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="setting-card">
+                        <div class="card-header">
+                            <i class="fas fa-history"></i>
+                            <h3>Recent Activity</h3>
+                        </div>
+                        <div class="activity-section">
+                            <button onclick="viewRecentLogins()" class="btn-secondary">
+                                <i class="fas fa-history"></i> View Recent Logins
+                            </button>
+                            <div id="recent-logins" class="activity-list"></div>
+                        </div>
+            </div>
+            </div>
+        </section>
+
+            <!-- Help & Support -->
+            <section id="help" class="settings-section">
+                <div class="section-header">
+                    <h1>Help & Support</h1>
+                    <p>Get help and provide feedback</p>
+                </div>
+
+                <div class="settings-grid">
+                    <div class="setting-card">
+                        <div class="card-header">
+                            <i class="fas fa-bug"></i>
+                <h3>Report a Problem</h3>
+                        </div>
+                        <div class="report-section">
+                            <textarea id="problem-report" placeholder="Describe the issue you're experiencing..." rows="4"></textarea>
+                            <button onclick="reportProblem()" class="btn-primary">
+                                <i class="fas fa-paper-plane"></i> Submit Report
+                            </button>
+                        </div>
+            </div>
+
+                    <div class="setting-card">
+                        <div class="card-header">
+                            <i class="fas fa-comment"></i>
+                <h3>Send Feedback</h3>
+                        </div>
+                        <div class="feedback-section">
+                            <textarea id="feedback" placeholder="Share your thoughts and suggestions..." rows="4"></textarea>
+                            <button onclick="sendFeedback()" class="btn-primary">
+                                <i class="fas fa-paper-plane"></i> Send Feedback
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="setting-card">
+                        <div class="card-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h3>About</h3>
+                        </div>
+                        <div class="about-section">
+                            <div class="about-item">
+                                <span class="about-label">App Version</span>
+                                <span class="about-value" id="app-version">1.0.0</span>
+                            </div>
+                            <div class="about-item">
+                                <span class="about-label">Build Number</span>
+                                <span class="about-value">2024.1.0</span>
+                            </div>
+                            <div class="about-item">
+                                <span class="about-label">Last Updated</span>
+                                <span class="about-value">August 2024</span>
+                            </div>
+                        </div>
+            </div>
+            </div>
+        </section>
+        </main>
+    </div>
+
+    <script src="../Js/settings.js"></script>
+</body>
+</html>

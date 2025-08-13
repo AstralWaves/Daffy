@@ -1,0 +1,32 @@
+.container {
+    position: relative;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    perspective: 1000;
+    transform-style: preserve-3d;
+    transform: translate3d(0, 0, 0);
+    /* Add initial opacity to prevent flash */
+    opacity: 0;
+}
+
+.page-transition {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition: opacity 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.page-exit {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.page-enter {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.transitioning {
+    pointer-events: none;
+}

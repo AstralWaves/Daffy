@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trends - Daffy</title>
+  <link rel="stylesheet" href="../css/trends.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <nav class="top-nav">
+    <div class="nav-container">
+      <div class="nav-left">
+        <div class="brand-container">
+          <i class="fas fa-star brand-icon"></i>
+          <h1 class="brand-name" onclick="window.location.href='home.html'">Daffy</h1>
+        </div>
+      </div>
+      
+      <div class="nav-center">
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="Search trends...">
+        </div>
+      </div>
+      
+      <div class="nav-right">
+        <button class="nav-btn" onclick="toggleTheme()">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button class="nav-btn">
+          <i class="fas fa-bell"></i>
+        </button>
+        <div class="user-menu">
+          <img src="https://via.placeholder.com/32x32" alt="Profile" class="user-avatar" onclick="toggleUserMenu()">
+          <div class="user-dropdown" id="userDropdown">
+            <a href="profile.html" class="dropdown-item">
+              <i class="fas fa-user"></i> Profile
+            </a>
+            <a href="settings.html" class="dropdown-item">
+              <i class="fas fa-cog"></i> Settings
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item" onclick="logout()">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content Container -->
+  <div class="main-container">
+    <!-- Left Sidebar - Navigation -->
+    <aside class="left-sidebar">
+      <nav class="sidebar-nav">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="home.html" class="nav-link">
+              <i class="fas fa-home nav-icon"></i>
+              <span class="nav-text">Home</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a href="trends.html" class="nav-link">
+              <i class="fas fa-fire nav-icon"></i>
+              <span class="nav-text">Trends</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="clubs.html" class="nav-link">
+              <i class="fas fa-users nav-icon"></i>
+              <span class="nav-text">Clubs</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="profile.html" class="nav-link">
+              <i class="fas fa-user-circle nav-icon"></i>
+              <span class="nav-text">Profile</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="settings.html" class="nav-link">
+              <i class="fas fa-cog nav-icon"></i>
+              <span class="nav-text">Settings</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Middle Content Area - Trends Posts -->
+    <main class="main-content">
+      <div class="content-header">
+        <h2 class="content-title">Trending Posts</h2>
+        <div class="content-filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="tech">Tech</button>
+          <button class="filter-btn" data-filter="news">News</button>
+          <button class="filter-btn" data-filter="entertainment">Entertainment</button>
+        </div>
+      </div>
+
+      <div class="trends-container" id="trendsContainer">
+        <!-- Loading state -->
+        <div class="loading-state" id="loadingState">
+          <div class="loading-spinner"></div>
+          <p>Loading trending posts...</p>
+        </div>
+
+        <!-- Error state -->
+        <div class="error-state" id="errorState" style="display: none;">
+          <i class="fas fa-exclamation-triangle"></i>
+          <p>Failed to load trends. Please try again later.</p>
+          <button class="btn-primary" id="retryBtn">Retry</button>
+        </div>
+
+        <!-- Trends posts will be dynamically loaded here -->
+        <div class="trends-posts" id="trendsPosts">
+          <!-- Sample trend post -->
+          <article class="trend-post">
+            <div class="post-header">
+              <div class="post-author">
+                <img src="https://via.placeholder.com/40x40" alt="User Avatar" class="author-avatar">
+                <div class="author-info">
+                  <h4 class="author-name">John Developer</h4>
+                  <span class="post-time">2 hours ago</span>
+                </div>
+              </div>
+              <div class="post-actions">
+                <button class="action-btn">
+                  <i class="fas fa-ellipsis-h"></i>
+                </button>
+              </div>
+            </div>
+            
+            <div class="post-content">
+              <p class="post-text">Just finished building an amazing AI-powered web application! The possibilities are endless with modern technology. #AI #WebDevelopment #Innovation</p>
+              <div class="post-hashtags">
+                <span class="hashtag">#AI</span>
+                <span class="hashtag">#WebDevelopment</span>
+                <span class="hashtag">#Innovation</span>
+              </div>
+            </div>
+            
+            <div class="post-media">
+              <img src="https://via.placeholder.com/600x300" alt="Post Image" class="post-image">
+            </div>
+            
+            <div class="post-stats">
+              <div class="stat-item">
+                <i class="fas fa-heart"></i>
+                <span>1.2K</span>
+              </div>
+              <div class="stat-item">
+                <i class="fas fa-comment"></i>
+                <span>234</span>
+              </div>
+              <div class="stat-item">
+                <i class="fas fa-share"></i>
+                <span>89</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Another sample trend post -->
+          <article class="trend-post">
+            <div class="post-header">
+              <div class="post-author">
+                <img src="https://via.placeholder.com/40x40" alt="User Avatar" class="author-avatar">
+                <div class="author-info">
+                  <h4 class="author-name">Tech Enthusiast</h4>
+                  <span class="post-time">4 hours ago</span>
+                </div>
+              </div>
+              <div class="post-actions">
+                <button class="action-btn">
+                  <i class="fas fa-ellipsis-h"></i>
+                </button>
+              </div>
+            </div>
+            
+            <div class="post-content">
+              <p class="post-text">The future of online learning is here! Interactive courses, AI tutors, and personalized learning paths are revolutionizing education. #OnlineLearning #Education #FutureOfLearning</p>
+              <div class="post-hashtags">
+                <span class="hashtag">#OnlineLearning</span>
+                <span class="hashtag">#Education</span>
+                <span class="hashtag">#FutureOfLearning</span>
+              </div>
+            </div>
+            
+            <div class="post-stats">
+              <div class="stat-item">
+                <i class="fas fa-heart"></i>
+                <span>856</span>
+              </div>
+              <div class="stat-item">
+                <i class="fas fa-comment"></i>
+                <span>156</span>
+              </div>
+              <div class="stat-item">
+                <i class="fas fa-share"></i>
+                <span>67</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Load more button -->
+        <div class="load-more-container">
+          <button class="btn-primary load-more-btn" id="loadMoreBtn">
+            <i class="fas fa-sync-alt"></i>
+            Load More Posts
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Right Sidebar - Top Trending Topics -->
+    <aside class="right-sidebar">
+      <div class="trending-topics">
+        <h3 class="sidebar-title">Top Trending Topics</h3>
+        <div class="title-underline"></div>
+        
+        <div class="topics-list" id="topicsList">
+          <div class="topic-item">
+            <span class="topic-number">1</span>
+            <div class="topic-info">
+              <span class="topic-name">#AI</span>
+              <span class="topic-posts">32.1K posts</span>
+            </div>
+          </div>
+          
+          <div class="topic-item">
+            <span class="topic-number">2</span>
+            <div class="topic-info">
+              <span class="topic-name">#WebDevelopment</span>
+              <span class="topic-posts">25.4K posts</span>
+            </div>
+          </div>
+          
+          <div class="topic-item">
+            <span class="topic-number">3</span>
+            <div class="topic-info">
+              <span class="topic-name">#WorldCup2024</span>
+              <span class="topic-posts">18.7K posts</span>
+            </div>
+          </div>
+          
+          <div class="topic-item">
+            <span class="topic-number">4</span>
+            <div class="topic-info">
+              <span class="topic-name">#OnlineLearning</span>
+              <span class="topic-posts">15.8K posts</span>
+            </div>
+          </div>
+          
+          <div class="topic-item">
+            <span class="topic-number">5</span>
+            <div class="topic-info">
+              <span class="topic-name">#NewMovies</span>
+              <span class="topic-posts">12.3K posts</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script src="../Js/trends.js"></script>
+</body>
+</html>

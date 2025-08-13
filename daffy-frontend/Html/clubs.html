@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clubs - Daffy</title>
+  <link rel="stylesheet" href="../css/clubs.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <nav class="top-nav">
+    <div class="nav-container">
+      <div class="nav-left">
+        <div class="brand-container">
+          <i class="fas fa-star brand-icon"></i>
+          <h1 class="brand-name" onclick="window.location.href='home.html'">Daffy</h1>
+        </div>
+      </div>
+      
+      <div class="nav-center">
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="Search clubs...">
+        </div>
+      </div>
+      
+      <div class="nav-right">
+        <button class="nav-btn" onclick="toggleTheme()">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button class="nav-btn">
+          <i class="fas fa-bell"></i>
+        </button>
+        <div class="user-menu">
+          <img src="https://via.placeholder.com/32x32" alt="Profile" class="user-avatar" onclick="toggleUserMenu()">
+          <div class="user-dropdown" id="userDropdown">
+            <a href="profile.html" class="dropdown-item">
+              <i class="fas fa-user"></i> Profile
+            </a>
+            <a href="settings.html" class="dropdown-item">
+              <i class="fas fa-cog"></i> Settings
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item" onclick="logout()">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Urgent Club Notice Banner -->
+  <div class="urgent-notice-banner" id="urgentNoticeBanner" style="display: none;">
+    <div class="notice-content">
+      <i class="fas fa-exclamation-triangle"></i>
+      <span class="notice-text">URGENT: Tech Innovators Club meeting tomorrow at 3 PM in Room 201!</span>
+    </div>
+    <button class="notice-close" onclick="closeUrgentNotice()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <!-- Main Content Container -->
+  <div class="main-container">
+    <!-- Left Sidebar - Navigation -->
+    <aside class="left-sidebar">
+      <nav class="sidebar-nav">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="home.html" class="nav-link">
+              <i class="fas fa-home nav-icon"></i>
+              <span class="nav-text">Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="trends.html" class="nav-link">
+              <i class="fas fa-fire nav-icon"></i>
+              <span class="nav-text">Trends</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a href="clubs.html" class="nav-link">
+              <i class="fas fa-users nav-icon"></i>
+              <span class="nav-text">Clubs</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="profile.html" class="nav-link">
+              <i class="fas fa-user-circle nav-icon"></i>
+              <span class="nav-text">Profile</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="settings.html" class="nav-link">
+              <i class="fas fa-cog nav-icon"></i>
+              <span class="nav-text">Settings</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Middle Content Area - Club Posts -->
+    <main class="main-content">
+      <div class="content-header">
+        <h2 class="content-title">Club Posts</h2>
+        <div class="content-filters">
+          <button class="filter-btn active" data-filter="all">All Clubs</button>
+          <button class="filter-btn" data-filter="tech">Tech Clubs</button>
+          <button class="filter-btn" data-filter="sports">Sports Clubs</button>
+          <button class="filter-btn" data-filter="music">Music Clubs</button>
+          <button class="filter-btn" data-filter="gaming">Gaming Clubs</button>
+          <button class="filter-btn" data-filter="university">University Clubs</button>
+        </div>
+      </div>
+
+      <!-- Opinion Section -->
+      <div class="opinion-section">
+        <h3 class="section-title">
+          <i class="fas fa-comments"></i>
+          Express Your Opinion
+        </h3>
+        <div class="opinion-input-container">
+          <textarea class="opinion-input" placeholder="Share your thoughts about clubs, events, or suggestions..." id="opinionInput"></textarea>
+          <button class="btn-primary opinion-submit-btn" onclick="submitOpinion()">
+            <i class="fas fa-paper-plane"></i>
+            Share Opinion
+          </button>
+        </div>
+      </div>
+
+      <div class="clubs-container" id="clubsContainer">
+        <!-- Loading state -->
+        <div class="loading-state" id="loadingState">
+          <div class="loading-spinner"></div>
+          <p>Loading club posts...</p>
+        </div>
+
+        <!-- Error state -->
+        <div class="error-state" id="errorState" style="display: none;">
+          <i class="fas fa-exclamation-triangle"></i>
+          <p>Failed to load clubs. Please try again later.</p>
+          <button class="btn-primary" id="retryBtn">Retry</button>
+        </div>
+
+        <!-- Club posts will be dynamically loaded here -->
+        <div class="club-posts" id="clubPosts">
+          <!-- Sample club post with badges -->
+          <article class="club-post">
+            <div class="post-header">
+              <div class="post-author">
+                <img src="https://via.placeholder.com/40x40" alt="User Avatar" class="author-avatar">
+                <div class="author-info">
+                  <h4 class="author-name">Sarah Developer</h4>
+                  <div class="author-badges">
+                    <span class="badge president-badge">
+                      <i class="fas fa-crown"></i>
+                      President
+                    </span>
+                    <span class="badge paid-badge">
+                      <i class="fas fa-star"></i>
+                      Paid Member
+                    </span>
+                  </div>
+                  <span class="club-name">📱 Tech Innovators Club</span>
+                  <span class="post-time">1 hour ago</span>
+                </div>
+              </div>
+              <div class="post-actions">
+                <button class="action-btn">
+                  <i class="fas fa-ellipsis-h"></i>
+                </button>
+              </div>
+            </div>
+            
+            <div class="post-content">
+              <p class="post-text">Just launched our new mobile app! The Tech Innovators Club has been working on this project for months. Check out the amazing features we've implemented! 🚀 #MobileApp #Innovation #TechClub</p>
+              <div class="post-hashtags">
+                <span class="hashtag">#MobileApp</span>
+                <span class="hashtag">#Innovation</span>
+                <span class="hashtag">#TechClub</span>
+              </div>
+            </div>
+            
+            <div class="post-media">
+              <img src="https://via.placeholder.com/600x300" alt="Post Image" class="post-image">
+            </div>
+            
+            <div class="post-stats">
+              <div class="stat-item" onclick="toggleLike(1)">
+                <i class="fas fa-heart"></i>
+                <span>2.1K</span>
+              </div>
+              <div class="stat-item" onclick="showComments(1)">
+                <i class="fas fa-comment"></i>
+                <span>156</span>
+              </div>
+              <div class="stat-item" onclick="sharePost(1)">
+                <i class="fas fa-share"></i>
+                <span>89</span>
+              </div>
+              <div class="stat-item">
+                <i class="fas fa-users"></i>
+                <span>Tech Innovators Club</span>
+              </div>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="comments-section">
+              <div class="comment-input-container">
+                <input type="text" class="comment-input" placeholder="Write a comment..." id="commentInput1">
+                <button class="btn-primary comment-submit-btn" onclick="submitComment(1)">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
+              <div class="comments-list" id="commentsList1">
+                <!-- Comments will be loaded here -->
+              </div>
+            </div>
+          </article>
+
+          <!-- Another sample club post -->
+          <article class="club-post">
+            <div class="post-header">
+              <div class="post-author">
+                <img src="https://via.placeholder.com/40x40" alt="User Avatar" class="author-avatar">
+                <div class="author-info">
+                  <h4 class="author-name">Mike Sports</h4>
+                  <div class="author-badges">
+                    <span class="badge vice-president-badge">
+                      <i class="fas fa-medal"></i>
+                      Vice President
+                    </span>
+                    <span class="badge paid-badge">
+                      <i class="fas fa-star"></i>
+                      Paid Member
+                    </span>
+                  </div>
+                  <span class="club-name">⚽ Football Fanatics Club</span>
+                  <span class="post-time">3 hours ago</span>
+                </div>
+              </div>
+              <div class="post-actions">
+                <button class="action-btn">
+                  <i class="fas fa-ellipsis-h"></i>
+                </button>
+              </div>
+            </div>
+            
+            <div class="post-content">
+              <p class="post-text">Amazing match today! The Football Fanatics Club organized a fantastic tournament. Great teamwork and sportsmanship from everyone! ⚽ #Football #Tournament #Sportsmanship</p>
+              <div class="post-hashtags">
+                <span class="hashtag">#Football</span>
+                <span class="hashtag">#Tournament</span>
+                <span class="hashtag">#Sportsmanship</span>
+              </div>
+            </div>
+            
+            <div class="post-stats">
+              <div class="stat-item" onclick="toggleLike(2)">
+                <i class="fas fa-heart"></i>
+                <span>1.8K</span>
+              </div>
+              <div class="stat-item" onclick="showComments(2)">
+                <i class="fas fa-comment"></i>
+                <span>234</span>
+              </div>
+              <div class="stat-item" onclick="sharePost(2)">
+                <i class="fas fa-share"></i>
+                <span>67</span>
+              </div>
+              <div class="stat-item">
+                <i class="fas fa-users"></i>
+                <span>Football Fanatics Club</span>
+              </div>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="comments-section">
+              <div class="comment-input-container">
+                <input type="text" class="comment-input" placeholder="Write a comment..." id="commentInput2">
+                <button class="btn-primary comment-submit-btn" onclick="submitComment(2)">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
+              <div class="comments-list" id="commentsList2">
+                <!-- Comments will be loaded here -->
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Load more button -->
+        <div class="load-more-container">
+          <button class="btn-primary load-more-btn" id="loadMoreBtn">
+            <i class="fas fa-sync-alt"></i>
+            Load More Posts
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Right Sidebar - Create Club & Club List -->
+    <aside class="right-sidebar">
+      <!-- Create Club Section -->
+      <div class="create-club-section">
+        <h3 class="sidebar-title">Create New Club</h3>
+        <div class="title-underline"></div>
+        
+        <button class="btn-primary create-club-btn" id="createClubBtn">
+          <i class="fas fa-plus"></i>
+          Create Club
+        </button>
+        
+        <p class="create-club-hint">Start a new community and connect with like-minded people!</p>
+      </div>
+
+      <!-- My Clubs Section -->
+      <div class="my-clubs-section">
+        <h3 class="sidebar-title">My Clubs</h3>
+        <div class="title-underline"></div>
+        
+        <div class="my-clubs-list" id="myClubsList">
+          <div class="club-item">
+            <div class="club-avatar">
+              <i class="fas fa-laptop-code"></i>
+            </div>
+            <div class="club-info">
+              <h4 class="club-name">Tech Innovators Club</h4>
+              <span class="club-members">1.2K members</span>
+              <div class="club-badges">
+                <span class="badge president-badge">President</span>
+                <span class="badge paid-badge">Paid</span>
+              </div>
+            </div>
+            <div class="club-status">
+              <span class="status-badge admin">Admin</span>
+            </div>
+          </div>
+          
+          <div class="club-item">
+            <div class="club-avatar">
+              <i class="fas fa-music"></i>
+            </div>
+            <div class="club-info">
+              <h4 class="club-name">Music Lovers Club</h4>
+              <span class="club-members">856 members</span>
+              <div class="club-badges">
+                <span class="badge executive-badge">Executive</span>
+                <span class="badge paid-badge">Paid</span>
+              </div>
+            </div>
+            <div class="club-status">
+              <span class="status-badge member">Member</span>
+            </div>
+          </div>
+          
+          <div class="club-item">
+            <div class="club-avatar">
+              <i class="fas fa-gamepad"></i>
+            </div>
+            <div class="club-info">
+              <h4 class="club-name">Gaming Enthusiasts</h4>
+              <span class="club-members">2.3K members</span>
+              <div class="club-badges">
+                <span class="badge unpaid-badge">Free</span>
+              </div>
+            </div>
+            <div class="club-status">
+              <span class="status-badge member">Member</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Popular Clubs Section -->
+      <div class="popular-clubs-section">
+        <h3 class="sidebar-title">Popular Clubs</h3>
+        <div class="title-underline"></div>
+        
+        <div class="popular-clubs-list" id="popularClubsList">
+          <div class="club-item">
+            <div class="club-avatar">
+              <i class="fas fa-code"></i>
+            </div>
+            <div class="club-info">
+              <h4 class="club-name">Web Developers Hub</h4>
+              <span class="club-members">5.4K members</span>
+              <div class="club-badges">
+                <span class="badge university-badge">University</span>
+              </div>
+            </div>
+            <button class="join-btn">Join</button>
+          </div>
+          
+          <div class="club-item">
+            <div class="club-avatar">
+              <i class="fas fa-palette"></i>
+            </div>
+            <div class="club-info">
+              <h4 class="club-name">Creative Designers</h4>
+              <span class="club-members">3.8K members</span>
+              <div class="club-badges">
+                <span class="badge university-badge">University</span>
+              </div>
+            </div>
+            <button class="join-btn">Join</button>
+          </div>
+          
+          <div class="club-item">
+            <div class="club-avatar">
+              <i class="fas fa-dumbbell"></i>
+            </div>
+            <div class="club-info">
+              <h4 class="club-name">Fitness Warriors</h4>
+              <span class="club-members">4.2K members</span>
+              <div class="club-badges">
+                <span class="badge university-badge">University</span>
+              </div>
+            </div>
+            <button class="join-btn">Join</button>
+          </div>
+          
+          <div class="club-item">
+            <div class="club-avatar">
+              <i class="fas fa-camera"></i>
+            </div>
+            <div class="club-info">
+              <h4 class="club-name">Photography Masters</h4>
+              <span class="club-members">2.9K members</span>
+              <div class="club-badges">
+                <span class="badge university-badge">University</span>
+              </div>
+            </div>
+            <button class="join-btn">Join</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Create Club Modal -->
+  <div class="modal" id="createClubModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Create New Club</h2>
+        <button class="close-btn" id="closeCreateClubModal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <form class="create-club-form" id="createClubForm">
+        <div class="form-group">
+          <label for="clubName">Club Name</label>
+          <input type="text" id="clubName" name="clubName" placeholder="Enter club name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="clubCategory">Category</label>
+          <select id="clubCategory" name="clubCategory" required>
+            <option value="">Select category</option>
+            <option value="tech">Technology</option>
+            <option value="sports">Sports</option>
+            <option value="music">Music</option>
+            <option value="gaming">Gaming</option>
+            <option value="art">Art & Design</option>
+            <option value="fitness">Fitness</option>
+            <option value="education">Education</option>
+            <option value="university">University Club</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="clubDescription">Description</label>
+          <textarea id="clubDescription" name="clubDescription" placeholder="Describe your club..." rows="4" required></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="clubRules">Club Rules</label>
+          <textarea id="clubRules" name="clubRules" placeholder="Enter club rules and guidelines..." rows="4" required></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="clubPrivacy">Privacy</label>
+          <select id="clubPrivacy" name="clubPrivacy" required>
+            <option value="public">Public - Anyone can join</option>
+            <option value="private">Private - Approval required</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="membershipType">Membership Type</label>
+          <select id="membershipType" name="membershipType" required>
+            <option value="free">Free Membership</option>
+            <option value="paid">Paid Membership</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="universityEmail">University Email (for verification)</label>
+          <input type="email" id="universityEmail" name="universityEmail" placeholder="your.email@daffodilvarsity.edu.bd" required>
+          <small>Must be a valid Daffodil International University email address</small>
+        </div>
+        
+        <div class="form-group">
+          <label for="clubAvatar">Club Avatar</label>
+          <input type="file" id="clubAvatar" name="clubAvatar" accept="image/*">
+          <small>Upload a logo or icon for your club (optional)</small>
+        </div>
+        
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" id="cancelCreateClub">Cancel</button>
+          <button type="submit" class="btn-primary">Create Club</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../Js/clubs.js"></script>
+</body>
+</html> 
