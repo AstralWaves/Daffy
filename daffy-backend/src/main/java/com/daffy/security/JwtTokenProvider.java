@@ -96,4 +96,9 @@ public class JwtTokenProvider {
     public boolean validateRefreshToken(String token) {
         return validateToken(token);
     }
+
+    public String getUserUsernameFromToken(String jwt) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getUserUsernameFromToken'");
+    }
 }

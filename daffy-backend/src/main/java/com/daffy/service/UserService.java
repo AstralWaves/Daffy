@@ -207,4 +207,9 @@ public class UserService {
             .createdAt(user.getCreatedAt())
             .build();
     }
+
+    public UserDto findUserById(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findUserById'");
+    }
 }

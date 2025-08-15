@@ -33,4 +33,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     
     @Query("SELECT COUNT(u) FROM User u WHERE u.createdAt >= :startDate")
     long countUsersCreatedAfter(@Param("startDate") java.time.LocalDateTime startDate);
+    List<User> findByUsernameContainingIgnoreCaseOrFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(
+            String query, String query2, String query3);
 }
