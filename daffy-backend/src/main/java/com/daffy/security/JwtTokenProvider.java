@@ -61,6 +61,13 @@ public class JwtTokenProvider {
         return Long.parseLong(claims.getSubject());
     }
 
+    public String getUsernameFromJWT(String token) {
+        // For compatibility, we'll return the user ID as string
+        // In a real application, you might want to store username in token
+        Long userId = getUserIdFromJWT(token);
+        return String.valueOf(userId);
+    }
+
     public Long getUserIdFromRefreshToken(String token) {
         return getUserIdFromJWT(token);
     }

@@ -22,6 +22,7 @@ import java.util.Set;
            @UniqueConstraint(columnNames = "username"),
            @UniqueConstraint(columnNames = "email")
        })
+// Add missing getter/setter methods
 @Data
 @Builder
 @NoArgsConstructor
@@ -150,5 +151,19 @@ public class User {
         return username;
     }
 
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }

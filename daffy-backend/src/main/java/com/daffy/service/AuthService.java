@@ -19,6 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,12 +42,21 @@ public class AuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
         
+        // Update last login time
+        User user = userRepository.findById(userPrincipal.getId()).orElse(null);
+        if (user != null) {
+            user.setLastLoginAt(LocalDateTime.now());
+            userRepository.save(user);
+        }
+        
         String accessToken = tokenProvider.generateAccessToken(userPrincipal.getId());
         String refreshToken = tokenProvider.generateRefreshToken(userPrincipal.getId());
 
         return AuthResponseDto.builder()
             .accessToken(accessToken)
             .refreshToken(refreshToken)
+            .tokenType("Bearer")
+            .expiresIn(86400L) // 24 hours in seconds
             .build();
     }
 
@@ -65,10 +75,15 @@ public class AuthService {
             .password(passwordEncoder.encode(registrationDto.getPassword()))
             .firstName(registrationDto.getFirstName())
             .lastName(registrationDto.getLastName())
+            .status(User.UserStatus.ACTIVE)
+            .enabled(true)
+            .locked(false)
+            .emailVerified(false)
+            .createdAt(LocalDateTime.now())
             .build();
 
         Set<Role> roles = new HashSet<>();
-        Role userRole = roleRepository.findByName("ROLE_USER")
+        Role userRole = roleRepository.findByName(Role.RoleName.ROLE_USER)
             .orElseThrow(() -> new RuntimeException("Default role not found"));
         roles.add(userRole);
         user.setRoles(roles);
@@ -82,6 +97,8 @@ public class AuthService {
         return AuthResponseDto.builder()
             .accessToken(accessToken)
             .refreshToken(refreshToken)
+            .tokenType("Bearer")
+            .expiresIn(86400L) // 24 hours in seconds
             .build();
     }
 
@@ -97,6 +114,8 @@ public class AuthService {
         return AuthResponseDto.builder()
             .accessToken(newAccessToken)
             .refreshToken(newRefreshToken)
+            .tokenType("Bearer")
+            .expiresIn(86400L) // 24 hours in seconds
             .build();
     }
 }

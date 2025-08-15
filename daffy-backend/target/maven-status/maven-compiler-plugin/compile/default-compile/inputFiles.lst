@@ -13,6 +13,7 @@ E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\entit
 E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\controller\AdminController.java
 E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\dto\LoginDto.java
 E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\dto\AuthResponseDto.java
+E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\repository\LikeRepository.java
 E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\security\JwtAuthenticationEntryPoint.java
 E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\service\UserService.java
 E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\security\UserPrincipal.java
@@ -31,6 +32,7 @@ E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\entit
 E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\dto\AdminDashboardDto.java
 E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\config\DataInitializer.java
 E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\dto\UserProfileDto.java
+E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\repository\CommentRepository.java
 E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\repository\PostRepository.java
 E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\security\JwtTokenProvider.java
 E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\entity\Post.java

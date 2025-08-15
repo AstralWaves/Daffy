@@ -4,6 +4,10 @@ import com.daffy.dto.AdminDashboardDto;
 import com.daffy.dto.UserDto;
 import com.daffy.entity.User;
 import com.daffy.exception.ResourceNotFoundException;
+import com.daffy.repository.ClubRepository;
+import com.daffy.repository.CommentRepository;
+import com.daffy.repository.LikeRepository;
+import com.daffy.repository.PostRepository;
 import com.daffy.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,34 +27,48 @@ import java.util.Map;
 public class AdminService {
 
     private final UserRepository userRepository;
+    private final PostRepository postRepository;
+    private final ClubRepository clubRepository;
+    private final CommentRepository commentRepository;
+    private final LikeRepository likeRepository;
 
     public AdminDashboardDto getDashboardStats() {
         log.info("Generating admin dashboard statistics");
         
         long totalUsers = userRepository.count();
         long activeUsers = userRepository.findActiveUsers(Pageable.unpaged()).getTotalElements();
+        long totalPosts = postRepository.count();
+        long totalClubs = clubRepository.count();
+        long totalComments = commentRepository.count();
+        long totalLikes = likeRepository.count();
         
         // Calculate other stats (simplified for now)
-        long suspendedUsers = 0; // TODO: Implement when status filtering is added
-        long deletedUsers = 0;   // TODO: Implement when status filtering is added
+        long suspendedUsers = totalUsers - activeUsers; // Simplified calculation
+        long deletedUsers = 0;   // TODO: Implement proper status filtering
         
         Map<String, Long> usersByStatus = new HashMap<>();
         usersByStatus.put("ACTIVE", activeUsers);
         usersByStatus.put("SUSPENDED", suspendedUsers);
         usersByStatus.put("DELETED", deletedUsers);
         
+        Map<String, Long> postsByType = new HashMap<>();
+        postsByType.put("TEXT", totalPosts); // Simplified - you can add proper counting by type
+        
+        Map<String, Long> clubsByType = new HashMap<>();
+        clubsByType.put("ALL", totalClubs); // Simplified - you can add proper counting by type
+        
         return AdminDashboardDto.builder()
                 .totalUsers(totalUsers)
                 .activeUsers(activeUsers)
                 .suspendedUsers(suspendedUsers)
                 .deletedUsers(deletedUsers)
-                .totalPosts(0L) // TODO: Implement when PostRepository is available
-                .totalClubs(0L) // TODO: Implement when ClubRepository is available
-                .totalComments(0L) // TODO: Implement when CommentRepository is available
-                .totalLikes(0L) // TODO: Implement when LikeRepository is available
+                .totalPosts(totalPosts)
+                .totalClubs(totalClubs)
+                .totalComments(totalComments)
+                .totalLikes(totalLikes)
                 .usersByStatus(usersByStatus)
-                .postsByType(new HashMap<>())
-                .clubsByType(new HashMap<>())
+                .postsByType(postsByType)
+                .clubsByType(clubsByType)
                 .lastUpdated(LocalDateTime.now())
                 .build();
     }
@@ -113,6 +131,9 @@ public class AdminService {
         health.put("timestamp", LocalDateTime.now());
         health.put("version", "1.0.0");
         health.put("database", "CONNECTED");
+        health.put("totalUsers", userRepository.count());
+        health.put("totalPosts", postRepository.count());
+        health.put("totalClubs", clubRepository.count());
         
         return health;
     }
@@ -127,7 +148,9 @@ public class AdminService {
                 .status(user.getStatus())
                 .enabled(user.isEnabled())
                 .locked(user.isLocked())
+                .emailVerified(user.isEmailVerified())
                 .createdAt(user.getCreatedAt())
+                .updatedAt(user.getUpdatedAt())
                 .lastLoginAt(user.getLastLoginAt())
                 .build();
     }
