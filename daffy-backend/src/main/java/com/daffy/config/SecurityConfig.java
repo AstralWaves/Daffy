@@ -41,8 +41,11 @@ public class SecurityConfig {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeHttpRequests(authz -> authz
-                .requestMatchers("/auth/**", "/public/**", "/h2-console/**").permitAll()
+                // Allow access to auth endpoints, test endpoints, and admin panel
+                .requestMatchers("/auth/**", "/test/**", "/admin-panel", "/h2-console/**").permitAll()
+                // Admin API endpoints require ADMIN role
                 .requestMatchers("/admin/**").hasRole("ADMIN")
+                // All other requests require authentication
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

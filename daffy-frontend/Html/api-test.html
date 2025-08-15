@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f5f5f5;
+            white-space: pre-wrap;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Daffy API Test</h1>
+    
+    <div>
+        <button onclick="testApiRoot()">Test API Root</button>
+        <button onclick="testApiHealth()">Test API Health</button>
+        <button onclick="testDirectApi()">Test Direct API</button>
+        <button onclick="fixIndexHtml()">Fix Index.html</button>
+    </div>
+    
+    <div class="result" id="result">Results will appear here...</div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8080/api';
+        
+        async function testApiRoot() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = 'Testing API root...';
+            
+            try {
+                // First try with the context path
+                const response = await fetch(API_BASE_URL);
+                const status = response.status;
+                const contentType = response.headers.get('content-type');
+                
+                let responseText;
+                if (contentType && contentType.includes('application/json')) {
+                    const data = await response.json();
+                    responseText = JSON.stringify(data, null, 2);
+                } else {
+                    responseText = await response.text();
+                }
+                
+                resultDiv.textContent = `Status: ${status}\nContent-Type: ${contentType}\n\nResponse:\n${responseText}`;
+                
+                // Also show the redirect issue
+                resultDiv.textContent += '\n\nNOTE: The issue is that http://localhost:8080/ redirects to admin panel because of the AdminPanelController.java root mapping, but the API should be accessed at http://localhost:8080/api';
+            } catch (error) {
+                resultDiv.textContent = `Error: ${error.message}`;
+            }
+        }
+        
+        async function testApiHealth() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = 'Testing API health...';
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/health`);
+                const status = response.status;
+                const contentType = response.headers.get('content-type');
+                
+                let responseText;
+                if (contentType && contentType.includes('application/json')) {
+                    const data = await response.json();
+                    responseText = JSON.stringify(data, null, 2);
+                } else {
+                    responseText = await response.text();
+                }
+                
+                resultDiv.textContent = `Status: ${status}\nContent-Type: ${contentType}\n\nResponse:\n${responseText}`;
+            } catch (error) {
+                resultDiv.textContent = `Error: ${error.message}`;
+            }
+        }
+        
+        async function testDirectApi() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = 'Testing direct API access...';
+            
+            try {
+                // Try accessing the API directly without the root path
+                const response = await fetch('http://localhost:8080/api/test/health');
+                const status = response.status;
+                const contentType = response.headers.get('content-type');
+                
+                let responseText;
+                if (contentType && contentType.includes('application/json')) {
+                    const data = await response.json();
+                    responseText = JSON.stringify(data, null, 2);
+                } else {
+                    responseText = await response.text();
+                }
+                
+                resultDiv.textContent = `Direct API Test\nStatus: ${status}\nContent-Type: ${contentType}\n\nResponse:\n${responseText}`;
+            } catch (error) {
+                resultDiv.textContent = `Error: ${error.message}`;
+            }
+        }
+        
+        async function fixIndexHtml() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = 'Diagnosing index.html issues...';
+            
+            resultDiv.innerHTML = `
+                <h3>Index.html Diagnosis</h3>
+                <p>The issue with <code>http://localhost:8000/Html/index.html</code> not working is due to path duplication:</p>
+                <ol>
+                    <li>When accessing <code>/Html/index.html</code>, the index.html file redirects to <code>Html/signin.html</code></li>
+                    <li>This creates a path like <code>/Html/Html/signin.html</code> which doesn't exist</li>
+                    <li>The fix is to update index.html to use relative paths without the Html/ prefix</li>
+                </ol>
+                <p>To fix this issue:</p>
+                <ol>
+                    <li>Access the frontend directly at <a href="http://localhost:8000/index.html" target="_blank">http://localhost:8000/index.html</a></li>
+                    <li>Or access specific pages directly: <a href="http://localhost:8000/Html/signin.html" target="_blank">http://localhost:8000/Html/signin.html</a></li>
+                </ol>
+                <p>For the API redirection issue:</p>
+                <ol>
+                    <li>The backend root (<code>http://localhost:8080/</code>) redirects to admin panel due to configuration in AdminPanelController.java</li>
+                    <li>API endpoints should be accessed with the /api prefix: <code>http://localhost:8080/api/...</code></li>
+                </ol>
+            `;
+        }
+    </script>
+</body>
+</html>

@@ -113,27 +113,24 @@ async function loadTrendsData() {
   try {
     showLoading();
     
-    // TODO: Load from backend API
-    // const response = await fetch('/api/trends', {
-    //   headers: {
-    //     'Authorization': `Bearer ${localStorage.getItem('token')}`
-    //   }
-    // });
-    // 
-    // if (response.ok) {
-    //   const data = await response.json();
-    //   trendsData.posts = data.posts;
-    //   trendsData.topics = data.topics;
-    //   renderPosts();
-    //   renderTopics();
-    // } else {
-    //   throw new Error('Failed to load trends');
-    // }
-    
-    // For now, use sample data
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate loading
-    trendsData.posts = samplePosts;
-    trendsData.topics = sampleTopics;
+    try {
+      // Use the API service to load trends
+      const data = await window.apiService.getTrends();
+      if (data && data.posts && data.topics) {
+        trendsData.posts = data.posts;
+        trendsData.topics = data.topics;
+      } else {
+        // Fallback to sample data if API doesn't return expected format
+        console.log('API returned unexpected data format, using sample data');
+        trendsData.posts = samplePosts;
+        trendsData.topics = sampleTopics;
+      }
+    } catch (error) {
+      console.log('Error fetching from API, using sample data:', error);
+      // Fallback to sample data
+      trendsData.posts = samplePosts;
+      trendsData.topics = sampleTopics;
+    }
     
     renderPosts();
     renderTopics();
@@ -330,7 +327,7 @@ async function searchPosts(query) {
     showLoading();
     
     // TODO: Search backend API
-    // const response = await fetch(`/api/trends/search?q=${encodeURIComponent(query)}`, {
+    // const response = await fetch(`http://localhost:8080/api/trends/search?q=${encodeURIComponent(query)}`, {
     //   headers: {
     //     'Authorization': `Bearer ${localStorage.getItem('token')}`
     //   }
@@ -377,7 +374,7 @@ async function loadMorePosts() {
     loadMoreBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
     
     // TODO: Load more from backend API
-    // const response = await fetch(`/api/trends?page=${trendsData.currentPage + 1}`, {
+    // const response = await fetch(`http://localhost:8080/api/trends?page=${trendsData.currentPage + 1}`, {
     //   headers: {
     //     'Authorization': `Bearer ${localStorage.getItem('token')}`
     //   }
@@ -446,7 +443,7 @@ function toggleLike(postId) {
   const post = trendsData.posts.find(p => p.id == postId);
   if (post) {
     // TODO: Send to backend
-    // await fetch(`/api/posts/${postId}/like`, {
+    // await fetch(`http://localhost:8080/api/posts/${postId}/like`, {
     //   method: 'POST',
     //   headers: {
     //     'Authorization': `Bearer ${localStorage.getItem('token')}`

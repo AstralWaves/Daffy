@@ -34,6 +34,14 @@ public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
+    // FIXED: Implementation for findUserById
+    public UserDto findUserById(Long id) {
+        log.info("Finding user by ID: {}", id);
+        User user = userRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+        return convertToUserDto(user);
+    }
+
     public UserDto getUserById(Long userId) {
         User user = userRepository.findById(userId)
             .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
@@ -206,10 +214,5 @@ public class UserService {
             .gender(user.getGender())
             .createdAt(user.getCreatedAt())
             .build();
-    }
-
-    public UserDto findUserById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findUserById'");
     }
 }

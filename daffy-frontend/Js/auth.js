@@ -7,17 +7,48 @@ const passwordStrength = document.getElementById('password-strength');
 const strengthFill = document.getElementById('strength-fill');
 const strengthText = document.getElementById('strength-text');
 
-// Check if user is already logged in
-function checkAuthStatus() {
+// Check if user is already logged in and validate token if available
+async function checkAuthStatus() {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     const currentUser = localStorage.getItem('currentUser');
+    const token = window.apiService?.getToken();
 
     // Only auto-redirect to home from auth pages (signin/signup/index)
     const path = window.location.pathname || '';
     const isAuthPage = !!signinForm || !!signupForm || /(?:^|\/)signin\.html$|(?:^|\/)signup\.html$|(?:^|\/)index\.html$/.test(path);
 
-    if (isLoggedIn === 'true' && currentUser && isAuthPage) {
-        window.location.href = 'home.html';
+    if (isLoggedIn === 'true' && currentUser) {
+        // If we have a token, validate it with the API
+        if (token && window.apiService) {
+            try {
+                // Verify token validity with the API
+                const isValid = await window.apiService.validateToken();
+                
+                if (!isValid) {
+                    // Token is invalid, clear auth data
+                    localStorage.removeItem('isLoggedIn');
+                    localStorage.removeItem('currentUser');
+                    window.apiService.clearToken();
+                    
+                    // Only redirect if on a protected page
+                    if (!isAuthPage) {
+                        window.location.href = 'signin.html';
+                    }
+                    return;
+                }
+            } catch (error) {
+                console.warn('Token validation failed:', error);
+                // Continue with local validation as fallback
+            }
+        }
+        
+        // Redirect to home if on auth page
+        if (isAuthPage) {
+            window.location.href = 'home.html';
+        }
+    } else if (!isAuthPage) {
+        // Not logged in and on a protected page, redirect to signin
+        window.location.href = 'signin.html';
     }
 }
 
@@ -310,35 +341,34 @@ function populateYearSelect(selectId, startYear, endYear) {
     }
 }
 
-// Authenticate user (simulate API call)
-function authenticateUser(email, password, rememberMe) {
+// Authenticate user using API service
+async function authenticateUser(email, password, rememberMe) {
     // Show loading state
     const submitBtn = signinForm.querySelector('.btn-primary');
     const originalText = submitBtn.innerHTML;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing In...';
     submitBtn.disabled = true;
     
-    // Simulate API delay
-    setTimeout(() => {
-        const users = JSON.parse(localStorage.getItem('users') || '[]');
-        const user = users.find(u => u.email === email && u.password === password);
+    try {
+        // Try to authenticate with the API
+        const credentials = { email, password };
+        const response = await window.apiService.login(credentials);
         
-        if (user) {
-            // Store user session
+        if (response && response.token) {
+            // Store token and user info
+            window.apiService.setToken(response.token);
             localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('currentUser', JSON.stringify({
-                id: user.id || Date.now(),
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.email,
-                username: user.username,
-                phone: user.phone,
-                userType: user.userType,
-                department: user.department,
-                semester: user.semester,
-                joiningYear: user.joiningYear,
-                graduationYear: user.graduationYear
-            }));
+            
+            // Store user data if available in response
+            if (response.user) {
+                localStorage.setItem('currentUser', JSON.stringify(response.user));
+            } else {
+                // Fallback to basic user info if not provided by API
+                localStorage.setItem('currentUser', JSON.stringify({
+                    email: email,
+                    // Add minimal required fields
+                }));
+            }
             
             if (rememberMe) {
                 localStorage.setItem('rememberMe', 'true');
@@ -351,57 +381,154 @@ function authenticateUser(email, password, rememberMe) {
                 window.location.href = 'home.html';
             }, 1000);
         } else {
-            showNotification('Invalid email or password', 'error');
-            
-            // Reset button
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
+            throw new Error('Invalid response from server');
         }
-    }, 1500);
+    } catch (error) {
+        console.error('Authentication error:', error);
+        
+        // Fallback to local authentication for development
+        try {
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                // Store user session
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('currentUser', JSON.stringify({
+                    id: user.id || Date.now(),
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    email: user.email,
+                    username: user.username,
+                    phone: user.phone,
+                    userType: user.userType,
+                    department: user.department,
+                    semester: user.semester,
+                    joiningYear: user.joiningYear,
+                    graduationYear: user.graduationYear
+                }));
+                
+                if (rememberMe) {
+                    localStorage.setItem('rememberMe', 'true');
+                }
+                
+                showNotification('Successfully signed in! (local mode)', 'success');
+                
+                // Redirect to home page
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 1000);
+                return;
+            }
+        } catch (localError) {
+            console.error('Local authentication fallback error:', localError);
+        }
+        
+        showNotification('Invalid email or password', 'error');
+        
+        // Reset button
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    }
 }
 
-// Create new user (simulate API call)
-function createUser(userData) {
+// Create new user using API service
+async function createUser(userData) {
     // Show loading state
     const submitBtn = signupForm.querySelector('.btn-primary');
     const originalText = submitBtn.innerHTML;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
     submitBtn.disabled = true;
     
-    // Simulate API delay
-    setTimeout(() => {
-        const users = JSON.parse(localStorage.getItem('users') || '[]');
+    try {
+        // Try to register with the API
+        const response = await window.apiService.register(userData);
         
-        // Add user ID
-        userData.id = Date.now();
+        if (response && (response.success || response.token)) {
+            showNotification('Account created successfully!', 'success');
+            
+            // If token is provided, store it
+            if (response.token) {
+                window.apiService.setToken(response.token);
+            }
+            
+            // Auto sign in
+            localStorage.setItem('isLoggedIn', 'true');
+            
+            // Store user data if available in response
+            if (response.user) {
+                localStorage.setItem('currentUser', JSON.stringify(response.user));
+            } else {
+                // Fallback to form data if user not provided by API
+                localStorage.setItem('currentUser', JSON.stringify({
+                    id: Date.now(),
+                    firstName: userData.firstName,
+                    lastName: userData.lastName,
+                    email: userData.email,
+                    username: userData.username,
+                    phone: userData.phone,
+                    userType: userData.userType,
+                    department: userData.department,
+                    semester: userData.semester,
+                    joiningYear: userData.joiningYear,
+                    graduationYear: userData.graduationYear
+                }));
+            }
+            
+            // Redirect to home page
+            setTimeout(() => {
+                window.location.href = 'home.html';
+            }, 1000);
+        } else {
+            throw new Error('Invalid response from server');
+        }
+    } catch (error) {
+        console.error('Registration error:', error);
         
-        // Add to users array
-        users.push(userData);
-        localStorage.setItem('users', JSON.stringify(users));
+        // Fallback to local registration for development
+        try {
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            
+            // Add user ID
+            userData.id = Date.now();
+            
+            // Add to users array
+            users.push(userData);
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            showNotification('Account created successfully! (local mode)', 'success');
+            
+            // Auto sign in
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('currentUser', JSON.stringify({
+                id: userData.id,
+                firstName: userData.firstName,
+                lastName: userData.lastName,
+                email: userData.email,
+                username: userData.username,
+                phone: userData.phone,
+                userType: userData.userType,
+                department: userData.department,
+                semester: userData.semester,
+                joiningYear: userData.joiningYear,
+                graduationYear: userData.graduationYear
+            }));
+            
+            // Redirect to home page
+            setTimeout(() => {
+                window.location.href = 'home.html';
+            }, 1000);
+            return;
+        } catch (localError) {
+            console.error('Local registration fallback error:', localError);
+        }
         
-        showNotification('Account created successfully!', 'success');
+        showNotification('Failed to create account. Please try again.', 'error');
         
-        // Auto sign in
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('currentUser', JSON.stringify({
-            id: userData.id,
-            firstName: userData.firstName,
-            lastName: userData.lastName,
-            email: userData.email,
-            username: userData.username,
-            phone: userData.phone,
-            userType: userData.userType,
-            department: userData.department,
-            semester: userData.semester,
-            joiningYear: userData.joiningYear,
-            graduationYear: userData.graduationYear
-        }));
-        
-        // Redirect to home page
-        setTimeout(() => {
-            window.location.href = 'home.html';
-        }, 1000);
-    }, 1500);
+        // Reset button
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    }
 }
 
 // Initialize on page load

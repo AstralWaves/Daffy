@@ -3,6 +3,7 @@ E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\contr
 E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\service\AuthService.java
 E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\entity\Notification.java
 E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\repository\ClubRepository.java
+E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\controller\RootController.java
 E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\entity\Role.java
 E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\exception\UserAlreadyExistsException.java
 E:\html,css,js\project_\social\Daffy\daffy-backend\src\main\java\com\daffy\repository\UserRepository.java

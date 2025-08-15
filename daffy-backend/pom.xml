@@ -19,9 +19,12 @@
     <description>Daffy Social Network Backend</description>
     
     <properties>
-        <java.version>24.0.1</java.version>
+        <!-- FIXED: Use compatible Java version -->
+        <java.version>17</java.version>
         <jwt.version>0.11.5</jwt.version>
-        <lombok.version>1.18.38</lombok.version>
+        <lombok.version>1.18.28</lombok.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
     
     <dependencies>
@@ -58,9 +61,9 @@
         
         <!-- Database -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.33</version>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
         </dependency>
         
         <dependency>
@@ -136,16 +139,17 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
                 <configuration>
-                    <argLine>--enable-native-access=ALL-UNNAMED</argLine>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
             </plugin>
             
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${project.parent.version}</version>
                 <configuration>
                     <excludes>
                         <exclude>

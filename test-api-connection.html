@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API Connection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f5f5f5;
+            white-space: pre-wrap;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        .error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+        .info {
+            background-color: #d9edf7;
+            color: #31708f;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test API Connection</h1>
+    
+    <div class="info">
+        <p><strong>Backend URL:</strong> http://localhost:8080/api</p>
+        <p><strong>Note:</strong> Make sure the backend server is running before testing the endpoints.</p>
+    </div>
+    
+    <div>
+        <button onclick="testHealth()">Test Health Endpoint</button>
+        <button onclick="testAdminPanel()">Test Admin Panel</button>
+        <button onclick="testRootEndpoint()">Test Root Endpoint</button>
+    </div>
+    
+    <div class="status" id="status"></div>
+    <div class="result" id="result">Results will appear here...</div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8080/api';
+        
+        function showStatus(message, isSuccess) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = message;
+            statusDiv.className = isSuccess ? 'status success' : 'status error';
+        }
+        
+        async function testHealth() {
+            try {
+                showStatus('Testing health endpoint...', true);
+                const response = await fetch(`${API_BASE_URL}/test/health`);
+                const data = await response.json();
+                document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+                showStatus('Health endpoint test successful!', true);
+            } catch (error) {
+                document.getElementById('result').textContent = 'Error: ' + error.message;
+                showStatus('Health endpoint test failed: ' + error.message, false);
+            }
+        }
+
+        async function testAdminPanel() {
+            try {
+                showStatus('Testing admin panel endpoint...', true);
+                const response = await fetch(`${API_BASE_URL}/admin-panel`);
+                const text = await response.text();
+                document.getElementById('result').textContent = 
+                    `Status: ${response.status} ${response.statusText}\n` +
+                    `URL: ${response.url}\n\n` +
+                    (text.length > 1000 ? text.substring(0, 1000) + '...' : text);
+                showStatus('Admin panel test completed with status: ' + response.status, response.ok);
+            } catch (error) {
+                document.getElementById('result').textContent = 'Error: ' + error.message;
+                showStatus('Admin panel test failed: ' + error.message, false);
+            }
+        }
+
+        async function testRootEndpoint() {
+            try {
+                showStatus('Testing API root endpoint...', true);
+                const response = await fetch(`${API_BASE_URL}`);
+                const text = await response.text();
+                document.getElementById('result').textContent = 
+                    `Status: ${response.status} ${response.statusText}\n` +
+                    `URL: ${response.url}\n\n` +
+                    (text.length > 1000 ? text.substring(0, 1000) + '...' : text);
+                showStatus('API root test completed with status: ' + response.status, response.ok);
+            } catch (error) {
+                document.getElementById('result').textContent = 'Error: ' + error.message;
+                showStatus('API root test failed: ' + error.message, false);
+            }
+        }
+        
+        // Add event listener for page load
+        window.addEventListener('load', function() {
+            showStatus('Page loaded. Click a button to test API endpoints.', true);
+        });
+    </script>
+</body>
+</html>
