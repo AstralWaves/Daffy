@@ -988,3 +988,447 @@ Caused by: org.hibernate.LazyInitializationException: failed to lazily initializ
 2025-08-15 15:59:44 [restartedMain] WARN  o.s.b.f.s.DisposableBeanAdapter - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-214]
 2025-08-15 15:59:44 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2025-08-15 15:59:44 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-08-15 16:34:36 [restartedMain] INFO  com.daffy.DaffyBackendApplication - Starting DaffyBackendApplication using Java 24.0.1 with PID 21828 (E:\html,css,js\project_\social\Daffy\daffy-backend\target\classes started by User in E:\html,css,js\project_\social\Daffy\daffy-backend)
+2025-08-15 16:34:36 [restartedMain] DEBUG com.daffy.DaffyBackendApplication - Running with Spring Boot v3.1.0, Spring v6.0.9
+2025-08-15 16:34:36 [restartedMain] INFO  com.daffy.DaffyBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2025-08-15 16:34:36 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-08-15 16:34:36 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-08-15 16:34:39 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-15 16:34:39 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 279 ms. Found 6 JPA repository interfaces.
+2025-08-15 16:34:43 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2025-08-15 16:34:43 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-15 16:34:43 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-08-15 16:34:43 [restartedMain] INFO  o.a.c.c.C.[.[localhost].[/api] - Initializing Spring embedded WebApplicationContext
+2025-08-15 16:34:43 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 6888 ms
+2025-08-15 16:34:43 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-08-15 16:34:44 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:daffydb user=DAFFY
+2025-08-15 16:34:44 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-08-15 16:34:44 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:daffydb'
+2025-08-15 16:34:45 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-15 16:34:45 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.2.Final
+2025-08-15 16:34:45 [restartedMain] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2025-08-15 16:34:46 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2025-08-15 16:34:46 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-15 16:34:47 [restartedMain] INFO  org.hibernate.orm.dialect - HHH035001: Using dialect: org.hibernate.dialect.H2Dialect, version: 2.1.214
+2025-08-15 16:34:48 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2025-08-15 16:34:52 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    drop table if exists club_members cascade 
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    drop table if exists club_moderators cascade 
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    drop table if exists clubs cascade 
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    drop table if exists comments cascade 
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    drop table if exists hashtags cascade 
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    drop table if exists likes cascade 
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    drop table if exists notifications cascade 
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    drop table if exists post_hashtags cascade 
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    drop table if exists posts cascade 
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    drop table if exists roles cascade 
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    drop table if exists user_clubs cascade 
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    drop table if exists user_followers cascade 
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    drop table if exists user_following cascade 
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    drop table if exists user_friends cascade 
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    drop table if exists user_roles cascade 
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    drop table if exists users cascade 
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table club_members (
+        club_id bigint not null,
+        user_id bigint not null,
+        primary key (club_id, user_id)
+    )
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table club_moderators (
+        club_id bigint not null,
+        user_id bigint not null,
+        primary key (club_id, user_id)
+    )
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table clubs (
+        is_active boolean not null,
+        max_members integer not null,
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        owner_id bigint not null,
+        updated_at timestamp(6),
+        name varchar(100),
+        description varchar(500),
+        cover_image_url varchar(255),
+        image_url varchar(255),
+        privacy varchar(255) check (privacy in ('PUBLIC','PRIVATE','SECRET')),
+        status varchar(255) check (status in ('ACTIVE','INACTIVE','SUSPENDED','DELETED')),
+        type varchar(255) check (type in ('ACADEMIC','SPORTS','CULTURAL','TECHNICAL','SOCIAL','OTHER')),
+        primary key (id)
+    )
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table comments (
+        is_deleted boolean not null,
+        is_edited boolean not null,
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        parent_comment_id bigint,
+        post_id bigint not null,
+        updated_at timestamp(6),
+        user_id bigint not null,
+        content varchar(500),
+        primary key (id)
+    )
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table hashtags (
+        usage_count integer not null,
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        name varchar(50) unique,
+        description varchar(255),
+        primary key (id)
+    )
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table likes (
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        post_id bigint not null,
+        user_id bigint not null,
+        type varchar(255) check (type in ('LIKE','LOVE','HAHA','WOW','SAD','ANGRY')),
+        primary key (id)
+    )
+2025-08-15 16:34:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table notifications (
+        club_id bigint,
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        post_id bigint,
+        read_at timestamp(6),
+        sender_id bigint,
+        user_id bigint not null,
+        message varchar(500),
+        image_url varchar(255),
+        status varchar(255) check (status in ('UNREAD','READ','ARCHIVED')),
+        target_url varchar(255),
+        title varchar(255),
+        type varchar(255) check (type in ('LIKE','COMMENT','FOLLOW','FRIEND_REQUEST','CLUB_INVITE','CLUB_JOIN','MENTION','SYSTEM')),
+        primary key (id)
+    )
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table post_hashtags (
+        hashtag_id bigint not null,
+        post_id bigint not null,
+        primary key (hashtag_id, post_id)
+    )
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table posts (
+        allow_comments boolean not null,
+        allow_likes boolean not null,
+        is_public boolean not null,
+        club_id bigint,
+        created_at timestamp(6),
+        id bigint generated by default as identity,
+        updated_at timestamp(6),
+        user_id bigint not null,
+        content varchar(1000),
+        image_url varchar(255),
+        status varchar(255) check (status in ('PUBLISHED','DRAFT','ARCHIVED','DELETED')),
+        type varchar(255) check (type in ('TEXT','IMAGE','VIDEO','LINK','POLL')),
+        video_url varchar(255),
+        primary key (id)
+    )
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table roles (
+        id bigint generated by default as identity,
+        name varchar(20) check (name in ('ROLE_USER','ROLE_MODERATOR','ROLE_ADMIN','ROLE_SUPER_ADMIN')),
+        description varchar(255),
+        primary key (id)
+    )
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table user_clubs (
+        club_id bigint not null,
+        user_id bigint not null,
+        primary key (club_id, user_id)
+    )
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table user_followers (
+        follower_id bigint not null,
+        user_id bigint not null,
+        primary key (follower_id, user_id)
+    )
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table user_following (
+        following_id bigint not null,
+        user_id bigint not null,
+        primary key (following_id, user_id)
+    )
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table user_friends (
+        friend_id bigint not null,
+        user_id bigint not null,
+        primary key (friend_id, user_id)
+    )
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table user_roles (
+        role_id bigint not null,
+        user_id bigint not null,
+        primary key (role_id, user_id)
+    )
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    create table users (
+        email_verified boolean not null,
+        enabled boolean not null,
+        locked boolean not null,
+        created_at timestamp(6),
+        date_of_birth timestamp(6),
+        id bigint generated by default as identity,
+        last_login_at timestamp(6),
+        updated_at timestamp(6),
+        username varchar(50),
+        email varchar(100),
+        first_name varchar(100),
+        last_name varchar(100),
+        password varchar(120),
+        bio varchar(500),
+        cover_image_url varchar(255),
+        gender varchar(255) check (gender in ('MALE','FEMALE','OTHER','PREFER_NOT_TO_SAY')),
+        location varchar(255),
+        profile_image_url varchar(255),
+        status varchar(255) check (status in ('ACTIVE','INACTIVE','SUSPENDED','DELETED')),
+        website varchar(255),
+        primary key (id),
+        constraint UKr43af9ap4edm43mmtq01oddj6 unique (username),
+        constraint UK6dotkott2kjsp8vw4d0m25fb7 unique (email)
+    )
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists club_members 
+       add constraint FKrhejy2k7mkjakkwdckyps1jfo 
+       foreign key (user_id) 
+       references users
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists club_members 
+       add constraint FKbwqgge4dgaaxukg2hytd9enhp 
+       foreign key (club_id) 
+       references clubs
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists club_moderators 
+       add constraint FKsvxp9jpy70y5cv26vlqyju0r8 
+       foreign key (user_id) 
+       references users
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists club_moderators 
+       add constraint FK629ipdrvptnu7v4qrdthfp1ac 
+       foreign key (club_id) 
+       references clubs
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists clubs 
+       add constraint FKa2uedbqqwplur4u373ijkvleb 
+       foreign key (owner_id) 
+       references users
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists comments 
+       add constraint FK7h839m3lkvhbyv3bcdv7sm4fj 
+       foreign key (parent_comment_id) 
+       references comments
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists comments 
+       add constraint FKh4c7lvsc298whoyd4w9ta25cr 
+       foreign key (post_id) 
+       references posts
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists comments 
+       add constraint FK8omq0tc18jd43bu5tjh6jvraq 
+       foreign key (user_id) 
+       references users
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists likes 
+       add constraint FKry8tnr4x2vwemv2bb0h5hyl0x 
+       foreign key (post_id) 
+       references posts
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists likes 
+       add constraint FKnvx9seeqqyy71bij291pwiwrg 
+       foreign key (user_id) 
+       references users
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists notifications 
+       add constraint FKjca6qb0stic500iuyvcsj2atg 
+       foreign key (club_id) 
+       references clubs
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists notifications 
+       add constraint FK599539lym3mnkbqks0u806eac 
+       foreign key (post_id) 
+       references posts
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists notifications 
+       add constraint FK13vcnq3ukas06ho1yrbc5lrb5 
+       foreign key (sender_id) 
+       references users
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists notifications 
+       add constraint FK9y21adhxn0ayjhfocscqox7bh 
+       foreign key (user_id) 
+       references users
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists post_hashtags 
+       add constraint FKb8j4xx456a7584d8blc604pqg 
+       foreign key (hashtag_id) 
+       references hashtags
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists post_hashtags 
+       add constraint FKrrlq793bvaswhomm900i71ac5 
+       foreign key (post_id) 
+       references posts
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists posts 
+       add constraint FKhj8dylgk572syl0gsa8of997a 
+       foreign key (club_id) 
+       references clubs
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists posts 
+       add constraint FK5lidm6cqbc7u4xhqpxm898qme 
+       foreign key (user_id) 
+       references users
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists user_clubs 
+       add constraint FKngv7angntcvti6ayqbb87v2x6 
+       foreign key (club_id) 
+       references clubs
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists user_clubs 
+       add constraint FKh4wt9jcnk9p86mstj6b62wuyj 
+       foreign key (user_id) 
+       references users
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists user_followers 
+       add constraint FKsauvjgnbgys3gbeharkga2omh 
+       foreign key (follower_id) 
+       references users
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists user_followers 
+       add constraint FKox7c2m7d9qhhpu45d83luq19q 
+       foreign key (user_id) 
+       references users
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists user_following 
+       add constraint FKj5bh5rimv03q1b79u7611qgg3 
+       foreign key (following_id) 
+       references users
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists user_following 
+       add constraint FKiauj02dmro0awb3hetthnrlye 
+       foreign key (user_id) 
+       references users
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists user_friends 
+       add constraint FK11y5boh1e7gh60rdqixyetv3x 
+       foreign key (friend_id) 
+       references users
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists user_friends 
+       add constraint FKk08ugelrh9cea1oew3hgxryw2 
+       foreign key (user_id) 
+       references users
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists user_roles 
+       add constraint FKh8ciramu9cc9q3qcqiv4ue8a6 
+       foreign key (role_id) 
+       references roles
+2025-08-15 16:34:53 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table if exists user_roles 
+       add constraint FKhfh9dx7w3ubf1co1vdev94g3f 
+       foreign key (user_id) 
+       references users
+2025-08-15 16:34:53 [restartedMain] INFO  o.h.t.s.i.e.GenerationTargetToDatabase - HHH000476: Executing script '[injected ScriptSourceInputNonExistentImpl script]'
+2025-08-15 16:34:53 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-15 16:34:54 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-08-15 16:34:57 [restartedMain] DEBUG c.d.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-08-15 16:34:58 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-15 16:34:59 [restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 23 mappings in 'requestMappingHandlerMapping'
+2025-08-15 16:34:59 [restartedMain] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-08-15 16:34:59 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5cc0ba7e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@573fb166, org.springframework.security.web.context.SecurityContextHolderFilter@241c43ef, org.springframework.security.web.header.HeaderWriterFilter@2342a9fe, org.springframework.web.filter.CorsFilter@64bc53bd, org.springframework.security.web.authentication.logout.LogoutFilter@2544ce23, com.daffy.security.JwtAuthenticationFilter@4553b4aa, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5148bffd, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@da875fa, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2b921328, org.springframework.security.web.session.SessionManagementFilter@674c635, org.springframework.security.web.access.ExceptionTranslationFilter@7a4cd634, org.springframework.security.web.access.intercept.AuthorizationFilter@15d3d4f4]
+2025-08-15 16:35:00 [restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-08-15 16:35:00 [restartedMain] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-08-15 16:35:01 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-08-15 16:35:01 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/api'
+2025-08-15 16:35:01 [restartedMain] INFO  com.daffy.DaffyBackendApplication - Started DaffyBackendApplication in 26.243 seconds (process running for 28.578)
+2025-08-15 16:35:01 [restartedMain] INFO  com.daffy.config.DataInitializer - Initializing database with default data...
+2025-08-15 16:35:01 [restartedMain] DEBUG org.hibernate.SQL - 
+    /* select
+        count(*) 
+    from
+        Role x */ select
+            count(*) 
+        from
+            roles r1_0
+2025-08-15 16:35:01 [restartedMain] INFO  com.daffy.config.DataInitializer - Creating default roles...
+2025-08-15 16:35:01 [restartedMain] DEBUG org.hibernate.SQL - 
+    /* insert for
+        com.daffy.entity.Role */insert 
+    into
+        roles (description,name,id) 
+    values
+        (?,?,default)
+2025-08-15 16:35:01 [restartedMain] DEBUG org.hibernate.SQL - 
+    /* insert for
+        com.daffy.entity.Role */insert 
+    into
+        roles (description,name,id) 
+    values
+        (?,?,default)
+2025-08-15 16:35:01 [restartedMain] DEBUG org.hibernate.SQL - 
+    /* insert for
+        com.daffy.entity.Role */insert 
+    into
+        roles (description,name,id) 
+    values
+        (?,?,default)
+2025-08-15 16:35:01 [restartedMain] DEBUG org.hibernate.SQL - 
+    /* insert for
+        com.daffy.entity.Role */insert 
+    into
+        roles (description,name,id) 
+    values
+        (?,?,default)
+2025-08-15 16:35:01 [restartedMain] INFO  com.daffy.config.DataInitializer - Default roles created successfully
+2025-08-15 16:35:02 [restartedMain] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? fetch first ? rows only
+2025-08-15 16:35:02 [restartedMain] INFO  com.daffy.config.DataInitializer - Creating default admin user...
+2025-08-15 16:35:02 [restartedMain] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        r1_0.id,
+        r1_0.description,
+        r1_0.name 
+    from
+        roles r1_0 
+    where
+        r1_0.name=?
+2025-08-15 16:35:02 [restartedMain] DEBUG org.hibernate.SQL - 
+    /* insert for
+        com.daffy.entity.User */insert 
+    into
+        users (bio,cover_image_url,created_at,date_of_birth,email,email_verified,enabled,first_name,gender,last_login_at,last_name,location,locked,password,profile_image_url,status,updated_at,username,website,id) 
+    values
+        (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,default)
+2025-08-15 16:35:02 [restartedMain] DEBUG org.hibernate.SQL - 
+    /* insert for
+        com.daffy.entity.User.roles */insert 
+    into
+        user_roles (user_id,role_id) 
+    values
+        (?,?)
+2025-08-15 16:35:02 [restartedMain] INFO  com.daffy.config.DataInitializer - Default admin user created successfully: admin/admin123
+2025-08-15 16:35:02 [restartedMain] INFO  com.daffy.config.DataInitializer - Database initialization completed successfully!

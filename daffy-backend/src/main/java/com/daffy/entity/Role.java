@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,6 +19,8 @@ import jakarta.validation.constraints.Size;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(exclude = {"users"}) // Exclude users from hashCode/equals to prevent LazyInitializationException
+@ToString(exclude = {"users"}) // Exclude users from toString to avoid lazy loading issues
 public class Role {
     
     @Id
