@@ -543,10 +543,38 @@ function showNotification(message, type = 'success') {
   }, 3000);
 }
 
+// Check if user is authenticated
+function checkAuthStatus() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const currentUser = localStorage.getItem('currentUser');
+    
+    if (isLoggedIn !== 'true' || !currentUser) {
+        // Redirect to signin page if not logged in
+        window.location.href = 'signin.html';
+        return;
+    }
+}
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+  checkAuthStatus();
   initTrends();
 });
+
+// Logout function
+function logout() {
+  // Clear user session
+  localStorage.removeItem('isLoggedIn');
+  localStorage.removeItem('currentUser');
+  localStorage.removeItem('rememberMe');
+  
+  showNotification('Successfully logged out!', 'success');
+  
+  // Redirect to signin page
+  setTimeout(() => {
+    window.location.href = 'signin.html';
+  }, 1000);
+}
 
 // Export functions for external use
 window.trendsManager = {
@@ -556,5 +584,6 @@ window.trendsManager = {
   toggleLike,
   showComments,
   sharePost,
-  showNotification
+  showNotification,
+  logout
 };
