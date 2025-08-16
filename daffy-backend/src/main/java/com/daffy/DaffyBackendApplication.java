@@ -15,7 +15,7 @@ import java.util.Map;
 @EnableCaching
 @EnableAsync
 @EnableScheduling
-@RestController  // Add this to handle root endpoint
+//@RestController  // Add this to handle root endpoint
 public class DaffyBackendApplication {
 
     public static void main(String[] args) {
