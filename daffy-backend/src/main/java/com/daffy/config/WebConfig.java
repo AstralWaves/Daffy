@@ -26,7 +26,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         // Map admin panel routes
-        registry.addViewController("/admin-panel").setViewName("forward:/static/admin.html");
         registry.addViewController("/admin").setViewName("forward:/static/admin.html");
     }
 

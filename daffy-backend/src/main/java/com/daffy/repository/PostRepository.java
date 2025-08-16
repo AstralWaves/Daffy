@@ -38,4 +38,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     
     @Query("SELECT p FROM Post p WHERE p.status = 'PUBLISHED' ORDER BY (SELECT COUNT(l) FROM Like l WHERE l.post = p) DESC")
     Page<Post> findTrendingPosts(Pageable pageable);
+    
+    @Query("SELECT p FROM Post p JOIN p.hashtags h WHERE h.name = :hashtag AND p.status = 'PUBLISHED' AND p.isPublic = true ORDER BY p.createdAt DESC")
+    Page<Post> findPostsByHashtag(@Param("hashtag") String hashtag, Pageable pageable);
 }

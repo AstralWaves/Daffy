@@ -1,5 +1,5 @@
 // API service for connecting to Daffy Backend
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = 'http://localhost:8080';
 
 class ApiService {
     constructor() {
@@ -154,6 +154,23 @@ class ApiService {
 
     async getInfo() {
         return this.request('/test/info');
+    }
+
+    // Trends endpoints
+    async getTrends() {
+        return this.request('/trends');
+    }
+
+    async getTrendingHashtags() {
+        return this.request('/trends/hashtags');
+    }
+
+    async getTrendsByHashtag(hashtagName) {
+        return this.request(`/trends/hashtag/${hashtagName}`);
+    }
+
+    async searchTrends(keyword) {
+        return this.request(`/trends/search?keyword=${encodeURIComponent(keyword)}`);
     }
 }
 

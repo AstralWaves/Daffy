@@ -12,23 +12,22 @@ import java.util.Map;
 public class AdminPanelController {
 
     /**
-     * Admin panel endpoint - returns JSON response for now
-     * Later you can return a view name when you have templates configured
+     * Admin panel API endpoint - returns JSON with system information
      */
-    @GetMapping("/admin-panel")
+    @GetMapping("/api/admin-panel-info")
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> adminPanel() {
+    public ResponseEntity<Map<String, Object>> adminPanelInfo() {
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Admin Panel Access Point");
         response.put("status", "Available");
-        response.put("login_required", true);
-        response.put("admin_api_endpoint", "/admin/dashboard");
-        response.put("auth_endpoint", "/auth/login");
+        response.put("loginRequired", true);
+        response.put("adminApiEndpoint", "/admin/dashboard");
+        response.put("authEndpoint", "/auth/login");
         
         Map<String, String> credentials = new HashMap<>();
-        credentials.put("default_admin_username", "admin");
-        credentials.put("default_admin_password", "admin123");
-        response.put("default_credentials", credentials);
+        credentials.put("username", "admin");
+        credentials.put("password", "admin123");
+        response.put("defaultAdminCredentials", credentials);
         
         return ResponseEntity.ok(response);
     }

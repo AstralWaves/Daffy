@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNotification } from '../context/NotificationContext';
+import apiService from '../services/api';
 import '../styles/trends.css';
 
 const Trends = () => {
@@ -12,7 +13,6 @@ const Trends = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // This will be replaced with actual API calls when backend is ready
     loadTrends();
     loadTopHashtags();
   }, []);
@@ -20,13 +20,10 @@ const Trends = () => {
   const loadTrends = async () => {
     try {
       setLoading(true);
-      // TODO: Replace with actual API call
-      // const response = await axios.get('/api/trends');
-      // setTrends(response.data.trends);
-      
-      // For now, show empty state
-      setTrends([]);
+      const response = await apiService.getTrends();
+      setTrends(response || []);
     } catch (error) {
+      console.error('Failed to load trends:', error);
       showError('Failed to load trends');
     } finally {
       setLoading(false);
@@ -35,13 +32,10 @@ const Trends = () => {
 
   const loadTopHashtags = async () => {
     try {
-      // TODO: Replace with actual API call
-      // const response = await axios.get('/api/hashtags/top');
-      // setTopHashtags(response.data.hashtags);
-      
-      // For now, show empty state
-      setTopHashtags([]);
+      const response = await apiService.getTrendingHashtags();
+      setTopHashtags(response || []);
     } catch (error) {
+      console.error('Failed to load hashtags:', error);
       showError('Failed to load top hashtags');
     }
   };
@@ -49,12 +43,11 @@ const Trends = () => {
   const handleHashtagClick = async (hashtag) => {
     setSelectedHashtag(hashtag);
     try {
-      // TODO: Replace with actual API call
-      // const response = await axios.get(`/api/trends/hashtag/${hashtag.id}`);
-      // setTrends(response.data.trends);
-      
+      const response = await apiService.getTrendsByHashtag(hashtag.name);
+      setTrends(response || []);
       showSuccess(`Showing trends for #${hashtag.name}`);
     } catch (error) {
+      console.error('Failed to load hashtag trends:', error);
       showError('Failed to load hashtag trends');
     }
   };
@@ -189,4 +182,3 @@ const Trends = () => {
 };
 
 export default Trends;
-

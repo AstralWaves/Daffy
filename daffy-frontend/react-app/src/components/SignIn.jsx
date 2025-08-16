@@ -48,26 +48,16 @@ const Signin = () => {
     if (isValid) {
       setLoading(true);
       try {
-        // Call backend API
-        const response = await apiService.login({
-          username: formData.username,
-          password: formData.password
-        });
+        // For demo purposes, directly use the AuthContext login
+        // In a real app, this would call the API service first
+        const result = await login(formData.username, formData.password);
         
-        if (response) {
-          // Store token in API service
-          apiService.setToken(response.accessToken);
-          
-          // Update auth context
-          const result = await login(formData.username, response.accessToken);
-          
-          if (result.success) {
-            showSuccess('Login successful!');
-            // Navigate to home page
-            navigate('/home');
-          } else {
-            showError(result.error || 'Login failed');
-          }
+        if (result.success) {
+          showSuccess('Login successful!');
+          // Navigate to root which will redirect to home page
+          navigate('/');
+        } else {
+          showError(result.error || 'Login failed');
         }
       } catch (error) {
         console.error('Login error:', error);

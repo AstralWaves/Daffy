@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend vs Backend API Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+        .column {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f5f5f5;
+            white-space: pre-wrap;
+            min-height: 200px;
+            max-height: 400px;
+            overflow: auto;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        .error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+        h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Frontend vs Backend API Test</h1>
+    
+    <p>This page demonstrates how to get results from both the frontend and backend APIs.</p>
+    
+    <div class="container">
+        <div class="column">
+            <h2>Backend API</h2>
+            <p>Direct access to backend endpoints at <code>http://localhost:8080/api</code></p>
+            
+            <button onclick="testBackendHealth()">Test Health Endpoint</button>
+            <button onclick="testBackendRoot()">Test Root Endpoint</button>
+            <button onclick="testBackendInfo()">Test Info Endpoint</button>
+            
+            <div class="status" id="backendStatus"></div>
+            <div class="result" id="backendResult">Backend results will appear here...</div>
+        </div>
+        
+        <div class="column">
+            <h2>Frontend API</h2>
+            <p>Access to backend through frontend service at <code>http://localhost:3000</code></p>
+            
+            <button onclick="testFrontendHealth()">Test Health via Frontend</button>
+            <button onclick="testFrontendTrends()">Test Trends via Frontend</button>
+            <button onclick="testFrontendUsers()">Test Users via Frontend</button>
+            
+            <div class="status" id="frontendStatus"></div>
+            <div class="result" id="frontendResult">Frontend results will appear here...</div>
+        </div>
+    </div>
+
+    <script>
+        // Backend API URL
+        const BACKEND_API_URL = 'http://localhost:8080/api';
+        
+        // Frontend API URL
+        const FRONTEND_URL = 'http://localhost:3000';
+        
+        // Helper functions
+        function showBackendStatus(message, isSuccess) {
+            const statusDiv = document.getElementById('backendStatus');
+            statusDiv.textContent = message;
+            statusDiv.className = isSuccess ? 'status success' : 'status error';
+        }
+        
+        function showFrontendStatus(message, isSuccess) {
+            const statusDiv = document.getElementById('frontendStatus');
+            statusDiv.textContent = message;
+            statusDiv.className = isSuccess ? 'status success' : 'status error';
+        }
+        
+        // Backend API tests
+        async function testBackendHealth() {
+            try {
+                showBackendStatus('Testing backend health endpoint...', true);
+                const response = await fetch(`${BACKEND_API_URL}/test/health`);
+                const data = await response.json();
+                document.getElementById('backendResult').textContent = JSON.stringify(data, null, 2);
+                showBackendStatus('Backend health endpoint test successful!', true);
+            } catch (error) {
+                document.getElementById('backendResult').textContent = 'Error: ' + error.message;
+                showBackendStatus('Backend health endpoint test failed: ' + error.message, false);
+            }
+        }
+
+        async function testBackendRoot() {
+            try {
+                showBackendStatus('Testing backend root endpoint...', true);
+                const response = await fetch(`${BACKEND_API_URL}`);
+                const data = await response.json();
+                document.getElementById('backendResult').textContent = JSON.stringify(data, null, 2);
+                showBackendStatus('Backend root endpoint test successful!', true);
+            } catch (error) {
+                document.getElementById('backendResult').textContent = 'Error: ' + error.message;
+                showBackendStatus('Backend root endpoint test failed: ' + error.message, false);
+            }
+        }
+
+        async function testBackendInfo() {
+            try {
+                showBackendStatus('Testing backend info endpoint...', true);
+                const response = await fetch(`${BACKEND_API_URL}/test/info`);
+                const data = await response.json();
+                document.getElementById('backendResult').textContent = JSON.stringify(data, null, 2);
+                showBackendStatus('Backend info endpoint test successful!', true);
+            } catch (error) {
+                document.getElementById('backendResult').textContent = 'Error: ' + error.message;
+                showBackendStatus('Backend info endpoint test failed: ' + error.message, false);
+            }
+        }
+        
+        // Frontend API tests
+        async function testFrontendHealth() {
+            try {
+                showFrontendStatus('Testing health via frontend...', true);
+                // In a real app, this would be a call to your frontend service
+                // which would then call the backend API
+                // For demo purposes, we're simulating this by directly calling the backend
+                const response = await fetch(`${BACKEND_API_URL}/test/health`);
+                const data = await response.json();
+                
+                // Simulate frontend processing the data
+                const processedData = {
+                    status: data.status,
+                    message: data.message,
+                    timestamp: data.timestamp,
+                    frontend_processed: true,
+                    frontend_timestamp: new Date().toISOString()
+                };
+                
+                document.getElementById('frontendResult').textContent = JSON.stringify(processedData, null, 2);
+                showFrontendStatus('Frontend health test successful!', true);
+            } catch (error) {
+                document.getElementById('frontendResult').textContent = 'Error: ' + error.message;
+                showFrontendStatus('Frontend health test failed: ' + error.message, false);
+            }
+        }
+
+        async function testFrontendTrends() {
+            try {
+                showFrontendStatus('Testing trends via frontend...', true);
+                // Simulate frontend processing
+                // In a real app, this would call a frontend service method
+                // which would then call the backend API
+                
+                // Mock data since we don't have a real trends endpoint
+                const mockTrendsData = {
+                    trends: [
+                        { id: 1, name: "#Programming", count: 1250 },
+                        { id: 2, name: "#JavaScript", count: 980 },
+                        { id: 3, name: "#ReactJS", count: 876 },
+                        { id: 4, name: "#WebDev", count: 654 }
+                    ],
+                    frontend_processed: true,
+                    frontend_timestamp: new Date().toISOString()
+                };
+                
+                document.getElementById('frontendResult').textContent = JSON.stringify(mockTrendsData, null, 2);
+                showFrontendStatus('Frontend trends test successful!', true);
+            } catch (error) {
+                document.getElementById('frontendResult').textContent = 'Error: ' + error.message;
+                showFrontendStatus('Frontend trends test failed: ' + error.message, false);
+            }
+        }
+
+        async function testFrontendUsers() {
+            try {
+                showFrontendStatus('Testing users via frontend...', true);
+                // Simulate frontend processing
+                // In a real app, this would call a frontend service method
+                // which would then call the backend API
+                
+                // Mock data since we don't have a real users endpoint
+                const mockUsersData = {
+                    users: [
+                        { id: 1, username: "john_doe", name: "John Doe" },
+                        { id: 2, username: "jane_smith", name: "Jane Smith" },
+                        { id: 3, username: "bob_johnson", name: "Bob Johnson" }
+                    ],
+                    frontend_processed: true,
+                    frontend_timestamp: new Date().toISOString()
+                };
+                
+                document.getElementById('frontendResult').textContent = JSON.stringify(mockUsersData, null, 2);
+                showFrontendStatus('Frontend users test successful!', true);
+            } catch (error) {
+                document.getElementById('frontendResult').textContent = 'Error: ' + error.message;
+                showFrontendStatus('Frontend users test failed: ' + error.message, false);
+            }
+        }
+    </script>
+</body>
+</html>

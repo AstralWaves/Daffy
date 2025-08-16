@@ -121,8 +121,8 @@ const SignUp = () => {
         localStorage.setItem('currentUser', JSON.stringify(mockUser));
         localStorage.setItem('isLoggedIn', 'true');
         
-        // Force page reload to update auth state
-        window.location.href = '/home';
+        // Navigate to root which will redirect to home page
+        navigate('/');
       } else {
         showError(result.error);
       }

@@ -1,3 +1,4 @@
+com\daffy\service\TrendService.class
 com\daffy\entity\Hashtag.class
 com\daffy\config\SecurityConfig.class
 com\daffy\dto\AuthResponseDto.class
@@ -7,6 +8,7 @@ com\daffy\security\UserPrincipal.class
 com\daffy\entity\Post$PostStatus.class
 com\daffy\dto\UserProfileDto$UserProfileDtoBuilder.class
 com\daffy\dto\UserRegistrationDto.class
+com\daffy\dto\HashtagDto$HashtagDtoBuilder.class
 com\daffy\entity\Comment$CommentBuilder.class
 com\daffy\controller\AdminPanelController.class
 com\daffy\dto\UserDto$UserDtoBuilder.class
@@ -17,6 +19,7 @@ com\daffy\controller\AuthController.class
 com\daffy\dto\AdminDashboardDto$AdminDashboardDtoBuilder.class
 com\daffy\entity\Comment.class
 com\daffy\DaffyBackendApplication.class
+com\daffy\dto\TrendDto.class
 com\daffy\entity\Post$PostType.class
 com\daffy\entity\User$UserBuilder.class
 com\daffy\exception\GlobalExceptionHandler$ErrorResponse$ErrorResponseBuilder.class
@@ -25,6 +28,7 @@ com\daffy\dto\LoginDto$LoginDtoBuilder.class
 com\daffy\entity\Notification.class
 com\daffy\config\DataInitializer.class
 com\daffy\entity\Club$ClubType.class
+com\daffy\controller\TrendController.class
 com\daffy\dto\UserRegistrationDto$UserRegistrationDtoBuilder.class
 com\daffy\exception\ResourceNotFoundException.class
 com\daffy\entity\Post.class
@@ -32,10 +36,12 @@ com\daffy\exception\UserAlreadyExistsException.class
 com\daffy\repository\ClubRepository.class
 com\daffy\entity\Notification$NotificationStatus.class
 com\daffy\entity\Club$ClubBuilder.class
+com\daffy\config\WebConfig.class
 com\daffy\entity\Club$ClubStatus.class
 com\daffy\entity\Role$RoleBuilder.class
 com\daffy\entity\Notification$NotificationType.class
 com\daffy\controller\UserController.class
+com\daffy\controller\HomeController.class
 com\daffy\entity\Like.class
 com\daffy\entity\Notification$NotificationBuilder.class
 com\daffy\service\AdminService.class
@@ -46,7 +52,10 @@ com\daffy\repository\CommentRepository.class
 com\daffy\repository\LikeRepository.class
 com\daffy\repository\PostRepository.class
 com\daffy\dto\AuthResponseDto$AuthResponseDtoBuilder.class
+com\daffy\dto\TrendDto$TrendDtoBuilder.class
 com\daffy\repository\UserRepository.class
+com\daffy\dto\HashtagDto.class
+com\daffy\repository\HashtagRepository.class
 com\daffy\entity\Club.class
 com\daffy\entity\User$UserStatus.class
 com\daffy\entity\Hashtag$HashtagBuilder.class
