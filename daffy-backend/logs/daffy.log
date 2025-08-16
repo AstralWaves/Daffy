@@ -10839,3 +10839,1787 @@ java.lang.IllegalArgumentException: When allowCredentials is true, allowedOrigin
 2025-08-16 11:38:36 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-08-16 11:38:36 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2025-08-16 11:38:36 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-08-16 11:39:29 [restartedMain] INFO  com.daffy.DaffyBackendApplication - Starting DaffyBackendApplication using Java 17 with PID 19844 (E:\html,css,js\project_\social\Daffy\daffy-backend\target\classes started by User in E:\html,css,js\project_\social\Daffy\daffy-backend)
+2025-08-16 11:39:29 [restartedMain] DEBUG com.daffy.DaffyBackendApplication - Running with Spring Boot v3.1.0, Spring v6.0.9
+2025-08-16 11:39:29 [restartedMain] INFO  com.daffy.DaffyBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2025-08-16 11:39:29 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-08-16 11:39:29 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-08-16 11:39:31 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-16 11:39:31 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 95 ms. Found 6 JPA repository interfaces.
+2025-08-16 11:39:33 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2025-08-16 11:39:33 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-16 11:39:33 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-08-16 11:39:33 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-16 11:39:33 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3742 ms
+2025-08-16 11:39:33 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-08-16 11:39:33 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1a2ee575
+2025-08-16 11:39:33 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-08-16 11:39:33 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/daffydb?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true'
+2025-08-16 11:39:34 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-16 11:39:34 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.2.Final
+2025-08-16 11:39:34 [restartedMain] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2025-08-16 11:39:34 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2025-08-16 11:39:35 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-16 11:39:35 [restartedMain] INFO  org.hibernate.orm.dialect - HHH035001: Using dialect: org.hibernate.dialect.MySQL8Dialect, version: 8.0
+2025-08-16 11:39:35 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-08-16 11:39:36 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2025-08-16 11:39:37 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-08-16 11:39:37 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column created_at  datetime(6)
+2025-08-16 11:39:38 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column privacy  enum ('PRIVATE','PUBLIC','SECRET')
+2025-08-16 11:39:38 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column status  enum ('ACTIVE','DELETED','INACTIVE','SUSPENDED')
+2025-08-16 11:39:38 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column type  enum ('ACADEMIC','CULTURAL','OTHER','SOCIAL','SPORTS','TECHNICAL')
+2025-08-16 11:39:38 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column updated_at  datetime(6)
+2025-08-16 11:39:38 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table comments 
+       modify column created_at  datetime(6)
+2025-08-16 11:39:38 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table comments 
+       modify column updated_at  datetime(6)
+2025-08-16 11:39:38 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table hashtags 
+       modify column created_at  datetime(6)
+2025-08-16 11:39:38 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table likes 
+       modify column created_at  datetime(6)
+2025-08-16 11:39:38 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table likes 
+       modify column type  enum ('ANGRY','HAHA','LIKE','LOVE','SAD','WOW')
+2025-08-16 11:39:38 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column created_at  datetime(6)
+2025-08-16 11:39:38 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column read_at  datetime(6)
+2025-08-16 11:39:38 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column status  enum ('ARCHIVED','READ','UNREAD')
+2025-08-16 11:39:38 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column type  enum ('CLUB_INVITE','CLUB_JOIN','COMMENT','FOLLOW','FRIEND_REQUEST','LIKE','MENTION','SYSTEM')
+2025-08-16 11:39:38 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column created_at  datetime(6)
+2025-08-16 11:39:38 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column status  enum ('ARCHIVED','DELETED','DRAFT','PUBLISHED')
+2025-08-16 11:39:38 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column type  enum ('IMAGE','LINK','POLL','TEXT','VIDEO')
+2025-08-16 11:39:38 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column updated_at  datetime(6)
+2025-08-16 11:39:38 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table roles 
+       modify column name  enum ('ROLE_ADMIN','ROLE_MODERATOR','ROLE_SUPER_ADMIN','ROLE_USER')
+2025-08-16 11:39:38 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column created_at  datetime(6)
+2025-08-16 11:39:38 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column date_of_birth  datetime(6)
+2025-08-16 11:39:38 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column gender  enum ('FEMALE','MALE','OTHER','PREFER_NOT_TO_SAY')
+2025-08-16 11:39:39 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column last_login_at  datetime(6)
+2025-08-16 11:39:39 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column status  enum ('ACTIVE','DELETED','INACTIVE','SUSPENDED')
+2025-08-16 11:39:39 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column updated_at  datetime(6)
+2025-08-16 11:39:39 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-16 11:39:39 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-08-16 11:39:40 [restartedMain] DEBUG c.d.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-08-16 11:39:40 [restartedMain] DEBUG o.s.w.f.ServerHttpObservationFilter - Filter 'webMvcObservationFilter' configured for use
+2025-08-16 11:39:41 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-16 11:39:41 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-08-16 11:39:41 [restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 28 mappings in 'requestMappingHandlerMapping'
+2025-08-16 11:39:41 [restartedMain] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/admin-panel, /admin] in 'viewControllerHandlerMapping'
+2025-08-16 11:39:42 [restartedMain] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**, /static/**, /admin-panel/**] in 'resourceHandlerMapping'
+2025-08-16 11:39:42 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 3 endpoint(s) beneath base path '/actuator'
+2025-08-16 11:39:42 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@135742d3, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@79bcae0c, org.springframework.security.web.context.SecurityContextHolderFilter@3a11e4d4, org.springframework.security.web.header.HeaderWriterFilter@3d6124ec, org.springframework.web.filter.CorsFilter@54f63306, org.springframework.security.web.authentication.logout.LogoutFilter@63d91f9b, com.daffy.security.JwtAuthenticationFilter@7133a2ab, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@38e95e56, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@17a160c2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@407e1770, org.springframework.security.web.session.SessionManagementFilter@482d7d85, org.springframework.security.web.access.ExceptionTranslationFilter@540dff27, org.springframework.security.web.access.intercept.AuthorizationFilter@377baf4a]
+2025-08-16 11:39:42 [restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-08-16 11:39:42 [restartedMain] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-08-16 11:39:43 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-08-16 11:39:43 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2025-08-16 11:39:43 [restartedMain] INFO  com.daffy.DaffyBackendApplication - Started DaffyBackendApplication in 14.679 seconds (process running for 15.423)
+2025-08-16 11:39:43 [restartedMain] INFO  com.daffy.config.DataInitializer - Initializing database with default data...
+2025-08-16 11:39:43 [restartedMain] DEBUG org.hibernate.SQL - 
+    /* select
+        count(*) 
+    from
+        Role x */ select
+            count(*) 
+        from
+            roles r1_0
+2025-08-16 11:39:43 [restartedMain] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? limit ?
+2025-08-16 11:39:44 [restartedMain] INFO  com.daffy.config.DataInitializer - Database initialization completed successfully!
+2025-08-16 11:40:28 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-16 11:40:28 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-08-16 11:40:28 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+2025-08-16 11:40:28 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+2025-08-16 11:40:28 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+2025-08-16 11:40:28 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@6b72c3e7
+2025-08-16 11:40:28 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@50fc8758
+2025-08-16 11:40:28 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-08-16 11:40:28 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 13 ms
+2025-08-16 11:40:28 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /auth/login
+2025-08-16 11:40:28 [http-nio-8080-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:40:28 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /auth/login
+2025-08-16 11:40:28 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/auth/login", parameters={}
+2025-08-16 11:40:28 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.daffy.exception.GlobalExceptionHandler#handleGenericException(Exception)
+2025-08-16 11:40:28 [http-nio-8080-exec-1] ERROR c.d.exception.GlobalExceptionHandler - Unexpected error: Request method 'GET' is not supported
+org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported
+	at org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping.handleNoMatch(RequestMappingInfoHandlerMapping.java:265)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.lookupHandlerMethod(AbstractHandlerMethodMapping.java:441)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.getHandlerInternal(AbstractHandlerMethodMapping.java:382)
+	at org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping.getHandlerInternal(RequestMappingInfoHandlerMapping.java:126)
+	at org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping.getHandlerInternal(RequestMappingInfoHandlerMapping.java:68)
+	at org.springframework.web.servlet.handler.AbstractHandlerMapping.getHandler(AbstractHandlerMapping.java:505)
+	at org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1275)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:477)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:338)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:80)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:126)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at com.daffy.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:48)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:321)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:222)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:166)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2025-08-16 11:40:29 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json;q=0.8', given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7] and supported [application/json, application/*+json]
+2025-08-16 11:40:29 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [com.daffy.exception.GlobalExceptionHandler$ErrorResponse@7226b177]
+2025-08-16 11:40:29 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2025-08-16 11:40:29 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 500 INTERNAL_SERVER_ERROR
+2025-08-16 11:40:30 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /favicon.ico
+2025-08-16 11:40:30 [http-nio-8080-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:40:30 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:40:30 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:40:30 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:40:30 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:40:30 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:40:30 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2025-08-16 11:40:30 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 11:40:30 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 11:40:30 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 11:40:30 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 11:40:30 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 11:40:30 [http-nio-8080-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:40:39 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /
+2025-08-16 11:40:39 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:40:39 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:40:39 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:40:39 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:40:39 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:40:39 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:40:39 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2025-08-16 11:40:39 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:40:39 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:40:39 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:40:39 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:40:39 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:40:39 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:40:49 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /test/health
+2025-08-16 11:40:49 [http-nio-8080-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:40:49 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.TestController#health()
+2025-08-16 11:40:49 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.TestController#health()
+2025-08-16 11:40:49 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /test/health
+2025-08-16 11:40:49 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/test/health", parameters={}
+2025-08-16 11:40:49 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.TestController#health()
+2025-08-16 11:40:49 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.daffy.exception.GlobalExceptionHandler#handleGenericException(Exception)
+2025-08-16 11:40:49 [http-nio-8080-exec-3] ERROR c.d.exception.GlobalExceptionHandler - Unexpected error: When allowCredentials is true, allowedOrigins cannot contain the special value "*" since that cannot be set on the "Access-Control-Allow-Origin" response header. To allow credentials to a set of origins, list them explicitly or consider using "allowedOriginPatterns" instead.
+java.lang.IllegalArgumentException: When allowCredentials is true, allowedOrigins cannot contain the special value "*" since that cannot be set on the "Access-Control-Allow-Origin" response header. To allow credentials to a set of origins, list them explicitly or consider using "allowedOriginPatterns" instead.
+	at org.springframework.web.cors.CorsConfiguration.validateAllowCredentials(CorsConfiguration.java:516)
+	at org.springframework.web.servlet.handler.AbstractHandlerMapping.getHandler(AbstractHandlerMapping.java:538)
+	at org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1275)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:477)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:338)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:80)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:126)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at com.daffy.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:48)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:321)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:222)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:166)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2025-08-16 11:40:49 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json;q=0.8', given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7] and supported [application/json, application/*+json]
+2025-08-16 11:40:49 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [com.daffy.exception.GlobalExceptionHandler$ErrorResponse@30aeb8ac]
+2025-08-16 11:40:49 [http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [java.lang.IllegalArgumentException: When allowCredentials is true, allowedOrigins cannot contain the special value "*" since that cannot be set on the "Access-Control-Allow-Origin" response header. To allow credentials to a set of origins, list them explicitly or consider using "allowedOriginPatterns" instead.]
+2025-08-16 11:40:49 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 500 INTERNAL_SERVER_ERROR
+2025-08-16 11:40:50 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /favicon.ico
+2025-08-16 11:40:50 [http-nio-8080-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:40:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:40:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:40:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:40:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:40:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:40:50 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2025-08-16 11:40:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 11:40:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 11:40:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 11:40:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 11:40:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 11:40:50 [http-nio-8080-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:41:36 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /h2-console
+2025-08-16 11:41:36 [http-nio-8080-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:41:36 [http-nio-8080-exec-6] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:41:36 [http-nio-8080-exec-6] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:41:36 [http-nio-8080-exec-6] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:41:36 [http-nio-8080-exec-6] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:41:36 [http-nio-8080-exec-6] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:41:36 [http-nio-8080-exec-6] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2025-08-16 11:41:36 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:41:36 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:41:36 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:41:36 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:41:36 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:41:36 [http-nio-8080-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:41:43 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Securing GET /admin-panel
+2025-08-16 11:41:43 [http-nio-8080-exec-7] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:41:43 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.AdminPanelController#adminPanel()
+2025-08-16 11:41:43 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.AdminPanelController#adminPanel()
+2025-08-16 11:41:43 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.AdminPanelController#adminPanel()
+2025-08-16 11:41:43 [http-nio-8080-exec-7] DEBUG o.s.security.web.FilterChainProxy - Secured GET /admin-panel
+2025-08-16 11:41:43 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - GET "/admin-panel", parameters={}
+2025-08-16 11:41:43 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.AdminPanelController#adminPanel()
+2025-08-16 11:41:43 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json;q=0.8', given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7] and supported [application/json, application/*+json]
+2025-08-16 11:41:43 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{default_credentials={default_admin_username=admin, default_admin_password=admin123}, auth_endpoint= (truncated)...]
+2025-08-16 11:41:43 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-16 11:41:44 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /favicon.ico
+2025-08-16 11:41:44 [http-nio-8080-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:41:44 [http-nio-8080-exec-8] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:41:44 [http-nio-8080-exec-8] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:41:44 [http-nio-8080-exec-8] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:41:44 [http-nio-8080-exec-8] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:41:44 [http-nio-8080-exec-8] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:41:44 [http-nio-8080-exec-8] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2025-08-16 11:41:44 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 11:41:44 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 11:41:44 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 11:41:44 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 11:41:44 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 11:41:44 [http-nio-8080-exec-8] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:44:05 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-08-16 11:44:05 [Thread-5] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2025-08-16 11:44:05 [Thread-5] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Destroying Spring FrameworkServlet 'dispatcherServlet'
+2025-08-16 11:44:06 [Thread-5] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-16 11:44:06 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-08-16 11:44:06 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-08-16 11:44:06 [restartedMain] INFO  com.daffy.DaffyBackendApplication - Starting DaffyBackendApplication using Java 17 with PID 19844 (E:\html,css,js\project_\social\Daffy\daffy-backend\target\classes started by User in E:\html,css,js\project_\social\Daffy\daffy-backend)
+2025-08-16 11:44:06 [restartedMain] DEBUG com.daffy.DaffyBackendApplication - Running with Spring Boot v3.1.0, Spring v6.0.9
+2025-08-16 11:44:06 [restartedMain] INFO  com.daffy.DaffyBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2025-08-16 11:44:07 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-16 11:44:07 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 72 ms. Found 6 JPA repository interfaces.
+2025-08-16 11:44:08 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2025-08-16 11:44:08 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-16 11:44:08 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-08-16 11:44:08 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-16 11:44:08 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1598 ms
+2025-08-16 11:44:08 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2025-08-16 11:44:08 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3f33d061
+2025-08-16 11:44:08 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2025-08-16 11:44:08 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/daffydb?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true'
+2025-08-16 11:44:09 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-16 11:44:09 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2025-08-16 11:44:09 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-16 11:44:09 [restartedMain] INFO  org.hibernate.orm.dialect - HHH035001: Using dialect: org.hibernate.dialect.MySQL8Dialect, version: 8.0
+2025-08-16 11:44:09 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-08-16 11:44:09 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2025-08-16 11:44:09 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-08-16 11:44:09 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column created_at  datetime(6)
+2025-08-16 11:44:10 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column privacy  enum ('PRIVATE','PUBLIC','SECRET')
+2025-08-16 11:44:10 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column status  enum ('ACTIVE','DELETED','INACTIVE','SUSPENDED')
+2025-08-16 11:44:10 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column type  enum ('ACADEMIC','CULTURAL','OTHER','SOCIAL','SPORTS','TECHNICAL')
+2025-08-16 11:44:10 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column updated_at  datetime(6)
+2025-08-16 11:44:10 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table comments 
+       modify column created_at  datetime(6)
+2025-08-16 11:44:10 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table comments 
+       modify column updated_at  datetime(6)
+2025-08-16 11:44:10 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table hashtags 
+       modify column created_at  datetime(6)
+2025-08-16 11:44:10 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table likes 
+       modify column created_at  datetime(6)
+2025-08-16 11:44:10 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table likes 
+       modify column type  enum ('ANGRY','HAHA','LIKE','LOVE','SAD','WOW')
+2025-08-16 11:44:10 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column created_at  datetime(6)
+2025-08-16 11:44:11 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column read_at  datetime(6)
+2025-08-16 11:44:11 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column status  enum ('ARCHIVED','READ','UNREAD')
+2025-08-16 11:44:11 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column type  enum ('CLUB_INVITE','CLUB_JOIN','COMMENT','FOLLOW','FRIEND_REQUEST','LIKE','MENTION','SYSTEM')
+2025-08-16 11:44:11 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column created_at  datetime(6)
+2025-08-16 11:44:11 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column status  enum ('ARCHIVED','DELETED','DRAFT','PUBLISHED')
+2025-08-16 11:44:11 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column type  enum ('IMAGE','LINK','POLL','TEXT','VIDEO')
+2025-08-16 11:44:11 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column updated_at  datetime(6)
+2025-08-16 11:44:11 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table roles 
+       modify column name  enum ('ROLE_ADMIN','ROLE_MODERATOR','ROLE_SUPER_ADMIN','ROLE_USER')
+2025-08-16 11:44:11 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column created_at  datetime(6)
+2025-08-16 11:44:11 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column date_of_birth  datetime(6)
+2025-08-16 11:44:11 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column gender  enum ('FEMALE','MALE','OTHER','PREFER_NOT_TO_SAY')
+2025-08-16 11:44:12 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column last_login_at  datetime(6)
+2025-08-16 11:44:12 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column status  enum ('ACTIVE','DELETED','INACTIVE','SUSPENDED')
+2025-08-16 11:44:12 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column updated_at  datetime(6)
+2025-08-16 11:44:12 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-16 11:44:13 [restartedMain] DEBUG c.d.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-08-16 11:44:13 [restartedMain] DEBUG o.s.w.f.ServerHttpObservationFilter - Filter 'webMvcObservationFilter' configured for use
+2025-08-16 11:44:13 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-16 11:44:13 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-08-16 11:44:13 [restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 28 mappings in 'requestMappingHandlerMapping'
+2025-08-16 11:44:13 [restartedMain] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/admin-panel, /admin] in 'viewControllerHandlerMapping'
+2025-08-16 11:44:13 [restartedMain] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**, /static/**, /admin-panel/**] in 'resourceHandlerMapping'
+2025-08-16 11:44:14 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 3 endpoint(s) beneath base path '/actuator'
+2025-08-16 11:44:14 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@75fb3ba3, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1517fd1d, org.springframework.security.web.context.SecurityContextHolderFilter@5fd384d0, org.springframework.security.web.header.HeaderWriterFilter@27f58048, org.springframework.web.filter.CorsFilter@6a186a3f, org.springframework.security.web.authentication.logout.LogoutFilter@6b190042, com.daffy.security.JwtAuthenticationFilter@10d81232, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2c5e0e3a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@27a22c39, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@25450727, org.springframework.security.web.session.SessionManagementFilter@3d764e90, org.springframework.security.web.access.ExceptionTranslationFilter@7f4187ef, org.springframework.security.web.access.intercept.AuthorizationFilter@56c33a29]
+2025-08-16 11:44:14 [restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-08-16 11:44:14 [restartedMain] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-08-16 11:44:14 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-08-16 11:44:14 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2025-08-16 11:44:14 [restartedMain] INFO  com.daffy.DaffyBackendApplication - Started DaffyBackendApplication in 7.816 seconds (process running for 286.651)
+2025-08-16 11:44:14 [restartedMain] INFO  com.daffy.config.DataInitializer - Initializing database with default data...
+2025-08-16 11:44:14 [restartedMain] DEBUG org.hibernate.SQL - 
+    /* select
+        count(*) 
+    from
+        Role x */ select
+            count(*) 
+        from
+            roles r1_0
+2025-08-16 11:44:14 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-16 11:44:14 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2025-08-16 11:44:14 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+2025-08-16 11:45:24 [restartedMain] INFO  com.daffy.DaffyBackendApplication - Starting DaffyBackendApplication using Java 17 with PID 4540 (E:\html,css,js\project_\social\Daffy\daffy-backend\target\classes started by User in E:\html,css,js\project_\social\Daffy\daffy-backend)
+2025-08-16 11:45:24 [restartedMain] DEBUG com.daffy.DaffyBackendApplication - Running with Spring Boot v3.1.0, Spring v6.0.9
+2025-08-16 11:45:24 [restartedMain] INFO  com.daffy.DaffyBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2025-08-16 11:45:24 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-08-16 11:45:24 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-08-16 11:45:27 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-16 11:45:27 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 148 ms. Found 6 JPA repository interfaces.
+2025-08-16 11:45:28 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2025-08-16 11:45:28 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-16 11:45:28 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-08-16 11:45:28 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-16 11:45:28 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3958 ms
+2025-08-16 11:45:29 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-08-16 11:45:29 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3d8c9628
+2025-08-16 11:45:29 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-08-16 11:45:29 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/daffydb?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true'
+2025-08-16 11:45:30 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-16 11:45:30 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.2.Final
+2025-08-16 11:45:30 [restartedMain] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2025-08-16 11:45:30 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2025-08-16 11:45:30 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-16 11:45:31 [restartedMain] INFO  org.hibernate.orm.dialect - HHH035001: Using dialect: org.hibernate.dialect.MySQL8Dialect, version: 8.0
+2025-08-16 11:45:31 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-08-16 11:45:31 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2025-08-16 11:45:33 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-08-16 11:45:33 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column created_at  datetime(6)
+2025-08-16 11:45:33 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column privacy  enum ('PRIVATE','PUBLIC','SECRET')
+2025-08-16 11:45:33 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column status  enum ('ACTIVE','DELETED','INACTIVE','SUSPENDED')
+2025-08-16 11:45:33 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column type  enum ('ACADEMIC','CULTURAL','OTHER','SOCIAL','SPORTS','TECHNICAL')
+2025-08-16 11:45:34 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column updated_at  datetime(6)
+2025-08-16 11:45:34 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table comments 
+       modify column created_at  datetime(6)
+2025-08-16 11:45:34 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table comments 
+       modify column updated_at  datetime(6)
+2025-08-16 11:45:34 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table hashtags 
+       modify column created_at  datetime(6)
+2025-08-16 11:45:34 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table likes 
+       modify column created_at  datetime(6)
+2025-08-16 11:45:34 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table likes 
+       modify column type  enum ('ANGRY','HAHA','LIKE','LOVE','SAD','WOW')
+2025-08-16 11:45:34 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column created_at  datetime(6)
+2025-08-16 11:45:34 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column read_at  datetime(6)
+2025-08-16 11:45:34 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column status  enum ('ARCHIVED','READ','UNREAD')
+2025-08-16 11:45:34 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column type  enum ('CLUB_INVITE','CLUB_JOIN','COMMENT','FOLLOW','FRIEND_REQUEST','LIKE','MENTION','SYSTEM')
+2025-08-16 11:45:34 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column created_at  datetime(6)
+2025-08-16 11:45:34 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column status  enum ('ARCHIVED','DELETED','DRAFT','PUBLISHED')
+2025-08-16 11:45:34 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column type  enum ('IMAGE','LINK','POLL','TEXT','VIDEO')
+2025-08-16 11:45:34 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column updated_at  datetime(6)
+2025-08-16 11:45:34 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table roles 
+       modify column name  enum ('ROLE_ADMIN','ROLE_MODERATOR','ROLE_SUPER_ADMIN','ROLE_USER')
+2025-08-16 11:45:34 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column created_at  datetime(6)
+2025-08-16 11:45:34 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column date_of_birth  datetime(6)
+2025-08-16 11:45:34 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column gender  enum ('FEMALE','MALE','OTHER','PREFER_NOT_TO_SAY')
+2025-08-16 11:45:34 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column last_login_at  datetime(6)
+2025-08-16 11:45:35 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column status  enum ('ACTIVE','DELETED','INACTIVE','SUSPENDED')
+2025-08-16 11:45:35 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column updated_at  datetime(6)
+2025-08-16 11:45:35 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-16 11:45:35 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-08-16 11:45:36 [restartedMain] DEBUG c.d.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-08-16 11:45:36 [restartedMain] DEBUG o.s.w.f.ServerHttpObservationFilter - Filter 'webMvcObservationFilter' configured for use
+2025-08-16 11:45:37 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-16 11:45:37 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-08-16 11:45:37 [restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 29 mappings in 'requestMappingHandlerMapping'
+2025-08-16 11:45:37 [restartedMain] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/admin-panel, /admin] in 'viewControllerHandlerMapping'
+2025-08-16 11:45:37 [restartedMain] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**, /static/**, /admin-panel/**] in 'resourceHandlerMapping'
+2025-08-16 11:45:38 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 3 endpoint(s) beneath base path '/actuator'
+2025-08-16 11:45:38 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4a4d0bcf, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5a09bc94, org.springframework.security.web.context.SecurityContextHolderFilter@2b90eab1, org.springframework.security.web.header.HeaderWriterFilter@3419822a, org.springframework.web.filter.CorsFilter@46f0da12, org.springframework.security.web.authentication.logout.LogoutFilter@575fdefc, com.daffy.security.JwtAuthenticationFilter@2518688b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4e8ee4ed, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@a5cba41, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@51d1dcfc, org.springframework.security.web.session.SessionManagementFilter@291e7392, org.springframework.security.web.access.ExceptionTranslationFilter@3e051cec, org.springframework.security.web.access.intercept.AuthorizationFilter@29073a68]
+2025-08-16 11:45:38 [restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-08-16 11:45:38 [restartedMain] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-08-16 11:45:38 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-08-16 11:45:38 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2025-08-16 11:45:38 [restartedMain] INFO  com.daffy.DaffyBackendApplication - Started DaffyBackendApplication in 14.931 seconds (process running for 15.749)
+2025-08-16 11:45:38 [restartedMain] INFO  com.daffy.config.DataInitializer - Initializing database with default data...
+2025-08-16 11:45:39 [restartedMain] DEBUG org.hibernate.SQL - 
+    /* select
+        count(*) 
+    from
+        Role x */ select
+            count(*) 
+        from
+            roles r1_0
+2025-08-16 11:45:39 [restartedMain] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? limit ?
+2025-08-16 11:45:39 [restartedMain] INFO  com.daffy.config.DataInitializer - Database initialization completed successfully!
+2025-08-16 11:45:48 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-16 11:45:48 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-08-16 11:45:48 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+2025-08-16 11:45:48 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+2025-08-16 11:45:48 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+2025-08-16 11:45:48 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@5713e2b
+2025-08-16 11:45:48 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@67be16e1
+2025-08-16 11:45:48 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-08-16 11:45:48 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 9 ms
+2025-08-16 11:45:48 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /
+2025-08-16 11:45:48 [http-nio-8080-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:45:48 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:45:48 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:45:48 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:45:48 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:45:48 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:45:49 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2025-08-16 11:45:49 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:45:49 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:45:49 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:45:49 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:45:49 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:45:49 [http-nio-8080-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:45:51 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /
+2025-08-16 11:45:51 [http-nio-8080-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:45:51 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:45:51 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:45:51 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:45:51 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:45:51 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:45:51 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2025-08-16 11:45:51 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:45:51 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:45:51 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:45:51 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:45:51 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:45:51 [http-nio-8080-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:46:06 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /test/health
+2025-08-16 11:46:06 [http-nio-8080-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:46:06 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.TestController#health()
+2025-08-16 11:46:06 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.TestController#health()
+2025-08-16 11:46:06 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Secured GET /test/health
+2025-08-16 11:46:06 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/test/health", parameters={}
+2025-08-16 11:46:06 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.TestController#health()
+2025-08-16 11:46:06 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.daffy.exception.GlobalExceptionHandler#handleGenericException(Exception)
+2025-08-16 11:46:06 [http-nio-8080-exec-3] ERROR c.d.exception.GlobalExceptionHandler - Unexpected error: When allowCredentials is true, allowedOrigins cannot contain the special value "*" since that cannot be set on the "Access-Control-Allow-Origin" response header. To allow credentials to a set of origins, list them explicitly or consider using "allowedOriginPatterns" instead.
+java.lang.IllegalArgumentException: When allowCredentials is true, allowedOrigins cannot contain the special value "*" since that cannot be set on the "Access-Control-Allow-Origin" response header. To allow credentials to a set of origins, list them explicitly or consider using "allowedOriginPatterns" instead.
+	at org.springframework.web.cors.CorsConfiguration.validateAllowCredentials(CorsConfiguration.java:516)
+	at org.springframework.web.servlet.handler.AbstractHandlerMapping.getHandler(AbstractHandlerMapping.java:538)
+	at org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1275)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:477)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:338)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:80)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:126)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at com.daffy.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:48)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:321)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:222)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:166)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2025-08-16 11:46:06 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json;q=0.8', given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7] and supported [application/json, application/*+json]
+2025-08-16 11:46:06 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [com.daffy.exception.GlobalExceptionHandler$ErrorResponse@6f767bf1]
+2025-08-16 11:46:06 [http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [java.lang.IllegalArgumentException: When allowCredentials is true, allowedOrigins cannot contain the special value "*" since that cannot be set on the "Access-Control-Allow-Origin" response header. To allow credentials to a set of origins, list them explicitly or consider using "allowedOriginPatterns" instead.]
+2025-08-16 11:46:06 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 500 INTERNAL_SERVER_ERROR
+2025-08-16 11:46:08 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /favicon.ico
+2025-08-16 11:46:08 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:46:08 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:46:08 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:46:08 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:46:08 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:46:08 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 11:46:08 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2025-08-16 11:46:08 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 11:46:08 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 11:46:08 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 11:46:08 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 11:46:08 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 11:46:08 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:55:01 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-08-16 11:55:02 [Thread-5] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2025-08-16 11:55:02 [Thread-5] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Destroying Spring FrameworkServlet 'dispatcherServlet'
+2025-08-16 11:55:02 [Thread-5] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-16 11:55:03 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-08-16 11:55:03 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-08-16 11:55:04 [restartedMain] INFO  com.daffy.DaffyBackendApplication - Starting DaffyBackendApplication using Java 17 with PID 4540 (E:\html,css,js\project_\social\Daffy\daffy-backend\target\classes started by User in E:\html,css,js\project_\social\Daffy\daffy-backend)
+2025-08-16 11:55:04 [restartedMain] DEBUG com.daffy.DaffyBackendApplication - Running with Spring Boot v3.1.0, Spring v6.0.9
+2025-08-16 11:55:04 [restartedMain] INFO  com.daffy.DaffyBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2025-08-16 11:55:06 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-16 11:55:06 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 50 ms. Found 6 JPA repository interfaces.
+2025-08-16 11:55:06 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2025-08-16 11:55:06 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-16 11:55:06 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-08-16 11:55:06 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-16 11:55:06 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1804 ms
+2025-08-16 11:55:06 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2025-08-16 11:55:07 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5705a893
+2025-08-16 11:55:07 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2025-08-16 11:55:07 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/daffydb?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true'
+2025-08-16 11:55:07 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-16 11:55:07 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2025-08-16 11:55:07 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-16 11:55:07 [restartedMain] INFO  org.hibernate.orm.dialect - HHH035001: Using dialect: org.hibernate.dialect.MySQL8Dialect, version: 8.0
+2025-08-16 11:55:07 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-08-16 11:55:07 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2025-08-16 11:55:07 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-08-16 11:55:07 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column created_at  datetime(6)
+2025-08-16 11:55:08 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column privacy  enum ('PRIVATE','PUBLIC','SECRET')
+2025-08-16 11:55:08 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column status  enum ('ACTIVE','DELETED','INACTIVE','SUSPENDED')
+2025-08-16 11:55:08 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column type  enum ('ACADEMIC','CULTURAL','OTHER','SOCIAL','SPORTS','TECHNICAL')
+2025-08-16 11:55:08 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column updated_at  datetime(6)
+2025-08-16 11:55:08 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table comments 
+       modify column created_at  datetime(6)
+2025-08-16 11:55:08 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table comments 
+       modify column updated_at  datetime(6)
+2025-08-16 11:55:08 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table hashtags 
+       modify column created_at  datetime(6)
+2025-08-16 11:55:08 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table likes 
+       modify column created_at  datetime(6)
+2025-08-16 11:55:08 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table likes 
+       modify column type  enum ('ANGRY','HAHA','LIKE','LOVE','SAD','WOW')
+2025-08-16 11:55:08 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column created_at  datetime(6)
+2025-08-16 11:55:08 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column read_at  datetime(6)
+2025-08-16 11:55:08 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column status  enum ('ARCHIVED','READ','UNREAD')
+2025-08-16 11:55:08 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column type  enum ('CLUB_INVITE','CLUB_JOIN','COMMENT','FOLLOW','FRIEND_REQUEST','LIKE','MENTION','SYSTEM')
+2025-08-16 11:55:08 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column created_at  datetime(6)
+2025-08-16 11:55:08 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column status  enum ('ARCHIVED','DELETED','DRAFT','PUBLISHED')
+2025-08-16 11:55:08 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column type  enum ('IMAGE','LINK','POLL','TEXT','VIDEO')
+2025-08-16 11:55:08 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column updated_at  datetime(6)
+2025-08-16 11:55:08 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table roles 
+       modify column name  enum ('ROLE_ADMIN','ROLE_MODERATOR','ROLE_SUPER_ADMIN','ROLE_USER')
+2025-08-16 11:55:08 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column created_at  datetime(6)
+2025-08-16 11:55:08 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column date_of_birth  datetime(6)
+2025-08-16 11:55:09 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column gender  enum ('FEMALE','MALE','OTHER','PREFER_NOT_TO_SAY')
+2025-08-16 11:55:09 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column last_login_at  datetime(6)
+2025-08-16 11:55:09 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column status  enum ('ACTIVE','DELETED','INACTIVE','SUSPENDED')
+2025-08-16 11:55:09 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column updated_at  datetime(6)
+2025-08-16 11:55:09 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-16 11:55:09 [restartedMain] DEBUG c.d.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-08-16 11:55:09 [restartedMain] DEBUG o.s.w.f.ServerHttpObservationFilter - Filter 'webMvcObservationFilter' configured for use
+2025-08-16 11:55:10 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-16 11:55:10 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-08-16 11:55:10 [restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 28 mappings in 'requestMappingHandlerMapping'
+2025-08-16 11:55:10 [restartedMain] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/admin-panel, /admin] in 'viewControllerHandlerMapping'
+2025-08-16 11:55:10 [restartedMain] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**, /static/**, /admin-panel/**] in 'resourceHandlerMapping'
+2025-08-16 11:55:10 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 3 endpoint(s) beneath base path '/actuator'
+2025-08-16 11:55:10 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4fe65b4f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@11667629, org.springframework.security.web.context.SecurityContextHolderFilter@71cfee76, org.springframework.security.web.header.HeaderWriterFilter@368175b1, org.springframework.web.filter.CorsFilter@7d897119, org.springframework.security.web.authentication.logout.LogoutFilter@6545474b, com.daffy.security.JwtAuthenticationFilter@265dfbb6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5af1cdbe, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@676017ac, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4cb6d31a, org.springframework.security.web.session.SessionManagementFilter@48988075, org.springframework.security.web.access.ExceptionTranslationFilter@309370c9, org.springframework.security.web.access.intercept.AuthorizationFilter@562b11]
+2025-08-16 11:55:10 [restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-08-16 11:55:10 [restartedMain] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-08-16 11:55:11 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-08-16 11:55:11 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2025-08-16 11:55:11 [restartedMain] INFO  com.daffy.DaffyBackendApplication - Started DaffyBackendApplication in 6.578 seconds (process running for 588.043)
+2025-08-16 11:55:11 [restartedMain] INFO  com.daffy.config.DataInitializer - Initializing database with default data...
+2025-08-16 11:55:11 [restartedMain] DEBUG org.hibernate.SQL - 
+    /* select
+        count(*) 
+    from
+        Role x */ select
+            count(*) 
+        from
+            roles r1_0
+2025-08-16 11:55:11 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-16 11:55:11 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2025-08-16 11:55:11 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+2025-08-16 11:55:31 [restartedMain] INFO  com.daffy.DaffyBackendApplication - Starting DaffyBackendApplication using Java 17 with PID 37308 (E:\html,css,js\project_\social\Daffy\daffy-backend\target\classes started by User in E:\html,css,js\project_\social\Daffy\daffy-backend)
+2025-08-16 11:55:31 [restartedMain] DEBUG com.daffy.DaffyBackendApplication - Running with Spring Boot v3.1.0, Spring v6.0.9
+2025-08-16 11:55:31 [restartedMain] INFO  com.daffy.DaffyBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2025-08-16 11:55:31 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-08-16 11:55:31 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-08-16 11:55:34 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-16 11:55:34 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 137 ms. Found 6 JPA repository interfaces.
+2025-08-16 11:55:35 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2025-08-16 11:55:35 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-16 11:55:35 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-08-16 11:55:35 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-16 11:55:35 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4053 ms
+2025-08-16 11:55:35 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-08-16 11:55:36 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7a2fe23b
+2025-08-16 11:55:36 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-08-16 11:55:36 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/daffydb?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true'
+2025-08-16 11:55:36 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-16 11:55:36 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.2.Final
+2025-08-16 11:55:36 [restartedMain] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2025-08-16 11:55:37 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2025-08-16 11:55:37 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-16 11:55:37 [restartedMain] INFO  org.hibernate.orm.dialect - HHH035001: Using dialect: org.hibernate.dialect.MySQL8Dialect, version: 8.0
+2025-08-16 11:55:37 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-08-16 11:55:38 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2025-08-16 11:55:39 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-08-16 11:55:39 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column created_at  datetime(6)
+2025-08-16 11:55:39 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column privacy  enum ('PRIVATE','PUBLIC','SECRET')
+2025-08-16 11:55:39 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column status  enum ('ACTIVE','DELETED','INACTIVE','SUSPENDED')
+2025-08-16 11:55:39 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column type  enum ('ACADEMIC','CULTURAL','OTHER','SOCIAL','SPORTS','TECHNICAL')
+2025-08-16 11:55:39 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column updated_at  datetime(6)
+2025-08-16 11:55:40 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table comments 
+       modify column created_at  datetime(6)
+2025-08-16 11:55:40 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table comments 
+       modify column updated_at  datetime(6)
+2025-08-16 11:55:40 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table hashtags 
+       modify column created_at  datetime(6)
+2025-08-16 11:55:40 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table likes 
+       modify column created_at  datetime(6)
+2025-08-16 11:55:40 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table likes 
+       modify column type  enum ('ANGRY','HAHA','LIKE','LOVE','SAD','WOW')
+2025-08-16 11:55:40 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column created_at  datetime(6)
+2025-08-16 11:55:40 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column read_at  datetime(6)
+2025-08-16 11:55:40 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column status  enum ('ARCHIVED','READ','UNREAD')
+2025-08-16 11:55:40 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column type  enum ('CLUB_INVITE','CLUB_JOIN','COMMENT','FOLLOW','FRIEND_REQUEST','LIKE','MENTION','SYSTEM')
+2025-08-16 11:55:40 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column created_at  datetime(6)
+2025-08-16 11:55:40 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column status  enum ('ARCHIVED','DELETED','DRAFT','PUBLISHED')
+2025-08-16 11:55:40 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column type  enum ('IMAGE','LINK','POLL','TEXT','VIDEO')
+2025-08-16 11:55:40 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column updated_at  datetime(6)
+2025-08-16 11:55:40 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table roles 
+       modify column name  enum ('ROLE_ADMIN','ROLE_MODERATOR','ROLE_SUPER_ADMIN','ROLE_USER')
+2025-08-16 11:55:40 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column created_at  datetime(6)
+2025-08-16 11:55:40 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column date_of_birth  datetime(6)
+2025-08-16 11:55:40 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column gender  enum ('FEMALE','MALE','OTHER','PREFER_NOT_TO_SAY')
+2025-08-16 11:55:40 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column last_login_at  datetime(6)
+2025-08-16 11:55:40 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column status  enum ('ACTIVE','DELETED','INACTIVE','SUSPENDED')
+2025-08-16 11:55:40 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column updated_at  datetime(6)
+2025-08-16 11:55:41 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-16 11:55:41 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-08-16 11:55:42 [restartedMain] DEBUG c.d.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-08-16 11:55:42 [restartedMain] DEBUG o.s.w.f.ServerHttpObservationFilter - Filter 'webMvcObservationFilter' configured for use
+2025-08-16 11:55:43 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-16 11:55:44 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-08-16 11:55:44 [restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 28 mappings in 'requestMappingHandlerMapping'
+2025-08-16 11:55:44 [restartedMain] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/admin-panel, /admin] in 'viewControllerHandlerMapping'
+2025-08-16 11:55:44 [restartedMain] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**, /static/**, /admin-panel/**] in 'resourceHandlerMapping'
+2025-08-16 11:55:44 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 3 endpoint(s) beneath base path '/actuator'
+2025-08-16 11:55:44 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@649a599e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@247a2f55, org.springframework.security.web.context.SecurityContextHolderFilter@13bd2bb3, org.springframework.security.web.header.HeaderWriterFilter@43e1609, org.springframework.web.filter.CorsFilter@7b93211a, org.springframework.security.web.authentication.logout.LogoutFilter@398a3067, com.daffy.security.JwtAuthenticationFilter@47e6c3e8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@454c3513, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4b91aab7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@db68b74, org.springframework.security.web.session.SessionManagementFilter@4e8ee4ed, org.springframework.security.web.access.ExceptionTranslationFilter@6b81f9b4, org.springframework.security.web.access.intercept.AuthorizationFilter@46f0da12]
+2025-08-16 11:55:45 [restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-08-16 11:55:45 [restartedMain] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-08-16 11:55:45 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-08-16 11:55:45 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2025-08-16 11:55:45 [restartedMain] INFO  com.daffy.DaffyBackendApplication - Started DaffyBackendApplication in 14.837 seconds (process running for 15.66)
+2025-08-16 11:55:45 [restartedMain] INFO  com.daffy.config.DataInitializer - Initializing database with default data...
+2025-08-16 11:55:45 [restartedMain] DEBUG org.hibernate.SQL - 
+    /* select
+        count(*) 
+    from
+        Role x */ select
+            count(*) 
+        from
+            roles r1_0
+2025-08-16 11:55:45 [restartedMain] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? limit ?
+2025-08-16 11:55:45 [restartedMain] INFO  com.daffy.config.DataInitializer - Database initialization completed successfully!
+2025-08-16 11:55:58 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-16 11:55:58 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-08-16 11:55:58 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+2025-08-16 11:55:58 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+2025-08-16 11:55:58 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+2025-08-16 11:55:58 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@4d0f78cb
+2025-08-16 11:55:58 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@4fb79b51
+2025-08-16 11:55:58 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-08-16 11:55:58 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 7 ms
+2025-08-16 11:55:58 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /
+2025-08-16 11:55:58 [http-nio-8080-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:55:58 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:55:58 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:55:58 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:55:58 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:55:58 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:55:58 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2025-08-16 11:55:58 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:55:58 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:55:58 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:55:58 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:55:58 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:55:58 [http-nio-8080-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:56:01 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /
+2025-08-16 11:56:01 [http-nio-8080-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:56:01 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:56:01 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:56:01 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:56:01 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:56:01 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 11:56:01 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2025-08-16 11:56:01 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:56:01 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:56:01 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:56:01 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:56:01 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-08-16 11:56:01 [http-nio-8080-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 11:58:42 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-08-16 11:58:42 [Thread-5] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2025-08-16 11:58:42 [Thread-5] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Destroying Spring FrameworkServlet 'dispatcherServlet'
+2025-08-16 11:58:43 [Thread-5] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-16 11:58:43 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-08-16 11:58:43 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-08-16 11:58:44 [restartedMain] INFO  com.daffy.DaffyBackendApplication - Starting DaffyBackendApplication using Java 17 with PID 37308 (E:\html,css,js\project_\social\Daffy\daffy-backend\target\classes started by User in E:\html,css,js\project_\social\Daffy\daffy-backend)
+2025-08-16 11:58:44 [restartedMain] DEBUG com.daffy.DaffyBackendApplication - Running with Spring Boot v3.1.0, Spring v6.0.9
+2025-08-16 11:58:44 [restartedMain] INFO  com.daffy.DaffyBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2025-08-16 11:58:46 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-16 11:58:46 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 80 ms. Found 6 JPA repository interfaces.
+2025-08-16 11:58:46 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2025-08-16 11:58:46 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-16 11:58:46 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-08-16 11:58:46 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-16 11:58:46 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2045 ms
+2025-08-16 11:58:47 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2025-08-16 11:58:47 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2636db41
+2025-08-16 11:58:47 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2025-08-16 11:58:47 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/daffydb?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true'
+2025-08-16 11:58:47 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-16 11:58:47 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2025-08-16 11:58:47 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-16 11:58:47 [restartedMain] INFO  org.hibernate.orm.dialect - HHH035001: Using dialect: org.hibernate.dialect.MySQL8Dialect, version: 8.0
+2025-08-16 11:58:47 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-08-16 11:58:47 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2025-08-16 11:58:48 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-08-16 11:58:48 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column created_at  datetime(6)
+2025-08-16 11:58:48 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column privacy  enum ('PRIVATE','PUBLIC','SECRET')
+2025-08-16 11:58:48 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column status  enum ('ACTIVE','DELETED','INACTIVE','SUSPENDED')
+2025-08-16 11:58:48 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column type  enum ('ACADEMIC','CULTURAL','OTHER','SOCIAL','SPORTS','TECHNICAL')
+2025-08-16 11:58:48 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column updated_at  datetime(6)
+2025-08-16 11:58:48 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table comments 
+       modify column created_at  datetime(6)
+2025-08-16 11:58:49 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table comments 
+       modify column updated_at  datetime(6)
+2025-08-16 11:58:49 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table hashtags 
+       modify column created_at  datetime(6)
+2025-08-16 11:58:49 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table likes 
+       modify column created_at  datetime(6)
+2025-08-16 11:58:49 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table likes 
+       modify column type  enum ('ANGRY','HAHA','LIKE','LOVE','SAD','WOW')
+2025-08-16 11:58:49 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column created_at  datetime(6)
+2025-08-16 11:58:49 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column read_at  datetime(6)
+2025-08-16 11:58:49 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column status  enum ('ARCHIVED','READ','UNREAD')
+2025-08-16 11:58:49 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column type  enum ('CLUB_INVITE','CLUB_JOIN','COMMENT','FOLLOW','FRIEND_REQUEST','LIKE','MENTION','SYSTEM')
+2025-08-16 11:58:49 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column created_at  datetime(6)
+2025-08-16 11:58:49 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column status  enum ('ARCHIVED','DELETED','DRAFT','PUBLISHED')
+2025-08-16 11:58:49 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column type  enum ('IMAGE','LINK','POLL','TEXT','VIDEO')
+2025-08-16 11:58:49 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column updated_at  datetime(6)
+2025-08-16 11:58:49 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table roles 
+       modify column name  enum ('ROLE_ADMIN','ROLE_MODERATOR','ROLE_SUPER_ADMIN','ROLE_USER')
+2025-08-16 11:58:49 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column created_at  datetime(6)
+2025-08-16 11:58:50 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column date_of_birth  datetime(6)
+2025-08-16 11:58:50 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column gender  enum ('FEMALE','MALE','OTHER','PREFER_NOT_TO_SAY')
+2025-08-16 11:58:50 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column last_login_at  datetime(6)
+2025-08-16 11:58:50 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column status  enum ('ACTIVE','DELETED','INACTIVE','SUSPENDED')
+2025-08-16 11:58:50 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column updated_at  datetime(6)
+2025-08-16 11:58:50 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-16 11:58:51 [restartedMain] DEBUG c.d.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-08-16 11:58:51 [restartedMain] DEBUG o.s.w.f.ServerHttpObservationFilter - Filter 'webMvcObservationFilter' configured for use
+2025-08-16 11:58:51 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-16 11:58:51 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-08-16 11:58:51 [restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 28 mappings in 'requestMappingHandlerMapping'
+2025-08-16 11:58:51 [restartedMain] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/admin-panel, /admin] in 'viewControllerHandlerMapping'
+2025-08-16 11:58:51 [restartedMain] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**, /static/**, /admin-panel/**] in 'resourceHandlerMapping'
+2025-08-16 11:58:51 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 3 endpoint(s) beneath base path '/actuator'
+2025-08-16 11:58:51 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7f09f04, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@12efa2fc, org.springframework.security.web.context.SecurityContextHolderFilter@8086242, org.springframework.security.web.header.HeaderWriterFilter@69b9d7de, org.springframework.web.filter.CorsFilter@5beefaa, org.springframework.security.web.authentication.logout.LogoutFilter@619d77c3, com.daffy.security.JwtAuthenticationFilter@7e626158, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@163f6786, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@319f45b8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@46b4ecd4, org.springframework.security.web.session.SessionManagementFilter@374591a0, org.springframework.security.web.access.ExceptionTranslationFilter@d427d78, org.springframework.security.web.access.intercept.AuthorizationFilter@d59d203]
+2025-08-16 11:58:52 [restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-08-16 11:58:52 [restartedMain] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-08-16 11:58:52 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-08-16 11:58:52 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2025-08-16 11:58:52 [restartedMain] INFO  com.daffy.DaffyBackendApplication - Started DaffyBackendApplication in 7.78 seconds (process running for 202.286)
+2025-08-16 11:58:52 [restartedMain] INFO  com.daffy.config.DataInitializer - Initializing database with default data...
+2025-08-16 11:58:52 [restartedMain] DEBUG org.hibernate.SQL - 
+    /* select
+        count(*) 
+    from
+        Role x */ select
+            count(*) 
+        from
+            roles r1_0
+2025-08-16 11:58:52 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-16 11:58:52 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2025-08-16 11:58:52 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+2025-08-16 12:00:18 [restartedMain] INFO  com.daffy.DaffyBackendApplication - Starting DaffyBackendApplication using Java 17 with PID 29896 (E:\html,css,js\project_\social\Daffy\daffy-backend\target\classes started by User in E:\html,css,js\project_\social\Daffy\daffy-backend)
+2025-08-16 12:00:18 [restartedMain] DEBUG com.daffy.DaffyBackendApplication - Running with Spring Boot v3.1.0, Spring v6.0.9
+2025-08-16 12:00:18 [restartedMain] INFO  com.daffy.DaffyBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2025-08-16 12:00:18 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-08-16 12:00:18 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-08-16 12:00:20 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-16 12:00:20 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 151 ms. Found 6 JPA repository interfaces.
+2025-08-16 12:00:22 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2025-08-16 12:00:22 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-16 12:00:22 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-08-16 12:00:22 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-16 12:00:22 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3246 ms
+2025-08-16 12:00:22 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-08-16 12:00:23 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@f1a94db
+2025-08-16 12:00:23 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-08-16 12:00:23 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/daffydb?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true'
+2025-08-16 12:00:23 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-16 12:00:23 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.2.Final
+2025-08-16 12:00:23 [restartedMain] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2025-08-16 12:00:23 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2025-08-16 12:00:23 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-16 12:00:24 [restartedMain] INFO  org.hibernate.orm.dialect - HHH035001: Using dialect: org.hibernate.dialect.MySQL8Dialect, version: 8.0
+2025-08-16 12:00:24 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-08-16 12:00:24 [restartedMain] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2025-08-16 12:00:25 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-08-16 12:00:25 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column created_at  datetime(6)
+2025-08-16 12:00:25 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column privacy  enum ('PRIVATE','PUBLIC','SECRET')
+2025-08-16 12:00:25 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column status  enum ('ACTIVE','DELETED','INACTIVE','SUSPENDED')
+2025-08-16 12:00:25 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column type  enum ('ACADEMIC','CULTURAL','OTHER','SOCIAL','SPORTS','TECHNICAL')
+2025-08-16 12:00:26 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table clubs 
+       modify column updated_at  datetime(6)
+2025-08-16 12:00:26 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table comments 
+       modify column created_at  datetime(6)
+2025-08-16 12:00:26 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table comments 
+       modify column updated_at  datetime(6)
+2025-08-16 12:00:26 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table hashtags 
+       modify column created_at  datetime(6)
+2025-08-16 12:00:26 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table likes 
+       modify column created_at  datetime(6)
+2025-08-16 12:00:26 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table likes 
+       modify column type  enum ('ANGRY','HAHA','LIKE','LOVE','SAD','WOW')
+2025-08-16 12:00:26 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column created_at  datetime(6)
+2025-08-16 12:00:26 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column read_at  datetime(6)
+2025-08-16 12:00:26 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column status  enum ('ARCHIVED','READ','UNREAD')
+2025-08-16 12:00:26 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table notifications 
+       modify column type  enum ('CLUB_INVITE','CLUB_JOIN','COMMENT','FOLLOW','FRIEND_REQUEST','LIKE','MENTION','SYSTEM')
+2025-08-16 12:00:26 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column created_at  datetime(6)
+2025-08-16 12:00:26 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column status  enum ('ARCHIVED','DELETED','DRAFT','PUBLISHED')
+2025-08-16 12:00:26 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column type  enum ('IMAGE','LINK','POLL','TEXT','VIDEO')
+2025-08-16 12:00:26 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table posts 
+       modify column updated_at  datetime(6)
+2025-08-16 12:00:26 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table roles 
+       modify column name  enum ('ROLE_ADMIN','ROLE_MODERATOR','ROLE_SUPER_ADMIN','ROLE_USER')
+2025-08-16 12:00:26 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column created_at  datetime(6)
+2025-08-16 12:00:26 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column date_of_birth  datetime(6)
+2025-08-16 12:00:26 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column gender  enum ('FEMALE','MALE','OTHER','PREFER_NOT_TO_SAY')
+2025-08-16 12:00:26 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column last_login_at  datetime(6)
+2025-08-16 12:00:26 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column status  enum ('ACTIVE','DELETED','INACTIVE','SUSPENDED')
+2025-08-16 12:00:26 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table users 
+       modify column updated_at  datetime(6)
+2025-08-16 12:00:26 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-16 12:00:27 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-08-16 12:00:28 [restartedMain] DEBUG c.d.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-08-16 12:00:28 [restartedMain] DEBUG o.s.w.f.ServerHttpObservationFilter - Filter 'webMvcObservationFilter' configured for use
+2025-08-16 12:00:28 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-16 12:00:29 [restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2025-08-16 12:00:29 [restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 28 mappings in 'requestMappingHandlerMapping'
+2025-08-16 12:00:29 [restartedMain] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/admin-panel, /admin] in 'viewControllerHandlerMapping'
+2025-08-16 12:00:29 [restartedMain] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**, /static/**, /admin-panel/**] in 'resourceHandlerMapping'
+2025-08-16 12:00:29 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 3 endpoint(s) beneath base path '/actuator'
+2025-08-16 12:00:29 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@70b24de9, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@48cb9d21, org.springframework.security.web.context.SecurityContextHolderFilter@5c1c003b, org.springframework.security.web.header.HeaderWriterFilter@60fb0ce9, org.springframework.web.filter.CorsFilter@10c03664, org.springframework.security.web.authentication.logout.LogoutFilter@78a90f11, com.daffy.security.JwtAuthenticationFilter@4c9b0427, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@21513e30, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@62e46f54, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2f0d5622, org.springframework.security.web.session.SessionManagementFilter@f2c11d4, org.springframework.security.web.access.ExceptionTranslationFilter@7a842aac, org.springframework.security.web.access.intercept.AuthorizationFilter@44ff87d1]
+2025-08-16 12:00:29 [restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-08-16 12:00:29 [restartedMain] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-08-16 12:00:29 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-08-16 12:00:30 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2025-08-16 12:00:30 [restartedMain] INFO  com.daffy.DaffyBackendApplication - Started DaffyBackendApplication in 11.881 seconds (process running for 12.757)
+2025-08-16 12:00:30 [restartedMain] INFO  com.daffy.config.DataInitializer - Initializing database with default data...
+2025-08-16 12:00:30 [restartedMain] DEBUG org.hibernate.SQL - 
+    /* select
+        count(*) 
+    from
+        Role x */ select
+            count(*) 
+        from
+            roles r1_0
+2025-08-16 12:00:30 [restartedMain] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? limit ?
+2025-08-16 12:00:30 [restartedMain] INFO  com.daffy.config.DataInitializer - Database initialization completed successfully!
+2025-08-16 12:00:36 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-16 12:00:36 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-08-16 12:00:36 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+2025-08-16 12:00:36 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+2025-08-16 12:00:36 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+2025-08-16 12:00:36 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@539eee68
+2025-08-16 12:00:36 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@1bc1a9b
+2025-08-16 12:00:36 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-08-16 12:00:36 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 7 ms
+2025-08-16 12:00:36 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Securing GET /
+2025-08-16 12:00:36 [http-nio-8080-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 12:00:36 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 12:00:36 [http-nio-8080-exec-1] DEBUG o.s.security.web.FilterChainProxy - Secured GET /
+2025-08-16 12:00:36 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/", parameters={}
+2025-08-16 12:00:36 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.HomeController#home()
+2025-08-16 12:00:36 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    /* select
+        count(*) 
+    from
+        User x */ select
+            count(*) 
+        from
+            users u1_0
+2025-08-16 12:00:36 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    /* select
+        count(*) 
+    from
+        Post x */ select
+            count(*) 
+        from
+            posts p1_0
+2025-08-16 12:00:36 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    /* select
+        count(*) 
+    from
+        Club x */ select
+            count(*) 
+        from
+            clubs c1_0
+2025-08-16 12:00:36 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    /* select
+        count(*) 
+    from
+        Role x */ select
+            count(*) 
+        from
+            roles r1_0
+2025-08-16 12:00:36 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json;q=0.8', given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7] and supported [application/json, application/*+json]
+2025-08-16 12:00:36 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{title=? DAFFY SOCIAL NETWORK BACKEND API, status=? RUNNING SUCCESSFULLY, timestamp=2025-08-16T12:0 (truncated)...]
+2025-08-16 12:00:36 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /favicon.ico
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:00:38 [http-nio-8080-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 12:00:50 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Securing GET /test/health
+2025-08-16 12:00:50 [http-nio-8080-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 12:00:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.TestController#health()
+2025-08-16 12:00:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.TestController#health()
+2025-08-16 12:00:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.TestController#health()
+2025-08-16 12:00:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.TestController#health()
+2025-08-16 12:00:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.TestController#health()
+2025-08-16 12:00:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.TestController#health()
+2025-08-16 12:00:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.TestController#health()
+2025-08-16 12:00:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.TestController#health()
+2025-08-16 12:00:50 [http-nio-8080-exec-5] DEBUG o.s.security.web.FilterChainProxy - Secured GET /test/health
+2025-08-16 12:00:50 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/test/health", parameters={}
+2025-08-16 12:00:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.daffy.controller.TestController#health()
+2025-08-16 12:00:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.daffy.exception.GlobalExceptionHandler#handleGenericException(Exception)
+2025-08-16 12:00:50 [http-nio-8080-exec-5] ERROR c.d.exception.GlobalExceptionHandler - Unexpected error: When allowCredentials is true, allowedOrigins cannot contain the special value "*" since that cannot be set on the "Access-Control-Allow-Origin" response header. To allow credentials to a set of origins, list them explicitly or consider using "allowedOriginPatterns" instead.
+java.lang.IllegalArgumentException: When allowCredentials is true, allowedOrigins cannot contain the special value "*" since that cannot be set on the "Access-Control-Allow-Origin" response header. To allow credentials to a set of origins, list them explicitly or consider using "allowedOriginPatterns" instead.
+	at org.springframework.web.cors.CorsConfiguration.validateAllowCredentials(CorsConfiguration.java:516)
+	at org.springframework.web.servlet.handler.AbstractHandlerMapping.getHandler(AbstractHandlerMapping.java:538)
+	at org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1275)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:477)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:338)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:80)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:126)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at com.daffy.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:48)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:238)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:321)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:222)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:135)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:166)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2025-08-16 12:00:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json;q=0.8', given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7] and supported [application/json, application/*+json]
+2025-08-16 12:00:50 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [com.daffy.exception.GlobalExceptionHandler$ErrorResponse@1e651920]
+2025-08-16 12:00:50 [http-nio-8080-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [java.lang.IllegalArgumentException: When allowCredentials is true, allowedOrigins cannot contain the special value "*" since that cannot be set on the "Access-Control-Allow-Origin" response header. To allow credentials to a set of origins, list them explicitly or consider using "allowedOriginPatterns" instead.]
+2025-08-16 12:00:50 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 500 INTERNAL_SERVER_ERROR
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /favicon.ico
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:00:51 [http-nio-8080-exec-4] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 12:01:04 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /.well-known/appspecific/com.chrome.devtools.json
+2025-08-16 12:01:04 [http-nio-8080-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-08-16 12:01:04 [http-nio-8080-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:01:04 [http-nio-8080-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:01:04 [http-nio-8080-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:01:04 [http-nio-8080-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:01:04 [http-nio-8080-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:01:04 [http-nio-8080-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:01:04 [http-nio-8080-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:01:04 [http-nio-8080-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:01:04 [http-nio-8080-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:01:04 [http-nio-8080-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:01:04 [http-nio-8080-exec-3] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [static/], classpath [public/]]
+2025-08-16 12:01:05 [http-nio-8080-exec-3] DEBUG o.s.security.web.FilterChainProxy - Securing GET /error
+2025-08-16 12:01:05 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:01:05 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:01:05 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:01:05 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:01:05 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:01:05 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:01:05 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:01:05 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:01:05 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:01:05 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:01:05 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2025-08-16 12:01:05 [http-nio-8080-exec-3] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext

@@ -41,7 +41,8 @@ public class SecurityConfig {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeHttpRequests(authz -> authz
-                // Allow access to auth endpoints, test endpoints, and admin panel
+                // FIXED: Allow access to root endpoint and public endpoints
+                .requestMatchers("/", "/health", "/status", "/ping", "/api", "/welcome").permitAll()
                 .requestMatchers("/auth/**", "/test/**", "/admin-panel", "/h2-console/**").permitAll()
                 // Admin API endpoints require ADMIN role
                 .requestMatchers("/admin/**").hasRole("ADMIN")
