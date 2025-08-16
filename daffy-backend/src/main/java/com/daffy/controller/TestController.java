@@ -33,7 +33,7 @@ public class TestController {
     }
     
     /**
-     * Root endpoint - handles localhost:8080/test (or localhost:8080/ if no RootController)
+     * Test endpoint - handles localhost:8080/test
      */
     @GetMapping("")
     public Map<String, Object> root() {
@@ -50,29 +50,5 @@ public class TestController {
     }
 }
 
-/**
- * Additional controller to handle root path if RootController doesn't exist
- */
-@RestController
-@CrossOrigin(origins = "*")
-class RootPathController {
-    
-    @GetMapping("/")
-    public Map<String, Object> home() {
-        Map<String, Object> response = new HashMap<>();
-        response.put("message", "🎯 Welcome to Daffy Social Network API");
-        response.put("status", "✅ Server Running Successfully");
-        response.put("timestamp", System.currentTimeMillis());
-        
-        Map<String, String> endpoints = new HashMap<>();
-        endpoints.put("🏥 Health", "/test/health");
-        endpoints.put("ℹ️  Info", "/test/info");
-        endpoints.put("🔐 Login", "POST /auth/login");
-        endpoints.put("🛡️  Admin", "/admin-panel");
-        
-        response.put("endpoints", endpoints);
-        response.put("note", "Your Daffy backend is running correctly!");
-        
-        return response;
-    }
-}
+// REMOVED: RootPathController class that was causing the conflict
+// The HomeController already handles the root "/" endpoint

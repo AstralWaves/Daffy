@@ -7,8 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Single controller to handle root and basic endpoints
- * This replaces RootController, SimpleWorkingController, and RootPathController
+ * Main controller to handle root and basic endpoints
  */
 @RestController
 @CrossOrigin(origins = "*")
